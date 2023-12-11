@@ -1,0 +1,19 @@
+.Navigation {
+  background: url(../assets/navbar/navbarBackground.png);
+  background-size: cover;
+}
+ul {
+  display: flex;
+}
+a {
+  text-decoration: none;
+  padding: 100px;
+}
+li {
+  margin-top: -90px;
+  list-style: none;
+  color: white;
+}
+a {
+  color: white;
+}

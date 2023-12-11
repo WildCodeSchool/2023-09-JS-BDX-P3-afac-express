@@ -1,5 +1,2 @@
-function Home() {
-  return <div>Accueil</div>;
-}
-
+function Home() {}
 export default Home;

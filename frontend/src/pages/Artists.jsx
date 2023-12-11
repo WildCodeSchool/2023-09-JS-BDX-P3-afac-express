@@ -1,5 +1,3 @@
-function Artists() {
-  return <div>Artiste</div>;
-}
+function Artists() {}
 
 export default Artists;

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "../styles/navbar.scss";
 
 function Navigation() {
   return (
-    <div>
+    <div className="Navigation">
       <ul>
         <Link to="/Home">
           <li>Accueil</li>
@@ -19,17 +20,8 @@ function Navigation() {
         <Link to="/About">
           <li>A Propos</li>
         </Link>
-        <Link to="/PasswordForgotten">
-          <li>PasswordForgotten</li>
-        </Link>
-        <Link to="/CreateAccount">
-          <li>CreateAccount</li>
-        </Link>
         <Link to="/User">
           <li>User</li>
-        </Link>
-        <Link to="/Admin">
-          <li>Admin</li>
         </Link>
       </ul>
     </div>
