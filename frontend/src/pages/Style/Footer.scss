@@ -1,0 +1,38 @@
+.container-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #7b273d;
+  color: white;
+}
+
+.container.flex {
+  display: flex;
+  align-items: center;
+}
+.contact,
+.partnerships {
+  padding: 10px;
+}
+.title-contact,
+.title-partnerships {
+  color: white;
+}
+
+.telephone-number {
+  padding-left: 10px;
+}
+.adress-mail {
+  padding-left: 10px;
+}
+.logo-right {
+  padding-left: 20px;
+}
+
+.vertical-line {
+  border-left: 5px solid white;
+  height: 200px;
+  margin-top: 25px;
+}
