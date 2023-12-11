@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import "../style/Home.scss";
 
 function Home() {
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="">
+        <img src="" alt="" />
         <h1>Bienvenue sur notre musée interactif</h1>
         <p>
           Les populations de l'<b>océan Indien</b> partagent et diffusent leur
