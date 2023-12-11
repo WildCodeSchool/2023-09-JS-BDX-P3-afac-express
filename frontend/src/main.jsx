@@ -3,31 +3,31 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 
-import Accueil from "./pages/Accueil";
-import Galeries from "./pages/Galeries";
-import Oeuvres from "./pages/Oeuvres";
-import Artistes from "./pages/Artistes";
-import Apropos from "./pages/Apropos";
+import Home from "./pages/Home";
+import Gallery from "./pages/Gallery";
+import Artworks from "./pages/Artworks";
+import Artists from "./pages/Artists";
+import About from "./pages/About";
 import Login from "./pages/Login";
-import MdpOublie from "./pages/MdpOublie";
-import CreationCompte from "./pages/CreationCompte";
-import Utilisateur from "./pages/Utilisateur";
+import PasswordForgotten from "./pages/PasswordForgotten";
+import CreateAccount from "./pages/CreateAccount";
+import User from "./pages/User";
 import Admin from "./pages/Admin";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: "*", element: <Accueil /> },
-      { path: "/", element: <Accueil /> },
-      { path: "/Galeries", element: <Galeries /> },
-      { path: "/Oeuvres", element: <Oeuvres /> },
-      { path: "/Artistes", element: <Artistes /> },
-      { path: "/Apropos", element: <Apropos /> },
+      { path: "*", element: <Home /> },
+      { path: "/", element: <Home /> },
+      { path: "/Gallery", element: <Gallery /> },
+      { path: "/Artworks", element: <Artworks /> },
+      { path: "/Artists", element: <Artists /> },
+      { path: "/About", element: <About /> },
       { path: "/Login", element: <Login /> },
-      { path: "/MdpOublie", element: <MdpOublie /> },
-      { path: "/CreationCompte", element: <CreationCompte /> },
-      { path: "/Utilisateur", element: <Utilisateur /> },
+      { path: "/PasswordForgotten", element: <PasswordForgotten /> },
+      { path: "/CreateAccount", element: <CreateAccount /> },
+      { path: "/User", element: <User /> },
       { path: "/Admin", element: <Admin /> },
     ],
   },
