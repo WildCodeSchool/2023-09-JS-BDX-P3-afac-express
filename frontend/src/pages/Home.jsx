@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import "../style/Home.scss";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+
 import arrow from "../assets/homeimg/arrow.svg";
 import ryandavechetty from "../assets/artists/1_RyanDaveChetty.jpg";
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
@@ -87,53 +80,52 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="container-collection-title">
-          <h2>Collection</h2>
-          <p>Regarder le monde c'est toucher sa diversité.</p>
-          <div className="container-collection">
-            <div className="collection">
-              <img src={creolization} alt="Creolization" />
+      </div>
+      <div className="container-collection-title">
+        <h2>Collection</h2>
+        <p>Regarder le monde c'est toucher sa diversité.</p>
+        <div className="container-collection">
+          <div className="collection">
+            <img src={creolization} alt="Creolization" />
+            <div className="collection-text">
               <h3>Creolization</h3>
               <h4>Ryan Dave Chetty</h4>
             </div>
-            <div className="collection">
-              <img src={bredechouchou} alt="Deepa Bauhadoor" />
+          </div>
+          <div className="collection">
+            <img src={bredechouchou} alt="Deepa Bauhadoor" />
+            <div className="collection-text">
               <h3>Brède chouchou</h3>
               <h4>Deepa Bauhadoor</h4>
             </div>
-            <div className="collection">
-              <img src={analakelyantananarivo} alt="Analakely, Antananarivo" />
+          </div>
+          <div className="collection">
+            <img src={analakelyantananarivo} alt="Analakely, Antananarivo" />
+            <div className="collection-text">
               <h3>Analakely, Antananarivo</h3>
               <h4>Mahefa Dimbiniaina Randrianarivelo</h4>
             </div>
-            {/* <div className="collection">
+          </div>
+          {/* <div className="collection">
             <img src="" alt="" />
+            <div className="collection-text">
             <h3>Il ne reste plus que [...]</h3>
             <h4>Mathilde Neri</h4>
+            </div>
           </div>
           <div className="collection">
             <img src="" alt="" />
+            <div className="collection-text">
             <h3>
               Tirem nos tudo mas deixem nos a música [...] Quando eu nasci era
               meio dia e o sol brillava [...] regressaremos, sombrias, corpos
               fluídos de feridas incuráveis
             </h3>
             <h4>Lara Sousa</h4>
+            </div>
           </div> */}
-          </div>
         </div>
       </div>
-
-      <MDBCard>
-        <MDBCardBody>
-          <MDBCardTitle>Card title</MDBCardTitle>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBBtn>Button</MDBBtn>
-        </MDBCardBody>
-      </MDBCard>
     </div>
   );
 }
