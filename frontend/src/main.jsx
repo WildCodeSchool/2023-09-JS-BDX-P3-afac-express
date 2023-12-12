@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "@fortawesome/fontawesome-free/css/all.min.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
