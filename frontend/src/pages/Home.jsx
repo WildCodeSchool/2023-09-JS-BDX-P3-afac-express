@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import ryandavechetty from "../assets/artists/1_RyanDaveChetty.jpg";
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";
-// import larasousa from "../assets/artists/5_LaraSousa.jpg";
-import creolization from "../assets/artworks/1_Creolization.jfif";
-import bredechouchou from "../assets/artworks/4_BredeChouchou.jfif";
-import analakelyantananarivo from "../assets/artworks/9_AnalakelyAntananarivo.jfif";
-import ilneresteplusque from "../assets/artworks/14_IlNeRestePlusQue[...].jfif";
+import larasousa from "../assets/artists/1_LaraSousa.jpg";
+import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jfif";
+import bredechouchou from "../assets/artworks/6_BredeChouchou.jfif";
+import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jfif";
+import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jfif";
 
 function Home() {
   return (
@@ -31,9 +30,9 @@ function Home() {
         <ul className="container-artist">
           <div className="first-container-artist">
             <li className="artist">
-              <h3>Ryan Dave Chetty</h3>
+              <h3>Lara Sousa</h3>
               <div className="title-img-artist">
-                <img src={ryandavechetty} alt="Ryan Dave Chetty" />
+                <img src={larasousa} alt="Lara Sousa" />
               </div>
             </li>
 
@@ -64,15 +63,6 @@ function Home() {
               </div>
             </li>
           </div>
-
-          {/* <div className="third-container-artist">
-            <li className="artist">
-              <h3>Lara Sousa</h3>
-              <div className="title-img-artist">
-                <img src={larasousa} alt="Lara Sousa" />
-              </div>
-            </li>
-          </div> */}
         </ul>
       </div>
 
@@ -83,10 +73,10 @@ function Home() {
         <ul className="horizontal-list">
           <div className="first-container_collection">
             <li className="collection">
-              <img src={creolization} alt="Creolization" />
+              <img src={CathedraleAntsirabe} alt="Cathédrale , Antsirabe" />
               <div className="collection-text">
-                <h3>Creolization</h3>
-                <h4>Ryan Dave Chetty</h4>
+                <h3>Cathédrale , Antsirabe</h3>
+                <h4>Mahefa D. Randrianarivelo</h4>
               </div>
             </li>
 
@@ -103,7 +93,7 @@ function Home() {
               <img src={analakelyantananarivo} alt="Analakely, Antananarivo" />
               <div className="collection-text">
                 <h3>Analakely, Antananarivo</h3>
-                <h4>Mahefa Dimbiniaina Randrianarivelo</h4>
+                <h4>Mahefa D. Randrianarivelo</h4>
               </div>
             </li>
 
