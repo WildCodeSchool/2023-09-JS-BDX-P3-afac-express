@@ -1,5 +1,3 @@
-function Artworks() {
-  return <div>Oeuvres</div>;
-}
+function Artworks() {}
 
 export default Artworks;

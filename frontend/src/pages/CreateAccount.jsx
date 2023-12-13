@@ -1,5 +1,3 @@
-function CreateAccount() {
-  return <div>Création compte</div>;
-}
+function CreateAccount() {}
 
 export default CreateAccount;
