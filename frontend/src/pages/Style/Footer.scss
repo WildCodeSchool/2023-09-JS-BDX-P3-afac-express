@@ -67,9 +67,20 @@
   width: 100px;
   height: 70px;
   position: relative;
-  left: -20px;
+  left: -10px;
 }
 
 .title-contact {
-  margin-left: 30px;
+  position: relative;
+  left: 5px;
+}
+
+.title-partnerships {
+  position: relative;
+  top: 3px;
+}
+
+.general-information {
+  position: relative;
+  top: 4px;
 }
