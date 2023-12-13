@@ -1,5 +1,3 @@
-function PasswordForgotten() {
-  return <div>ReinitialisationMdp</div>;
-}
+function PasswordForgotten() {}
 
 export default PasswordForgotten;

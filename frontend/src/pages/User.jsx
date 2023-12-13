@@ -1,5 +1,3 @@
-function User() {
-  return <div>Utilisateur</div>;
-}
+function User() {}
 
 export default User;
