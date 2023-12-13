@@ -1,0 +1,13 @@
+@import "./settings.scss";
+
+.container-artist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  flex-direction: column;
+}
+
+.artist-description {
+  border: 2px solid;
+}
