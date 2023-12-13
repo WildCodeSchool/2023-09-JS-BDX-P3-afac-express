@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import "../style/Home.scss";
-import "../App.css";
 import ryandavechetty from "../assets/artists/1_RyanDaveChetty.jpg";
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";
-import larasousa from "../assets/artists/5_LaraSousa.jpg";
+// import larasousa from "../assets/artists/5_LaraSousa.jpg";
 import creolization from "../assets/artworks/1_Creolization.jfif";
 import bredechouchou from "../assets/artworks/4_BredeChouchou.jfif";
 import analakelyantananarivo from "../assets/artworks/9_AnalakelyAntananarivo.jfif";
@@ -13,9 +11,8 @@ import ilneresteplusque from "../assets/artworks/14_IlNeRestePlusQue[...].jfif";
 
 function Home() {
   return (
-    <div className="container">
+    <div className="container-home">
       <div className="container-img-introduction">
-        <img src="" alt="" />
         <div className="introduction-containt">
           <h1>Bienvenue sur notre musée interactif</h1>
           <p>
@@ -31,51 +28,54 @@ function Home() {
       <div className="container-artist-title">
         <h2>Artistes</h2>
 
-        <div className="container-artist">
+        <ul className="container-artist">
           <div className="first-container-artist">
-            <div className="title-img-artist">
-              <div className="artist">
-                <h3>Ryan Dave Chetty</h3>
+            <li className="artist">
+              <h3>Ryan Dave Chetty</h3>
+              <div className="title-img-artist">
+                <img src={ryandavechetty} alt="Ryan Dave Chetty" />
               </div>
-              <img src={ryandavechetty} alt="Ryan Dave Chetty" />
-            </div>
+            </li>
 
-            <div className="title-img-artist">
-              <div className="artist">
-                <h3>Deepa Bauhadoor</h3>
+            <li className="artist">
+              <h3>Deepa Bauhadoor</h3>
+
+              <div className="title-img-artist">
+                <img src={deepabauhadoor} alt="Deepa Bauhadoor" />
               </div>
-              <img src={deepabauhadoor} alt="Deepa Bauhadoor" />
-            </div>
+            </li>
           </div>
+
           <div className="second-container-artist">
-            <div className="title-img-artist">
-              <div className="artist">
-                <h3>Mahefa D. Randrianarivelo</h3>
+            <li className="artist">
+              <h3>Mahefa D. Randrianarivelo</h3>
+              <div className="title-img-artist">
+                <img
+                  src={mahefadimbiniainadandrianarivelo}
+                  alt="Mahefa D. Randrianarivelo"
+                />
               </div>
-              <img
-                src={mahefadimbiniainadandrianarivelo}
-                alt="Mahefa D. Randrianarivelo"
-              />
-            </div>
+            </li>
 
-            <div className="title-img-artist">
-              <div className="artist">
-                <h3>Mathilde Neri</h3>
+            <li className="artist">
+              <h3>Mathilde Neri</h3>
+              <div className="title-img-artist">
+                <img src={mathildeneri} alt="Mathilde Neri" />
               </div>
-              <img src={mathildeneri} alt="Mathilde Neri" />
-            </div>
+            </li>
           </div>
 
-          <div className="third-container-artist">
-            <div className="title-img-artist">
-              <div className="artist">
-                <h3>Lara Sousa</h3>
+          {/* <div className="third-container-artist">
+            <li className="artist">
+              <h3>Lara Sousa</h3>
+              <div className="title-img-artist">
+                <img src={larasousa} alt="Lara Sousa" />
               </div>
-              <img src={larasousa} alt="Lara Sousa" />
-            </div>{" "}
-          </div>
-        </div>
+            </li>
+          </div> */}
+        </ul>
       </div>
+
       <div className="container-collection-title">
         <h2>Collection</h2>
         <p>Regarder le monde c'est toucher sa diversité.</p>
