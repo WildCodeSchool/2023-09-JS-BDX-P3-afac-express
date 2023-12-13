@@ -1,57 +1,36 @@
 .Navigation {
   background: url(../assets/navbar/navbarBackground.png);
+  background-size: cover;
   object-fit: cover;
   padding: 1rem;
-  height: 50px;
-  width: 2000px;
+  height: 80px;
 
   ul {
     display: none;
   }
-}
 
-@media screen and (min-width: 600px) and (max-width: 1199px) {
-  .Navigation {
-    object-fit: cover;
-    padding: 1rem;
-    height: 50px;
-    width: 2000px;
-
-    a {
-      text-decoration: none;
-      padding: 100px;
-    }
-
-    li {
-      margin-top: -90px;
-      list-style: none;
-      color: white;
-    }
-
-    a {
-      color: white;
-    }
+  .dropdown ul li a {
+    color: black;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
   .Navigation {
-    object-fit: cover;
-    padding: 1rem;
-    height: 50px;
-    width: 2000px;
+    height: 200px;
 
     ul {
       display: flex;
       justify-content: space-evenly;
+    }
+    a {
+      text-decoration: none;
 
-      a {
-        text-decoration: none;
-
-        li {
-          list-style: none;
-          color: white;
-        }
+      li {
+        list-style: none;
+        color: white;
       }
     }
   }

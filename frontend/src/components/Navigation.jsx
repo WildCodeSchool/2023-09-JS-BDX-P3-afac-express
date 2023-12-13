@@ -1,9 +1,40 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
 
-function Navigation() {
+export default function Navigation() {
   return (
     <div className="Navigation">
+      <MDBDropdown>
+        <MDBDropdownToggle color="black">Menu</MDBDropdownToggle>
+        <MDBDropdownMenu>
+          <MDBDropdownItem link>
+            <Link to="/Home">Accueil</Link>
+          </MDBDropdownItem>
+          <MDBDropdownItem link>
+            {" "}
+            <Link to="/Gallery">Galerie</Link>
+          </MDBDropdownItem>
+          <MDBDropdownItem link>
+            <Link to="/Artworks">Oeuvres</Link>
+          </MDBDropdownItem>
+          <MDBDropdownItem link>
+            <Link to="/Artists">Artistes</Link>
+          </MDBDropdownItem>
+          <MDBDropdownItem link>
+            <Link to="/About">A propos</Link>
+          </MDBDropdownItem>
+          <MDBDropdownItem link>
+            <Link to="/User">Artistes</Link>
+          </MDBDropdownItem>
+        </MDBDropdownMenu>
+      </MDBDropdown>
       <ul>
         <Link to="/Home">
           <li>Accueil</li>
@@ -27,5 +58,3 @@ function Navigation() {
     </div>
   );
 }
-
-export default Navigation;
