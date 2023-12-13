@@ -10,6 +10,7 @@ import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbinia
 import creolization from "../assets/artworks/1_Creolization.jfif";
 import bredechouchou from "../assets/artworks/4_BredeChouchou.jfif";
 import analakelyantananarivo from "../assets/artworks/9_AnalakelyAntananarivo.jfif";
+import Navigation from "../components/Navigation";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <div className="container-img-introduction">
         <img src="" alt="" />
         <div className="introduction-containt">
+          <Navigation />
           <h1>Bienvenue sur notre musée interactif</h1>
           <p>
             Les populations de l'<b>océan Indien</b> partagent et diffusent leur
