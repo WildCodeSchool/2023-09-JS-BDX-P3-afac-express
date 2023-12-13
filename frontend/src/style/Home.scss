@@ -1,17 +1,5 @@
 @import "./settings.scss";
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  flex-direction: column;
-  max-width: 1280px;
-  height: 100vh;
-}
-
 .container-img-introduction {
   display: flex;
   justify-content: center;
@@ -25,14 +13,12 @@
   background-color: white;
   flex-direction: column;
   align-items: center;
-  height: 27rem;
+  height: 28rem;
   justify-content: center;
-  width: 40rem;
-  margin-left: 13em;
-  padding-top: 2rem;
+  width: 52rem;
+  max-width: 100%;
+  margin: 2em auto 0;
   padding-bottom: 2rem;
-  margin-top: 33em;
-
   h1 {
     color: $font_color_title;
     text-align: center;
@@ -70,9 +56,9 @@
 
 h2 {
   color: $font_color_title;
-  margin-left: 1em;
-  margin-top: 2em;
+  margin: 2em 0 0 1em;
   font-size: 34px;
+  font-weight: bold;
 }
 
 .container-artist-title {
@@ -94,37 +80,30 @@ h3 {
 
   .artist {
     position: relative;
-    width: 97%;
+    width: 82%;
     height: 5.5em;
+    left: 31px;
     display: flex;
     flex-direction: row;
-
     border-bottom: 1px solid;
 
-    img {
-      padding: 1rem;
-      height: 2.7rem;
-      margin: 3em 0em 0em 2em;
-    }
     h3 {
-      margin: 1em;
+      margin: 1em 1em 1em 0em;
       text-align: left;
+      padding-right: 16px;
     }
   }
 }
 
 .title-img-artist img {
   position: relative;
-  height: 12em;
-  width: 12em;
-  margin-left: 1em;
+  height: 14em;
+  width: 14em;
+  margin-left: 3em;
   margin-top: 1em;
   object-fit: cover;
   left: 10px;
-
-  // -webkit-box-shadow: 31px 35px 0px -5px rgba(0, 0, 0, 0.66);
-  // -moz-box-shadow: 31px 35px 0px -5px rgba(0, 0, 0, 0.66);
-  // box-shadow: 31px 35px 0px -5px rgba(0, 0, 0, 0.66);
+  box-shadow: 26px 29px 0px -6px rgba(0, 0, 0, 0.65);
 }
 
 .container-collection-title {
@@ -145,32 +124,17 @@ h3 {
   display: flex;
   flex-direction: row;
   margin-left: 1.5em;
-  min-height: 10em;
-  height: 14em;
+  height: 26em;
   position: relative;
-}
-
-.collection {
-  position: relative;
-  width: 18em;
-  height: 6.5em;
-  display: flex;
-  flex-direction: column;
-  margin: -2em 0em 0em 0em;
-
-  img {
-    padding: 1rem;
-
-    margin: 1em 3em 0em 0em;
-    width: 100%;
-    height: 190%;
-    object-fit: cover;
-  }
+  max-width: 1500px;
+  align-items: flex-start;
+  padding: 0;
+  white-space: nowrap;
 }
 
 .collection-text {
   text-align: left;
-  margin-left: 0.8em;
+  margin-left: 2.8em;
   h3 {
     font-size: 26px;
     font-weight: bold;
@@ -180,4 +144,50 @@ h3 {
     font-style: italic;
     color: $font_color_text;
   }
+}
+
+.horizontal-list {
+  display: flex;
+  gap: 35px;
+  // padding-bottom: 20px;
+  // margin: 0;
+  // max-width: 100%;
+
+  .collection {
+    position: relative;
+    height: 6.5em;
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em 0em 0em;
+    flex: none;
+    width: 100%;
+    max-width: 250px;
+    height: 22em;
+
+    img {
+      margin: 2em 0em 2em 2em;
+      height: 11em;
+      width: 17em;
+      object-fit: cover;
+      box-shadow: 26px 29px 0px -6px #7b273d;
+    }
+  }
+}
+
+// .horizontal-list::-webkit-scrollbar {
+//   width: 0.1em;
+// }
+
+// .horizontal-list::-webkit-scrollbar-thumb {
+//   background-color: white;
+// }
+
+// .horizontal-list::-webkit-scrollbar-track {
+//   background-color: white;
+// }
+
+.first-container_collection,
+.second-container_collection,
+.third-container_collection {
+  grid-column: 1;
 }
