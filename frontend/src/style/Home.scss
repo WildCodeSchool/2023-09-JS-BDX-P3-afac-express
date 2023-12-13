@@ -76,7 +76,7 @@ h3 {
 
 .container-artist {
   display: flex;
-  flex-direction: row;
+  // flex-direction: row;
 
   .artist {
     position: relative;
@@ -97,13 +97,14 @@ h3 {
 
 .title-img-artist img {
   position: relative;
-  height: 14em;
-  width: 14em;
+  height: 12em;
+  width: 12em;
   margin-left: 3em;
   margin-top: 1em;
   object-fit: cover;
   left: 10px;
-  box-shadow: 26px 29px 0px -6px rgba(0, 0, 0, 0.65);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
 }
 
 .container-collection-title {
@@ -149,6 +150,7 @@ h3 {
 .horizontal-list {
   display: flex;
   gap: 35px;
+  margin-left: 3em;
   // padding-bottom: 20px;
   // margin: 0;
   // max-width: 100%;
@@ -169,7 +171,8 @@ h3 {
       height: 11em;
       width: 17em;
       object-fit: cover;
-      box-shadow: 26px 29px 0px -6px #7b273d;
+      border-radius: 10px;
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
     }
   }
 }
