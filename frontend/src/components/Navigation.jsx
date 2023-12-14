@@ -7,6 +7,8 @@ import {
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
+import "../style/About.scss";
+import profil from "../assets/navbar/profil.png";
 
 export default function Navigation() {
   return (
@@ -51,10 +53,13 @@ export default function Navigation() {
         <Link to="/About">
           <li>A Propos</li>
         </Link>
-        <Link to="/User">
-          <li>User</li>
-        </Link>
       </ul>
+      <div className="profilUser">
+        {" "}
+        <Link to="/User" className="userlogo">
+          <img src={profil} className="profil" alt="profil" />
+        </Link>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,9 @@
   object-fit: cover;
   padding: 1rem;
   height: auto;
+  display: flex;
+  justify-content: space-between; /* Add this to create space between items */
+  align-items: center; /* Align items vertically in the center */
 
   ul {
     display: none;
@@ -14,7 +17,9 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+img.profil {
+  height: 2rem;
+  width: 2rem;
 }
 
 @media screen and (min-width: 1024px) {
@@ -23,7 +28,7 @@
 
     ul {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
     }
     a {
       text-decoration: none;
@@ -32,6 +37,10 @@
         list-style: none;
         color: white;
       }
+    }
+
+    .profilUser {
+      margin-left: auto;
     }
   }
 }

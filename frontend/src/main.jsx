@@ -15,10 +15,10 @@ import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import PasswordForgotten from "./pages/PasswordForgotten";
 import CreateAccount from "./pages/CreateAccount";
 import User from "./pages/User";
 import Admin from "./pages/Admin";
+import UserForgottenPassword from "./pages/UserForgottenPassword";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +31,11 @@ const router = createBrowserRouter([
       { path: "/Artists", element: <Artists /> },
       { path: "/About", element: <About /> },
       { path: "/Login", element: <Login /> },
-      { path: "/PasswordForgotten", element: <PasswordForgotten /> },
+      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
       { path: "/CreateAccount", element: <CreateAccount /> },
       { path: "/User", element: <User /> },
       { path: "/Admin", element: <Admin /> },
+      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
     ],
   },
 ]);
