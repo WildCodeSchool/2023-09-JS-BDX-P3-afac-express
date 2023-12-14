@@ -11,6 +11,7 @@ import {
 export default function User() {
   return (
     <form className="user-form">
+      <h1>Connexion</h1>
       <MDBInput
         className="mb-4"
         type="email"
