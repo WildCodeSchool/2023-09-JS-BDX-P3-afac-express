@@ -1,15 +1,16 @@
+import "./App.scss";
 import { Outlet } from "react-router-dom";
+import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import "./style/Footer.scss";
-import Navigation from "./components/Navigation";
 
 function App() {
   return (
-    <>
+    <div>
       <Navigation />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 
