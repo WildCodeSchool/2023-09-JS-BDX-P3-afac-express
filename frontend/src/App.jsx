@@ -1,8 +1,8 @@
 import "./App.scss";
 import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
+import "./components/Footer/Footer.scss";
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import "./style/Footer.scss";
 
 function App() {
   return (
