@@ -43,7 +43,7 @@ export default function User() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <a href="#!">Enregistrez-vous</a>
+          Pas encore membre ? <a href="/UserCreateAccount">Enregistrez-vous</a>
         </p>
       </div>
     </form>

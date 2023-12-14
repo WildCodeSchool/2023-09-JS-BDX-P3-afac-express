@@ -8,13 +8,16 @@ export default function UserForgottenPassword() {
         className="mb-4"
         type="email"
         id="form1Example1"
-        label="Email address"
+        label="Adresse Mail"
       />
       {/* <MDBRow className="mb-4"></MDBRow> */}
 
       <MDBBtn type="submit" block>
-        Sign in
+        Suivant
       </MDBBtn>
+      <div className="text-center">
+        <a href="/User">Retour</a>{" "}
+      </div>
     </form>
   );
 }

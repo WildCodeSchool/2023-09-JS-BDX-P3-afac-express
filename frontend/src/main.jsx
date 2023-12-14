@@ -14,6 +14,7 @@ import CreateAccount from "./pages/CreateAccount";
 import User from "./pages/User";
 import Admin from "./pages/Admin";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
+import UserCreateAccount from "./pages/UserCreateAccount";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "/User", element: <User /> },
       { path: "/Admin", element: <Admin /> },
       { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
+      { path: "/UserCreateAccount", element: <UserCreateAccount /> },
     ],
   },
 ]);
