@@ -3,7 +3,7 @@ import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
 
 export default function UserCreateAccount() {
   return (
-    <form>
+    <form className="user-form">
       <h1>Créer un compte</h1>
       <MDBRow className="mb-4">
         <MDBCol>
