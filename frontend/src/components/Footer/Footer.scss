@@ -1,0 +1,46 @@
+.container-footer {
+  background-color: #7b273d;
+  color: white;
+}
+
+.title-contact,
+.title-partnerships {
+  color: white;
+  font-size: 24px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-mail,
+.logo-telephone {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.telephone-number,
+.adress-mail {
+  margin-left: 10px;
+}
+
+.logo-right {
+  width: 70px;
+  height: 80px;
+}
+
+.logo-left {
+  width: 120px;
+  height: 80px;
+}
+
+.contact {
+  margin-bottom: -10px;
+}
+
+.partnerships {
+  margin-bottom: -50px;
+}
