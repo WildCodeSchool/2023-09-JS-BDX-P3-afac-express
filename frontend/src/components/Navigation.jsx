@@ -32,9 +32,6 @@ export default function Navigation() {
           <MDBDropdownItem link>
             <Link to="/About">A propos</Link>
           </MDBDropdownItem>
-          <MDBDropdownItem link>
-            <Link to="/User">Artistes</Link>
-          </MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
       <ul>
