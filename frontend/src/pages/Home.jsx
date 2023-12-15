@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";
 import larasousa from "../assets/artists/1_LaraSousa.jpg";
-import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jfif";
-import bredechouchou from "../assets/artworks/6_BredeChouchou.jfif";
-import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jfif";
-import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jfif";
+import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jpg";
+import bredechouchou from "../assets/artworks/6_BredeChouchou.jpg";
+import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jpg";
+import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jpg";
 
 function Home() {
   return (
