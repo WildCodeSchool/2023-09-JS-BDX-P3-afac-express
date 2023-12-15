@@ -1,3 +1,4 @@
+import { MDBContainer } from "mdb-react-ui-kit";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import "./style/Footer.scss";
@@ -7,7 +8,9 @@ function App() {
   return (
     <>
       <Navigation />
-      <Outlet />
+      <MDBContainer className="d-flex flex-column">
+        <Outlet />
+      </MDBContainer>
       <Footer />
     </>
   );
