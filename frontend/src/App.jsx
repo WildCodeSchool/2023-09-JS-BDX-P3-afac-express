@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <MDBContainer className="d-flex flex-column">
+      <MDBContainer className="d-flex">
         <Outlet />
       </MDBContainer>
       <Footer />
