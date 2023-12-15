@@ -8,12 +8,13 @@ import {
   MDBDropdownMenu,
   MDBDropdownToggle,
   MDBDropdownItem,
+  MDBContainer,
 } from "mdb-react-ui-kit";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 
 function Artists() {
   return (
-    <>
+    <MDBContainer fluid className="pt-5">
       <h2
         className="fs-2 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
@@ -77,7 +78,7 @@ function Artists() {
           </MDBCardText>
         </MDBCardBody>
       </MDBCard>
-    </>
+    </MDBContainer>
   );
 }
 

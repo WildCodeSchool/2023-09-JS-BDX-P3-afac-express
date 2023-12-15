@@ -4,6 +4,7 @@ import {
   MDBBtn,
   MDBCarousel,
   MDBCarouselItem,
+  MDBContainer,
   //   MDBCol,
   MDBDropdown,
   MDBDropdownItem,
@@ -29,7 +30,7 @@ function Gallery() {
     <MDBIcon fas icon="heart" className="d-block p-2" />
   );
   return (
-    <>
+    <MDBContainer fluid className="pt-5">
       <h2
         className="fs-2 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
@@ -203,7 +204,7 @@ function Gallery() {
           </div>
         </div>
       </div>
-    </>
+    </MDBContainer>
   );
 }
 
