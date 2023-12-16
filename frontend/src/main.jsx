@@ -30,6 +30,9 @@ const router = createBrowserRouter([
       { path: "/Gallery", element: <Gallery /> },
       { path: "/Artworks", element: <Artworks /> },
       { path: "/Artists", element: <Artists /> },
+
+      { path: "/Artist/:id", element: <Artists /> },
+
       { path: "/About", element: <About /> },
       { path: "/Login", element: <Login /> },
       { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },

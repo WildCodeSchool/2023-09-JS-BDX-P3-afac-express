@@ -1,7 +1,6 @@
-import { useState } from "react";
 import {
-  //   MDBAnimation,
   MDBBtn,
+  //   MDBAnimation,
   MDBCarousel,
   MDBCarouselItem,
   MDBContainer,
@@ -17,18 +16,9 @@ import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jpg"
 import bredechouchou from "../assets/artworks/6_BredeChouchou.jpg";
 import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jpg";
 import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jpg";
+import Likes from "../components/Likes";
 
 function Gallery() {
-  const [isliked, setIsidLiked] = useState(false);
-  const toggleLikes = () => {
-    setIsidLiked((prevIsidLiked) => !prevIsidLiked);
-  };
-
-  const likes = isliked ? (
-    <MDBIcon far icon="heart" className="d-block p-2" />
-  ) : (
-    <MDBIcon fas icon="heart" className="d-block p-2" />
-  );
   return (
     <MDBContainer fluid className="pt-5">
       <h2
@@ -188,19 +178,21 @@ function Gallery() {
           </MDBRow> */}
 
           <div className="d-flex justify-content-center">
-            <MDBIcon
-              fas
-              icon="exclamation-circle"
-              className="d-block p-2 size='4x'"
-            />
             <MDBBtn
-              tag="a"
               color="none"
+              className="m-1"
               style={{ color: "#7b273d" }}
-              onClick={toggleLikes}
+              link
+              href="/Artworks"
             >
-              {likes}
+              <MDBIcon
+                fas
+                icon="exclamation-circle"
+                className="d-block p-2 size='4x'"
+              />
             </MDBBtn>
+
+            <Likes />
           </div>
         </div>
       </div>
