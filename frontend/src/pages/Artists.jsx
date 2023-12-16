@@ -4,13 +4,10 @@ import {
   MDBCardText,
   MDBCardImage,
   MDBRipple,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBDropdownItem,
   MDBContainer,
 } from "mdb-react-ui-kit";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
+// import Filter from "../components/Filter";
 
 function Artists() {
   return (
@@ -24,29 +21,7 @@ function Artists() {
 
       <h3 className="fs-5 text text-center fst-italic pb-4">Photographe</h3>
 
-      <MDBDropdown className="d-flex justify-content-center pb-5 ">
-        <MDBDropdownToggle
-          tag="a"
-          className="btn btn-primary bg-transparent text-dark"
-        >
-          Autres artistes
-        </MDBDropdownToggle>
-
-        <MDBDropdownMenu>
-          <MDBDropdownItem link href="#">
-            Lara Sousa
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Deepa Bauhadoor
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Mahefa Dimbiniaina Randrianarivelo
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Mathilde Neri
-          </MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown>
+      {/* <Filter /> */}
 
       <MDBCard alignment="center" className="col-10 m-auto" shadow="5">
         <MDBRipple
