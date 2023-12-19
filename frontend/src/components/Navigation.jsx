@@ -52,8 +52,7 @@ export default function Navigation() {
         </Link>
       </ul>
       <div className="profilUser">
-        {" "}
-        <Link to="/User" className="userlogo">
+        <Link to="/Login" className="userlogo">
           <img src={profil} className="profil" alt="profil" />
         </Link>
       </div>
