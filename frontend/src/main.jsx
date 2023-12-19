@@ -15,7 +15,6 @@ import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import CreateAccount from "./pages/CreateAccount";
 import User from "./pages/User";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import UserCreateAccount from "./pages/UserCreateAccount";
@@ -36,7 +35,7 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
-      { path: "/createaccount", element: <CreateAccount /> },
+      { path: "/createaccount", element: <UserCreateAccount /> },
       { path: "/user", element: <User /> },
       { path: "/createaccount", element: <UserCreateAccount /> },
       { path: "/adminuser", element: <AdminUserManager /> },

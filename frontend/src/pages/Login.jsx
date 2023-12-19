@@ -34,7 +34,7 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <a href="/UserForgottenPassword">Mot de passe oublié ?</a>
+          <a href="/forgottenpassword">Mot de passe oublié ?</a>
         </MDBCol>
       </MDBRow>
 
@@ -44,7 +44,7 @@ function Login() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <a href="/UserCreateAccount">Enregistrez-vous</a>
+          Pas encore membre ? <a href="/createaccount">Enregistrez-vous</a>
         </p>
       </div>
     </form>
