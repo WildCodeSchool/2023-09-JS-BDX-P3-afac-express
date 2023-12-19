@@ -9,10 +9,10 @@ import "./Footer.scss";
 export default function Footer() {
   return (
     <MDBFooter className="text-center text-lg-left container-footer">
-      <MDBContainer className="p-4">
+      <MDBContainer>
         <MDBRow>
           <MDBCol lg="6" md="12" className="mb-4 mb-md-0">
-            <div className="contact">
+            <div className="shadow-lg contact">
               <h2 className="title-contact">Nous Contacter</h2>
               <div className="container number">
                 <img
@@ -30,7 +30,7 @@ export default function Footer() {
           </MDBCol>
 
           <MDBCol lg="6" md="12" className="mb-4 mb-md-0">
-            <div className="partnerships">
+            <div className=" shadow-lg partnerships">
               <h2 className="title-partnerships">Partenaires</h2>
               <div className="container-partnerships">
                 <img
@@ -46,11 +46,25 @@ export default function Footer() {
               </div>
             </div>
           </MDBCol>
+          <MDBCol>
+            <div className=" shadow-lg development">
+              <h2 className="title-development">Développement</h2>
+              <div className="container-development">
+                <p className="text-start text-decoration-underline">
+                  Nélia COURTAIS
+                </p>
+                <p className="text-decoration-underline">Benoit HAYET</p>
+                <p className="text-end text-decoration-underline">
+                  Florian BRUN
+                </p>
+              </div>
+            </div>
+          </MDBCol>
         </MDBRow>
       </MDBContainer>
 
       <div
-        className="text-center p-3 copyright"
+        className="text-center copyright"
         style={{ backgroundColor: "#7b273d" }}
       >
         &copy; {new Date().getFullYear()} Copyright: Afac express
