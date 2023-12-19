@@ -1,29 +1,21 @@
 @import "./settings.scss";
 
-.container-home {
+.card-custom {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  overflow: hidden;
   width: 100%;
-  flex-direction: column;
-  min-height: 100vh;
+  min-height: 200px;
+  box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+}
 
-  .container-img-introduction {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-top: 100px;
-  }
-  .container-artist-title .first-container-artist,
-  .container-artist-title .second-container-artist {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .container-collection-title .first-container_collection,
-  .container-collection-title .second-container_collection {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-  }
+.btn {
+  background-color: #7b273d;
+  color: white;
+}
+
+.carousel-description {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  color: white;
 }
