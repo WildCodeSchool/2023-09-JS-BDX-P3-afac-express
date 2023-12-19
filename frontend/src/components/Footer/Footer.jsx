@@ -8,7 +8,7 @@ import "./Footer.scss";
 
 export default function Footer() {
   return (
-    <MDBFooter className="text-center  container-footer">
+    <MDBFooter className="text-center container-footer">
       <MDBContainer>
         <MDBRow>
           <MDBCol lg="6" md="12" className="mb-4 mb-md-0">
