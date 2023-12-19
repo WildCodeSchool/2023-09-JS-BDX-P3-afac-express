@@ -35,7 +35,6 @@ CREATE TABLE
     artwork (
         id int primary key NOT NULL AUTO_INCREMENT,
         title varchar(200) UNIQUE NOT NULL,
-        art_style varchar(255) NULL,
         image varchar(500) NOT NULL,
         dimention varchar(100) DEFAULT NULL,
         creation_place varchar(255) DEFAULT NULL,

@@ -17,9 +17,9 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import User from "./pages/User";
-import Admin from "./pages/Admin";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import UserCreateAccount from "./pages/UserCreateAccount";
+import AdminUserManager from "./pages/AdminUserManager";
 
 const router = createBrowserRouter([
   {
@@ -27,20 +27,19 @@ const router = createBrowserRouter([
     children: [
       { path: "*", element: <Home /> },
       { path: "/", element: <Home /> },
-      { path: "/Gallery", element: <Gallery /> },
-      { path: "/Artworks", element: <Artworks /> },
-      { path: "/Artists", element: <Artists /> },
+      { path: "/gallery", element: <Gallery /> },
+      { path: "/artworks", element: <Artworks /> },
+      { path: "/artists", element: <Artists /> },
 
-      { path: "/Artist/:id", element: <Artists /> },
+      { path: "/artist/:id", element: <Artists /> },
 
-      { path: "/About", element: <About /> },
-      { path: "/Login", element: <Login /> },
-      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
-      { path: "/CreateAccount", element: <CreateAccount /> },
-      { path: "/User", element: <User /> },
-      { path: "/Admin", element: <Admin /> },
-      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
-      { path: "/UserCreateAccount", element: <UserCreateAccount /> },
+      { path: "/about", element: <About /> },
+      { path: "/login", element: <Login /> },
+      { path: "/forgottenpassword", element: <UserForgottenPassword /> },
+      { path: "/createaccount", element: <CreateAccount /> },
+      { path: "/user", element: <User /> },
+      { path: "/createaccount", element: <UserCreateAccount /> },
+      { path: "/adminuser", element: <AdminUserManager /> },
     ],
   },
 ]);
