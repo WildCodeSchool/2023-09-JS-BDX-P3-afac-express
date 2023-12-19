@@ -20,6 +20,7 @@ import User from "./pages/User";
 import Admin from "./pages/Admin";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import UserCreateAccount from "./pages/UserCreateAccount";
+import AdminArtManager from "./pages/AdminArtManager";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
       { path: "/Admin", element: <Admin /> },
       { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
       { path: "/UserCreateAccount", element: <UserCreateAccount /> },
+      { path: "/AdminArtManager", element: <AdminArtManager /> },
     ],
   },
 ]);
