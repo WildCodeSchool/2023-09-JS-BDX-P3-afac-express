@@ -20,11 +20,15 @@ export default function Footer() {
                   src={logoTelephone}
                   alt="icone telephone"
                 />
-                <p className="telephone-number">+262 692 31 83 98</p>
+                <p className="telephone-number">
+                  <a href="tel:">+262 692 31 83 98</a>
+                </p>
               </div>
               <div className="container mail">
                 <img className="logo-mail" src={logoMail} alt="icone mail" />
-                <p className="adress-mail">afac974@gmail.com</p>
+                <p className="adress-mail">
+                  <a href="mailto:"> afac974@gmail.com</a>
+                </p>
               </div>
             </div>
           </MDBCol>

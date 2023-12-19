@@ -46,14 +46,12 @@
   margin-bottom: 0;
 }
 
-// Media queries pour le format Desktop
+//Media queries pour le format Desktop
 
 @media (min-width: 768px) {
-  .container-footer {
-    display: flex;
-    // flex-direction: row;
-
-    padding: 0; // Utilisez une disposition en ligne pour le mode desktop.
+  .container {
+    display: inline;
+    flex-direction: row;
   }
 
   .contact,
@@ -64,14 +62,17 @@
   }
 
   .contact {
+    display: inline;
     justify-content: flex-start; // On aligne le container à gauche.
   }
 
   .partnerships {
+    display: inline;
     justify-content: flex-end; // On aligne le container au centre.
   }
 
   .development {
+    display: inline;
     justify-content: center; // On aligne le container à droite.
   }
   .copyright {
