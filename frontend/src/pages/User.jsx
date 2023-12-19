@@ -51,71 +51,136 @@ function User() {
           </MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
-      <div>
-        <div className="d-flex flex-column mb-3">
-          <div className="p-2">
-            <MDBLightbox>
-              <MDBRow>
-                <MDBCol lg="4">
-                  <MDBLightboxItem
-                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
-                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
-                    className="w-100"
-                  />
-                  <MDBCard>
-                    <MDBCardBody className="d-flex justify-content-center">
-                      <div className="d-inline p-2">
-                        <MDBCardTitle tag="strong" className="fs-5 me-5">
-                          nom de l'oeuvre
-                        </MDBCardTitle>
-                        <div className="d-inline">
-                          <Likes />
-                        </div>
+
+      <div className="d-flex flex-column mb-3">
+        <div className="p-2">
+          <MDBLightbox>
+            <MDBRow>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
                       </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol lg="4">
-                  <MDBLightboxItem
-                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
-                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
-                    className="w-100"
-                  />
-                  <MDBCard>
-                    <MDBCardBody className="d-flex justify-content-center">
-                      <div className="d-inline p-2">
-                        <MDBCardTitle tag="strong" className="fs-5 me-5">
-                          nom de l'oeuvre
-                        </MDBCardTitle>
-                        <div className="d-inline">
-                          <Likes />
-                        </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
                       </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol lg="4">
-                  <MDBLightboxItem
-                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
-                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
-                    className="w-100"
-                  />
-                  <MDBCard>
-                    <MDBCardBody className="d-flex justify-content-center">
-                      <div className="d-inline p-2">
-                        <MDBCardTitle tag="strong" className="fs-5 me-5">
-                          nom de l'oeuvre
-                        </MDBCardTitle>
-                        <div className="d-inline">
-                          <Likes />
-                        </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
                       </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-              </MDBRow>
-            </MDBLightbox>
-          </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+          </MDBLightbox>
+        </div>
+      </div>
+
+      <div className="d-flex flex-column mb-3">
+        <div className="p-2">
+          <MDBLightbox>
+            <MDBRow>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
+                      </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
+                      </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol lg="4">
+                <MDBLightboxItem
+                  src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                  fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
+                  className="w-100"
+                />
+                <MDBCard>
+                  <MDBCardBody className="d-flex justify-content-center">
+                    <div className="d-inline p-2">
+                      <MDBCardTitle tag="strong" className="fs-5 me-5">
+                        nom de l'oeuvre
+                      </MDBCardTitle>
+                      <div className="d-inline">
+                        <Likes />
+                      </div>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+          </MDBLightbox>
         </div>
       </div>
       {/* <MDBRow>
