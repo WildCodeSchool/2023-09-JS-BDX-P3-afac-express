@@ -55,8 +55,6 @@ function Gallery() {
           Mahefa Dimbiniaina Randrianarivelo
         </h3>
 
-        <h4 className="fs-6 text text-start fst-italic pb-4">Photographe</h4>
-
         <div className="d-flex flex-column mb-3">
           <div className="p-2">
             <MDBCarousel showControls showIndicators>
