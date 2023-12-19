@@ -38,7 +38,7 @@ export default function Navigation() {
         </MDBContainer>
       </MDBNavbar>
       <div className="profilUser">
-        <MDBNavbarLink href="/User" className="userlogo">
+        <MDBNavbarLink to="/Login" className="userlogo">
           <img src={profil} className="profil" alt="profil" />
         </MDBNavbarLink>
       </div>
