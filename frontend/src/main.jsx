@@ -18,13 +18,13 @@ import Login from "./pages/Login";
 import User from "./pages/User";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import UserCreateAccount from "./pages/UserCreateAccount";
-import AdminUserManager from "./pages/AdminUserManager";
+import AdminArtManager from "./pages/AdminArtManager";
+import AdminUser from "./pages/AdminUser";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: "*", element: <Home /> },
       { path: "/", element: <Home /> },
       { path: "/gallery", element: <Gallery /> },
       { path: "/artworks", element: <Artworks /> },
@@ -37,8 +37,9 @@ const router = createBrowserRouter([
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
       { path: "/createaccount", element: <UserCreateAccount /> },
       { path: "/user", element: <User /> },
-      { path: "/createaccount", element: <UserCreateAccount /> },
-      { path: "/adminuser", element: <AdminUserManager /> },
+      { path: "/adminart", element: <AdminArtManager /> },
+      { path: "/adminuser", element: <AdminUser /> },
+      { path: "*", element: <Home /> },
     ],
   },
 ]);

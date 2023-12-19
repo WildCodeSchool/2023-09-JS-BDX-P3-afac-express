@@ -108,9 +108,7 @@ function Home() {
       <h2 className="mt-5 shadow-lg" style={{ color: "#7b273d" }}>
         Collections
       </h2>
-      <p className="text-center shadow-lg">
-        "Regarder le monde c'est toucher sa diversité".
-      </p>
+
       <MDBCarousel className="mt-3 mb-5 " showControls showIndicators>
         <MDBCarouselItem itemId={1}>
           <img
