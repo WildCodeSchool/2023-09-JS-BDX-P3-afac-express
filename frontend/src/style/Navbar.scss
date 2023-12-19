@@ -7,6 +7,9 @@
   justify-content: space-between;
   align-items: center;
 
+  .navbar {
+    box-shadow: none;
+  }
   .navbar > .container-fluid {
     display: flex;
     flex-wrap: inherit;
