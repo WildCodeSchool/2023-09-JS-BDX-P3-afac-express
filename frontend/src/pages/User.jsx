@@ -62,13 +62,13 @@ function User() {
                     fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
                     className="w-100"
                   />
-                  <MDBCard className="d-flex flex-column justify-content-center square border p-2 mt-3">
-                    <MDBCardBody className="d-flex justify-content-center pl-5">
+                  <MDBCard>
+                    <MDBCardBody className="d-flex justify-content-center">
                       <div className="d-inline p-2">
-                        <MDBCardTitle tag="strong" className="fs-5">
+                        <MDBCardTitle tag="strong" className="fs-5 me-5">
                           nom de l'oeuvre
                         </MDBCardTitle>
-                        <div className=" d-inline pl-5">
+                        <div className="d-inline">
                           <Likes />
                         </div>
                       </div>
@@ -77,34 +77,38 @@ function User() {
                 </MDBCol>
                 <MDBCol lg="4">
                   <MDBLightboxItem
-                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/2.webp"
-                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/2.webp"
+                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
                     className="w-100"
                   />
-                  <MDBCard className="d-flex flex-column justify-content-center square border p-2 mt-3">
-                    <MDBCardBody>
-                      <MDBCardTitle tag="strong" className="fs-4">
-                        nom de l'oeuvre
-                      </MDBCardTitle>
-                      <div className="d-flex justify-content-end">
-                        <Likes />
+                  <MDBCard>
+                    <MDBCardBody className="d-flex justify-content-center">
+                      <div className="d-inline p-2">
+                        <MDBCardTitle tag="strong" className="fs-5 me-5">
+                          nom de l'oeuvre
+                        </MDBCardTitle>
+                        <div className="d-inline">
+                          <Likes />
+                        </div>
                       </div>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
                 <MDBCol lg="4">
                   <MDBLightboxItem
-                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/3.webp"
-                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/3.webp"
+                    src="https://mdbootstrap.com/img/Photos/Thumbnails/Slides/1.webp"
+                    fullscreenSrc="https://mdbootstrap.com/img/Photos/Slides/1.webp"
                     className="w-100"
                   />
-                  <MDBCard className="d-flex flex-column justify-content-center square border p-2 mt-3">
-                    <MDBCardBody>
-                      <MDBCardTitle tag="strong" className="fs-4">
-                        nom de l'oeuvre
-                      </MDBCardTitle>
-                      <div className="d-flex justify-content-end">
-                        <Likes />
+                  <MDBCard>
+                    <MDBCardBody className="d-flex justify-content-center">
+                      <div className="d-inline p-2">
+                        <MDBCardTitle tag="strong" className="fs-5 me-5">
+                          nom de l'oeuvre
+                        </MDBCardTitle>
+                        <div className="d-inline">
+                          <Likes />
+                        </div>
                       </div>
                     </MDBCardBody>
                   </MDBCard>
