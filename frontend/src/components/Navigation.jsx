@@ -1,61 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import {
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBDropdownItem,
+  MDBNavbar,
+  MDBContainer,
+  MDBNavbarToggler,
+  MDBIcon,
+  MDBCollapse,
+  MDBNavbarNav,
+  MDBNavbarLink,
 } from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
 import "../style/About.scss";
 import profil from "../assets/navbar/profil.png";
 
 export default function Navigation() {
+  const [openNavSecond, setOpenNavSecond] = useState(false);
+
   return (
     <div className="Navigation">
-      <MDBDropdown>
-        <MDBDropdownToggle color="black">Menu</MDBDropdownToggle>
-        <MDBDropdownMenu>
-          <MDBDropdownItem link>
-            <Link to="/Home">Accueil</Link>
-          </MDBDropdownItem>
-          <MDBDropdownItem link>
-            {" "}
-            <Link to="/Gallery">Galerie</Link>
-          </MDBDropdownItem>
-          <MDBDropdownItem link>
-            <Link to="/Artworks">Oeuvres</Link>
-          </MDBDropdownItem>
-          <MDBDropdownItem link>
-            <Link to="/Artists">Artistes</Link>
-          </MDBDropdownItem>
-          <MDBDropdownItem link>
-            <Link to="/About">A propos</Link>
-          </MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown>
-      <ul>
-        <Link to="/Home">
-          <li>Accueil</li>
-        </Link>
-        <Link to="/Gallery">
-          <li>Galerie</li>
-        </Link>
-        <Link to="/Artworks">
-          <li>Oeuvres</li>
-        </Link>
-        <Link to="/Artists">
-          <li>Artistes</li>
-        </Link>
-        <Link to="/About">
-          <li>A Propos</li>
-        </Link>
-      </ul>
+      <MDBNavbar expand="lg">
+        <MDBContainer fluid>
+          <MDBNavbarToggler
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            onClick={() => setOpenNavSecond(!openNavSecond)}
+          >
+            <MDBIcon icon="bars" fas color="white" className="d-inline" />
+          </MDBNavbarToggler>
+          <MDBCollapse navbar open={openNavSecond}>
+            <MDBNavbarNav className="ms-auto">
+              <MDBNavbarLink href="/Home">Accueil</MDBNavbarLink>
+              <MDBNavbarLink href="/Gallery">Galerie</MDBNavbarLink>
+              <MDBNavbarLink href="/Artworks">Oeuvres</MDBNavbarLink>
+              <MDBNavbarLink href="/Artists">Artistes</MDBNavbarLink>
+              <MDBNavbarLink href="/About">A propos</MDBNavbarLink>
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBContainer>
+      </MDBNavbar>
       <div className="profilUser">
-        {" "}
-        <Link to="/User" className="userlogo">
+        <MDBNavbarLink href="/User" className="userlogo">
           <img src={profil} className="profil" alt="profil" />
-        </Link>
+        </MDBNavbarLink>
       </div>
     </div>
   );

@@ -1,42 +1,39 @@
 .Navigation {
-  background: url(../assets/navbar/navbarBackground.png);
+  background-color: #7b273d;
   background-size: cover;
-  object-fit: cover;
   padding: 1rem;
   height: auto;
   display: flex;
-  justify-content: space-between; /* Add this to create space between items */
-  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between;
+  align-items: center;
 
-  ul {
-    display: none;
+  .navbar > .container-fluid {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .nav-link {
+    display: block;
+    padding: var(--mdb-nav-link-padding-y) var(--mdb-nav-link-padding-x);
+    font-size: var(--mdb-nav-link-font-size);
+    font-weight: var(--mdb-nav-link-font-weight);
+    color: whitesmoke;
+    text-decoration: none; // Add this line to remove underline
   }
 
-  .dropdown ul li a {
-    color: black;
+  img.profil {
+    height: 2rem;
+    width: 2rem;
   }
-}
 
-img.profil {
-  height: 2rem;
-  width: 2rem;
-}
-
-@media screen and (min-width: 1024px) {
-  .Navigation {
-    height: 200px;
-
-    ul {
-      display: flex;
-      justify-content: space-between;
+  @media screen and (min-width: 1024px) {
+    .Navigation {
+      height: 200px;
     }
-    a {
-      text-decoration: none;
 
-      li {
-        list-style: none;
-        color: white;
-      }
+    .nav-link {
+      color: #fff;
     }
 
     .profilUser {

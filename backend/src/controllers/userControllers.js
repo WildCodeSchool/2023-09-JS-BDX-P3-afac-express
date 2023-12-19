@@ -11,43 +11,52 @@
 //       res.sendStatus(500);
 //     });
 // };
+// const getUsersById = (req, res) => {
+//   models.user
+//     .find(req.params.id)
+//     .then(([rows]) => {
+//       if (rows[0] != null) {
+//         res.json(rows[0]);
+//       } else {
+//         res.sendStatus(404);
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// };
 
-// // const getUsersById = (req, res) => {
-// //  const user = await models.user
-// //  .findOne({ where: { id: userId } }); /*.findOne({ where: { id } })*/   /*await models.user.findOne({ where: { id: userId } });*/
-// //   models.user
-// //     .find({ where: { id } })
-// //     .then(([rows]) => {
-// //       if (rows[0] != null) {
-// //         res.json(rows[0]);
-// //       } else {
-// //         res.sendStatus(404);
-// //       }
-// //     })
-// //     .catch((err) => {
-// //       console.error(err);
-// //       res.sendStatus(200);
-// //     });
-// // };
+// const postUsers = (req, res) => {
+//   models.user
+//     .create(req.body)
+//     .then(([rows]) => {
+//       res.send({ id: rows.insertId, ...req.body });
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// };
 
-// // const getUsersById = (req, res) => {
-// //     const id = parseInt(req.params.id);
-// //     models.user
-// //       .findOne({ where: { id } })
-// //       .then((user) => {
-// //         if (user) {
-// //           res.userjson();
-// //         } else {
-// //           res.status(404).send("Utilisateur non trouvé");
-// //         }
-// //       })
-// //       .catch((error) => {
-// //         console.error("Erreur lors de la récupération de l'utilisateur :", error);
-// //         res.status(500).send("Erreur serveur");
-// //       });
-// //   };
+// const deleteUsers = (req, res) => {
+//   models.user
+//     .delete(req.params.id)
+//     .then(([rows]) => {
+//       if (rows.affectedRows === 0) {
+//         res.sendStatus(404);
+//       } else {
+//         res.sendStatus(204);
+//       }
+//     })
+//     .catch((err) => {
+//       res.status(500).send({ message: err.message });
+//     });
+// };
 
 // module.exports = {
 //   getUsers,
-// //   getUsersById,
+//   getUsersById,
+//   postUsers,
+//   deleteUsers,
 // };
