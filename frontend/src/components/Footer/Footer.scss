@@ -27,16 +27,54 @@
   margin-top: -3px;
 }
 
-.logo-right {
-  width: 70px;
+.logo-left {
+  width: 90px;
   height: 80px;
+  margin-right: 50px;
 }
 
-.logo-left {
-  width: 120px;
+.logo-right {
+  width: 140px;
   height: 80px;
 }
 
 .contact {
   margin-bottom: -10px;
+}
+
+.container-development > p {
+  margin-bottom: 0;
+}
+
+// Media queries pour le format Desktop
+
+@media (min-width: 768px) {
+  .container-footer {
+    display: flex;
+    // flex-direction: row;
+
+    padding: 0; // Utilisez une disposition en ligne pour le mode desktop.
+  }
+
+  .contact,
+  .partnerships,
+  .development {
+    width: 33.33%; // On répartit l'espace en trois colonnes égales.
+    margin-bottom: 0;
+  }
+
+  .contact {
+    justify-content: flex-start; // On aligne le container à gauche.
+  }
+
+  .partnerships {
+    justify-content: flex-end; // On aligne le container au centre.
+  }
+
+  .development {
+    justify-content: center; // On aligne le container à droite.
+  }
+  .copyright {
+    margin-top: 0;
+  }
 }
