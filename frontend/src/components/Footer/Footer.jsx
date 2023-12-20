@@ -11,29 +11,31 @@ export default function Footer() {
     <MDBFooter className="text-center container-footer">
       <MDBContainer>
         <MDBRow>
-          <MDBCol lg="6" md="12" className="mb-4 mb-md-0">
+          <MDBCol>
             <div className="shadow-lg contact">
               <h2 className="title-contact">Nous Contacter</h2>
-              <div className="container number">
-                <img
-                  className="logo-telephone"
-                  src={logoTelephone}
-                  alt="icone telephone"
-                />
-                <p className="telephone-number">
-                  <a href="tel:">+262 692 31 83 98</a>
-                </p>
-              </div>
-              <div className="container mail">
-                <img className="logo-mail" src={logoMail} alt="icone mail" />
-                <p className="adress-mail">
-                  <a href="mailto:"> afac974@gmail.com</a>
-                </p>
+              <div className="contact-details">
+                <div className="container number">
+                  <img
+                    className="logo-telephone"
+                    src={logoTelephone}
+                    alt="icone telephone"
+                  />
+                  <p className="telephone-number">
+                    <a href="tel:">+262 692 31 83 98</a>
+                  </p>
+                </div>
+                <div className="container mail">
+                  <img className="logo-mail" src={logoMail} alt="icone mail" />
+                  <p className="adress-mail">
+                    <a href="mailto:">afac974@gmail.com</a>
+                  </p>
+                </div>
               </div>
             </div>
           </MDBCol>
 
-          <MDBCol lg="6" md="12" className="mb-4 mb-md-0">
+          <MDBCol lg="6" md="12">
             <div className=" shadow-lg partnerships">
               <h2 className="title-partnerships">Partenaires</h2>
               <div className="container-partnerships">
