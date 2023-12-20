@@ -1,7 +1,7 @@
-.Navigation {
+.navigation {
   background-color: #7b273d;
   background-size: cover;
-  padding: 1rem;
+  padding: 1.5rem;
   height: auto;
   display: flex;
   justify-content: space-between;
@@ -33,6 +33,10 @@
   @media screen and (min-width: 1024px) {
     .Navigation {
       height: 200px;
+    }
+
+    .logoAfac {
+      justify-content: center;
     }
 
     .nav-link {
