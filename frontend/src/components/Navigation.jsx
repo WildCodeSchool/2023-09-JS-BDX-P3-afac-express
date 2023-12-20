@@ -26,19 +26,29 @@ export default function Navigation() {
           aria-label="Toggle navigation"
           onClick={() => setOpenNavSecond(!openNavSecond)}
         >
-          <MDBIcon icon="bars" fas color="white" className="" />
+          <MDBIcon icon="bars" fas color="white" />
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNavSecond}>
           <MDBNavbarNav className="ms-auto">
-            <MDBNavbarLink href="/Home">Accueil</MDBNavbarLink>
-            <MDBNavbarLink href="/Gallery">Galerie</MDBNavbarLink>
-            <MDBNavbarLink href="/Artworks">Oeuvres</MDBNavbarLink>
-            <MDBNavbarLink href="/Artists">Artistes</MDBNavbarLink>
-            <MDBNavbarLink href="/About">A propos</MDBNavbarLink>
+            <MDBNavbarLink className="navLink" href="/Home">
+              Accueil
+            </MDBNavbarLink>
+            <MDBNavbarLink className="navLink" href="/Gallery">
+              Galerie
+            </MDBNavbarLink>
+            <MDBNavbarLink className="navLink" href="/Artworks">
+              Oeuvres
+            </MDBNavbarLink>
+            <MDBNavbarLink className="navLink" href="/Artists">
+              Artistes
+            </MDBNavbarLink>
+            <MDBNavbarLink className="navLink" href="/About">
+              A propos
+            </MDBNavbarLink>
           </MDBNavbarNav>
         </MDBCollapse>
-        <div>
-          <MDBNavbarLink className="logoAfac">
+        <div className="logoAfac">
+          <MDBNavbarLink>
             <img src={logoAfac} className="logoAfac" alt="logoAfac" />
           </MDBNavbarLink>
         </div>
