@@ -35,7 +35,6 @@ CREATE TABLE
     artwork (
         id int primary key NOT NULL AUTO_INCREMENT,
         title varchar(200) UNIQUE NOT NULL,
-        art_style varchar(255) NULL,
         image varchar(500) NOT NULL,
         dimention varchar(100) DEFAULT NULL,
         creation_place varchar(255) DEFAULT NULL,
@@ -201,24 +200,23 @@ VALUES (
         'Ben et nuts',
         'noit',
         'ben.noit@test.fr',
-        '1234,
-        ' 1990 -01 -01 '), 
-        (
-          ' Nel ',
-          ' ia ',
-          ' nel.ia @test.fr ',
-          ' 3456 ',
-          ' 1990 -01 -01 '
-        ),
-        (
-      ' Floflo ',
-      ' BRUNLOURS ',
-      ' 12348 ',
-      ' azerty @hotmail.fr ',
-      ' 2001 -09 -11 '
-      );
+        '1234',
+        '1990-01-01',
+    ) (
+        'Nel',
+        'ia',
+        'nel.ia@test.fr',
+        '3456',
+        '1990-01-01'
+    ), (
+        'Floflo',
+        'BRUNLOURS',
+        '12348',
+        'azerty@hotmail.fr',
+        '2001-09 -11'
+    );
 
-      DROP TABLE IF EXISTS artwork_user;
+DROP TABLE IF EXISTS artwork_user;
 
 CREATE TABLE
     artwork_user (

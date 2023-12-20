@@ -14,11 +14,11 @@ import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import CreateAccount from "./pages/CreateAccount";
 import User from "./pages/User";
-import Admin from "./pages/Admin";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import UserCreateAccount from "./pages/UserCreateAccount";
+import AdminArtManager from "./pages/AdminArtManager";
+import AdminUser from "./pages/AdminUser";
 
 const router = createBrowserRouter([
   {
@@ -26,20 +26,17 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/Gallery", element: <Gallery /> },
-      { path: "/Artworks", element: <Artworks /> },
-      { path: "/Artists", element: <Artists /> },
-
-      { path: "/Artist/:id", element: <Artists /> },
-
-      { path: "/About", element: <About /> },
-      { path: "/Login", element: <Login /> },
-      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
-      { path: "/CreateAccount", element: <CreateAccount /> },
-      { path: "/User", element: <User /> },
-      { path: "/Admin", element: <Admin /> },
-      { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
-      { path: "/UserCreateAccount", element: <UserCreateAccount /> },
+      { path: "/gallery", element: <Gallery /> },
+      { path: "/artworks", element: <Artworks /> },
+      { path: "/artists", element: <Artists /> },
+      { path: "/artist/:id", element: <Artists /> },
+      { path: "/about", element: <About /> },
+      { path: "/login", element: <Login /> },
+      { path: "/forgottenpassword", element: <UserForgottenPassword /> },
+      { path: "/createaccount", element: <UserCreateAccount /> },
+      { path: "/user", element: <User /> },
+      { path: "/adminart", element: <AdminArtManager /> },
+      { path: "/adminuser", element: <AdminUser /> },
       { path: "*", element: <Home /> },
     ],
   },
