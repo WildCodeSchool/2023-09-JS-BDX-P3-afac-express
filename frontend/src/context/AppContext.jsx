@@ -2,8 +2,6 @@ import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const appContext = createContext();
 function AppContextProvider({ children }) {
@@ -24,9 +22,9 @@ function AppContextProvider({ children }) {
     );
 
     if (!memoryUser) {
-      toast.error("Identifiants incorrects !");
+      alert("Identifiants incorrects !"); // eslint-disable-line no-alert
     } else {
-      toast.success(`Content de vous revoir ${credentials.email}`);
+      alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
       setUser(memoryUser);
 
       if (memoryUser.admin) {
@@ -42,9 +40,9 @@ function AppContextProvider({ children }) {
     if (!users.find((userdb) => userdb.email === newUser.email)) {
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
-      toast.success(`Bienvenue ${newUser.email}`);
+      alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
     } else {
-      toast.error("Vous êtes déjà inscrit !");
+      alert("Vous êtes déjà inscrit !"); // eslint-disable-line no-alert
     }
   };
 
