@@ -3,16 +3,22 @@
   color: white;
 }
 
+.container-footer a {
+  color: white;
+  text-decoration: none;
+}
+
 .title-contact,
 .title-partnerships {
   color: white;
-  font-size: 24px;
+  margin-bottom: 0;
 }
 
 .container {
   display: flex;
   justify-content: center;
-  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .logo-mail,
@@ -38,10 +44,6 @@
   height: 80px;
 }
 
-.contact {
-  margin-bottom: -10px;
-}
-
 .container-development > p {
   margin-bottom: 0;
 }
@@ -60,10 +62,33 @@
     width: 33.33%; // On répartit l'espace en trois colonnes égales.
     margin-bottom: 0;
   }
+  .container-partnerships {
+    margin-top: 20px;
+  }
+
+  .container-development {
+    margin-top: 20px;
+  }
+  .contact-details {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    // align-items: center;
+  }
+  .logo-telephone,
+  .logo-mail {
+    display: flex;
+    margin-right: 5px;
+  }
+  .telephone-number,
+  .adress-mail {
+    display: inline;
+  }
 
   .contact {
     display: inline;
-    justify-content: flex-start; // On aligne le container à gauche.
+    justify-content: flex-start;
+    // On aligne le container à gauche.
   }
 
   .partnerships {
@@ -77,5 +102,10 @@
   }
   .copyright {
     margin-top: 0;
+  }
+
+  .container-footer a {
+    color: white;
+    text-decoration: none;
   }
 }

@@ -7,7 +7,6 @@ import "./App.scss";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@fortawesome/fontawesome-free/css/all.min.css";
-// eslint-disable-next-line import/no-extraneous-dependencies
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
@@ -23,9 +22,9 @@ import UserCreateAccount from "./pages/UserCreateAccount";
 
 const router = createBrowserRouter([
   {
+    path: "/",
     element: <App />,
     children: [
-      { path: "*", element: <Home /> },
       { path: "/", element: <Home /> },
       { path: "/Gallery", element: <Gallery /> },
       { path: "/Artworks", element: <Artworks /> },
@@ -41,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/Admin", element: <Admin /> },
       { path: "/UserForgottenPassword", element: <UserForgottenPassword /> },
       { path: "/UserCreateAccount", element: <UserCreateAccount /> },
+      { path: "*", element: <Home /> },
     ],
   },
 ]);
