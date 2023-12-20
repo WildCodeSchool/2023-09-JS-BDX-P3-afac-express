@@ -4,6 +4,7 @@ import {
   MDBTable,
   MDBTableBody,
   MDBTableHead,
+  //   MDBScrollbar
 } from "mdb-react-ui-kit";
 
 export default function AdminUser() {
@@ -54,7 +55,7 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Edit
+                    Éditer
                   </MDBBtn>
                 </td>
               </tr>
@@ -85,7 +86,7 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Edit
+                    Éditer
                   </MDBBtn>
                 </td>
               </tr>
@@ -116,7 +117,7 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Edit
+                    Éditer
                   </MDBBtn>
                 </td>
               </tr>
@@ -124,6 +125,16 @@ export default function AdminUser() {
           </MDBTable>
         </div>
       </section>
+
+      {/* <MDBScrollbar
+        style={{ position: "relative", width: "600px", height: "400px" }}
+      >
+        <img
+          src="https://mdbootstrap.com/img/new/slides/041.webp"
+          alt="..."
+          style={{ height: "700px", width: "1000px" }}
+        />
+      </MDBScrollbar> */}
     </MDBContainer>
   );
 }

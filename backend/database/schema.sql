@@ -193,7 +193,6 @@ INSERT INTO
         lastname,
         email,
         passeword,
-        birthday,
         is_admin
     )
 VALUES (
@@ -201,19 +200,16 @@ VALUES (
         'noit',
         'ben.noit@test.fr',
         '1234',
-        '1990-01-01',
     ) (
         'Nel',
         'ia',
         'nel.ia@test.fr',
         '3456',
-        '1990-01-01'
     ), (
         'Floflo',
         'BRUNLOURS',
         '12348',
         'azerty@hotmail.fr',
-        '2001-09 -11'
     );
 
 DROP TABLE IF EXISTS artwork_user;
