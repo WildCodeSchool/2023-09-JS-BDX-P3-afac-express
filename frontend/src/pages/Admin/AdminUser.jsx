@@ -4,7 +4,6 @@ import {
   MDBTable,
   MDBTableBody,
   MDBTableHead,
-  //   MDBScrollbar
 } from "mdb-react-ui-kit";
 
 export default function AdminUser() {
@@ -18,7 +17,7 @@ export default function AdminUser() {
       </h3>
       <section>
         <div className="shadow-4 rounded-5 overflow-hidden">
-          <MDBTable>
+          <MDBTable align="middle" responsive>
             <MDBTableHead light>
               <tr>
                 <th>Identifiant</th>
@@ -30,17 +29,9 @@ export default function AdminUser() {
             <MDBTableBody style={{ verticalAlign: "middle" }}>
               <tr>
                 <td>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                      alt=""
-                      style={{ width: "45px", height: "45px" }}
-                      className="rounded-circle"
-                    />
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">Ben et nuts noit</p>
-                      <p className="text-muted mb-0">ben.noit@test.fr</p>
-                    </div>
+                  <div className="ms-3">
+                    <p className="fw-bold mb-1">Ben et nuts noit</p>
+                    <p className="text-muted mb-0">ben.noit@test.fr</p>
                   </div>
                 </td>
                 <td>
@@ -61,17 +52,9 @@ export default function AdminUser() {
               </tr>
               <tr>
                 <td>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                      className="rounded-circle"
-                      alt=""
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">Nel ia</p>
-                      <p className="text-muted mb-0">nel.ia@test.fr</p>
-                    </div>
+                  <div className="ms-3">
+                    <p className="fw-bold mb-1">Nel ia</p>
+                    <p className="text-muted mb-0">nel.ia@test.fr</p>
                   </div>
                 </td>
                 <td>
@@ -92,17 +75,9 @@ export default function AdminUser() {
               </tr>
               <tr>
                 <td>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                      className="rounded-circle"
-                      alt=""
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">Floflo BRUNLOURS</p>
-                      <p className="text-muted mb-0">azerty@hotmail.fr</p>
-                    </div>
+                  <div className="ms-3">
+                    <p className="fw-bold mb-1">Floflo BRUNLOURS</p>
+                    <p className="text-muted mb-0">azerty@hotmail.fr</p>
                   </div>
                 </td>
                 <td>
@@ -125,16 +100,6 @@ export default function AdminUser() {
           </MDBTable>
         </div>
       </section>
-
-      {/* <MDBScrollbar
-        style={{ position: "relative", width: "600px", height: "400px" }}
-      >
-        <img
-          src="https://mdbootstrap.com/img/new/slides/041.webp"
-          alt="..."
-          style={{ height: "700px", width: "1000px" }}
-        />
-      </MDBScrollbar> */}
     </MDBContainer>
   );
 }
