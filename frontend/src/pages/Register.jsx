@@ -5,8 +5,8 @@ import Redirection from "../components/Redirection";
 
 export default function Register() {
   const [formValue, setFormValue] = useState({
-    email: "elea@gmail.com",
-    password: "1234",
+    email: "",
+    password: "",
   });
 
   const { register } = useApp();

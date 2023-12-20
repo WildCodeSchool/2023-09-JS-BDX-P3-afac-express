@@ -9,12 +9,7 @@ function Redirection() {
   };
 
   return (
-    <MDBBtn
-      type="button"
-      onClick={handleGoBack}
-      color="link"
-      rippleColor="dark"
-    >
+    <MDBBtn type="button" onClick={handleGoBack} color="link" className="mb-5">
       Retour
     </MDBBtn>
   );

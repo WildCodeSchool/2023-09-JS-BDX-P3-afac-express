@@ -1,5 +1,6 @@
 import React from "react";
 import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
+import Redirection from "../../components/Redirection";
 
 export default function AdminArtManager() {
   return (
@@ -50,9 +51,7 @@ export default function AdminArtManager() {
         Suivant
       </MDBBtn>
 
-      <div className="text-center">
-        <a href="/User">Retour</a>
-      </div>
+      <Redirection />
     </form>
   );
 }
