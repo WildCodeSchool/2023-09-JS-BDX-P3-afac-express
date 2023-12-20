@@ -16,14 +16,21 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import User from "./pages/User";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
-import UserCreateAccount from "./pages/UserCreateAccount";
-import AdminArtManager from "./pages/AdminArtManager";
-import AdminUser from "./pages/AdminUser";
+import Register from "./pages/Register";
+import AdminArtManager from "./pages/Admin/AdminArtManager";
+import AdminUser from "./pages/Admin/AdminUser";
+// import Admin from "./pages/Admin/Admin";
+import AppContextProvider from "./context/AppContext";
+// import AdminContextProvider from "./context/AdminContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
+    ),
     children: [
       { path: "/", element: <Home /> },
       { path: "/gallery", element: <Gallery /> },
@@ -33,10 +40,20 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
-      { path: "/createaccount", element: <UserCreateAccount /> },
+      { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
+      // {
+      //   path: "/admin",
+      //   element: (
+      //     <AdminContextProvider>
+      //       <Admin />
+      //     </AdminContextProvider>
+      //   ),
+      // },
+
       { path: "/adminart", element: <AdminArtManager /> },
       { path: "/adminuser", element: <AdminUser /> },
+
       { path: "*", element: <Home /> },
     ],
   },

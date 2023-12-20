@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/Login.scss";
 import {
   MDBInput,
@@ -7,22 +7,42 @@ import {
   MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { useApp } from "../context/AppContext";
 
 function Login() {
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { login } = useApp();
+
+  const onChange = (e) => {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
+
   return (
     <form className="user-form">
       <h1>Connexion</h1>
       <MDBInput
         className="mb-4"
-        type="email"
-        id="form2Example1"
+        value={formValue.email}
+        name="email"
+        onChange={onChange}
+        id="validationUser01"
+        required
         label="Adresse mail"
+        type="email"
       />
       <MDBInput
         className="mb-4"
-        type="password"
-        id="form2Example2"
+        value={formValue.password}
+        name="password"
+        onChange={onChange}
+        id="validationUser02"
+        required
         label="Mot de passe"
+        type="password"
       />
 
       <MDBRow className="mb-4">
@@ -38,13 +58,18 @@ function Login() {
         </MDBCol>
       </MDBRow>
 
-      <MDBBtn type="submit" className="mb-4" block>
+      <MDBBtn
+        type="submit"
+        className="mb-4"
+        block
+        onClick={() => login(formValue)}
+      >
         Se connecter
       </MDBBtn>
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <a href="/createaccount">Enregistrez-vous</a>
+          Pas encore membre ? <a href="/register">Enregistrez-vous</a>
         </p>
       </div>
     </form>

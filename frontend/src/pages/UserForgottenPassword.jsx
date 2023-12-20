@@ -1,5 +1,6 @@
 import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import Redirection from "../components/Redirection";
 
 export default function UserForgottenPassword() {
   return (
@@ -16,9 +17,7 @@ export default function UserForgottenPassword() {
       <MDBBtn type="submit" block>
         Suivant
       </MDBBtn>
-      <div className="text-center">
-        <a href="/User">Retour</a>{" "}
-      </div>
+      <Redirection />
     </form>
   );
 }
