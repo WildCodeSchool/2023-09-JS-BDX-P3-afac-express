@@ -3,14 +3,16 @@ import {
   MDBNavbar,
   MDBContainer,
   MDBNavbarToggler,
+  MDBDropdownToggle,
   MDBIcon,
   MDBCollapse,
   MDBNavbarNav,
   MDBNavbarLink,
+  MDBDropdown,
+  MDBDropdownMenu,
 } from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
 import "../style/About.scss";
-import profil from "../assets/navbar/profil.png";
 import logoAfac from "../assets/logo/logoAfac.png";
 
 export default function Navigation() {
@@ -18,7 +20,7 @@ export default function Navigation() {
 
   return (
     <MDBContainer fluid className="row w-100 navigation">
-      <MDBNavbar expand="lg" className="">
+      <MDBNavbar expand="lg" className="containernavbar">
         <MDBNavbarToggler
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -41,11 +43,21 @@ export default function Navigation() {
           </MDBNavbarLink>
         </div>
 
-        <div className="profilUser">
-          <MDBNavbarLink href="/login" className="userlogo">
-            <img src={profil} className="profil" alt="profil" />
-          </MDBNavbarLink>
-        </div>
+        <MDBDropdown>
+          <MDBDropdownToggle>
+            <MDBIcon far icon="user" />
+          </MDBDropdownToggle>
+          <MDBDropdownMenu>
+            <MDBNavbarLink href="/adminuser">
+              Gérer les utilisateurs
+            </MDBNavbarLink>
+            <MDBNavbarLink href="/adminart">
+              Gérer les oeuvres et artistes
+            </MDBNavbarLink>
+            <MDBNavbarLink href="/User">Gérer mon compte</MDBNavbarLink>
+            <MDBNavbarLink href="/Home">Déconnexion</MDBNavbarLink>
+          </MDBDropdownMenu>
+        </MDBDropdown>
       </MDBNavbar>
     </MDBContainer>
   );
