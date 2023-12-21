@@ -19,8 +19,8 @@ import UserForgottenPassword from "./pages/UserForgottenPassword";
 import Register from "./pages/Register";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
-// import Admin from "./pages/Admin/Admin";
 import AppContextProvider from "./context/AppContext";
+import Admin from "./pages/Admin/Admin";
 // import AdminContextProvider from "./context/AdminContext";
 
 const router = createBrowserRouter([
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
+      { path: "/admin", element: <Admin /> },
       // {
       //   path: "/admin",
       //   element: (
