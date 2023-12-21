@@ -60,11 +60,11 @@ export default function Navigation() {
           <MDBDropdownMenu>
             <MDBNavbarLink href="/User">Mon compte</MDBNavbarLink>
             <MDBNavbarLink href="/User">Ma page personelle</MDBNavbarLink>
-            <MDBNavbarLink href="/adminart">
-              Gérer les oeuvres et artistes
-            </MDBNavbarLink>
             <MDBNavbarLink href="/adminuser">
               Gérer les utilisateurs
+              <MDBNavbarLink href="/adminart">
+                Gérer les oeuvres et artistes
+              </MDBNavbarLink>
             </MDBNavbarLink>
             <MDBNavbarLink href="/Home">Déconnexion</MDBNavbarLink>
           </MDBDropdownMenu>

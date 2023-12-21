@@ -7,7 +7,7 @@ import {
   MDBContainer,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
-import Filter from "../components/Filter";
+import ArtistsFilter from "../components/ArtistsFilter";
 
 const artists = [
   {
@@ -57,7 +57,7 @@ function Artists() {
         Nos artistes
       </h3>
 
-      <Filter artists={artists} onSelectArtist={onSelectArtist} />
+      <ArtistsFilter artists={artists} onSelectArtist={onSelectArtist} />
       {selectedArtist && (
         <div key={selectedArtist.id}>
           <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
