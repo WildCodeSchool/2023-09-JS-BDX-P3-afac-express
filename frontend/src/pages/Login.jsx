@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
-  const { login, setLoggedInUser, user } = useApp();
+  const { login, setLoggedInUser, user, setUser } = useApp();
   const navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({
@@ -28,6 +28,7 @@ function Login() {
 
     if (user) {
       setLoggedInUser(user);
+      setUser({ ...user, connected: true });
       navigate("/home");
     }
   };
