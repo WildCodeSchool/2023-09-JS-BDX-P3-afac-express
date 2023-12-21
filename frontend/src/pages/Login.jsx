@@ -7,18 +7,30 @@ import {
   MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
+  const { login, setLoggedInUser, user } = useApp(); // Déstructurez user du contexte
+  const navigate = useNavigate();
+
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
   });
 
-  const { login } = useApp();
-
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = () => {
+    login(formValue);
+
+    if (user) {
+      setLoggedInUser(user);
+
+      navigate("/home");
+    }
   };
 
   return (
@@ -58,12 +70,7 @@ function Login() {
         </MDBCol>
       </MDBRow>
 
-      <MDBBtn
-        type="submit"
-        className="mb-4"
-        block
-        onClick={() => login(formValue)}
-      >
+      <MDBBtn type="submit" className="mb-4" block onClick={handleLogin}>
         Se connecter
       </MDBBtn>
 

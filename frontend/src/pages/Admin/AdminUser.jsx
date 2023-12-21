@@ -22,7 +22,6 @@ export default function AdminUser() {
               <tr>
                 <th>Identifiant</th>
                 <th>Mot de passe</th>
-                <th>Date de naissance</th>
                 <th>Actions</th>
               </tr>
             </MDBTableHead>
@@ -37,7 +36,7 @@ export default function AdminUser() {
                 <td>
                   <p className="fw-normal mb-1">1234</p>
                 </td>
-                <td>1990-01-01</td>
+
                 <td>
                   <MDBBtn
                     className="fw-bold"
@@ -60,7 +59,7 @@ export default function AdminUser() {
                 <td>
                   <p className="fw-normal mb-1">3456</p>
                 </td>
-                <td>1990-01-01</td>
+
                 <td>
                   <MDBBtn
                     className="fw-bold"
@@ -83,7 +82,7 @@ export default function AdminUser() {
                 <td>
                   <p className="fw-normal mb-1">12348</p>
                 </td>
-                <td>2001-09-11</td>
+
                 <td>
                   <MDBBtn
                     className="fw-bold"
