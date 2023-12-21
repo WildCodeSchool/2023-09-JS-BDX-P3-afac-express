@@ -6,15 +6,16 @@ import { MDBAlert } from "mdb-react-ui-kit";
 const appContext = createContext();
 function AppContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState({ admin: false });
+  const [user, setUser] = useState({ admin: false, connected: false });
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
   // const navigate = useNavigate();
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  const [loggedInUser, setLoggedInUser] = useState(false);
 
-  const setLoggedInUser = (loggedInUser) => {
-    setUser(loggedInUser);
-  };
+  // const setLoggedInUser = (loggedInUser) => {
+  //   setUser(loggedInUser);
+  // };
 
   const login = (credentials) => {
     // setUser({ admin: true });
@@ -30,7 +31,7 @@ function AppContextProvider({ children }) {
       alert("Identifiants incorrects !"); // eslint-disable-line no-alert
     } else {
       alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
-      setUser(memoryUser);
+      // setUser(memoryUser);
       setLoggedInUser(memoryUser);
       // if (memoryUser.admin) {
       //   return navigate("/admin/demo");
@@ -52,8 +53,7 @@ function AppContextProvider({ children }) {
   };
 
   const logout = () => {
-    // setUser({ admin: false });
-    setUser(null);
+    setUser({ ...user, admin: false, connected: false });
     setOpenNavSecond(false);
   };
 
@@ -62,22 +62,26 @@ function AppContextProvider({ children }) {
       isAdmin,
       setIsAdmin,
       user,
+      setUser,
       login,
       logout,
       register,
       openNavSecond,
       setOpenNavSecond,
+      loggedInUser,
       setLoggedInUser,
     }),
     [
       isAdmin,
       setIsAdmin,
       user,
+      setUser,
       login,
       logout,
       register,
       openNavSecond,
       setOpenNavSecond,
+      loggedInUser,
       setLoggedInUser,
     ]
   );

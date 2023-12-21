@@ -62,7 +62,7 @@ export default function Navigation() {
             <img src={logoAfac} className="logoAfac" alt="logoAfac" />
           </MDBNavbarLink>
         </div>
-        {user ? (
+        {user.connected ? (
           <MDBDropdown>
             <MDBNavbarLink>
               <MDBDropdownToggle>
