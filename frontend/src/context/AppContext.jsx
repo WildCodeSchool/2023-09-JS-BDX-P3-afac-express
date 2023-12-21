@@ -53,7 +53,7 @@ function AppContextProvider({ children }) {
 
   const logout = () => {
     // setUser({ admin: false });
-    setUser(null); // ou setUser({})
+    setUser(null);
     setOpenNavSecond(false);
   };
 
