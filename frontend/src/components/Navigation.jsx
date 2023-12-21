@@ -28,7 +28,7 @@ export default function Navigation() {
         >
           <MDBIcon icon="bars" fas color="white" />
         </MDBNavbarToggler>
-        <MDBCollapse navbar open={openNavSecond}>
+        <MDBCollapse className="navbar-display" navbar open={openNavSecond}>
           <MDBNavbarNav className="ms-auto">
             <MDBNavbarLink className="navLink" href="/Home">
               Accueil

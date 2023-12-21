@@ -1,3 +1,5 @@
+//Media queries pour le format Mobile
+
 .navigation {
   background-color: #7b273d;
   background-size: cover;
@@ -18,18 +20,27 @@
     left: 0;
   }
 
+  .navbar-display {
+    position: absolute;
+    background-color: #7b273d;
+    top: 50px;
+    z-index: 100;
+    width: calc(100% + 12px);
+    left: -12px;
+  }
+
   .logoAfac {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 210px;
-    height: 80px;
+    width: 150px;
+    height: 60px;
     left: 50%;
     top: 50%;
   }
 
   .containernavbar {
     position: relative;
-    max-height: 50%; // Fixez la hauteur de la barre de navigation
+    // max-height: 50px; // Fixez la hauteur de la barre de navigation
   }
 
   // .navbar > .container-fluid {
