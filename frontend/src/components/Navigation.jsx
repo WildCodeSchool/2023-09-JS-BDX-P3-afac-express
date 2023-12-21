@@ -71,7 +71,9 @@ export default function Navigation() {
             </MDBNavbarLink>
 
             <MDBDropdownMenu>
-              <MDBNavbarLink href="/User">Mon compte</MDBNavbarLink>
+              <MDBNavbarLink href="/accountmanagement">
+                Mon compte
+              </MDBNavbarLink>
               <MDBNavbarLink href="/User">Ma page personnelle</MDBNavbarLink>
               <MDBNavbarLink href="/adminuser">
                 Gérer les utilisateurs

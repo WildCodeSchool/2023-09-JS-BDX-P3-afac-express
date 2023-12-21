@@ -21,6 +21,7 @@ import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import AppContextProvider from "./context/AppContext";
 import Admin from "./pages/Admin/Admin";
+import AccountManagement from "./pages/AccountManagement";
 // import AdminContextProvider from "./context/AdminContext";
 
 const router = createBrowserRouter([
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/admin", element: <Admin /> },
+      { path: "/accountmanagement", element: <AccountManagement /> },
+
       // {
       //   path: "/admin",
       //   element: (
