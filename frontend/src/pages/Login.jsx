@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
-  const { login, setLoggedInUser, user } = useApp(); // Déstructurez user du contexte
+  const { login, setLoggedInUser, user } = useApp();
   const navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({
@@ -28,7 +28,6 @@ function Login() {
 
     if (user) {
       setLoggedInUser(user);
-
       navigate("/home");
     }
   };
