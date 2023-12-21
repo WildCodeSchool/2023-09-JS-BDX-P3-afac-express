@@ -53,18 +53,19 @@ export default function Navigation() {
           </MDBNavbarLink>
         </div>
 
-        <MDBDropdown>
+        <MDBDropdown className="authentication-button">
           <MDBDropdownToggle>
             <MDBIcon far icon="user" />
           </MDBDropdownToggle>
           <MDBDropdownMenu>
-            <MDBNavbarLink href="/adminuser">
-              Gérer les utilisateurs
-            </MDBNavbarLink>
+            <MDBNavbarLink href="/User">Mon compte</MDBNavbarLink>
+            <MDBNavbarLink href="/User">Ma page personelle</MDBNavbarLink>
             <MDBNavbarLink href="/adminart">
               Gérer les oeuvres et artistes
             </MDBNavbarLink>
-            <MDBNavbarLink href="/User">Gérer mon compte</MDBNavbarLink>
+            <MDBNavbarLink href="/adminuser">
+              Gérer les utilisateurs
+            </MDBNavbarLink>
             <MDBNavbarLink href="/Home">Déconnexion</MDBNavbarLink>
           </MDBDropdownMenu>
         </MDBDropdown>
