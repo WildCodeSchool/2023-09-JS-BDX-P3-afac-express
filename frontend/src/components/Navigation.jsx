@@ -76,7 +76,11 @@ export default function Navigation() {
               <Link to="/adminart" className="nav-link navLink">
                 Gérer les oeuvres et artistes
               </Link>
-              <button type="button" onClick={() => logout()}>
+              <button
+                type="button"
+                className="nav-link navLink"
+                onClick={() => logout()}
+              >
                 Déconnexion
               </button>
             </MDBDropdownMenu>
