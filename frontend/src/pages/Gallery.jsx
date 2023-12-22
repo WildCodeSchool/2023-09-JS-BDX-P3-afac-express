@@ -51,7 +51,7 @@ function Gallery() {
         </MDBDropdownMenu>
       </MDBDropdown>
       <div>
-        <h3 className="fs-6 text text-start fw-bold pt-">
+        <h3 className="fs-6 text text-start fw-bold">
           Mahefa Dimbiniaina Randrianarivelo
         </h3>
 

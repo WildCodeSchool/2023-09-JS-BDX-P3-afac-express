@@ -53,12 +53,10 @@ function Home() {
           </MDBBtn>
         </MDBCardBody>
       </MDBCard>
-      <h2 className="mt-5 shadow-lg " style={{ color: "#7b273d" }}>
+      <h2 className="mt-5 " style={{ color: "#7b273d" }}>
         Artistes
       </h2>
-      <p className="text-center shadow-lg">
-        "Regarder le monde c'est toucher sa diversité".
-      </p>
+
       <MDBCarousel className="mt-3  " showControls showIndicators>
         <MDBCarouselItem itemId={1}>
           <img src={larasousa} className="d-block w-100" alt="Lara Sousa" />
@@ -105,10 +103,12 @@ function Home() {
           </MDBCarouselCaption>
         </MDBCarouselItem>
       </MDBCarousel>
-      <h2 className="mt-5 shadow-lg" style={{ color: "#7b273d" }}>
+      <h2 className="mt-5" style={{ color: "#7b273d" }}>
         Collections
       </h2>
-
+      <p className="text-left">
+        "Regarder le monde c'est toucher sa diversité".
+      </p>
       <MDBCarousel className="mt-3 mb-5 " showControls showIndicators>
         <MDBCarouselItem itemId={1}>
           <img

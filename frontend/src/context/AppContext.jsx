@@ -1,15 +1,21 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const appContext = createContext();
 function AppContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState({ admin: false });
+  const [user, setUser] = useState({ admin: false, connected: false });
   const [basicDanger, setBasicDanger] = useState(false);
-  const navigate = useNavigate();
+  const [openNavSecond, setOpenNavSecond] = useState(false);
+  // const navigate = useNavigate();
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  const [loggedInUser, setLoggedInUser] = useState(false);
+
+  // const setLoggedInUser = (loggedInUser) => {
+  //   setUser(loggedInUser);
+  // };
 
   const login = (credentials) => {
     // setUser({ admin: true });
@@ -25,13 +31,13 @@ function AppContextProvider({ children }) {
       alert("Identifiants incorrects !"); // eslint-disable-line no-alert
     } else {
       alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
-      setUser(memoryUser);
-
-      if (memoryUser.admin) {
-        return navigate("/admin/demo");
-      }
+      // setUser(memoryUser);
+      setLoggedInUser(memoryUser);
+      // if (memoryUser.admin) {
+      //   return navigate("/admin/demo");
+      // }
     }
-    return navigate("/demo");
+    // return navigate("/demo");
   };
 
   const register = (newUser) => {
@@ -47,14 +53,37 @@ function AppContextProvider({ children }) {
   };
 
   const logout = () => {
-    setUser({ admin: false });
+    setUser({ ...user, admin: false, connected: false });
+    setOpenNavSecond(false);
   };
 
-  // exemple méthodes pour communiquer avec une api
-
   const contextData = useMemo(
-    () => ({ isAdmin, setIsAdmin, user, login, logout, register }),
-    [isAdmin, setIsAdmin, user, login, logout, register]
+    () => ({
+      isAdmin,
+      setIsAdmin,
+      user,
+      setUser,
+      login,
+      logout,
+      register,
+      openNavSecond,
+      setOpenNavSecond,
+      loggedInUser,
+      setLoggedInUser,
+    }),
+    [
+      isAdmin,
+      setIsAdmin,
+      user,
+      setUser,
+      login,
+      logout,
+      register,
+      openNavSecond,
+      setOpenNavSecond,
+      loggedInUser,
+      setLoggedInUser,
+    ]
   );
 
   return (
