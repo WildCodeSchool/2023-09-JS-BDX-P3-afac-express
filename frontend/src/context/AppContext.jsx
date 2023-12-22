@@ -1,24 +1,16 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
-// import { useNavigate } from "react-router-dom";
 
 const appContext = createContext();
 function AppContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState({ admin: false, connected: false });
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("session")));
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  // const navigate = useNavigate();
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
-  const [loggedInUser, setLoggedInUser] = useState(false);
-
-  // const setLoggedInUser = (loggedInUser) => {
-  //   setUser(loggedInUser);
-  // };
 
   const login = (credentials) => {
-    // setUser({ admin: true });
     const users = getUsers();
 
     const memoryUser = users.find(
@@ -29,15 +21,13 @@ function AppContextProvider({ children }) {
 
     if (!memoryUser) {
       alert("Identifiants incorrects !"); // eslint-disable-line no-alert
-    } else {
-      alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
-      // setUser(memoryUser);
-      setLoggedInUser(memoryUser);
-      // if (memoryUser.admin) {
-      //   return navigate("/admin/demo");
-      // }
+      return false;
     }
-    // return navigate("/demo");
+
+    alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
+    setUser(memoryUser);
+    localStorage.setItem("session", JSON.stringify(memoryUser));
+    return true;
   };
 
   const register = (newUser) => {
@@ -53,8 +43,9 @@ function AppContextProvider({ children }) {
   };
 
   const logout = () => {
-    setUser({ ...user, admin: false, connected: false });
+    setUser(undefined);
     setOpenNavSecond(false);
+    localStorage.removeItem("session");
   };
 
   const contextData = useMemo(
@@ -68,8 +59,6 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      loggedInUser,
-      setLoggedInUser,
     }),
     [
       isAdmin,
@@ -81,8 +70,6 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      loggedInUser,
-      setLoggedInUser,
     ]
   );
 

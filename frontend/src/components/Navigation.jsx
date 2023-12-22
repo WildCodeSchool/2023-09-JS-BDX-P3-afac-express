@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   MDBNavbar,
   MDBContainer,
@@ -13,20 +14,12 @@ import {
 } from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
 import "../style/About.scss";
-import logoAfac from "../assets/logo/logoAfac.png";
 import { useApp } from "../context/AppContext";
+import logoAfac from "../assets/logo/logoAfac.png";
 
 export default function Navigation() {
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  const { user, logout, setLoggedInUser } = useApp();
-
-  const handleLogout = () => {
-    if (user) {
-      setLoggedInUser(user);
-      setOpenNavSecond(false);
-      logout();
-    }
-  };
+  const { user, logout } = useApp();
 
   return (
     <MDBContainer fluid className="row w-100 navigation">
@@ -62,7 +55,7 @@ export default function Navigation() {
             <img src={logoAfac} className="logoAfac" alt="logoAfac" />
           </MDBNavbarLink>
         </div>
-        {user.connected ? (
+        {user ? (
           <MDBDropdown>
             <MDBNavbarLink>
               <MDBDropdownToggle>
@@ -71,23 +64,31 @@ export default function Navigation() {
             </MDBNavbarLink>
 
             <MDBDropdownMenu>
-              <MDBNavbarLink href="/accountmanagement">
+              <Link to="/accountmanagement" className="nav-link navLink">
                 Mon compte
-              </MDBNavbarLink>
-              <MDBNavbarLink href="/User">Ma page personnelle</MDBNavbarLink>
-              <MDBNavbarLink href="/adminuser">
+              </Link>
+              <Link to="/User" className="nav-link navLink">
+                Ma page personnelle
+              </Link>
+              <Link to="/adminuser" className="nav-link navLink">
                 Gérer les utilisateurs
-              </MDBNavbarLink>
-              <MDBNavbarLink href="/adminart">
+              </Link>
+              <Link to="/adminart" className="nav-link navLink">
                 Gérer les oeuvres et artistes
-              </MDBNavbarLink>
-              <MDBNavbarLink onClick={handleLogout}>Déconnexion</MDBNavbarLink>
+              </Link>
+              <button
+                type="button"
+                className="nav-link navLink"
+                onClick={() => logout()}
+              >
+                Déconnexion
+              </button>
             </MDBDropdownMenu>
           </MDBDropdown>
         ) : (
-          <MDBNavbarLink href="/login">
+          <Link to="/login">
             <MDBIcon far icon="user" />
-          </MDBNavbarLink>
+          </Link>
         )}
       </MDBNavbar>
     </MDBContainer>

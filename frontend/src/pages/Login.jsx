@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
-  const { login, setLoggedInUser, user, setUser } = useApp();
+  const { login } = useApp();
   const navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({
@@ -23,18 +23,16 @@ function Login() {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = () => {
-    login(formValue);
+  const handleLogin = (event) => {
+    event.preventDefault();
 
-    if (user) {
-      setLoggedInUser(user);
-      setUser({ ...user, connected: true });
+    if (login(formValue)) {
       navigate("/home");
     }
   };
 
   return (
-    <form className="user-form">
+    <form className="user-form" onSubmit={handleLogin}>
       <h1>Connexion</h1>
       <MDBInput
         className="mb-4"
@@ -70,7 +68,7 @@ function Login() {
         </MDBCol>
       </MDBRow>
 
-      <MDBBtn type="submit" className="mb-4" block onClick={handleLogin}>
+      <MDBBtn type="submit" className="mb-4" block>
         Se connecter
       </MDBBtn>
 
