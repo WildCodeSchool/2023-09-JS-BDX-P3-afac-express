@@ -6,11 +6,11 @@ import { useApp } from "./AppContext";
 const adminContext = createContext();
 
 function AdminContextProvider({ children }) {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const appContext = useApp();
 
   if (appContext.user.admin === false) {
-    return <Navigate to="/demo" />;
+    return <Navigate to="/login" />;
   }
 
   const adminData = useMemo(
