@@ -7,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function ArtistsFilter({ artists, onSelectArtist }) {
+function Filter({ artists, onSelectArtist }) {
   return (
     <MDBDropdown className="d-flex justify-content-center pb-4 pt-3">
       <MDBDropdownToggle
@@ -33,7 +33,7 @@ function ArtistsFilter({ artists, onSelectArtist }) {
   );
 }
 
-ArtistsFilter.propTypes = {
+Filter.propTypes = {
   artists: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -43,4 +43,4 @@ ArtistsFilter.propTypes = {
   onSelectArtist: PropTypes.func.isRequired,
 };
 
-export default ArtistsFilter;
+export default Filter;
