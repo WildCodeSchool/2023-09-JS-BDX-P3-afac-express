@@ -7,7 +7,7 @@ import {
   MDBContainer,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
-import Filter from "../components/Filter";
+import Filter from "../components/Filter/Filter";
 
 const artists = [
   {
@@ -43,11 +43,12 @@ const artists = [
 ];
 
 function Artists() {
-  const [selectedArtist, setSelectedArtist] = useState([0]);
+  const [selectedArtist, setSelectedArtist] = useState(null);
 
   const onSelectArtist = (artist) => {
     setSelectedArtist(artist);
   };
+
   return (
     <MDBContainer fluid className="pt-5">
       <h3
