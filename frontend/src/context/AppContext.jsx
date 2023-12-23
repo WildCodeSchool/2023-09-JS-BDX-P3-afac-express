@@ -48,6 +48,10 @@ function AppContextProvider({ children }) {
     localStorage.removeItem("session");
   };
 
+  // const removeUser = () => {
+  //   localStorage.clean();
+  // };
+
   const contextData = useMemo(
     () => ({
       isAdmin,
