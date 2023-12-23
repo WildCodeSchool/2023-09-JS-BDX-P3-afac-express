@@ -136,19 +136,19 @@ VALUES (
         'Madagascar',
         '3'
     ), (
-        'Il ne reste plus que...',
+        'Gare d\'Antananarivo',
         'https://i.postimg.cc/W1g8jcxw/15-Gare-DAntananarivo.jpg',
-        '-',
-        'Réunion',
-        '4'
+        '6906 x 6906',
+        'Madagascar',
+        '3'
     ), (
-        '... réalité fantomatique',
+        'Il ne reste plus que...',
         'https://i.postimg.cc/0rgSHb5R/16-Il-Ne-Reste-Plus-Que.jpg',
         '-',
         'Réunion',
         '4'
     ), (
-        'Semis du riz. Métamorphosés... sublimés',
+        '... réalité fantomatique',
         'https://i.postimg.cc/7LLNzJfm/17-Realite-Fantomatique.jpg',
         '-',
         'Réunion',
