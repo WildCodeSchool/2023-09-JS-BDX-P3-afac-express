@@ -84,6 +84,16 @@
     font-size: 20px;
   }
 
+  .navButton {
+    border: none;
+    padding-right: 78px;
+  }
+
+  button:hover {
+    background-color: #7b273d;
+    box-shadow: #7b273d;
+  }
+
   @media screen and (min-width: 1024px) {
     .navbar {
       box-shadow: none;

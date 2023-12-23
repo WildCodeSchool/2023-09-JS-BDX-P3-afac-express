@@ -78,7 +78,7 @@ export default function Navigation() {
               </Link>
               <button
                 type="button"
-                className="nav-link navLink"
+                className="nav-link navLink navButton"
                 onClick={() => logout()}
               >
                 Déconnexion
