@@ -1,19 +1,9 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function AccountManagement() {
-  const { user, logout, setLoggedInUser } = useApp();
+  const { logout } = useApp();
 
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    if (user) {
-      setLoggedInUser(user);
-      logout();
-      navigate("/home");
-    }
-  };
   return (
     <MDBContainer
       fluid
@@ -67,7 +57,7 @@ function AccountManagement() {
         </MDBBtn>
       </form>
 
-      <MDBBtn className="mt-4 mb-6" onClick={handleLogout}>
+      <MDBBtn className="mt-4 mb-6" onClick={() => logout()}>
         Déconnexion
       </MDBBtn>
     </MDBContainer>
