@@ -2,7 +2,7 @@ import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import { useApp } from "../context/AppContext";
 
 function AccountManagement() {
-  const { logout } = useApp();
+  const { logout, removeUser } = useApp();
 
   return (
     <MDBContainer
@@ -59,6 +59,10 @@ function AccountManagement() {
 
       <MDBBtn className="mt-4 mb-6" onClick={() => logout()}>
         Déconnexion
+      </MDBBtn>
+
+      <MDBBtn className="mt-4 mb-6" onClick={() => removeUser()}>
+        Supprimer son compte
       </MDBBtn>
     </MDBContainer>
   );
