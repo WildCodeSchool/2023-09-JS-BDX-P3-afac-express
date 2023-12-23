@@ -128,6 +128,10 @@ function User() {
 
       {selectedArtist && (
         <div key={selectedArtist.id}>
+          <h2 className="fs-5 text text-center pt-2 pb-2">
+            {selectedArtist.name}
+          </h2>
+
           <div className="d-flex flex-column mb-3">
             <div className="p-2">
               <MDBLightbox>
