@@ -1,28 +1,32 @@
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import { useState } from "react";
+import PropTypes from "prop-types";
+import { useLike } from "../context/LikeContext";
 
-function Likes() {
-  const [isliked, setIsidLiked] = useState(false);
-  const toggleLikes = () => {
-    setIsidLiked((prevIsidLiked) => !prevIsidLiked);
-  };
+function Likes({ artworkId }) {
+  const { likes, toggleLike } = useLike();
+  const isLiked = likes[artworkId];
 
-  const likes = isliked ? (
+  const likesIcon = isLiked ? (
     <MDBIcon far icon="heart" className="d-block p-2" />
   ) : (
     <MDBIcon fas icon="heart" className="d-block p-2" />
   );
+
   return (
     <MDBBtn
       tag="a"
       color="none"
       className="m-1"
       style={{ color: "#7b273d" }}
-      onClick={toggleLikes}
+      onClick={() => toggleLike(artworkId)}
     >
-      {likes}
+      {likesIcon}
     </MDBBtn>
   );
 }
+
+Likes.propTypes = {
+  artworkId: PropTypes.number.isRequired,
+};
 
 export default Likes;

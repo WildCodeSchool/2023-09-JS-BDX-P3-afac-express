@@ -14,7 +14,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import Likes from "../components/Likes";
-import Filter from "../components/Filter/FilterUser";
+import FilterUser from "../components/Filter/FilterUser";
 
 const artists = [
   {
@@ -124,7 +124,7 @@ function User() {
         Patrimoine iconographique de l’océan indien
       </h2>
 
-      <Filter artists={artists} onSelectArtist={onSelectArtist} />
+      <FilterUser artists={artists} onSelectArtist={onSelectArtist} />
 
       {selectedArtist && (
         <div key={selectedArtist.id}>
@@ -180,91 +180,6 @@ function User() {
           </div>
         </div>
       )}
-      {/* <MDBRow>
-        <MDBCol lg="4" md="12" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            src="https://mdbootstrap.com/img/new/standard/city/041.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-  
-        <MDBCol lg="4" md="6" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            delay={300}
-            src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-  
-        <MDBCol lg="4" md="6" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            delay={500}
-            src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-      </MDBRow>
-  
-      <MDBRow>
-        <MDBCol lg="4" md="12" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-  
-        <MDBCol lg="4" md="6" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            delay={300}
-            src="https://mdbootstrap.com/img/new/standard/city/045.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-  
-        <MDBCol lg="4" md="6" className="mb-4">
-          <MDBAnimation
-            reset
-            tag="img"
-            repeatOnScroll
-            start="onScroll"
-            animation="fade-in"
-            duration={500}
-            delay={500}
-            src="https://mdbootstrap.com/img/new/standard/city/046.webp"
-            className="img-fluid shadow-1-strong rounded"
-          />
-        </MDBCol>
-      </MDBRow> */}
     </MDBContainer>
   );
 }
