@@ -1,32 +1,31 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useApp } from "./AppContext";
 
 const likeContext = createContext();
 
 function LikeContext({ children }) {
-  const [user, setUser] = useState(false);
-  const [likes, setLikes] = useState(() => {
-    const storedLikes = localStorage.getItem("likes");
-    return storedLikes ? JSON.parse(storedLikes) : {};
-  });
-  const { login, logout } = useApp();
+  const [likes, setLikes] = useState(
+    JSON.parse(localStorage.getItem("likes_info")) || {}
+  );
 
   useEffect(() => {
-    localStorage.setItem("likes", JSON.stringify(likes));
+    localStorage.setItem("likes_info", JSON.stringify(likes));
   }, [likes]);
 
-  const toggleLike = (artworkId) => {
-    setLikes((prevLikes) => {
-      const newLikes = { ...prevLikes, [artworkId]: !prevLikes[artworkId] };
-      return newLikes;
-    });
+  const likeArtwork = (artworkId, artwork) => {
+    const newLike = {
+      id: artworkId,
+      image: artwork.image,
+      title: artwork.title,
+    };
+
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [artworkId]: newLike,
+    }));
   };
 
-  const userData = useMemo(
-    () => ({ user, setUser, login, logout, likes, toggleLike }),
-    [user, setUser, login, logout, likes, toggleLike]
-  );
+  const userData = useMemo(() => ({ likes, likeArtwork }), [likes]);
 
   return (
     <likeContext.Provider value={userData}>{children}</likeContext.Provider>
@@ -34,8 +33,9 @@ function LikeContext({ children }) {
 }
 
 LikeContext.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.shape.isRequired,
 };
+
 export default LikeContext;
 
 export const useLike = () => useContext(likeContext);

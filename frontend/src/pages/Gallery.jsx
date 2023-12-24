@@ -1,11 +1,13 @@
 import {
+  MDBAnimation,
   MDBBtn,
   //   MDBAnimation,
-  MDBCarousel,
-  MDBCarouselItem,
+  MDBCol,
   MDBContainer,
   //   MDBCol,
   MDBIcon,
+  MDBRow,
+
   //   MDBRow,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
@@ -129,125 +131,46 @@ function Gallery() {
             {selectedArtist.name}
           </h3>
 
-          <div className="d-flex flex-column mb-3">
-            <div className="p-2">
-              <MDBCarousel showControls showIndicators>
-                {selectedArtist.artworks.map((artwork, index) => (
-                  <MDBCarouselItem key={selectedArtist.id} itemId={index + 1}>
-                    <img
-                      src={artwork.image}
-                      className="d-block w-100 img-fluid rounded"
-                      alt={artwork.title}
-                    />
-                  </MDBCarouselItem>
-                ))}
-              </MDBCarousel>
-            </div>
-
-            {/* <MDBRow>
-            <MDBCol lg="4" md="12" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                src="https://mdbootstrap.com/img/new/standard/city/041.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={300}
-                src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={500}
-                src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-          </MDBRow>
-
           <MDBRow>
-            <MDBCol lg="4" md="12" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={300}
-                src="https://mdbootstrap.com/img/new/standard/city/045.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={500}
-                src="https://mdbootstrap.com/img/new/standard/city/046.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-          </MDBRow> */}
-
-            <div className="d-flex justify-content-center">
-              <MDBBtn
-                color="none"
-                className="m-1"
-                style={{ color: "#7b273d" }}
-                link
-                href="/Artworks"
+            {selectedArtist.artworks.map((artwork, index) => (
+              <MDBCol
+                lg="4"
+                md="12"
+                className="mb-4"
+                key={selectedArtist.id}
+                itemId={index + 1}
               >
-                <MDBIcon
-                  fas
-                  icon="exclamation-circle"
-                  className="d-block p-2 size='4x'"
+                <MDBAnimation
+                  reset
+                  tag="img"
+                  repeatOnScroll
+                  start="onScroll"
+                  animation="fade-in"
+                  duration={500}
+                  src={artwork.image}
+                  className="img-fluid shadow-1-strong rounded"
                 />
-              </MDBBtn>
+                <h3 className=" fst-italic fs-6">{artwork.title}</h3>
+                <div className="d-flex justify-content-center">
+                  <MDBBtn
+                    color="none"
+                    className="m-1"
+                    style={{ color: "#7b273d" }}
+                    link
+                    href="/Artworks"
+                  >
+                    <MDBIcon
+                      fas
+                      icon="exclamation-circle"
+                      className="d-block p-2 size='4x'"
+                    />
+                  </MDBBtn>
 
-              <Likes artwork={selectedArtist.artworks[0]} />
-            </div>
-          </div>
+                  <Likes artwork={selectedArtist.artworks[0]} />
+                </div>
+              </MDBCol>
+            ))}
+          </MDBRow>
         </div>
       )}
     </MDBContainer>

@@ -20,7 +20,7 @@ import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jpg"
 import bredechouchou from "../assets/artworks/6_BredeChouchou.jpg";
 import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jpg";
 import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jpg";
-import Likes from "../components/Likes";
+// import Likes from "../components/Likes";
 
 function Artworks() {
   return (
@@ -78,7 +78,7 @@ function Artworks() {
                       </MDBTypography>
                     </MDBCardText>
                     <div className="d-flex justify-content-end">
-                      <Likes />
+                      {/* <Likes /> */}
                     </div>
                   </MDBCardBody>
                 </MDBCard>
@@ -103,7 +103,7 @@ function Artworks() {
                       </MDBTypography>
                     </MDBCardText>
                     <div className="d-flex justify-content-end">
-                      <Likes />
+                      {/* <Likes /> */}
                     </div>
                   </MDBCardBody>
                 </MDBCard>
@@ -128,7 +128,7 @@ function Artworks() {
                       </MDBTypography>
                     </MDBCardText>
                     <div className="d-flex justify-content-end">
-                      <Likes />
+                      {/* <Likes /> */}
                     </div>
                   </MDBCardBody>
                 </MDBCard>
@@ -153,7 +153,7 @@ function Artworks() {
                       </MDBTypography>
                     </MDBCardText>
                     <div className="d-flex justify-content-end">
-                      <Likes />
+                      {/* <Likes /> */}
                     </div>
                   </MDBCardBody>
                 </MDBCard>

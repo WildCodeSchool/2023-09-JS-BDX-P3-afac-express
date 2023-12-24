@@ -116,7 +116,7 @@ function AppContextProvider({ children }) {
 }
 
 AppContextProvider.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.shape.isRequired,
 };
 
 export default AppContextProvider;
