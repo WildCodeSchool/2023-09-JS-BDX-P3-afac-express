@@ -45,6 +45,13 @@ function AppContextProvider({ children }) {
     }
   };
 
+  // useEffect(() => {
+  //   register({
+  //     email: "nouvel_utilisateur@example.com",
+  //     passeword: "mot_de_passe",
+  //   });
+  // }, []);
+
   const logout = () => {
     setUser(undefined);
     setOpenNavSecond(false);

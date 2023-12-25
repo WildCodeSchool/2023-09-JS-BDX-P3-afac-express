@@ -12,16 +12,14 @@ function LikeContext({ children }) {
     localStorage.setItem("likes_info", JSON.stringify(likes));
   }, [likes]);
 
-  const likeArtwork = (artworkId, artwork) => {
-    const newLike = {
-      id: artworkId,
-      image: artwork.image,
-      title: artwork.title,
-    };
-
+  const likeArtwork = (id, title, image) => {
     setLikes((prevLikes) => ({
       ...prevLikes,
-      [artworkId]: newLike,
+      [id]: {
+        id,
+        image,
+        title,
+      },
     }));
   };
 

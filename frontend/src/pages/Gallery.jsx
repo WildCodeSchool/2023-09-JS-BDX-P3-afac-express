@@ -24,6 +24,7 @@ const artists = [
       "Lara Sousa est une cinéaste et artiste numérique mozambicaine...",
     artworks: [
       {
+        id: 11,
         title:
           "Tirem nos tudo mas deixem nos a música... Quando eu nasci era meio dia e o sol brillava ...",
         image:
@@ -32,6 +33,7 @@ const artists = [
         creation_place: "-",
       },
       {
+        id: 12,
         title: "Sementes e imagens",
         image: "https://i.postimg.cc/1XMYcrRY/2-Sementes-EImagens.jpg",
         dimention: "-",
@@ -47,12 +49,14 @@ const artists = [
       "Née à Maurice en 1976, elle passe toute son enfance à Petite Julie dans la maison familiale et au milieu des champs de canne alentours. ...", // (la description complète ici)
     artworks: [
       {
+        id: 21,
         title: "Brède chouchou",
         image: "https://i.postimg.cc/W3fxBPJw/6-Brede-Chouchou.jpg",
         dimention: "1200 x 1600",
         creation_place: "Maurice",
       },
       {
+        id: 22,
         title: "Brède rave",
         image: "https://i.postimg.cc/7Z94KdXm/7-Brede-Rave.jpg",
         dimention: "1200 x 1600",
@@ -70,12 +74,14 @@ const artists = [
 
     artworks: [
       {
+        id: 31,
         title: "Analakely, Antananarivo",
         image: "https://i.postimg.cc/W1YN2xrt/11-Analakely-Antananarivo.jpg",
         dimention: "4613 x 4613",
         creation_place: "Madagascar",
       },
       {
+        id: 32,
         title: "Ancienne banque de Madagascar et des Comores, Toamasina",
         image:
           "https://i.postimg.cc/mgJvp4C3/12-Ancienne-Banque-De-Madagascar-Et-Des-Comores-Toamasina.jpg",
@@ -92,12 +98,14 @@ const artists = [
       "Née en 1982 à Noyon (France), Mathilde Neri est une artiste visuelle du monde hybride et outsider qui œuvre également dans le champ de la performance. Neri explore les dimensions de réalité qui émanent de la rencontre avec le signe dans la nature, avec lequel elle entre en connexion par le médium. Elle vit et travaille à La Réunion.",
     artworks: [
       {
+        id: 41,
         title: "Il ne reste plus que...",
         image: "https://i.postimg.cc/0rgSHb5R/16-Il-Ne-Reste-Plus-Que.jpg",
         dimention: "-",
         creation_place: "Réunion",
       },
       {
+        id: 42,
         title: "... réalité fantomatique",
         image: "https://i.postimg.cc/7LLNzJfm/17-Realite-Fantomatique.jpg",
         dimention: "-",

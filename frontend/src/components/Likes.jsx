@@ -18,7 +18,7 @@ function Likes({ artwork }) {
       color="none"
       className="m-1"
       style={{ color: "#7b273d" }}
-      onClick={() => likeArtwork(artwork.id, artwork)}
+      onClick={() => likeArtwork(artwork.id, artwork.title, artwork.image)}
     >
       {likesIcon}
     </MDBBtn>
@@ -28,6 +28,8 @@ function Likes({ artwork }) {
 Likes.propTypes = {
   id: PropTypes.number.isRequired,
   artwork: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default Likes;
