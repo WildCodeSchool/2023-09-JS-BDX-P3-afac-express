@@ -1,14 +1,10 @@
 import {
   MDBAnimation,
   MDBBtn,
-  //   MDBAnimation,
   MDBCol,
   MDBContainer,
-  //   MDBCol,
   MDBIcon,
   MDBRow,
-
-  //   MDBRow,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 
@@ -145,7 +141,7 @@ function Gallery() {
                 lg="4"
                 md="12"
                 className="mb-4"
-                key={selectedArtist.id}
+                key={artwork.id}
                 itemId={index + 1}
               >
                 <MDBAnimation
@@ -174,7 +170,9 @@ function Gallery() {
                     />
                   </MDBBtn>
 
-                  <Likes artwork={selectedArtist.artworks[0]} />
+                  <Likes
+                    artworkId={(artwork.id, artwork.title, artwork.image)}
+                  />
                 </div>
               </MDBCol>
             ))}

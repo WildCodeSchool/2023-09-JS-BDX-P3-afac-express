@@ -12,26 +12,15 @@ function LikeContext({ children }) {
     localStorage.setItem("likes_info", JSON.stringify(likes));
   }, [likes]);
 
-  const likeArtwork = (id, title, image) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [id]: {
-        id,
-        image,
-        title,
-      },
-    }));
-  };
-
-  const userData = useMemo(() => ({ likes, likeArtwork }), [likes]);
+  const contextValue = useMemo(() => ({ likes, setLikes }), [likes]);
 
   return (
-    <likeContext.Provider value={userData}>{children}</likeContext.Provider>
+    <likeContext.Provider value={contextValue}>{children}</likeContext.Provider>
   );
 }
 
 LikeContext.propTypes = {
-  children: PropTypes.shape.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default LikeContext;
