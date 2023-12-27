@@ -24,6 +24,7 @@ import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
+import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
       { path: "/adminuser", element: <AdminUser /> },
       { path: "/adminart", element: <AdminArtManager /> },
       { path: "/accountmanagement", element: <AccountManagement /> },
+      { path: "/adminusermanagement", element: <AdminUserManagement /> },
       { path: "*", element: <Home /> },
 
       // {
