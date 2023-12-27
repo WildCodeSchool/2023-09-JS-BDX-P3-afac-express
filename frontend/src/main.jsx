@@ -46,25 +46,19 @@ const router = createBrowserRouter([
       { path: "/user/:id", element: <User /> },
       { path: "/admin", element: <Admin /> },
       { path: "/accountmanagement", element: <AccountManagement /> },
+      { path: "/adminuser", element: <AdminUser /> },
+      { path: "/adminart", element: <AdminArtManager /> },
       { path: "*", element: <Home /> },
-
-      {
-        path: "/admin",
-        element: (
-          <AdminContextProvider>
-            <Admin />
-          </AdminContextProvider>
-        ),
-        children: [
-          {
-            path: "/adminart",
-            element: <AdminArtManager />,
-          },
-          { path: "/adminuser", element: <AdminUser /> },
-          { path: "/adminart", element: <AdminArtManager /> },
-        ],
-      },
     ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <AdminContextProvider>
+        <Admin />
+      </AdminContextProvider>
+    ),
+    children: [],
   },
 ]);
 
