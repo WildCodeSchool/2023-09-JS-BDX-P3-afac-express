@@ -8,7 +8,7 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";
-import AdminContextProvider from "./context/AdminContext";
+// import AdminContextProvider from "./context/AdminContext";
 import LikeContextProvider from "./context/LikeContext";
 
 import Home from "./pages/Home";
@@ -48,26 +48,24 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
-      // { path: "/admin", element: <Admin /> },
+      { path: "/admin", element: <Admin /> },
+      { path: "/adminuser", element: <AdminUser /> },
+      { path: "/adminart", element: <AdminArtManager /> },
       { path: "/accountmanagement", element: <AccountManagement /> },
       { path: "*", element: <Home /> },
 
-      {
-        path: "/admin",
-        element: (
-          <AdminContextProvider>
-            <Admin />
-          </AdminContextProvider>
-        ),
-        children: [
-          {
-            path: "/adminart",
-            element: <AdminArtManager />,
-          },
-          { path: "/adminuser", element: <AdminUser /> },
-          { path: "/adminart", element: <AdminArtManager /> },
-        ],
-      },
+      // {
+      //   path: "/admin",
+      //   element: (
+      //     <AdminContextProvider>
+      //       <Admin />
+      //     </AdminContextProvider>
+      //   ),
+      //   children: [
+      //     { path: "/adminuser", element: <AdminUser /> },
+      //     { path: "/adminart", element: <AdminArtManager /> },
+      //   ],
+      // },
     ],
   },
 ]);

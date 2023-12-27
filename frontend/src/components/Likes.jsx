@@ -1,22 +1,33 @@
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
 import { useLike } from "../context/LikeContext";
-// import { useState } from "react";
 
-function Likes({ artworkId }) {
-  const { likes, setLikes } = useLike();
-  const isLiked = likes[artworkId] || false;
+function Likes({ artworkId, artworkTitle, artworkImage }) {
+  const { favoriteArtworks, setFavoriteArtworks } = useLike();
+  const isLiked = favoriteArtworks.some((artwork) => artwork.id === artworkId);
 
   const toggleLikes = () => {
-    const newLikes = { ...likes, [artworkId]: !isLiked };
-    setLikes(newLikes);
+    if (isLiked) {
+      // Retirer l'artwork de la liste des favoris
+      const updatedFavorites = favoriteArtworks.filter(
+        (artwork) => artwork.id !== artworkId
+      );
+      setFavoriteArtworks(updatedFavorites);
+    } else {
+      // Ajouter l'artwork à la liste des favoris
+      setFavoriteArtworks([
+        ...favoriteArtworks,
+        { id: artworkId, title: artworkTitle, image: artworkImage },
+      ]);
+    }
   };
 
-  const likeIcon = isLiked ? (
+  const icon = !isLiked ? (
     <MDBIcon far icon="heart" className="d-block p-2" />
   ) : (
     <MDBIcon fas icon="heart" className="d-block p-2" />
   );
+
   return (
     <MDBBtn
       tag="a"
@@ -25,17 +36,14 @@ function Likes({ artworkId }) {
       style={{ color: "#7b273d" }}
       onClick={toggleLikes}
     >
-      {likeIcon}
+      {icon}
     </MDBBtn>
   );
 }
-
 Likes.propTypes = {
-  artworkId: PropTypes.string.isRequired,
-  artwork: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+  artworkId: PropTypes.number.isRequired,
+  artworkTitle: PropTypes.string.isRequired,
+  artworkImage: PropTypes.string.isRequired,
 };
+
 export default Likes;
