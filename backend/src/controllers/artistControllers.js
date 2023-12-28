@@ -1,7 +1,7 @@
 const models = require("../models");
 
-const putArtists = (_, res) => {
-  models.user
+const getArtists = (_, res) => {
+  models.artist
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,5 +13,5 @@ const putArtists = (_, res) => {
 };
 
 module.exports = {
-  putArtists,
+  getArtists,
 };
