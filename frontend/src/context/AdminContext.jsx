@@ -26,7 +26,7 @@ function AdminContextProvider({ children }) {
 }
 
 AdminContextProvider.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.shape.isRequired,
 };
 
 export default AdminContextProvider;
