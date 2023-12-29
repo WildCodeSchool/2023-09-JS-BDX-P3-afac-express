@@ -1,8 +1,9 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import { useApp } from "../context/AppContext";
+import { useApp } from "../../context/AppContext";
+import Redirection from "../../components/Redirection";
 
-function AccountManagement() {
-  const { logout, removeUser } = useApp();
+export default function AdminUserManagment() {
+  const { removeUser } = useApp();
 
   return (
     <MDBContainer
@@ -13,17 +14,23 @@ function AccountManagement() {
         className=" d-flex justify-content-center fs-1 text text-center fw-bold pt-5 text-uppercase mb-5"
         style={{ color: "#7b273d" }}
       >
-        Administrateur
+        Gestion utilisateur
       </h3>
       <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
-        <h3 className="fs-5 fw-bold pb-3">Changement d'adresse e-mail</h3>
-
+        <h3 className="fs-5 fw-bold pb-3">L'identifiant à aller cherché</h3>
         <MDBInput
           className="mb-4"
-          type="email"
+          type="pseudo"
           id="form1Example1"
-          label="Ancienne adresse email"
+          label="Modifier l'identifant"
         />
+
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+        <h3 className="fs-5 fw-bold pb-3">L'adresse e-mail à aller cherché</h3>
 
         <MDBInput
           className="mb-4"
@@ -39,33 +46,17 @@ function AccountManagement() {
 
       <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
         <h3 className="fs-5 fw-bold pb-3">Changement de mot de passe</h3>
-        <MDBInput
-          className="mb-4"
-          type="password"
-          id="form1Example1"
-          label="Ancien mot de passe"
-        />
-        <MDBInput
-          className="mb-4"
-          type="password"
-          id="form1Example2"
-          label="Nouveau mot de passe"
-        />
 
         <MDBBtn type="submit" block className="mb-2">
-          Valider
+          Réinitialisation de mot de passe
         </MDBBtn>
       </form>
 
-      <MDBBtn className="mt-4 mb-6" onClick={() => logout()}>
-        Déconnexion
+      <MDBBtn className="mt-4 mb-6" onClick={() => removeUser()}>
+        Supprimer le compte
       </MDBBtn>
 
-      <MDBBtn className="mt-4 mb-6" onClick={() => removeUser()}>
-        Supprimer son compte
-      </MDBBtn>
+      <Redirection />
     </MDBContainer>
   );
 }
-
-export default AccountManagement;

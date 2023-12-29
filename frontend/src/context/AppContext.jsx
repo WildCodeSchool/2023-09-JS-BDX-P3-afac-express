@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 const appContext = createContext();
 function AppContextProvider({ children }) {
@@ -9,6 +10,7 @@ function AppContextProvider({ children }) {
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  const navigate = useNavigate();
 
   const login = (credentials) => {
     const users = getUsers();
@@ -37,10 +39,18 @@ function AppContextProvider({ children }) {
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
+      navigate("/home");
     } else {
       alert("Vous êtes déjà inscrit !"); // eslint-disable-line no-alert
     }
   };
+
+  // useEffect(() => {
+  //   register({
+  //     email: "nouvel_utilisateur@example.com",
+  //     passeword: "mot_de_passe",
+  //   });
+  // }, []);
 
   const logout = () => {
     setUser(undefined);
@@ -48,9 +58,24 @@ function AppContextProvider({ children }) {
     localStorage.removeItem("session");
   };
 
-  // const removeUser = () => {
-  //   localStorage.clean();
-  // };
+  const removeUser = () => {
+    const currentUser = JSON.parse(localStorage.getItem("session"));
+
+    if (currentUser) {
+      const users = getUsers();
+
+      const updatedUsers = users.filter(
+        (userdb) => userdb.email !== currentUser.email
+      );
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+      setUser(undefined);
+      setOpenNavSecond(false);
+      localStorage.removeItem("session");
+      navigate("/home");
+    }
+  };
 
   const contextData = useMemo(
     () => ({
@@ -63,6 +88,7 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
+      removeUser,
     }),
     [
       isAdmin,
@@ -74,6 +100,7 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
+      removeUser,
     ]
   );
 
@@ -96,7 +123,7 @@ function AppContextProvider({ children }) {
 }
 
 AppContextProvider.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AppContextProvider;

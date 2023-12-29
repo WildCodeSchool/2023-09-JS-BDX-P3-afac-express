@@ -5,6 +5,7 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
 export default function AdminUser() {
   return (
@@ -45,7 +46,12 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Éditer
+                    <Link
+                      to="/adminusermanagement"
+                      className="nav-link navLink"
+                    >
+                      Éditer
+                    </Link>
                   </MDBBtn>
                 </td>
               </tr>
@@ -68,7 +74,12 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Éditer
+                    <Link
+                      to="/adminusermanagement"
+                      className="nav-link navLink"
+                    >
+                      Éditer
+                    </Link>
                   </MDBBtn>
                 </td>
               </tr>
@@ -91,7 +102,12 @@ export default function AdminUser() {
                     size="sm"
                     rippleColor="dark"
                   >
-                    Éditer
+                    <Link
+                      to="/adminusermanagement"
+                      className="nav-link navLink"
+                    >
+                      Éditer
+                    </Link>
                   </MDBBtn>
                 </td>
               </tr>
