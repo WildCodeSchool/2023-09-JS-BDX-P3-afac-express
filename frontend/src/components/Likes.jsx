@@ -15,10 +15,17 @@ function Likes({ artworkId, artworkTitle, artworkImage }) {
       setFavoriteArtworks(updatedFavorites);
     } else {
       // Ajouter l'artwork à la liste des favoris
-      setFavoriteArtworks([
-        ...favoriteArtworks,
-        { id: artworkId, title: artworkTitle, image: artworkImage },
-      ]);
+      const newFavorite = {
+        id: artworkId,
+        title: artworkTitle,
+        image: artworkImage,
+      };
+      setFavoriteArtworks([...favoriteArtworks, newFavorite]);
+      // Mettre à jour le local storage avec la nouvelle liste
+      localStorage.setItem(
+        "favorite_artworks",
+        JSON.stringify([...favoriteArtworks, newFavorite])
+      );
     }
   };
 
