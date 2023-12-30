@@ -103,9 +103,14 @@ const artists = [
     ],
   },
 ];
+
+function getFavoriteArtworksFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("favorite_artworks")) || [];
+}
+
 function LikeContext({ children }) {
   const [favoriteArtworks, setFavoriteArtworks] = useState(
-    JSON.parse(localStorage.getItem("favorite_artworks")) || []
+    getFavoriteArtworksFromLocalStorage()
   );
 
   useEffect(() => {
