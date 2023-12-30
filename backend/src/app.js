@@ -48,6 +48,7 @@ app.use(
 // The current code contains different parsing options as comments to demonstrate different ways of extracting data.
 
 // 1. `express.json()`: Parses requests with JSON data.
+app.use(express.json());
 // 2. `express.urlencoded()`: Parses requests with URL-encoded data.
 // 3. `express.text()`: Parses requests with raw text data.
 // 4. `express.raw()`: Parses requests with raw binary data.
