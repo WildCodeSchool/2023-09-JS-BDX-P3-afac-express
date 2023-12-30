@@ -7,13 +7,13 @@ USE afac_express;
 DROP TABLE IF EXISTS artist;
 
 CREATE TABLE
-    artist (
+    artists (
         id int primary key NOT NULL AUTO_INCREMENT,
         name varchar(255) NOT NULL,
-        description varchar(500) NOT NULL,
+        description varchar(500) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-INSERT INTO artist (name, description)
+INSERT INTO artists (name, description)
 VALUES 
     ('Lara Sousa', 'Lara Sousa est une cinéaste et artiste numérique mozambicaine. ... (description continues)'),
     ('Deepa Bauhadoor', 'Née à Maurice en 1976, elle passe toute son enfance à Petite Julie ... (description continues)'),
