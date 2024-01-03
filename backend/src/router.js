@@ -18,6 +18,7 @@ router.get("/artwork", artworkControllers.getArtwork);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
+router.put("/artwork/:id", artworkControllers.updateArtwork);
 
 // Import itemControllers module for handling item-related operations
 const itemControllers = require("./controllers/itemControllers");
