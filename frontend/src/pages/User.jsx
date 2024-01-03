@@ -14,7 +14,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import { useLike } from "../context/LikeContext";
-import Likes from "../components/Likes";
+// import Likes from "../components/Likes";
 import FilterUser from "../components/Filter/FilterUser";
 
 function User() {
@@ -53,60 +53,38 @@ function User() {
             <div className="p-2">
               <MDBLightbox>
                 <MDBRow>
-                  <MDBCol lg="4">
-                    <MDBLightboxItem
-                      src={
-                        getFavoriteArtworkById(selectedArtist.artworks[0].id)
-                          ?.image || selectedArtist.artworks[0].image
-                      }
-                      fullscreenSrc={
-                        getFavoriteArtworkById(selectedArtist.artworks[0].id)
-                          ?.image || selectedArtist.artworks[0].image
-                      }
-                      className="w-100"
-                    />
-                    <MDBCard>
-                      <MDBCardBody className="d-flex justify-content-center">
-                        <div className="d-inline p-2">
-                          <MDBCardTitle tag="strong" className="fs-5 me-5">
-                            {getFavoriteArtworkById(
-                              selectedArtist.artworks[0].id
-                            )?.title || selectedArtist.artworks[0].title}
-                          </MDBCardTitle>
-                          <div className="d-inline">
-                            <Likes />
+                  {selectedArtist.artworks.map((artwork) => (
+                    <MDBCol lg="4" key={artwork.id}>
+                      <MDBLightboxItem
+                        src={
+                          getFavoriteArtworkById(artwork.id)?.image ||
+                          artwork.image
+                        }
+                        fullscreenSrc={
+                          getFavoriteArtworkById(artwork.id)?.image ||
+                          artwork.image
+                        }
+                        className="w-100"
+                      />
+                      <MDBCard>
+                        <MDBCardBody className="d-flex justify-content-center">
+                          <div className="d-inline p-2">
+                            <MDBCardTitle tag="strong" className="fs-5 me-5">
+                              {getFavoriteArtworkById(artwork.id)?.title ||
+                                artwork.title}
+                            </MDBCardTitle>
+                            <div className="d-inline">
+                              {/* <Likes
+                              artworkId={selectedArtist.artworks[0].id}
+                              artworkTitle={selectedArtist.artworks[0].title}
+                              artworkImage={selectedArtist.artworks[0].image}
+                            /> */}
+                            </div>
                           </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol>
-                  {/* <MDBCol lg="4">
-                    <MDBLightboxItem
-                      src={
-                        getFavoriteArtworkById(selectedArtist.artworks[0].id)
-                          ?.image || selectedArtist.artworks[0].image
-                      }
-                      fullscreenSrc={
-                        getFavoriteArtworkById(selectedArtist.artworks[0].id)
-                          ?.image || selectedArtist.artworks[0].image
-                      }
-                      className="w-100"
-                    />
-                    <MDBCard>
-                      <MDBCardBody className="d-flex justify-content-center">
-                        <div className="d-inline p-2">
-                          <MDBCardTitle tag="strong" className="fs-5 me-5">
-                            {getFavoriteArtworkById(
-                              selectedArtist.artworks[0].id
-                            )?.title || selectedArtist.artworks[0].title}
-                          </MDBCardTitle>
-                          <div className="d-inline">
-                            <Likes />
-                          </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol> */}
+                        </MDBCardBody>
+                      </MDBCard>
+                    </MDBCol>
+                  ))}
                 </MDBRow>
               </MDBLightbox>
             </div>
