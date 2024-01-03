@@ -19,6 +19,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import User from "./pages/User";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
+import OTPInput from "./pages/OTPInput";
 import Register from "./pages/Register";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
+      { path: "/resetpassword", element: <OTPInput /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
