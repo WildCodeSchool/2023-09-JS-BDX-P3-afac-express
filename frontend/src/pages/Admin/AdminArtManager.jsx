@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
 import Redirection from "../../components/Redirection";
+// import { useAdmin } from "../../context/AdminContext";
 
 export default function AdminArtManager() {
   return (
