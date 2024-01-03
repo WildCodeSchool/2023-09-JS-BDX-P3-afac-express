@@ -6,11 +6,13 @@
 const ItemManager = require("./models/ItemManager");
 const ArtistManager = require("./models/ArtistManager");
 const UserManager = require("./models/UserManager");
+const ArtworkManager = require("./models/ArtworkManager");
 
 const managers = [
   ItemManager,
   ArtistManager,
   UserManager,
+  ArtworkManager,
   // Add other managers here
 ];
 

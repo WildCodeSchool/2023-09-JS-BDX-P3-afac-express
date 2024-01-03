@@ -31,11 +31,15 @@ const models = {};
 
 const ArtistManager = require("./ArtistManager");
 const UserManager = require("./UserManager");
+const ArtworkManager = require("./ArtworkManager");
 
 models.artist = new ArtistManager();
 models.artist.setDatabase(pool);
 
 models.users = new UserManager();
 models.users.setDatabase(pool);
+
+models.artwork = new ArtworkManager();
+models.artwork.setDatabase(pool);
 
 module.exports = models;

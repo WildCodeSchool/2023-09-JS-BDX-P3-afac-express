@@ -180,7 +180,7 @@ CREATE TABLE
         firstname varchar(255) NOT NULL,
         lastname varchar(255) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
-        passeword varchar(255) DEFAULT NULL,
+        password varchar(255) DEFAULT NULL,
         is_admin BOOLEAN NOT NULL DEFAULT false
     )
 
@@ -189,7 +189,7 @@ INSERT INTO
         firstname,
         lastname,
         email,
-        passeword,
+        password,
         is_admin
     )
 VALUES (
