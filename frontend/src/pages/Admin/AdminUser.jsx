@@ -6,8 +6,11 @@ import {
   MDBTableHead,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+// import { useAdmin } from "../../context/AdminContext";
 
 export default function AdminUser() {
+  // const { isAdmin } = useAdmin();
+
   return (
     <MDBContainer fluid className="pt-5 pb-5">
       <h3
@@ -47,7 +50,7 @@ export default function AdminUser() {
                     rippleColor="dark"
                   >
                     <Link
-                      to="/adminusermanagement"
+                      to="/admin/adminusermanagement"
                       className="nav-link navLink"
                     >
                       Éditer
@@ -75,7 +78,7 @@ export default function AdminUser() {
                     rippleColor="dark"
                   >
                     <Link
-                      to="/adminusermanagement"
+                      to="/admin/adminusermanagement"
                       className="nav-link navLink"
                     >
                       Éditer
@@ -103,7 +106,7 @@ export default function AdminUser() {
                     rippleColor="dark"
                   >
                     <Link
-                      to="/adminusermanagement"
+                      to="/admin/adminusermanagement"
                       className="nav-link navLink"
                     >
                       Éditer

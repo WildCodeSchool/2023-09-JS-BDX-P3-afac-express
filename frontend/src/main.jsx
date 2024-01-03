@@ -8,7 +8,7 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";
-// import AdminContextProvider from "./context/AdminContext";
+import AdminContextProvider from "./context/AdminContext";
 import LikeContextProvider from "./context/LikeContext";
 
 import Home from "./pages/Home";
@@ -25,6 +25,7 @@ import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
+import AdminHome from "./pages/Admin/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -50,23 +51,28 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
-      { path: "/admin",
-       element: (
-      <AdminContextProvider>
+      { path: "/accountmanagement", element: <AccountManagement /> },
+      {
+        path: "/admin",
+        element: (
+          <AdminContextProvider>
             <Admin />
-      </AdminContextProvider>
+          </AdminContextProvider>
         ),
-       children: [
-         { path: "/adminuser", element: <AdminUser /> },
-         { path: "/adminart", element: <AdminArtManager /> },
-         { path: "/adminusermanagement", element: <AdminUserManagement /> },
+        children: [
+          { path: "/admin", element: <AdminHome /> },
+          { path: "/admin/adminuser", element: <AdminUser /> },
+          { path: "/admin/adminart", element: <AdminArtManager /> },
+          {
+            path: "/admin/adminusermanagement",
+            element: <AdminUserManagement />,
+          },
         ],
       },
-      { path: "*", element: <Home /> },  
+      { path: "*", element: <Home /> },
     ],
   },
-  
-;
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

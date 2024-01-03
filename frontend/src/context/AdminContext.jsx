@@ -9,7 +9,7 @@ function AdminContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const appContext = useApp();
 
-  if (appContext.user.admin === false) {
+  if (!appContext.user?.admin) {
     return <Navigate to="/login" />;
   }
 
@@ -26,7 +26,7 @@ function AdminContextProvider({ children }) {
 }
 
 AdminContextProvider.propTypes = {
-  children: PropTypes.shape.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AdminContextProvider;
