@@ -15,6 +15,9 @@ router.get("/artist", artistControllers.getArtists);
 router.post("/artist", artistControllers.postArtist);
 
 router.get("/artwork", artworkControllers.getArtwork);
+router.get("/artwork/:id", artworkControllers.getArtworkById);
+router.post("/artwork", artworkControllers.postArtwork);
+router.delete("/artwork/:id", artworkControllers.deleteArtwork);
 
 // Import itemControllers module for handling item-related operations
 const itemControllers = require("./controllers/itemControllers");

@@ -11,6 +11,7 @@ const getUsers = (_, res) => {
       res.sendStatus(500);
     });
 };
+
 const getUsersById = (req, res) => {
   models.users
     .find(req.params.id)
