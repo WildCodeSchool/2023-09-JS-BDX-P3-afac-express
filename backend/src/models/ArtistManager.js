@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class ArtistManager extends AbstractManager {
   constructor() {
-    super({ table: "artists" });
+    super({ table: "artist" });
   }
 
   create(artist) {

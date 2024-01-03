@@ -1,7 +1,7 @@
 const models = require("../models");
 
-const getUsers = (_, res) => {
-  models.users
+const getArtwork = (_, res) => {
+  models.artwork
     .findAll()
     .then((rows) => {
       res.send(rows);
@@ -12,8 +12,8 @@ const getUsers = (_, res) => {
     });
 };
 
-const getUsersById = (req, res) => {
-  models.users
+const getArtworkById = (req, res) => {
+  models.artwork
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] != null) {
@@ -28,8 +28,8 @@ const getUsersById = (req, res) => {
     });
 };
 
-const postUsers = (req, res) => {
-  models.users
+const postArtwork = (req, res) => {
+  models.artwork
     .create(req.body)
     .then(([rows]) => {
       res.send({ id: rows.insertId, ...req.body });
@@ -40,8 +40,8 @@ const postUsers = (req, res) => {
     });
 };
 
-const deleteUsers = (req, res) => {
-  models.users
+const deleteArtwork = (req, res) => {
+  models.artwork
     .delete(req.params.id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
@@ -56,8 +56,8 @@ const deleteUsers = (req, res) => {
 };
 
 module.exports = {
-  getUsers,
-  getUsersById,
-  postUsers,
-  deleteUsers,
+  getArtwork,
+  getArtworkById,
+  postArtwork,
+  deleteArtwork,
 };
