@@ -7,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function FilterUser({ artists, onSelectArtist }) {
+function ArtworksFilter({ artworks, onSelectArtist }) {
   return (
     <MDBDropdown className="d-flex justify-content-center pb-4 pt-3">
       <MDBDropdownToggle
@@ -18,13 +18,13 @@ function FilterUser({ artists, onSelectArtist }) {
       </MDBDropdownToggle>
 
       <MDBDropdownMenu>
-        {artists.map((artist) => (
-          <MDBDropdownItem key={artist.id}>
+        {artworks.map((artwork) => (
+          <MDBDropdownItem key={artwork.artist.id}>
             <Link
-              to={`/user/${artist.id}`}
-              onClick={() => onSelectArtist(artist)}
+              to={`/artworks/${artwork.artist.id}`}
+              onClick={() => onSelectArtist(artwork.artist)}
             >
-              {artist.name}
+              {artwork.artist.name}
             </Link>
           </MDBDropdownItem>
         ))}
@@ -33,14 +33,16 @@ function FilterUser({ artists, onSelectArtist }) {
   );
 }
 
-FilterUser.propTypes = {
-  artists: PropTypes.arrayOf(
+ArtworksFilter.propTypes = {
+  artworks: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      artist: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
     })
   ).isRequired,
   onSelectArtist: PropTypes.func.isRequired,
 };
 
-export default FilterUser;
+export default ArtworksFilter;

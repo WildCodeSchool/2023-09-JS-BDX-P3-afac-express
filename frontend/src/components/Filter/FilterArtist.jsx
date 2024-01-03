@@ -7,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function FilterUser({ artists, onSelectArtist }) {
+function FilterArtist({ artists, onSelectArtist }) {
   return (
     <MDBDropdown className="d-flex justify-content-center pb-4 pt-3">
       <MDBDropdownToggle
@@ -21,7 +21,7 @@ function FilterUser({ artists, onSelectArtist }) {
         {artists.map((artist) => (
           <MDBDropdownItem key={artist.id}>
             <Link
-              to={`/user/${artist.id}`}
+              to={`/artist/${artist.id}`}
               onClick={() => onSelectArtist(artist)}
             >
               {artist.name}
@@ -33,7 +33,7 @@ function FilterUser({ artists, onSelectArtist }) {
   );
 }
 
-FilterUser.propTypes = {
+FilterArtist.propTypes = {
   artists: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -43,4 +43,4 @@ FilterUser.propTypes = {
   onSelectArtist: PropTypes.func.isRequired,
 };
 
-export default FilterUser;
+export default FilterArtist;

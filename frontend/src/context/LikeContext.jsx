@@ -1,20 +1,8 @@
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  //   MDBAnimation,
-  MDBCol,
-  MDBContainer,
-  //   MDBCol,
-  MDBLightbox,
-  MDBLightboxItem,
-  MDBRow,
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+// import axios from "axios";
+import PropTypes from "prop-types";
 
-  //   MDBRow,
-} from "mdb-react-ui-kit";
-import { useState } from "react";
-import Likes from "../components/Likes";
-import FilterUser from "../components/Filter/FilterUser";
+const likeContext = createContext();
 
 const artists = [
   {
@@ -25,6 +13,7 @@ const artists = [
       "Lara Sousa est une cinéaste et artiste numérique mozambicaine...",
     artworks: [
       {
+        id: 11,
         title:
           "Tirem nos tudo mas deixem nos a música... Quando eu nasci era meio dia e o sol brillava ...",
         image:
@@ -33,6 +22,7 @@ const artists = [
         creation_place: "-",
       },
       {
+        id: 12,
         title: "Sementes e imagens",
         image: "https://i.postimg.cc/1XMYcrRY/2-Sementes-EImagens.jpg",
         dimention: "-",
@@ -48,12 +38,14 @@ const artists = [
       "Née à Maurice en 1976, elle passe toute son enfance à Petite Julie dans la maison familiale et au milieu des champs de canne alentours. ...", // (la description complète ici)
     artworks: [
       {
+        id: 21,
         title: "Brède chouchou",
         image: "https://i.postimg.cc/W3fxBPJw/6-Brede-Chouchou.jpg",
         dimention: "1200 x 1600",
         creation_place: "Maurice",
       },
       {
+        id: 22,
         title: "Brède rave",
         image: "https://i.postimg.cc/7Z94KdXm/7-Brede-Rave.jpg",
         dimention: "1200 x 1600",
@@ -71,12 +63,14 @@ const artists = [
 
     artworks: [
       {
+        id: 31,
         title: "Analakely, Antananarivo",
         image: "https://i.postimg.cc/W1YN2xrt/11-Analakely-Antananarivo.jpg",
         dimention: "4613 x 4613",
         creation_place: "Madagascar",
       },
       {
+        id: 32,
         title: "Ancienne banque de Madagascar et des Comores, Toamasina",
         image:
           "https://i.postimg.cc/mgJvp4C3/12-Ancienne-Banque-De-Madagascar-Et-Des-Comores-Toamasina.jpg",
@@ -93,12 +87,14 @@ const artists = [
       "Née en 1982 à Noyon (France), Mathilde Neri est une artiste visuelle du monde hybride et outsider qui œuvre également dans le champ de la performance. Neri explore les dimensions de réalité qui émanent de la rencontre avec le signe dans la nature, avec lequel elle entre en connexion par le médium. Elle vit et travaille à La Réunion.",
     artworks: [
       {
+        id: 41,
         title: "Il ne reste plus que...",
         image: "https://i.postimg.cc/0rgSHb5R/16-Il-Ne-Reste-Plus-Que.jpg",
         dimention: "-",
         creation_place: "Réunion",
       },
       {
+        id: 42,
         title: "... réalité fantomatique",
         image: "https://i.postimg.cc/7LLNzJfm/17-Realite-Fantomatique.jpg",
         dimention: "-",
@@ -107,80 +103,33 @@ const artists = [
     ],
   },
 ];
+function LikeContext({ children }) {
+  const [likes, setLikes] = useState(
+    JSON.parse(localStorage.getItem("likes_info")) || {}
+  );
+  const [favoriteArtworks, setFavoriteArtworks] = useState(
+    JSON.parse(localStorage.getItem("favorite_artworks")) || []
+  );
 
-function User() {
-  const [selectedArtist, setSelectedArtist] = useState(null);
+  useEffect(() => {
+    localStorage.setItem("likes_info", JSON.stringify(likes));
+    localStorage.setItem("favorite_artworks", JSON.stringify(favoriteArtworks));
+  }, [likes, favoriteArtworks]);
 
-  const onSelectArtist = (artist) => {
-    setSelectedArtist(artist);
-  };
+  const contextValue = useMemo(
+    () => ({ likes, setLikes, artists, favoriteArtworks, setFavoriteArtworks }),
+    [likes, favoriteArtworks]
+  );
 
   return (
-    <MDBContainer fluid className="pt-5">
-      <h2
-        className="fs-2 text text-center fw-bold pt-5"
-        style={{ color: "#7b273d" }}
-      >
-        Patrimoine iconographique de l’océan indien
-      </h2>
-
-      <FilterUser artists={artists} onSelectArtist={onSelectArtist} />
-
-      {selectedArtist && (
-        <div key={selectedArtist.id}>
-          <h2 className="fs-5 text text-center pt-2 pb-2">
-            {selectedArtist.name}
-          </h2>
-
-          <div className="d-flex flex-column mb-3">
-            <div className="p-2">
-              <MDBLightbox>
-                <MDBRow>
-                  <MDBCol lg="4">
-                    <MDBLightboxItem
-                      src={selectedArtist.artworks[0].image}
-                      fullscreenSrc={selectedArtist.artworks[0].image}
-                      className="w-100"
-                    />
-                    <MDBCard>
-                      <MDBCardBody className="d-flex justify-content-center">
-                        <div className="d-inline p-2">
-                          <MDBCardTitle tag="strong" className="fs-5 me-5">
-                            {selectedArtist.artworks[0].title}
-                          </MDBCardTitle>
-                          <div className="d-inline">
-                            <Likes />
-                          </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol>
-                  <MDBCol lg="4">
-                    <MDBLightboxItem
-                      src={selectedArtist.artworks[1].image}
-                      fullscreenSrc={selectedArtist.artworks[1].image}
-                      className="w-100"
-                    />
-                    <MDBCard>
-                      <MDBCardBody className="d-flex justify-content-center">
-                        <div className="d-inline p-2">
-                          <MDBCardTitle tag="strong" className="fs-5 me-5">
-                            {selectedArtist.artworks[1].title}
-                          </MDBCardTitle>
-                          <div className="d-inline">
-                            <Likes />
-                          </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol>
-                </MDBRow>
-              </MDBLightbox>
-            </div>
-          </div>
-        </div>
-      )}
-    </MDBContainer>
+    <likeContext.Provider value={contextValue}>{children}</likeContext.Provider>
   );
 }
-export default User;
+
+LikeContext.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default LikeContext;
+
+export const useLike = () => useContext(likeContext);
