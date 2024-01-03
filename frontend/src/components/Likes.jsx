@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLike } from "../context/LikeContext";
 
 function Likes({ artworkId, artworkTitle, artworkImage }) {
-  const { favoriteArtworks, setFavoriteArtworks } = useLike();
+  const { artists, favoriteArtworks, setFavoriteArtworks } = useLike();
   const isLiked = favoriteArtworks.some((artwork) => artwork.id === artworkId);
 
   const toggleLikes = () => {
@@ -14,11 +14,19 @@ function Likes({ artworkId, artworkTitle, artworkImage }) {
       );
       setFavoriteArtworks(updatedFavorites);
     } else {
-      // Ajouter l'artwork à la liste des favoris
+      // Récupérer l'artiste associé à l'œuvre
+      const artist = artists.find(
+        (
+          artist // eslint-disable-line
+        ) => artist.artworks.some((artwork) => artwork.id === artworkId) // eslint-disable-line
+      );
+
+      // Ajouter l'artwork à la liste des favoris avec le nom de l'artiste
       const newFavorite = {
         id: artworkId,
         title: artworkTitle,
         image: artworkImage,
+        artistId: artist.id,
       };
       setFavoriteArtworks([...favoriteArtworks, newFavorite]);
       // Mettre à jour le local storage avec la nouvelle liste

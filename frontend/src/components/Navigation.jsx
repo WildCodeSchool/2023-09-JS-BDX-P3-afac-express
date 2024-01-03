@@ -8,7 +8,6 @@ import {
   MDBIcon,
   MDBCollapse,
   MDBNavbarNav,
-  MDBNavbarLink,
   MDBDropdown,
   MDBDropdownMenu,
 } from "mdb-react-ui-kit";
@@ -33,35 +32,33 @@ export default function ation() {
         </MDBNavbarToggler>
         <MDBCollapse className="navbar-display" navbar open={openNavSecond}>
           <MDBNavbarNav className="ms-auto">
-            <MDBNavbarLink className="navLink" href="/Home">
+            <Link className="nav-link navLink" to="/Home">
               Accueil
-            </MDBNavbarLink>
-            <MDBNavbarLink className="navLink" href="/Gallery">
+            </Link>
+            <Link className="nav-link navLink" to="/Gallery">
               Galerie
-            </MDBNavbarLink>
-            <MDBNavbarLink className="navLink" href="/Artworks">
+            </Link>
+            <Link className="nav-link navLink" to="/Artworks">
               Oeuvres
-            </MDBNavbarLink>
-            <MDBNavbarLink className="navLink" href="/Artists">
+            </Link>
+            <Link className="nav-link navLink" to="/Artists">
               Artistes
-            </MDBNavbarLink>
-            <MDBNavbarLink className="navLink" href="/About">
+            </Link>
+            <Link className="nav-link navLink" to="/About">
               A propos
-            </MDBNavbarLink>
+            </Link>
           </MDBNavbarNav>
         </MDBCollapse>
         <div className="logoAfac">
-          <MDBNavbarLink>
+          <Link to="/">
             <img src={logoAfac} className="logoAfac" alt="logoAfac" />
-          </MDBNavbarLink>
+          </Link>
         </div>
         {user ? (
           <MDBDropdown>
-            <MDBNavbarLink>
-              <MDBDropdownToggle>
-                <MDBIcon far icon="user" />
-              </MDBDropdownToggle>
-            </MDBNavbarLink>
+            <MDBDropdownToggle>
+              <MDBIcon far icon="user" />
+            </MDBDropdownToggle>
 
             <MDBDropdownMenu>
               <Link to="/accountmanagement" className="nav-link navLink">
@@ -70,10 +67,13 @@ export default function ation() {
               <Link to="/User" className="nav-link navLink">
                 Ma page personnelle
               </Link>
-              <Link to="/adminuser" className="nav-link navLink">
+              <Link to="/admin" className="nav-link navLink">
+                Admin
+              </Link>
+              <Link to="/admin/adminuser" className="nav-link navLink">
                 Gérer les utilisateurs
               </Link>
-              <Link to="/adminart" className="nav-link navLink">
+              <Link to="/admin/adminart" className="nav-link navLink">
                 Gérer les oeuvres et artistes
               </Link>
               <button

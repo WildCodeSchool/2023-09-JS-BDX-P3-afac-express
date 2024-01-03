@@ -8,7 +8,7 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";
-// import AdminContextProvider from "./context/AdminContext";
+import AdminContextProvider from "./context/AdminContext";
 import LikeContextProvider from "./context/LikeContext";
 
 import Home from "./pages/Home";
@@ -20,13 +20,14 @@ import Login from "./pages/Login";
 import User from "./pages/User";
 import UserForgottenPassword from "./pages/UserForgottenPassword";
 import OTPInput from "./pages/OTPInput";
+import ChangePassword from "./pages/ChangePassword";
 import Register from "./pages/Register";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
-import ChangePassword from "./pages/ChangePassword";
+import AdminHome from "./pages/Admin/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -54,25 +55,25 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
-      { path: "/admin", element: <Admin /> },
-      { path: "/adminuser", element: <AdminUser /> },
-      { path: "/adminart", element: <AdminArtManager /> },
       { path: "/accountmanagement", element: <AccountManagement /> },
-      { path: "/adminusermanagement", element: <AdminUserManagement /> },
+      {
+        path: "/admin",
+        element: (
+          <AdminContextProvider>
+            <Admin />
+          </AdminContextProvider>
+        ),
+        children: [
+          { path: "/admin", element: <AdminHome /> },
+          { path: "/admin/adminuser", element: <AdminUser /> },
+          { path: "/admin/adminart", element: <AdminArtManager /> },
+          {
+            path: "/admin/adminusermanagement",
+            element: <AdminUserManagement />,
+          },
+        ],
+      },
       { path: "*", element: <Home /> },
-
-      // {
-      //   path: "/admin",
-      //   element: (
-      //     <AdminContextProvider>
-      //       <Admin />
-      //     </AdminContextProvider>
-      //   ),
-      //   children: [
-      //     { path: "/adminuser", element: <AdminUser /> },
-      //     { path: "/adminart", element: <AdminArtManager /> },
-      //   ],
-      // },
     ],
   },
 ]);
