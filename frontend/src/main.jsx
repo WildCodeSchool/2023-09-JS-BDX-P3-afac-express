@@ -26,6 +26,7 @@ import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
+import ChangePassword from "./pages/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/forgottenpassword", element: <UserForgottenPassword /> },
       { path: "/resetpassword", element: <OTPInput /> },
+      { path: "/changepassword", element: <ChangePassword /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },

@@ -17,16 +17,16 @@ import "../style/About.scss";
 import { useApp } from "../context/AppContext";
 import logoAfac from "../assets/logo/logoAfac.png";
 
-export default function Navigation() {
+export default function ation() {
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const { user, logout } = useApp();
 
   return (
-    <MDBContainer fluid className="row w-100 navigation">
+    <MDBContainer fluid className="row w-100 ation">
       <MDBNavbar expand="lg" className="containernavbar">
         <MDBNavbarToggler
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label="Toggle ation"
           onClick={() => setOpenNavSecond(!openNavSecond)}
         >
           <MDBIcon icon="bars" fas color="white" />

@@ -17,7 +17,7 @@ export default function AdminUserManagment() {
         Gestion utilisateur
       </h3>
       <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
-        <h3 className="fs-5 fw-bold pb-3">L'identifiant à aller cherché</h3>
+        <h3 className="fs-5 fw-bold pb-3">L'identifiant à aller chercher</h3>
         <MDBInput
           className="mb-4"
           type="pseudo"
@@ -30,7 +30,7 @@ export default function AdminUserManagment() {
         </MDBBtn>
       </form>
       <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
-        <h3 className="fs-5 fw-bold pb-3">L'adresse e-mail à aller cherché</h3>
+        <h3 className="fs-5 fw-bold pb-3">L'adresse e-mail à aller chercher</h3>
 
         <MDBInput
           className="mb-4"

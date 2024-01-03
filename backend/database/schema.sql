@@ -29,6 +29,7 @@ VALUES (
         'Née en 1982 à Noyon (France), Mathilde Neri est une artiste visuelle du monde hybride et outsider qui œuvre également dans le champ de la performance. Neri explore les dimensions de réalité qui émanent de la rencontre avec le signe dans la nature, avec lequel elle entre en connexion par le médium. Elle vit et travaille à La Réunion.'
     );
 
+
 DROP TABLE IF EXISTS artwork;
 
 CREATE TABLE

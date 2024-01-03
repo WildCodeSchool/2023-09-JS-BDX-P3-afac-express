@@ -1,11 +1,10 @@
 import React from "react";
 import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
-import Redirection from "../../components/Redirection";
 
-export default function AdminArtManager() {
+export default function ChangePassword() {
   return (
     <form className="user-form">
-      <h1>Ajout artistes et oeuvres</h1>
+      <h1>Changer le mot de passe</h1>
       <h3>Créateur</h3>
       <MDBInput
         className="mb-4"
@@ -53,8 +52,6 @@ export default function AdminArtManager() {
       <MDBBtn type="submit" className="mb-4" block>
         Valider
       </MDBBtn>
-
-      <Redirection />
     </form>
   );
 }
