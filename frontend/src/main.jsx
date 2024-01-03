@@ -41,6 +41,7 @@ const router = createBrowserRouter([
       { path: "/gallery", element: <Gallery /> },
       { path: "/gallery/:id", element: <Gallery /> },
       { path: "/artworks", element: <Artworks /> },
+      { path: "/artworks/:id", element: <Artworks /> },
       { path: "/artists", element: <Artists /> },
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },

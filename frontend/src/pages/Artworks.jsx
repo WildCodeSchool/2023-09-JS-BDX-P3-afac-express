@@ -1,167 +1,173 @@
+import { useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
   MDBCardText,
-  MDBCardTitle,
-  //   MDBAnimation,
-  MDBCarousel,
-  MDBCarouselItem,
+  MDBCardImage,
+  MDBRipple,
   MDBContainer,
-  //   MDBCol,
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBTypography,
-
-  //   MDBRow,
 } from "mdb-react-ui-kit";
-import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jpg";
-import bredechouchou from "../assets/artworks/6_BredeChouchou.jpg";
-import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jpg";
-import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jpg";
-// import Likes from "../components/Likes";
+
+import ArtworksFilter from "../components/ArtworksFilter";
+
+const artworks = [
+  {
+    artist: {
+      id: 1,
+      name: "Lara Sousa",
+
+      artworks: [
+        {
+          id: 1,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 2,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 3,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+      ],
+    },
+  },
+  {
+    artist: {
+      id: 2,
+      name: "Deepa Bauhadoor",
+
+      artworks: [
+        {
+          id: 1,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 2,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 3,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+      ],
+    },
+  },
+  {
+    artist: {
+      id: 3,
+      name: "Mahefa Dimbiniaina Randrianarivelo",
+
+      artworks: [
+        {
+          id: 1,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 2,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 3,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+      ],
+    },
+  },
+  {
+    artist: {
+      id: 4,
+      name: "Mathilde Neri",
+
+      artworks: [
+        {
+          id: 1,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 2,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+        {
+          id: 3,
+          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
+          details: "rien à afficher pour le moment",
+        },
+      ],
+    },
+  },
+];
 
 function Artworks() {
+  const [selectedArtist, setSelectedArtist] = useState(null);
+  const [selectedArtworks, setSelectedArtworks] = useState([]);
+
+  const onSelectArtist = (artist) => {
+    setSelectedArtist(artist);
+    setSelectedArtworks(artist.artworks || []);
+  };
   return (
     <MDBContainer fluid className="pt-5">
-      <h2
-        className="fs-2 text text-center fw-bold pt-5"
+      <h3
+        className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
       >
-        Patrimoine iconographique de l’océan indien
-      </h2>
-      <MDBDropdown className="d-flex justify-content-center pb-5 ">
-        <MDBDropdownToggle
-          tag="a"
-          className="btn btn-primary bg-transparent text-dark"
-        >
-          Autres artistes
-        </MDBDropdownToggle>
+        Patrimoine iconographique de l'océan indien
+      </h3>
 
-        <MDBDropdownMenu>
-          <MDBDropdownItem link href="#">
-            Lara Sousa
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Deepa Bauhadoor
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Mahefa Dimbiniaina Randrianarivelo
-          </MDBDropdownItem>
-          <MDBDropdownItem link href="#">
-            Mathilde Neri
-          </MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown>
-      <div>
-        <div className="d-flex flex-column mb-3">
-          <div className="p-2">
-            <MDBCarousel showControls showIndicators>
-              <MDBCarouselItem itemId={1}>
-                <img
-                  src={CathedraleAntsirabe}
-                  className="d-block w-100 img-fluid rounded"
-                  alt="Cathédrale , Antsirabe"
-                />
-                <MDBCard className="d-flex flex-column justify-content-center square border p-2 mt-3">
-                  <MDBCardBody>
-                    <MDBCardTitle tag="strong" className="fs-4">
-                      nom de l'oeuvre
-                    </MDBCardTitle>
-                    <MDBCardText>
-                      <MDBTypography tag="em" className="d-block">
-                        dimention de l'oeuvre
-                      </MDBTypography>
-                      <MDBTypography tag="em" className="d-block">
-                        lieu de création
-                      </MDBTypography>
-                    </MDBCardText>
-                    <div className="d-flex justify-content-end">
-                      {/* <Likes /> */}
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId={2}>
-                <img
-                  src={bredechouchou}
-                  className="d-block w-100 img-fluid rounded"
-                  alt="Deepa Bauhadoor"
-                />
-                <MDBCard className="d-flex flex-column justify-content-center square border  p-2 mt-3">
-                  <MDBCardBody>
-                    <MDBCardTitle tag="strong" className="fs-4">
-                      nom de l'oeuvre
-                    </MDBCardTitle>
-                    <MDBCardText>
-                      <MDBTypography tag="em" className="d-block">
-                        dimention de l'oeuvre
-                      </MDBTypography>
-                      <MDBTypography tag="em" className="d-block">
-                        lieu de création
-                      </MDBTypography>
-                    </MDBCardText>
-                    <div className="d-flex justify-content-end">
-                      {/* <Likes /> */}
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId={3}>
-                <img
-                  src={analakelyantananarivo}
-                  className="d-block w-100 img-fluid rounded"
-                  alt="Analakely, Antananarivo"
-                />
-                <MDBCard className="d-flex flex-column justify-content-center square border  p-2 mt-3">
-                  <MDBCardBody>
-                    <MDBCardTitle tag="strong" className="fs-4">
-                      nom de l'oeuvre
-                    </MDBCardTitle>
-                    <MDBCardText>
-                      <MDBTypography tag="em" className="d-block">
-                        dimention de l'oeuvre
-                      </MDBTypography>
-                      <MDBTypography tag="em" className="d-block">
-                        lieu de création
-                      </MDBTypography>
-                    </MDBCardText>
-                    <div className="d-flex justify-content-end">
-                      {/* <Likes /> */}
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId={4}>
-                <img
-                  src={ilneresteplusque}
-                  className="d-block w-100 img-fluid rounded"
-                  alt="Il ne reste plus que [...]"
-                />
-                <MDBCard className="d-flex flex-column justify-content-center square border  p-2 mt-3">
-                  <MDBCardBody>
-                    <MDBCardTitle tag="strong" className="fs-4">
-                      nom de l'oeuvre
-                    </MDBCardTitle>
-                    <MDBCardText>
-                      <MDBTypography tag="em" className="d-block">
-                        dimention de l'oeuvre
-                      </MDBTypography>
-                      <MDBTypography tag="em" className="d-block">
-                        lieu de création
-                      </MDBTypography>
-                    </MDBCardText>
-                    <div className="d-flex justify-content-end">
-                      {/* <Likes /> */}
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCarouselItem>
-            </MDBCarousel>
-          </div>
+      <ArtworksFilter artworks={artworks} onSelectArtist={onSelectArtist} />
+      {selectedArtist && (
+        <div key={selectedArtist.id}>
+          <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
 
-          {/* <MDBRow>
+          {selectedArtworks.map((artwork) => (
+            <MDBCard
+              alignment="center"
+              className="col-10 m-auto"
+              shadow="5"
+              key={artwork.id}
+            >
+              <MDBRipple
+                rippleColor="light"
+                rippleTag="div"
+                className="bg-image hover-overlay"
+              >
+                <div className="bg-image hover-zoom">
+                  <MDBCardImage
+                    src={artwork.image}
+                    fluid
+                    alt={selectedArtist.name}
+                    class="rounded img-fluid"
+                  />
+                </div>
+              </MDBRipple>
+              <MDBCardBody>
+                <MDBCardText className="p-5 text-start">
+                  {selectedArtist.description}
+                </MDBCardText>
+              </MDBCardBody>
+            </MDBCard>
+          ))}
+        </div>
+      )}
+    </MDBContainer>
+  );
+}
+
+export default Artworks;
+
+/* <MDBRow>
             <MDBCol lg="4" md="12" className="mb-4">
               <MDBAnimation
                 reset
@@ -245,11 +251,4 @@ function Artworks() {
                 className="img-fluid shadow-1-strong rounded"
               />
             </MDBCol>
-          </MDBRow> */}
-        </div>
-      </div>
-    </MDBContainer>
-  );
-}
-
-export default Artworks;
+          </MDBRow> */
