@@ -20,7 +20,10 @@ export default function AdminArtManager() {
         label="Biographie"
       />
       <MDBBtn type="submit" className="mb-4" block>
-        Télécharger une image
+        Ajouter une image
+      </MDBBtn>
+      <MDBBtn type="submit" className="mb-4" block>
+        Valider
       </MDBBtn>
       <h3>Oeuvres</h3>
       <MDBInput className="mb-4" type="artName" id="artName" label="Titre" />
@@ -45,10 +48,10 @@ export default function AdminArtManager() {
         label="Lieux de création"
       />
       <MDBBtn type="submit" className="mb-4" block>
-        Télécharger une image
+        Ajouter une image
       </MDBBtn>
       <MDBBtn type="submit" className="mb-4" block>
-        Suivant
+        Valider
       </MDBBtn>
 
       <Redirection />

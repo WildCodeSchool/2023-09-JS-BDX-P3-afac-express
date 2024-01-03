@@ -50,28 +50,23 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
-      { path: "/admin", element: <Admin /> },
-      { path: "/adminuser", element: <AdminUser /> },
-      { path: "/adminart", element: <AdminArtManager /> },
-      { path: "/accountmanagement", element: <AccountManagement /> },
-      { path: "/adminusermanagement", element: <AdminUserManagement /> },
-      { path: "*", element: <Home /> },
-
-      // {
-      //   path: "/admin",
-      //   element: (
-      //     <AdminContextProvider>
-      //       <Admin />
-      //     </AdminContextProvider>
-      //   ),
-      //   children: [
-      //     { path: "/adminuser", element: <AdminUser /> },
-      //     { path: "/adminart", element: <AdminArtManager /> },
-      //   ],
-      // },
+      { path: "/admin",
+       element: (
+      <AdminContextProvider>
+            <Admin />
+      </AdminContextProvider>
+        ),
+       children: [
+         { path: "/adminuser", element: <AdminUser /> },
+         { path: "/adminart", element: <AdminArtManager /> },
+         { path: "/adminusermanagement", element: <AdminUserManagement /> },
+        ],
+      },
+      { path: "*", element: <Home /> },  
     ],
   },
-]);
+  
+;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

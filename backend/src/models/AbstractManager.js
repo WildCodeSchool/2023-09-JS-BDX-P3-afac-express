@@ -13,6 +13,10 @@ class AbstractManager {
     return this.database.query(`select * from  ${this.table}`);
   }
 
+  put() {
+    return this.database.query(`insert into * from ${this.table}`);
+  }
+
   delete(id) {
     return this.database.query(`delete from ${this.table} where id = ?`, [id]);
   }

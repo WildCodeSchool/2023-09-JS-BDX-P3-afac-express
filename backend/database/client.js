@@ -1,8 +1,8 @@
-// Get variables from .env file for database connection
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
-
+require("dotenv").config();
 // Create a connection pool to the database
 const mysql = require("mysql2/promise");
+// Get variables from .env file for database connection
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const client = mysql.createPool({
   host: DB_HOST,
@@ -28,9 +28,7 @@ client
     );
     console.error("Error message:", error.message);
   });
-
-// Store database name into client for further uses
-client.databaseName = DB_NAME;
-
+/* Store database name into client for further uses
+client.databaseName = DB_NAME; */
 // Ready to export
 module.exports = client;

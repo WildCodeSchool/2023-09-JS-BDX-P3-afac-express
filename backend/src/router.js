@@ -3,12 +3,16 @@ const express = require("express");
 const router = express.Router();
 
 const userControllers = require("./controllers/userControllers");
+const artistControllers = require("./controllers/artistControllers");
 
 router.get("/users", userControllers.getUsers);
 router.get("/users/:id", userControllers.getUsersById);
 
 router.post("/users", userControllers.postUsers);
 router.delete("/users/:id", userControllers.deleteUsers);
+
+router.get("/artists", artistControllers.getArtists);
+router.post("/artist", artistControllers.postArtist);
 
 // Import itemControllers module for handling item-related operations
 const itemControllers = require("./controllers/itemControllers");
