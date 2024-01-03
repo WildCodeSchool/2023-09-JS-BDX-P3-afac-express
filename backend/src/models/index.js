@@ -30,8 +30,12 @@ pool.getConnection().catch(() => {
 const models = {};
 
 const ArtistManager = require("./ArtistManager");
+const UserManager = require("./UserManager");
 
 models.artist = new ArtistManager();
 models.artist.setDatabase(pool);
+
+models.users = new UserManager();
+models.users.setDatabase(pool);
 
 module.exports = models;

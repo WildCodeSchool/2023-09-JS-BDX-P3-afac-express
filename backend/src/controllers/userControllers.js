@@ -1,9 +1,9 @@
 const models = require("../models");
 
 const getUsers = (_, res) => {
-  models.user
+  models.users
     .findAll()
-    .then(([rows]) => {
+    .then((rows) => {
       res.send(rows);
     })
     .catch((err) => {
@@ -12,7 +12,7 @@ const getUsers = (_, res) => {
     });
 };
 const getUsersById = (req, res) => {
-  models.user
+  models.users
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] != null) {
@@ -28,7 +28,7 @@ const getUsersById = (req, res) => {
 };
 
 const postUsers = (req, res) => {
-  models.user
+  models.users
     .create(req.body)
     .then(([rows]) => {
       res.send({ id: rows.insertId, ...req.body });
@@ -40,7 +40,7 @@ const postUsers = (req, res) => {
 };
 
 const deleteUsers = (req, res) => {
-  models.user
+  models.users
     .delete(req.params.id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
