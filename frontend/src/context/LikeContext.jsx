@@ -103,22 +103,23 @@ const artists = [
     ],
   },
 ];
+
+function getFavoriteArtworksFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("favorite_artworks")) || [];
+}
+
 function LikeContext({ children }) {
-  const [likes, setLikes] = useState(
-    JSON.parse(localStorage.getItem("likes_info")) || {}
-  );
   const [favoriteArtworks, setFavoriteArtworks] = useState(
-    JSON.parse(localStorage.getItem("favorite_artworks")) || []
+    getFavoriteArtworksFromLocalStorage()
   );
 
   useEffect(() => {
-    localStorage.setItem("likes_info", JSON.stringify(likes));
     localStorage.setItem("favorite_artworks", JSON.stringify(favoriteArtworks));
-  }, [likes, favoriteArtworks]);
+  }, [favoriteArtworks]);
 
   const contextValue = useMemo(
-    () => ({ likes, setLikes, artists, favoriteArtworks, setFavoriteArtworks }),
-    [likes, favoriteArtworks]
+    () => ({ artists, favoriteArtworks, setFavoriteArtworks }),
+    [favoriteArtworks]
   );
 
   return (
