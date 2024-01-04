@@ -1,4 +1,9 @@
+// const jwt = require("jsonwebtoken");
 const models = require("../models");
+
+// function generateAccessToken(data) {
+//   return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
+// }
 
 const getUsers = (_, res) => {
   models.users
@@ -28,15 +33,31 @@ const getUsersById = (req, res) => {
     });
 };
 
+const postLogin = (req, res) => {
+  models.users.login(req.body).then((user) => {
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(401).send({ error: "Identifiant incorrect!!!" });
+    }
+  });
+};
+
 const postUsers = (req, res) => {
   models.users
     .create(req.body)
-    .then(([rows]) => {
-      res.send({ id: rows.insertId, ...req.body });
+    .then((result) => {
+      res.send({
+        id: result.insertId,
+        firstnname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        is_admin: req.body.is_admin,
+      });
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(422).send({ error: err.message });
     });
 };
 
@@ -58,6 +79,7 @@ const deleteUsers = (req, res) => {
 module.exports = {
   getUsers,
   getUsersById,
+  postLogin,
   postUsers,
   deleteUsers,
 };
