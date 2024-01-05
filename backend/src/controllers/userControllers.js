@@ -37,8 +37,6 @@ const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
       const token = generateAccessToken({
-        firstname: user.firstname,
-        lastname: user.lastname,
         email: user.email,
         admin: user.is_admin,
       });

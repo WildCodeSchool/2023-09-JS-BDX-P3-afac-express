@@ -5,11 +5,35 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
-// import { useAdmin } from "../../context/AdminContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const userFetch = async () => {
+  try {
+    const { data } = await axios.get(`http://localhost:5021/users`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    alert(err.message); // eslint-disable-line no-alert
+    return null;
+  }
+};
 
 export default function AdminUser() {
-  // const { isAdmin } = useAdmin();
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await userFetch();
+      if (userData) {
+        setUsers([...userData[0]]);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   return (
     <MDBContainer fluid className="pt-5 pb-5">
@@ -30,90 +54,38 @@ export default function AdminUser() {
               </tr>
             </MDBTableHead>
             <MDBTableBody style={{ verticalAlign: "middle" }}>
-              <tr>
-                <td>
-                  <div className="ms-3">
-                    <p className="fw-bold mb-1">Ben et nuts noit</p>
-                    <p className="text-muted mb-0">ben.noit@test.fr</p>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">1234</p>
-                </td>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>
+                    <div className="ms-3">
+                      <p className="fw-bold mb-1">
+                        {user.firstname}
+                        {user.lastname}
+                      </p>
+                      <p className="text-muted mb-0">{user.email}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">{user.password}</p>
+                  </td>
 
-                <td>
-                  <MDBBtn
-                    className="fw-bold"
-                    color="link"
-                    rounded
-                    size="sm"
-                    rippleColor="dark"
-                  >
-                    <Link
-                      to="/admin/adminusermanagement"
-                      className="nav-link navLink"
+                  <td>
+                    <MDBBtn
+                      className="fw-bold navLink "
+                      style={{ color: "#ffffff" }}
+                      color="link"
+                      rounded
+                      size="sm"
+                      rippleColor="dark"
+                      onClick={() =>
+                        navigate(`/admin/adminusermanagement/${user.id}`)
+                      }
                     >
                       Éditer
-                    </Link>
-                  </MDBBtn>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="ms-3">
-                    <p className="fw-bold mb-1">Nel ia</p>
-                    <p className="text-muted mb-0">nel.ia@test.fr</p>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">3456</p>
-                </td>
-
-                <td>
-                  <MDBBtn
-                    className="fw-bold"
-                    color="link"
-                    rounded
-                    size="sm"
-                    rippleColor="dark"
-                  >
-                    <Link
-                      to="/admin/adminusermanagement"
-                      className="nav-link navLink"
-                    >
-                      Éditer
-                    </Link>
-                  </MDBBtn>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="ms-3">
-                    <p className="fw-bold mb-1">Floflo BRUNLOURS</p>
-                    <p className="text-muted mb-0">azerty@hotmail.fr</p>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">12348</p>
-                </td>
-
-                <td>
-                  <MDBBtn
-                    className="fw-bold"
-                    color="link"
-                    rounded
-                    size="sm"
-                    rippleColor="dark"
-                  >
-                    <Link
-                      to="/admin/adminusermanagement"
-                      className="nav-link navLink"
-                    >
-                      Éditer
-                    </Link>
-                  </MDBBtn>
-                </td>
-              </tr>
+                    </MDBBtn>
+                  </td>
+                </tr>
+              ))}
             </MDBTableBody>
           </MDBTable>
         </div>
