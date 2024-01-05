@@ -36,8 +36,12 @@ const getUsersById = (req, res) => {
 const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
-      // to do : filtrer les données à envoyer
-      const token = generateAccessToken(user);
+      const token = generateAccessToken({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        admin: user.is_admin,
+      });
       res.send({ token });
     } else {
       res.status(401).send({ error: "Identifiant incorrect!!!" });
