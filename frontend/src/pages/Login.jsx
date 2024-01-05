@@ -64,7 +64,7 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <a href="/forgottenpassword">Mot de passe oublié ?</a>
+          <a href="/resetpassword">Mot de passe oublié ?</a>
         </MDBCol>
       </MDBRow>
 
