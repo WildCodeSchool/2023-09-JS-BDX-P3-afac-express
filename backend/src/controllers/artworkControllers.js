@@ -55,9 +55,25 @@ const deleteArtwork = (req, res) => {
     });
 };
 
+const updateArtwork = (req, res) => {
+  models.artwork
+    .update(req.body, req.params.id)
+    .then((result) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      res.status(422).send({ message: err.message });
+    });
+};
+
 module.exports = {
   getArtwork,
   getArtworkById,
   postArtwork,
   deleteArtwork,
+  updateArtwork,
 };
