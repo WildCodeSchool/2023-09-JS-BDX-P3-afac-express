@@ -17,7 +17,7 @@ function AppContextProvider({ children }) {
   const login = async (credentials) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/login`,
+        `http://localhost:5021/login`,
         credentials
       );
       localStorage.setItem("token", data.token);
@@ -37,7 +37,7 @@ function AppContextProvider({ children }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:3000/users", newUser));
+      setUser(await axios.post("http://localhost:5021/users", newUser));
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
       navigate("/home");
     } catch (err) {
