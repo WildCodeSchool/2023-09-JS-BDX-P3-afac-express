@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import axios from "axios";
-import { useApp } from "../../context/AppContext";
+// import { useApp } from "../../context/AppContext";
 import Redirection from "../../components/Redirection";
 
 export default function AdminUserManagment() {
-  const { removeUser } = useApp();
+  // const { removeUser } = useApp();
   const { id } = useParams();
   const [user, setUser] = useState({
     firstname: "Prénom actuel",
@@ -16,6 +16,7 @@ export default function AdminUserManagment() {
   const [updatedFirstname, setUpdatedFirstname] = useState("");
   const [updatedLastname, setUpdatedLastname] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
+  const navigate = useNavigate();
 
   const updateUserData = async () => {
     try {
@@ -43,13 +44,15 @@ export default function AdminUserManagment() {
     fetchUserData();
   }, [id]);
 
-  // useEffect(() => {
-  //   const deleteUserData = async () => {
-  //     const { data } = await axios.delete(`http://localhost:5021/users/id`);
-  //     setUser(data);
-  //   };
-  //   deleteUserData();
-  // }, []);
+  const deleteUserData = async () => {
+    try {
+      const { data } = await axios.delete(`http://localhost:5021/users/${id}`);
+      setUser(data);
+      navigate("/admin/adminuser");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <MDBContainer
@@ -117,7 +120,7 @@ export default function AdminUserManagment() {
         </MDBBtn>
       </form>
 
-      <MDBBtn className="mt-4 mb-6" onClick={() => removeUser()}>
+      <MDBBtn className="mt-4 mb-6" onClick={deleteUserData}>
         Supprimer le compte
       </MDBBtn>
 
