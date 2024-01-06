@@ -13,6 +13,27 @@ export default function AdminUserManagment() {
     lastname: "Nom actuel",
     email: "Email actuel",
   });
+  const [updatedFirstname, setUpdatedFirstname] = useState("");
+  const [updatedLastname, setUpdatedLastname] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState("");
+
+  const updateUserData = async () => {
+    try {
+      const updatedData = {
+        firstname: updatedFirstname !== "" ? updatedFirstname : user.firstname,
+        lastname: updatedLastname !== "" ? updatedLastname : user.lastname,
+        email: updatedEmail !== "" ? updatedEmail : user.email,
+      };
+
+      const { data } = await axios.put(
+        `http://localhost:5021/users/${id}`,
+        updatedData
+      );
+      setUser(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -21,6 +42,14 @@ export default function AdminUserManagment() {
     };
     fetchUserData();
   }, [id]);
+
+  // useEffect(() => {
+  //   const deleteUserData = async () => {
+  //     const { data } = await axios.delete(`http://localhost:5021/users/id`);
+  //     setUser(data);
+  //   };
+  //   deleteUserData();
+  // }, []);
 
   return (
     <MDBContainer
@@ -34,22 +63,32 @@ export default function AdminUserManagment() {
         Gestion utilisateur
       </h3>
       <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
-        <h3 className="fs-5 fw-bold pb-3">Modifier les identifiants</h3>
+        <h3 className="fs-5 fw-bold pb-3">Modifier le nom</h3>
         <p>{user.firstname}</p>
         <MDBInput
           className="mb-4"
           type="pseudo"
           id="form1Example1"
           label="Modifier le prénom"
+          value={updatedFirstname}
+          onChange={(e) => setUpdatedFirstname(e.target.value)}
         />
+        <MDBBtn type="submit" block className="mb-2" onClick={updateUserData}>
+          Valider
+        </MDBBtn>
+      </form>
+      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+        <h3 className="fs-5 fw-bold pb-3">Modifier le prénom</h3>
         <p>{user.lastname}</p>
         <MDBInput
           className="mb-4"
           type="pseudo"
           id="form1Example1"
           label="Modifier le nom"
+          value={updatedLastname}
+          onChange={(e) => setUpdatedLastname(e.target.value)}
         />
-        <MDBBtn type="submit" block className="mb-2">
+        <MDBBtn type="submit" block className="mb-2" onClick={updateUserData}>
           Valider
         </MDBBtn>
       </form>
@@ -61,9 +100,11 @@ export default function AdminUserManagment() {
           type="email"
           id="form1Example1"
           label="Nouvelle adresse email"
+          value={updatedEmail}
+          onChange={(e) => setUpdatedEmail(e.target.value)}
         />
 
-        <MDBBtn type="submit" block className="mb-2">
+        <MDBBtn type="submit" block className="mb-2" onClick={updateUserData}>
           Valider
         </MDBBtn>
       </form>
