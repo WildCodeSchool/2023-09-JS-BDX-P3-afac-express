@@ -10,6 +10,7 @@ import {
   MDBCarouselCaption,
 } from "mdb-react-ui-kit";
 
+import { Link } from "react-router-dom";
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";
@@ -48,8 +49,8 @@ function Home() {
               Indien et soutenue par la Commission de l'océan Indien (COI).
             </p>
           </MDBCardText>
-          <MDBBtn className="btn" link href="/About">
-            À propos
+          <MDBBtn className="btn">
+            <Link to="/About">À propos</Link>
           </MDBBtn>
         </MDBCardBody>
       </MDBCard>

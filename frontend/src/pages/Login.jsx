@@ -7,7 +7,7 @@ import {
   MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
@@ -64,7 +64,9 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <a href="/resetpassword">Mot de passe oublié ?</a>
+          <Link className="nav-link navLink" to="/verificationlogin">
+            Mot de passe oublié ?
+          </Link>
         </MDBCol>
       </MDBRow>
 
@@ -74,7 +76,10 @@ function Login() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <a href="/register">Enregistrez-vous</a>
+          Pas encore membre ?{" "}
+          <Link className="nav-link navLink" to="/register">
+            Enregistrez-vous
+          </Link>
         </p>
       </div>
     </form>

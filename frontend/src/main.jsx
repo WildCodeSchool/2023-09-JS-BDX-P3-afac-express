@@ -16,9 +16,10 @@ import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import User from "./pages/User";
+import VerificationLogin from "./pages/VerificationLogin";
 import ResetPassword from "./pages/ResetPassword";
 import Register from "./pages/Register";
+import User from "./pages/User";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
+      { path: "/verificationlogin", element: <VerificationLogin /> },
       { path: "/resetpassword", element: <ResetPassword /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },

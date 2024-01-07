@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 import Redirection from "../components/Redirection";
 
 export default function ResetPassword() {
@@ -42,11 +43,21 @@ export default function ResetPassword() {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
+      <h3>Confirmez votre réponse secrète</h3>
+      <MDBInput
+        className="mb-4"
+        type="password"
+        id="form2Example2"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <MDBBtn type="submit" className="mb-4" block>
-        Réinitialiser mon mot de passe
+        <Link className="nav-link navLink" to="/login">
+          Réinitialiser mon mot de passe
+        </Link>
       </MDBBtn>
       <Redirection />
     </form>

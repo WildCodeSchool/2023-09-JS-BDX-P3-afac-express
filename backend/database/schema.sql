@@ -181,9 +181,11 @@ CREATE TABLE
         firstname varchar(255) NOT NULL,
         lastname varchar(255) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
-        passeword varchar(255) DEFAULT NULL,
+        password varchar(255) DEFAULT NOT NULL,
         birthday varchar(255) DEFAULT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT false
+        is_admin BOOLEAN NOT NULL DEFAULT false,
+        secret_question TEXT NOT NULL,
+        secret_answer TEXT NOT NULL,
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 INSERT INTO
@@ -191,27 +193,36 @@ INSERT INTO
         firstname,
         lastname,
         email,
-        passeword,
-        is_admin
+        password,
+        is_admin,
+        secret_question,
+        secret_answer
     )
 VALUES (
         'Ben et nuts',
         'noit',
         'ben.noit@test.fr',
         '1234',
-        FALSE
+        TRUE,
+        "Quelle était la couleur du cheval blanc d'Henri IV ?",
+        "Blanc"
     ), (
         'Nel',
         'ia',
         'nel.ia@test.fr',
         '3456',
-        TRUE
+        TRUE,
+        "Que dit un papier quand il tombe dans l'eau ?",
+        "J'ai pas pied"
+
     ), (
-        'Floflo',
-        'BRUNLOURS',
+        'Florian',
+        'BRUN',
         'azerty@hotmail.fr',
-        '12348',
-        TRUE
+        '6666',
+        TRUE,
+        "Tu as trois poussins sur une table et tu n'en veux que deux, que fais-tu ?",
+        "T'en pousses un"
     );
 
 DROP TABLE IF EXISTS artwork_users;
