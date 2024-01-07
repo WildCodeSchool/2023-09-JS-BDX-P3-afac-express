@@ -95,6 +95,39 @@ const updateUsers = (req, res) => {
     });
 };
 
+const postOldEmail = async (req, res) => {
+  try {
+    // Recherchez l'utilisateur par son identifiant
+    const [userRows] = await models.users.find(req.params.id);
+
+    // Vérifiez si l'utilisateur existe
+    if (!userRows.length) {
+      res.sendStatus(404);
+      return;
+    }
+
+    // Obtenez l'objet utilisateur à partir des résultats de la requête
+    const user = userRows[0];
+
+    // Utilisez findOne pour vérifier si l'ancienne adresse e-mail correspond à celle de l'utilisateur
+    const [emailRows] = await models.users.findOne("email", req.body.oldEmail);
+
+    // Vérifiez si l'ancienne adresse e-mail correspond
+    if (!emailRows.length || emailRows[0].id !== user.id) {
+      res.sendStatus(404);
+      return;
+    }
+
+    // Mettez à jour l'adresse e-mail de l'utilisateur avec la nouvelle adresse e-mail
+    await models.users.update({ email: req.body.newEmail }, user.id);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
 module.exports = {
   getUsers,
   getUsersById,
@@ -102,4 +135,5 @@ module.exports = {
   postUsers,
   deleteUsers,
   updateUsers,
+  postOldEmail,
 };

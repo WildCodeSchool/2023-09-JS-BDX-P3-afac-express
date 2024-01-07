@@ -21,8 +21,27 @@ function AppContextProvider({ children }) {
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const tokenData = jwtDecode(token);
+      setUser(tokenData);
+
+      if (tokenData.is_admin === 1) {
+        navigate("/admin");
+      }
+    }
+  }, []);
+
   const login = async (credentials) => {
     try {
+      if (user) {
+        // L'utilisateur est déjà connecté, rediriger vers la page Home
+        navigate("/home");
+        return;
+      }
+
       const { data } = await axios.post(
         `http://localhost:5021/login`,
         credentials
@@ -72,6 +91,7 @@ function AppContextProvider({ children }) {
     setUser(undefined);
     setOpenNavSecond(false);
     localStorage.removeItem("token");
+    navigate("/home");
   };
 
   // A voir - todo
