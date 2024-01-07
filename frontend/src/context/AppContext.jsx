@@ -49,7 +49,7 @@ function AppContextProvider({ children }) {
     try {
       const convertedUser = {
         ...newUser,
-        is_admin: newUser.admin ? 1 : 0, // Convertir true en 1, false en 0
+        is_admin: newUser.is_admin ? 1 : 0,
       };
 
       const response = await axios.post(
@@ -58,6 +58,8 @@ function AppContextProvider({ children }) {
       );
       const registeredUser = response.data;
       setUser(registeredUser);
+      setIsAdmin(registeredUser.is_admin === 1);
+
       login({ email: newUser.email, password: newUser.password });
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
       navigate("/home");
