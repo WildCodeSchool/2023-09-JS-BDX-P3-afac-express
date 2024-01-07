@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,14 @@ import { jwtDecode } from "jwt-decode";
 const appContext = createContext();
 function AppContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("session")));
+  const [user, setUser] = useState(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const tokenData = jwtDecode(token);
+      return tokenData;
+    }
+    return null;
+  });
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
@@ -25,15 +32,18 @@ function AppContextProvider({ children }) {
       alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
       setUser(tokenData);
       if (tokenData.is_admin === 1) {
-        return navigate("/admin");
+        navigate("/admin");
       }
-      return navigate("/home");
+      navigate("/home");
     } catch (err) {
       console.error(err);
-      alert(err.message); // eslint-disable-line no-alert
+      setBasicDanger(true);
     }
-    return null;
   };
+
+  useEffect(() => {
+    login();
+  }, []);
 
   const register = async (newUser) => {
     try {
@@ -43,16 +53,6 @@ function AppContextProvider({ children }) {
     } catch (err) {
       alert(err.message); // eslint-disable-line no-alert
     }
-
-    // const users = getUsers();
-    // if (!users.find((userdb) => userdb.email === newUser.email)) {
-    //   users.push(newUser);
-    //   localStorage.setItem("users", JSON.stringify(users));
-    //   alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
-    //   navigate("/home");
-    // } else {
-    //   alert("Vous êtes déjà inscrit !"); // eslint-disable-line no-alert
-    // }
   };
 
   const logout = () => {
