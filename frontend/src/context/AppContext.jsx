@@ -37,7 +37,7 @@ function AppContextProvider({ children }) {
       navigate("/home");
     } catch (err) {
       console.error(err);
-      setBasicDanger(true);
+      alert(err.message); // eslint-disable-line no-alert
     }
   };
 
@@ -47,7 +47,18 @@ function AppContextProvider({ children }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:5021/users", newUser));
+      const convertedUser = {
+        ...newUser,
+        is_admin: newUser.admin ? 1 : 0, // Convertir true en 1, false en 0
+      };
+
+      const response = await axios.post(
+        "http://localhost:5021/users",
+        convertedUser
+      );
+      const registeredUser = response.data;
+      setUser(registeredUser);
+      login({ email: newUser.email, password: newUser.password });
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
       navigate("/home");
     } catch (err) {
@@ -58,9 +69,10 @@ function AppContextProvider({ children }) {
   const logout = () => {
     setUser(undefined);
     setOpenNavSecond(false);
-    localStorage.removeItem("session");
+    localStorage.removeItem("token");
   };
 
+  // A voir - todo
   const removeUser = () => {
     const currentUser = JSON.parse(localStorage.getItem("session"));
 

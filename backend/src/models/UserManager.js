@@ -8,8 +8,8 @@ class UserManager extends AbstractManager {
 
   create(user) {
     return new Promise((resolve, reject) => {
-      if (!user.password || typeof user.password !== "string") {
-        reject(new Error("Invalid password"));
+      if (!user.firstname || !user.lastname || !user.email || !user.password) {
+        reject(new Error("Missing required fields"));
         return;
       }
 
