@@ -11,7 +11,7 @@ CREATE TABLE
         id int primary key NOT NULL AUTO_INCREMENT,
         name varchar(255) NOT NULL,
         description varchar(10000) NOT NULL
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    )
 
 INSERT INTO
     artist (name, description)
@@ -29,7 +29,6 @@ VALUES (
         'Née en 1982 à Noyon (France), Mathilde Neri est une artiste visuelle du monde hybride et outsider qui œuvre également dans le champ de la performance. Neri explore les dimensions de réalité qui émanent de la rencontre avec le signe dans la nature, avec lequel elle entre en connexion par le médium. Elle vit et travaille à La Réunion.'
     );
 
-
 DROP TABLE IF EXISTS artwork;
 
 CREATE TABLE
@@ -41,7 +40,7 @@ CREATE TABLE
         creation_place varchar(255) DEFAULT NULL,
         artist_id int DEFAULT NULL,
         CONSTRAINT fk_artwork_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    )
 
 INSERT INTO
     artwork (
@@ -233,4 +232,4 @@ CREATE TABLE
         users_id int NOT NULL,
         CONSTRAINT fk_users_artist FOREIGN KEY (artwork_id) REFERENCES artwork(id),
         CONSTRAINT fk_artist_users FOREIGN KEY (users_id) REFERENCES users(id)
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    )

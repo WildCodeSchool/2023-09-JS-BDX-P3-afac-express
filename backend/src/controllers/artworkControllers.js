@@ -1,12 +1,7 @@
-const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
-}
-
-const getUsers = (_, res) => {
-  models.users
+const getArtwork = (_, res) => {
+  models.artwork
     .findAll()
     .then((rows) => {
       res.send(rows);
@@ -17,8 +12,8 @@ const getUsers = (_, res) => {
     });
 };
 
-const getUsersById = (req, res) => {
-  models.users
+const getArtworkById = (req, res) => {
+  models.artwork
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] != null) {
@@ -33,40 +28,20 @@ const getUsersById = (req, res) => {
     });
 };
 
-const postLogin = (req, res) => {
-  models.users.login(req.body).then((user) => {
-    if (user) {
-      const token = generateAccessToken({
-        email: user.email,
-        admin: user.is_admin,
-      });
-      res.send({ token });
-    } else {
-      res.status(401).send({ error: "Identifiant incorrect!!!" });
-    }
-  });
-};
-
-const postUsers = (req, res) => {
-  models.users
+const postArtwork = (req, res) => {
+  models.artwork
     .create(req.body)
-    .then((result) => {
-      res.send({
-        id: result.insertId,
-        firstnname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        is_admin: req.body.is_admin,
-      });
+    .then(([rows]) => {
+      res.send({ id: rows.insertId, ...req.body });
     })
     .catch((err) => {
       console.error(err);
-      res.status(422).send({ error: err.message });
+      res.sendStatus(500);
     });
 };
 
-const deleteUsers = (req, res) => {
-  models.users
+const deleteArtwork = (req, res) => {
+  models.artwork
     .delete(req.params.id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
@@ -80,8 +55,8 @@ const deleteUsers = (req, res) => {
     });
 };
 
-const updateUsers = (req, res) => {
-  models.users
+const updateArtwork = (req, res) => {
+  models.artwork
     .update(req.body, req.params.id)
     .then((result) => {
       if (result.affectedRows === 0) {
@@ -96,10 +71,9 @@ const updateUsers = (req, res) => {
 };
 
 module.exports = {
-  getUsers,
-  getUsersById,
-  postLogin,
-  postUsers,
-  deleteUsers,
-  updateUsers,
+  getArtwork,
+  getArtworkById,
+  postArtwork,
+  deleteArtwork,
+  updateArtwork,
 };
