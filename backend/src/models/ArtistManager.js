@@ -7,7 +7,7 @@ class ArtistManager extends AbstractManager {
 
   create(artist) {
     return this.database.query(
-      `insert into ${this.table} (name, description) values (?, ?)`,
+      `insert into ${this.table} (name, description) values (?,?)`,
       [artist.name, artist.description]
     );
   }
