@@ -8,6 +8,8 @@ const artworkControllers = require("./controllers/artworkControllers");
 
 router.get("/users", userControllers.getUsers);
 router.get("/users/:id", userControllers.getUsersById);
+router.get("/users/:email", userControllers.getUserByEmail);
+router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
 router.delete("/users/:id", userControllers.deleteUsers);
