@@ -57,6 +57,7 @@ export default function Navigation() {
         {user ? (
           <MDBDropdown>
             <MDBDropdownToggle>
+              {user.email}
               <MDBIcon far icon="user" />
             </MDBDropdownToggle>
 
