@@ -24,15 +24,19 @@ function VerificationLogin() {
     try {
       // Utilisez axios pour faire une requête à la route backend
 
-      const response = await axios.get(
-        `http://localhost:5021/users/${formValue.email}`
+      const { data } = await axios.get(
+        `http://localhost:5021/auth/get-question/${formValue.email}`
       );
-      // console.log("response ???", response);
-      if (response.data) {
+
+      if (data) {
         // Utilisez les données récupérées comme nécessaire
-        console.error("Utilisateur récupéré :", response.data[0]);
         // Naviguez vers la page suivante, par exemple /resetpassword
-        navigate("/resetpassword");
+        navigate("/resetpassword", {
+          state: {
+            ...data,
+            email: formValue.email,
+          },
+        });
       } else {
         alert(
           "Adresse e-mail non trouvée. Veuillez vérifier l'adresse e-mail renseignée."
@@ -55,7 +59,7 @@ function VerificationLogin() {
         name="email"
         onChange={onChange}
         id="validationUser01"
-        required
+        required="required"
         label="Adresse mail"
         type="email"
       />

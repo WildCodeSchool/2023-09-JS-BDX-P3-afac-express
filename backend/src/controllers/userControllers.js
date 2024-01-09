@@ -33,14 +33,14 @@ const getUsersById = (req, res) => {
     });
 };
 
-const getUserByEmail = (req, res) => {
+const getUserQuestion = (req, res) => {
   models.users
     .getUserByEmail(req.params.email)
-    .then(([rows]) => {
-      console.error("rows", rows);
+    .then((user) => {
+      console.error("rows", user);
 
-      if (rows != null) {
-        res.json(rows);
+      if (user != null) {
+        res.json({ question: user.secret_question });
       } else {
         res.sendStatus(404);
       }
@@ -132,7 +132,7 @@ const updateUsers = (req, res) => {
 module.exports = {
   getUsers,
   getUsersById,
-  getUserByEmail,
+  getUserQuestion,
   postUserByEmail,
   postLogin,
   postUsers,

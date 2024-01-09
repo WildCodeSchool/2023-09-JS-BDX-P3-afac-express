@@ -7,8 +7,8 @@ const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
 
 router.get("/users", userControllers.getUsers);
-router.get("/users/:id", userControllers.getUsersById);
-router.get("/users/:email", userControllers.getUserByEmail);
+router.get("/users/:id([0-9]+)", userControllers.getUsersById);
+router.get("/auth/get-question/:email", userControllers.getUserQuestion);
 router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);

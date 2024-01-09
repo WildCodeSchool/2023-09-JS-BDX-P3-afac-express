@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Redirection from "../components/Redirection";
 
 export default function ResetPassword() {
+  const location = useLocation();
+  const question = location.state?.question;
+  const [answer, setAnswer] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -32,6 +35,7 @@ export default function ResetPassword() {
         className="mb-4"
         type="password"
         id="form2Example1"
+        required="required"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -40,16 +44,18 @@ export default function ResetPassword() {
         className="mb-4"
         type="password"
         id="form2Example2"
+        required="required"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <h3>Confirmez votre réponse secrète</h3>
+      <h3>{question}</h3>
       <MDBInput
         className="mb-4"
-        type="password"
+        type="text"
         id="form2Example2"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        required="required"
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
       />
 
       {error && <p style={{ color: "red" }}>{error}</p>}

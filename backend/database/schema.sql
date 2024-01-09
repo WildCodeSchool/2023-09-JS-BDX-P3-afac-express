@@ -183,8 +183,8 @@ CREATE TABLE
         hashedPassword varchar(255) NOT NULL,
         birthday varchar(255) DEFAULT NULL,
         is_admin BOOLEAN NOT NULL DEFAULT false,
-        secret_question varchar(255) DEFAULT "Qu'est-ce qui est petit, vert qui monte et qui descend ?",
-        secret_answer varchar(255) DEFAULT "Un petit pois dans un ascenseur"
+        secret_question varchar(255) DEFAULT "?",
+        secret_answer varchar(255) DEFAULT ""
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 INSERT INTO
