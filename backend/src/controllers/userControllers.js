@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const models = require("../models");
 
 function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
+  return jwt.sign(data, process.env.APP_SECRET); // TODO ajouter , { expiresIn: "1800s" } ?
 }
 
 const getUsers = (_, res) => {
@@ -36,9 +36,11 @@ const getUsersById = (req, res) => {
 const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
+      // TODO à voir si on garde email et admin
       const token = generateAccessToken({
         email: user.email,
         admin: user.is_admin,
+        id: user.id,
       });
       res.send({ token });
     } else {
@@ -95,6 +97,29 @@ const updateUsers = (req, res) => {
     });
 };
 
+const patchEmail = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const [emailRows] = await models.users.findOne("email", user.email);
+    if (!emailRows.length || emailRows[0].id !== user.id) {
+      res.sendStatus(404);
+      return;
+    }
+
+    await models.users.update({ email: req.body.newEmail }, user.id);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
+const getProfile = async (req, res) => {
+  res.send(req.user);
+};
+
 module.exports = {
   getUsers,
   getUsersById,
@@ -102,4 +127,6 @@ module.exports = {
   postUsers,
   deleteUsers,
   updateUsers,
+  patchEmail,
+  getProfile,
 };

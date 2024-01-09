@@ -1,21 +1,17 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import ApiService from "../services/api.service";
 
 const appContext = createContext();
-function AppContextProvider({ children }) {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const tokenData = jwtDecode(token);
-      return tokenData;
-    }
-    return null;
-  });
+function AppContextProvider({ children, apiService }) {
+  const givenData = useLoaderData();
+  const [isAdmin, setIsAdmin] = useState(
+    givenData?.preloadUser?.data?.is_admin
+  );
+  const [user, setUser] = useState(givenData?.preloadUser?.data);
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
@@ -23,46 +19,40 @@ function AppContextProvider({ children }) {
 
   const login = async (credentials) => {
     try {
-      const { data } = await axios.post(
+      const data = await apiService.post(
         `http://localhost:5021/login`,
         credentials
       );
       localStorage.setItem("token", data.token);
-      const tokenData = jwtDecode(data.token);
-      alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
-      setUser(tokenData);
-      if (tokenData.is_admin === 1) {
+
+      apiService.setToken(data.token);
+
+      const result = await apiService.get(
+        "http://localhost:5021/users/personal"
+      );
+
+      alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+      setUser(result.data);
+
+      if (result.data.is_admin === 1) {
         navigate("/admin");
       }
-      navigate("/home");
+      return navigate("/home");
     } catch (err) {
       console.error(err);
       alert(err.message); // eslint-disable-line no-alert
     }
-  };
 
-  useEffect(() => {
-    login();
-  }, []);
+    return null;
+  };
 
   const register = async (newUser) => {
     try {
-      const convertedUser = {
-        ...newUser,
-        is_admin: newUser.admin ? 1 : 0, // Convertir true en 1, false en 0
-      };
-
-      const response = await axios.post(
-        "http://localhost:5021/users",
-        convertedUser
-      );
-      const registeredUser = response.data;
-      setUser(registeredUser);
-      login({ email: newUser.email, password: newUser.password });
+      setUser(await axios.post("http://localhost:5021/users", newUser));
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
-      navigate("/home");
     } catch (err) {
       alert(err.message); // eslint-disable-line no-alert
+      navigate("/home");
     }
   };
 
@@ -70,9 +60,10 @@ function AppContextProvider({ children }) {
     setUser(undefined);
     setOpenNavSecond(false);
     localStorage.removeItem("token");
+    navigate("/home");
   };
 
-  // A voir - todo
+  // TODO: A voir - supprimer
   const removeUser = () => {
     const currentUser = JSON.parse(localStorage.getItem("session"));
 
@@ -104,6 +95,7 @@ function AppContextProvider({ children }) {
       openNavSecond,
       setOpenNavSecond,
       removeUser,
+      apiService,
     }),
     [
       isAdmin,
@@ -116,8 +108,17 @@ function AppContextProvider({ children }) {
       openNavSecond,
       setOpenNavSecond,
       removeUser,
+      apiService,
     ]
   );
+
+  // useEffect(() => {
+  //   if (isAdmin) {
+  //     return navigate("/admin");
+  //   }
+
+  //   return null;
+  // }, []);
 
   return (
     <appContext.Provider value={contextData}>
@@ -139,6 +140,7 @@ function AppContextProvider({ children }) {
 
 AppContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  apiService: PropTypes.instanceOf(ApiService).isRequired,
 };
 
 export default AppContextProvider;

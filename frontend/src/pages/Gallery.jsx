@@ -7,7 +7,7 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import Likes from "../components/Likes";
 import FilterGallery from "../components/Filter/FilterGallery";
 import { useLike } from "../context/LikeContext";
@@ -62,13 +62,14 @@ function Gallery() {
                     className="m-1"
                     style={{ color: "#7b273d" }}
                     link
-                    href="/Artworks"
                   >
-                    <MDBIcon
-                      fas
-                      icon="exclamation-circle"
-                      className="d-block p-2 size='4x'"
-                    />
+                    <Link to="/Artworks">
+                      <MDBIcon
+                        fas
+                        icon="exclamation-circle"
+                        className="d-block p-2 size='4x'"
+                      />
+                    </Link>
                   </MDBBtn>
 
                   <Likes

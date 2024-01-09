@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import { useApp } from "./AppContext";
@@ -6,11 +6,10 @@ import { useApp } from "./AppContext";
 const adminContext = createContext();
 
 function AdminContextProvider({ children }) {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const appContext = useApp();
+  const { user, isAdmin, setIsAdmin } = useApp();
 
-  if (!appContext.user?.admin) {
-    return <Navigate to="/login" />;
+  if (user.is_admin !== 1) {
+    return <Navigate to="/admin" />;
   }
 
   const adminData = useMemo(
