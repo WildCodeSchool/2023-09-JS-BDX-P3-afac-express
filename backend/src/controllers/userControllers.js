@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const models = require("../models");
 
 function generateAccessToken(data) {
@@ -116,6 +117,42 @@ const patchEmail = async (req, res) => {
   }
 };
 
+const patchPassword = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const [passwordRows] = await models.users.findOne("id", user.id);
+
+    if (
+      !passwordRows.length ||
+      !bcrypt.compareSync(req.body.oldPassword, passwordRows[0].password)
+    ) {
+      res.sendStatus(404);
+      return;
+    }
+
+    const hashedPasswordFromDB = passwordRows[0].password;
+
+    const isPasswordMatch = await bcrypt.compare(
+      req.body.oldPassword,
+      hashedPasswordFromDB
+    );
+
+    if (!isPasswordMatch) {
+      res.sendStatus(404);
+      return;
+    }
+
+    const hashedNewPassword = await bcrypt.hash(req.body.newPassword, 10);
+    await models.users.update({ password: hashedNewPassword }, user.id);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const getProfile = async (req, res) => {
   res.send(req.user);
 };
@@ -128,5 +165,6 @@ module.exports = {
   deleteUsers,
   updateUsers,
   patchEmail,
+  patchPassword,
   getProfile,
 };
