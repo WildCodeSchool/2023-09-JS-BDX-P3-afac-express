@@ -8,7 +8,9 @@ import ApiService from "../services/api.service";
 const appContext = createContext();
 function AppContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
-  const [isAdmin, setIsAdmin] = useState(givenData?.preloadUser?.data?.isAdmin);
+  const [isAdmin, setIsAdmin] = useState(
+    givenData?.preloadUser?.data?.is_admin
+  );
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);

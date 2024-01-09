@@ -35,7 +35,9 @@ const router = createBrowserRouter([
     path: "/",
     loader: async () => {
       try {
-        const data = apiService.get("http://localhost:5021/users/personal");
+        const data = await apiService.get(
+          "http://localhost:5021/users/personal"
+        );
         return { preloadUser: data ?? null };
       } catch (err) {
         console.error(err.message);
