@@ -97,6 +97,7 @@ const updateUsers = (req, res) => {
     });
 };
 
+// TODO à refaire :
 const patchEmail = async (req, res) => {
   try {
     // Recherchez l'utilisateur par son identifiant

@@ -20,7 +20,7 @@ router.get(
 );
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
-router.delete("/users/:id", userControllers.deleteUsers);
+router.delete("/users/:id", authMiddleware, userControllers.deleteUsers);
 router.put("/users/:id", userControllers.updateUsers);
 router.patch("/change/email", userControllers.patchEmail);
 

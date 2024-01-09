@@ -1,15 +1,29 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Form } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function AccountManagement() {
   const { logout, removeUser, user } = useApp();
+  // console.log("user from useApp:", user);
   const [oldEmail, setOldEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [isUserReady, setIsUserReady] = useState(false);
+
+  useEffect(() => {
+    // console.log("user:", user);
+    if (user && user.email) {
+      setIsUserReady(true);
+    }
+  }, [user]);
 
   const handleEmailChange = async () => {
     try {
+      if (!isUserReady) {
+        console.error("L'utilisateur ou son ID n'est pas prêt");
+        return;
+      }
       const response = await axios.post(
         `http://localhost:5021/check-old-email/${user.id}`,
         {
@@ -28,6 +42,10 @@ function AccountManagement() {
     }
   };
 
+  useEffect(() => {
+    // console.log("isUserReady:", isUserReady);
+  }, [isUserReady]);
+
   return (
     <MDBContainer
       fluid
@@ -39,7 +57,11 @@ function AccountManagement() {
       >
         Gérer mon compte
       </h3>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+
+      <Form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={handleEmailChange}
+      >
         <h3 className="fs-5 fw-bold pb-3">Changement d'adresse e-mail</h3>
 
         <MDBInput
@@ -60,17 +82,12 @@ function AccountManagement() {
           onChange={(e) => setNewEmail(e.target.value)}
         />
 
-        <MDBBtn
-          type="submit"
-          block
-          className="mb-2"
-          onClick={handleEmailChange}
-        >
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
-      </form>
+      </Form>
 
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <Form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
         <h3 className="fs-5 fw-bold pb-3">Changement de mot de passe</h3>
         <MDBInput
           className="mb-4"
@@ -88,9 +105,9 @@ function AccountManagement() {
         <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
-      </form>
+      </Form>
 
-      <MDBBtn className="mt-4 mb-6" onClick={() => logout()}>
+      <MDBBtn className="mt-4 mb-6" onClick={logout}>
         Déconnexion
       </MDBBtn>
 

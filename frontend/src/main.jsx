@@ -26,12 +26,24 @@ import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 import AdminHome from "./pages/Admin/AdminHome";
+import ApiService from "./services/api.service";
+
+const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: async () => {
+      try {
+        const data = apiService.get("http://localhost:5021/users/personal");
+        return { preloadUser: data ?? null };
+      } catch (err) {
+        console.error(err.message);
+        return null;
+      }
+    },
     element: (
-      <AppContextProvider>
+      <AppContextProvider apiService={apiService}>
         <LikeContextProvider>
           <App />
         </LikeContextProvider>

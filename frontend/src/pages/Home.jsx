@@ -48,7 +48,9 @@ function Home() {
             Indien (COI).
           </MDBCardText>
           <MDBBtn className="btn">
-            <Link to="/About">À propos</Link>
+            <Link to="/About" className="nav-link navLink">
+              À propos
+            </Link>
           </MDBBtn>
         </MDBCardBody>
       </MDBCard>
