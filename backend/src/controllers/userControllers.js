@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const models = require("../models");
 
 function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
+  return jwt.sign(data, process.env.APP_SECRET); // TODO ajouter , { expiresIn: "1800s" } ?
 }
 
 const getUsers = (_, res) => {
@@ -36,9 +36,11 @@ const getUsersById = (req, res) => {
 const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
+      // TODO à voir si on garde email et admin
       const token = generateAccessToken({
         email: user.email,
         admin: user.is_admin,
+        id: user.id,
       });
       res.send({ token });
     } else {
@@ -95,7 +97,7 @@ const updateUsers = (req, res) => {
     });
 };
 
-const postOldEmail = async (req, res) => {
+const patchEmail = async (req, res) => {
   try {
     // Recherchez l'utilisateur par son identifiant
     const [userRows] = await models.users.find(req.params.id);
@@ -128,6 +130,10 @@ const postOldEmail = async (req, res) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  res.send(req.user);
+};
+
 module.exports = {
   getUsers,
   getUsersById,
@@ -135,5 +141,6 @@ module.exports = {
   postUsers,
   deleteUsers,
   updateUsers,
-  postOldEmail,
+  patchEmail,
+  getProfile,
 };

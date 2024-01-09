@@ -5,14 +5,24 @@ const router = express.Router();
 const userControllers = require("./controllers/userControllers");
 const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
+const { authMiddleware } = require("./middlewares/Security/auth.middleware");
+const {
+  authAdminMiddleware,
+} = require("./middlewares/Security/auth.admin.middleware");
 
+router.get("/users/personal", authMiddleware, userControllers.getProfile);
 router.get("/users", userControllers.getUsers);
-router.get("/users/:id", userControllers.getUsersById);
-router.post("/check-old-email/:id", userControllers.postOldEmail);
+router.get(
+  "/users/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.getUsersById
+);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
 router.delete("/users/:id", userControllers.deleteUsers);
 router.put("/users/:id", userControllers.updateUsers);
+router.patch("/change/email", userControllers.patchEmail);
 
 router.get("/artist", artistControllers.getArtists);
 router.post("/artist", artistControllers.postArtist);

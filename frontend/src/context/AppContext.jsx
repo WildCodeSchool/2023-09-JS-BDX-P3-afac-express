@@ -94,7 +94,7 @@ function AppContextProvider({ children }) {
     navigate("/home");
   };
 
-  // A voir - todo
+  // TODO: A voir - supprimer
   const removeUser = () => {
     const currentUser = JSON.parse(localStorage.getItem("session"));
 
