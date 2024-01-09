@@ -1,31 +1,20 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import ApiService from "../services/api.service";
+
+const apiService = new ApiService();
 
 function AccountManagement() {
-  const { logout, removeUser, user } = useApp();
-  // console.log("user from useApp:", user);
+  const { logout, removeUser } = useApp();
   const [oldEmail, setOldEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [isUserReady, setIsUserReady] = useState(false);
-
-  useEffect(() => {
-    // console.log("user:", user);
-    if (user && user.email) {
-      setIsUserReady(true);
-    }
-  }, [user]);
 
   const handleEmailChange = async () => {
     try {
-      if (!isUserReady) {
-        console.error("L'utilisateur ou son ID n'est pas prêt");
-        return;
-      }
-      const response = await axios.post(
-        `http://localhost:5021/check-old-email/${user.id}`,
+      const response = await apiService.patch(
+        `http://localhost:5021/change/email`,
         {
           oldEmail,
           newEmail,
@@ -41,10 +30,6 @@ function AccountManagement() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    // console.log("isUserReady:", isUserReady);
-  }, [isUserReady]);
 
   return (
     <MDBContainer
