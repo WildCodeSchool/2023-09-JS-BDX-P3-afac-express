@@ -35,4 +35,8 @@ export default class ApiService {
     const { data } = await axios.post(url, content, this.getConfig());
     return data;
   }
+
+  patch(url, content) {
+    return axios.patch(url, content, this.getConfig());
+  }
 }

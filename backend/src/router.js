@@ -23,6 +23,7 @@ router.post("/users", userControllers.postUsers);
 router.delete("/users/:id", authMiddleware, userControllers.deleteUsers);
 router.put("/users/:id", userControllers.updateUsers);
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
+router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
 router.get("/artist", artistControllers.getArtists);
 router.post("/artist", artistControllers.postArtist);
