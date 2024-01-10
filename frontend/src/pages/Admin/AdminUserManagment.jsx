@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import axios from "axios";
-// import { useApp } from "../../context/AppContext";
 import Redirection from "../../components/Redirection";
+import ApiService from "../../services/api.service";
+
+const apiService = new ApiService();
 
 export default function AdminUserManagment() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export default function AdminUserManagment() {
         email: updatedEmail !== "" ? updatedEmail : user.email,
       };
 
-      const { data } = await axios.put(
+      const { data } = await apiService.put(
         `http://localhost:5021/users/${id}`,
         updatedData
       );
@@ -38,7 +39,9 @@ export default function AdminUserManagment() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const { data } = await axios.get(`http://localhost:5021/users/${id}`);
+      const { data } = await apiService.get(
+        `http://localhost:5021/users/${id}`
+      );
       setUser(data);
     };
     fetchUserData();
@@ -46,7 +49,9 @@ export default function AdminUserManagment() {
 
   const deleteUserData = async () => {
     try {
-      const { data } = await axios.delete(`http://localhost:5021/users/${id}`);
+      const { data } = await apiService.delete(
+        `http://localhost:5021/users/${id}`
+      );
       setUser(data);
       navigate("/admin/adminuser");
     } catch (error) {
