@@ -1,31 +1,22 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import ApiService from "../services/api.service";
+
+const apiService = new ApiService();
 
 function AccountManagement() {
-  const { logout, removeUser, user } = useApp();
-  // console.log("user from useApp:", user);
+  const { logout, removeUser } = useApp();
   const [oldEmail, setOldEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [isUserReady, setIsUserReady] = useState(false);
-
-  useEffect(() => {
-    // console.log("user:", user);
-    if (user && user.email) {
-      setIsUserReady(true);
-    }
-  }, [user]);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const handleEmailChange = async () => {
     try {
-      if (!isUserReady) {
-        console.error("L'utilisateur ou son ID n'est pas prêt");
-        return;
-      }
-      const response = await axios.post(
-        `http://localhost:5021/check-old-email/${user.id}`,
+      const response = await apiService.patch(
+        `http://localhost:5021/change/email`,
         {
           oldEmail,
           newEmail,
@@ -42,9 +33,25 @@ function AccountManagement() {
     }
   };
 
-  useEffect(() => {
-    // console.log("isUserReady:", isUserReady);
-  }, [isUserReady]);
+  const handlePasswordChange = async () => {
+    try {
+      const response = await apiService.patch(
+        `http://localhost:5021/change/password`,
+        {
+          oldPassword,
+          newPassword,
+        }
+      );
+
+      if (response.status === 204) {
+        alert("Le mot de passe a été modifiée avec succès."); // eslint-disable-line no-alert
+      } else {
+        alert("Échec de la modification du mot de passe."); // eslint-disable-line no-alert
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <MDBContainer
@@ -68,6 +75,7 @@ function AccountManagement() {
           className="mb-4"
           type="email"
           id="oldEmail"
+          required="required"
           label="Ancienne adresse email"
           value={oldEmail}
           onChange={(e) => setOldEmail(e.target.value)}
@@ -77,6 +85,7 @@ function AccountManagement() {
           className="mb-4"
           type="email"
           id="newEmail"
+          required="required"
           label="Nouvelle adresse email"
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
@@ -87,19 +96,28 @@ function AccountManagement() {
         </MDBBtn>
       </Form>
 
-      <Form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <Form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={handlePasswordChange}
+      >
         <h3 className="fs-5 fw-bold pb-3">Changement de mot de passe</h3>
         <MDBInput
           className="mb-4"
           type="password"
           id="oldPassword"
+          required="required"
           label="Ancien mot de passe"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
         />
         <MDBInput
           className="mb-4"
           type="password"
           id="newPassword"
+          required="required"
           label="Nouveau mot de passe"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
         />
 
         <MDBBtn type="submit" block className="mb-2">

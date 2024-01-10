@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const models = require("../models");
 
 function generateAccessToken(data) {
@@ -20,40 +21,6 @@ const getUsers = (_, res) => {
 const getUsersById = (req, res) => {
   models.users
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] != null) {
-        res.json(rows[0]);
-      } else {
-        res.sendStatus(404);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const getUserQuestion = (req, res) => {
-  models.users
-    .getUserByEmail(req.params.email)
-    .then((user) => {
-      console.error("rows", user);
-
-      if (user != null) {
-        res.json({ question: user.secret_question });
-      } else {
-        res.sendStatus(404);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const postUserByEmail = (req, res) => {
-  models.users
-    .postUserByEmail(req.params.email)
     .then(([rows]) => {
       if (rows[0] != null) {
         res.json(rows[0]);
@@ -89,7 +56,7 @@ const postUsers = (req, res) => {
     .then((result) => {
       res.send({
         id: result.insertId,
-        firstname: req.body.firstname,
+        firstnname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
         is_admin: req.body.is_admin,
@@ -150,6 +117,42 @@ const patchEmail = async (req, res) => {
   }
 };
 
+const patchPassword = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const [passwordRows] = await models.users.findOne("id", user.id);
+
+    if (
+      !passwordRows.length ||
+      !bcrypt.compareSync(req.body.oldPassword, passwordRows[0].password)
+    ) {
+      res.sendStatus(404);
+      return;
+    }
+
+    const hashedPasswordFromDB = passwordRows[0].password;
+
+    const isPasswordMatch = await bcrypt.compare(
+      req.body.oldPassword,
+      hashedPasswordFromDB
+    );
+
+    if (!isPasswordMatch) {
+      res.sendStatus(404);
+      return;
+    }
+
+    const hashedNewPassword = await bcrypt.hash(req.body.newPassword, 10);
+    await models.users.update({ password: hashedNewPassword }, user.id);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const getProfile = async (req, res) => {
   res.send(req.user);
 };
@@ -157,12 +160,11 @@ const getProfile = async (req, res) => {
 module.exports = {
   getUsers,
   getUsersById,
-  getUserQuestion,
-  postUserByEmail,
   postLogin,
   postUsers,
   deleteUsers,
   updateUsers,
   patchEmail,
+  patchPassword,
   getProfile,
 };
