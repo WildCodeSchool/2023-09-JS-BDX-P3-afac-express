@@ -69,13 +69,9 @@ const postUsers = (req, res) => {
 };
 
 const deleteUsers = (req, res) => {
-  if (req.user.id !== parseInt(req.params.id, 10)) {
-    return res
-      .status(401)
-      .send({ message: "Vous n'êtes pas autorisé à effectuer cette action." });
-  }
+  const id = parseInt(req.params.id, 10);
   return models.users
-    .delete(req.params.id)
+    .delete(id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
         res.sendStatus(404);

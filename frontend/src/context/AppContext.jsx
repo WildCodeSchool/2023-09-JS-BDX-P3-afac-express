@@ -50,9 +50,10 @@ function AppContextProvider({ children, apiService }) {
     try {
       setUser(await axios.post("http://localhost:5021/users", newUser));
       alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
+      login();
+      navigate("/home");
     } catch (err) {
       alert(err.message); // eslint-disable-line no-alert
-      navigate("/home");
     }
   };
 
