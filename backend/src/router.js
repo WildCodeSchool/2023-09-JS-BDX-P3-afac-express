@@ -11,17 +11,32 @@ const {
 } = require("./middlewares/Security/auth.admin.middleware");
 
 router.get("/users/personal", authMiddleware, userControllers.getProfile);
-router.get("/users", userControllers.getUsers);
 router.get(
+  "/users",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.getUsers
+);
+router.get("/users/:id", userControllers.getUsersById);
+router.post("/login", userControllers.postLogin);
+router.post("/users", userControllers.postUsers);
+router.delete(
   "/users/:id",
   authMiddleware,
   authAdminMiddleware,
-  userControllers.getUsersById
+  userControllers.deleteUsers
 );
-router.post("/login", userControllers.postLogin);
-router.post("/users", userControllers.postUsers);
-router.delete("/users/:id", authMiddleware, userControllers.deleteUsers);
-router.put("/users/:id", userControllers.updateUsers);
+router.delete(
+  "/deletepersonnelaccount/:id",
+  authMiddleware,
+  userControllers.deleteUsers
+);
+router.put(
+  "/users/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.updateUsers
+);
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 

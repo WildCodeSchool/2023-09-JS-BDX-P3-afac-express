@@ -39,4 +39,12 @@ export default class ApiService {
   patch(url, content) {
     return axios.patch(url, content, this.getConfig());
   }
+
+  put(url, content) {
+    return axios.put(url, content, this.getConfig());
+  }
+
+  delete(url) {
+    return axios.delete(url, this.getConfig());
+  }
 }
