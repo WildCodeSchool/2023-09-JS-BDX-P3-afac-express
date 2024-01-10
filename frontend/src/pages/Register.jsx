@@ -17,6 +17,8 @@ export default function Register() {
     email: "",
     password: "",
     is_admin: "",
+    secretQuestion: "",
+    secretAnswer: "",
   });
 
   const { register } = useApp();
@@ -30,6 +32,18 @@ export default function Register() {
       <form className="user-form">
         <h1 className="mb-5">Créer un compte</h1>
         <MDBRow className="mb-2">
+          <MDBCol>
+            <MDBInput
+              className="mb-4"
+              value={formValue.lastname}
+              name="lastname"
+              onChange={onChange}
+              id="validationUser2"
+              required
+              label="Nom"
+              type="lastname"
+            />
+          </MDBCol>
           <MDBCol>
             <MDBInput
               className="mb-3"
@@ -74,6 +88,26 @@ export default function Register() {
           required
           label="Mot de passe"
           type="password"
+        />
+        <MDBInput
+          className="mb-4"
+          value={formValue.secretQuestion}
+          name="secretQuestion"
+          onChange={onChange}
+          id="validationUser4"
+          required
+          label="Question secrète ?"
+          type="secretQuestion"
+        />
+        <MDBInput
+          className="mb-4"
+          value={formValue.secretAnswer}
+          name="secretAnswer"
+          onChange={onChange}
+          id="validationUser4"
+          required
+          label="Réponse secrète"
+          type="secretAnswer"
         />
 
         <MDBSwitch

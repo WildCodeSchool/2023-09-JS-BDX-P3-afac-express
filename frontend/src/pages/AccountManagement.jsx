@@ -114,7 +114,7 @@ function AccountManagement() {
           className="mb-4"
           type="password"
           id="newPassword"
-          required="required"
+          required="require"
           label="Nouveau mot de passe"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}

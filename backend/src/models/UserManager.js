@@ -16,8 +16,16 @@ class UserManager extends AbstractManager {
       UserManager.hashPassword(user.password)
         .then((hash) => {
           return this.database.query(
-            `insert into ${this.table} (firstname, lastname, email, password, is_admin) values (?, ?, ?, ?, ?)`,
-            [user.firstname, user.lastname, user.email, hash, user.is_admin]
+            `insert into ${this.table} (firstname, lastname, email, hashedPassword, is_admin, secret_question, secret_answer) values (?, ?, ?, ?, ?, ?, ?)`,
+            [
+              user.firstname,
+              user.lastname,
+              user.email,
+              hash,
+              user.is_admin,
+              user.secret_question,
+              user.secret_answer,
+            ]
           );
         })
         .then((result) => {
@@ -26,7 +34,10 @@ class UserManager extends AbstractManager {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
+            hashedPassword: user.hashedPassword,
             is_admin: user.is_admin,
+            secret_question: user.secret_question,
+            secret_answer: user.secret_answer,
           });
         })
         .catch((err) => {
@@ -59,6 +70,49 @@ class UserManager extends AbstractManager {
       `SELECT id, email, firstname, lastname, is_admin FROM ${this.table} WHERE id = ?`,
       [id]
     );
+  }
+
+  async getUserByEmail(email) {
+    console.error("manag");
+
+    try {
+      const [rows] = await this.database.query(
+        `SELECT * FROM ${this.table} WHERE email = ?`,
+        [email]
+      );
+
+      if (rows.length > 0) {
+        return rows[0];
+      }
+      return null;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la recherche de l'utilisateur par e-mail :",
+        error
+      );
+      throw error;
+    }
+  }
+  // TODO à voir si utile -->
+
+  async postUserByEmail(email) {
+    try {
+      const [rows] = await this.database.query(
+        `SELECT * FROM ${this.table} WHERE email = ?`,
+        [email]
+      );
+
+      if (rows.length > 0) {
+        return rows[0];
+      }
+      return null;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la recherche de l'utilisateur par e-mail :",
+        error
+      );
+      throw error;
+    }
   }
 
   static hashPassword(password, workFactor = 5) {
