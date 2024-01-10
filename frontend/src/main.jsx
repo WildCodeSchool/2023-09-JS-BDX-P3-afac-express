@@ -68,10 +68,15 @@ const router = createBrowserRouter([
             element: <AdminArtManager />,
             loader: async () => {
               try {
-                const { data } = await axios.get(
-                  `http://localhost:5021/artist`
-                );
-                return { artistCollection: data };
+                const [artistData, artData] = await Promise.all([
+                  axios.get("http://localhost:5021/artist"),
+                  axios.get("http://localhost:5021/artwork"),
+                ]);
+
+                return {
+                  artistCollection: artistData.data,
+                  artCollection: artData.data,
+                };
               } catch (error) {
                 console.error(error);
                 return [];
