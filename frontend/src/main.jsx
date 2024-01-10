@@ -10,16 +10,16 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";
 import AdminContextProvider from "./context/AdminContext";
 import LikeContextProvider from "./context/LikeContext";
-
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import User from "./pages/User";
-import UserForgottenPassword from "./pages/UserForgottenPassword";
+import VerificationLogin from "./pages/VerificationLogin";
+import ResetPassword from "./pages/ResetPassword";
 import Register from "./pages/Register";
+import User from "./pages/User";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
@@ -61,7 +61,8 @@ const router = createBrowserRouter([
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
-      { path: "/forgottenpassword", element: <UserForgottenPassword /> },
+      { path: "/verificationlogin", element: <VerificationLogin /> },
+      { path: "/resetpassword", element: <ResetPassword /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },

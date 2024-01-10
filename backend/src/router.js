@@ -18,6 +18,9 @@ router.get(
   authAdminMiddleware,
   userControllers.getUsersById
 );
+router.get("/users/:id([0-9]+)", userControllers.getUsersById);
+router.get("/auth/get-question/:email", userControllers.getUserQuestion);
+router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
 router.delete("/users/:id", authMiddleware, userControllers.deleteUsers);

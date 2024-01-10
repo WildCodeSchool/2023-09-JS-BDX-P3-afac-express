@@ -33,6 +33,40 @@ const getUsersById = (req, res) => {
     });
 };
 
+const getUserQuestion = (req, res) => {
+  models.users
+    .getUserByEmail(req.params.email)
+    .then((user) => {
+      console.error("rows", user);
+
+      if (user != null) {
+        res.json({ question: user.secret_question });
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const postUserByEmail = (req, res) => {
+  models.users
+    .postUserByEmail(req.params.email)
+    .then(([rows]) => {
+      if (rows[0] != null) {
+        res.json(rows[0]);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
@@ -55,7 +89,7 @@ const postUsers = (req, res) => {
     .then((result) => {
       res.send({
         id: result.insertId,
-        firstnname: req.body.firstname,
+        firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
         is_admin: req.body.is_admin,
@@ -123,6 +157,8 @@ const getProfile = async (req, res) => {
 module.exports = {
   getUsers,
   getUsersById,
+  getUserQuestion,
+  postUserByEmail,
   postLogin,
   postUsers,
   deleteUsers,

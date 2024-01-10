@@ -65,7 +65,9 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <Link to="/forgottenpassword">Mot de passe oublié ?</Link>
+          <Link className="nav-link navLink" to="/verificationlogin">
+            Mot de passe oublié ?
+          </Link>
         </MDBCol>
       </MDBRow>
 
@@ -75,7 +77,10 @@ function Login() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <Link to="/register">Enregistrez-vous</Link>
+          Pas encore membre ?{" "}
+          <Link className="nav-link navLink" to="/register">
+            Enregistrez-vous
+          </Link>
         </p>
       </div>
     </form>
