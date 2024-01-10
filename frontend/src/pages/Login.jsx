@@ -23,10 +23,11 @@ function Login() {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    const success = await login(formValue);
 
-    if (login(formValue)) {
+    if (success) {
       navigate("/home");
     }
   };

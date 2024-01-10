@@ -12,8 +12,11 @@ import Redirection from "../components/Redirection";
 
 export default function Register() {
   const [formValue, setFormValue] = useState({
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
+    is_admin: "",
     secretQuestion: "",
     secretAnswer: "",
   });
@@ -99,7 +102,7 @@ export default function Register() {
           id="flexSwitchCheckDefault"
           label="Administrateur"
           onClick={() =>
-            setFormValue({ ...formValue, admin: !formValue.admin })
+            setFormValue({ ...formValue, is_admin: !formValue.is_admin })
           }
         />
 

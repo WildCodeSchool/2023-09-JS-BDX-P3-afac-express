@@ -6,13 +6,13 @@ import axios from "axios";
 import Redirection from "../../components/Redirection";
 
 export default function AdminUserManagment() {
-  // const { removeUser } = useApp();
   const { id } = useParams();
   const [user, setUser] = useState({
     firstname: "Prénom actuel",
     lastname: "Nom actuel",
     email: "Email actuel",
   });
+
   const [updatedFirstname, setUpdatedFirstname] = useState("");
   const [updatedLastname, setUpdatedLastname] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");

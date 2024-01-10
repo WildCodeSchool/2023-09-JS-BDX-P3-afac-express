@@ -57,7 +57,8 @@ export default function ation() {
         {user ? (
           <MDBDropdown>
             <MDBDropdownToggle>
-              <MDBIcon far icon="user" />
+              {user.email}
+              <MDBIcon far icon="user" className="pe-2 ps-4" />
             </MDBDropdownToggle>
 
             <MDBDropdownMenu>
@@ -67,6 +68,8 @@ export default function ation() {
               <Link to="/User" className="nav-link navLink">
                 Ma page personnelle
               </Link>
+              {/* {isAdmin && (
+                <> */}
               <Link to="/admin" className="nav-link navLink">
                 Admin
               </Link>
@@ -76,10 +79,13 @@ export default function ation() {
               <Link to="/admin/adminart" className="nav-link navLink">
                 Gérer les oeuvres et artistes
               </Link>
+              {/* </>
+              )} */}
+
               <button
                 type="button"
                 className="nav-link navLink navButton"
-                onClick={() => logout()}
+                onClick={logout}
               >
                 Déconnexion
               </button>

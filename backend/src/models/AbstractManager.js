@@ -13,6 +13,13 @@ class AbstractManager {
     return this.database.query(`select * from  ${this.table}`);
   }
 
+  findOne(attribute, value) {
+    return this.database.query(
+      `SELECT * FROM ${this.table} WHERE ${attribute} = ? LIMIT 1`,
+      [value]
+    );
+  }
+
   put() {
     return this.database.query(`insert into * from ${this.table}`);
   }
