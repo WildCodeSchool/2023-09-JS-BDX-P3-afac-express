@@ -75,6 +75,7 @@ function AccountManagement() {
           className="mb-4"
           type="email"
           id="oldEmail"
+          required="required"
           label="Ancienne adresse email"
           value={oldEmail}
           onChange={(e) => setOldEmail(e.target.value)}
@@ -84,6 +85,7 @@ function AccountManagement() {
           className="mb-4"
           type="email"
           id="newEmail"
+          required="required"
           label="Nouvelle adresse email"
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
@@ -103,6 +105,7 @@ function AccountManagement() {
           className="mb-4"
           type="password"
           id="oldPassword"
+          required="required"
           label="Ancien mot de passe"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
@@ -111,6 +114,7 @@ function AccountManagement() {
           className="mb-4"
           type="password"
           id="newPassword"
+          required="required"
           label="Nouveau mot de passe"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
