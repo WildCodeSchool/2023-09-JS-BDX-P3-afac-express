@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
@@ -10,7 +11,6 @@ import {
   MDBCarouselCaption,
 } from "mdb-react-ui-kit";
 
-import { Link } from "react-router-dom";
 import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
 import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
 import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";

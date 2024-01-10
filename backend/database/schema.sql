@@ -11,7 +11,7 @@ CREATE TABLE
         id int primary key NOT NULL AUTO_INCREMENT,
         name varchar(255) NOT NULL,
         description varchar(10000) NOT NULL
-    );
+    )
 
 INSERT INTO
     artist (name, description)
@@ -40,7 +40,7 @@ CREATE TABLE
         creation_place varchar(255) DEFAULT NULL,
         artist_id int DEFAULT NULL,
         CONSTRAINT fk_artwork_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
-    );
+    )
 
 INSERT INTO
     artwork (
@@ -180,47 +180,36 @@ CREATE TABLE
         firstname varchar(255) NOT NULL,
         lastname varchar(255) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
-        hashedPassword varchar(255) NOT NULL,
-        birthday varchar(255) DEFAULT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT false,
-        secret_question varchar(255) DEFAULT "?",
-        secret_answer varchar(255) DEFAULT ""
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+        password varchar(255) DEFAULT NULL,
+        is_admin BOOLEAN NOT NULL DEFAULT false
+    )
 
 INSERT INTO
     users (
         firstname,
         lastname,
         email,
-        hashedPassword,
-        is_admin,
-        secret_question,
-        secret_answer
+        password,
+        is_admin
     )
 VALUES (
         'Ben et nuts',
         'noit',
         'ben.noit@test.fr',
         '1234',
-        TRUE,
-        "Quelle était la couleur du cheval blanc d'Henri IV ?",
-        "Blanc"
+        FALSE
     ), (
         'Nel',
         'ia',
         'nel.ia@test.fr',
         '3456',
-        TRUE,
-        "Que dit un papier quand il tombe dans l'eau ?",
-        "J'ai pas pied"
+        TRUE
     ), (
-        'florian',
-        'BRUN',
+        'Floflo',
+        'BRUNLOURS',
         'azerty@hotmail.fr',
-        '1234',
-        TRUE,
-        "Tu as trois poussins sur une table et tu n'en veux que deux, que fais-tu ?",
-        "T'en pousses un"
+        '12348',
+        TRUE
     );
 
 DROP TABLE IF EXISTS artwork_users;
@@ -231,4 +220,4 @@ CREATE TABLE
         users_id int NOT NULL,
         CONSTRAINT fk_users_artist FOREIGN KEY (artwork_id) REFERENCES artwork(id),
         CONSTRAINT fk_artist_users FOREIGN KEY (users_id) REFERENCES users(id)
-    );
+    )
