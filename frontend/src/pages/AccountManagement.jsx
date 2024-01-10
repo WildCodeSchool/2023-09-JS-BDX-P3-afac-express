@@ -1,17 +1,18 @@
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import ApiService from "../services/api.service";
 
 const apiService = new ApiService();
 
 function AccountManagement() {
-  const { logout, removeUser } = useApp();
+  const { logout, user } = useApp();
   const [oldEmail, setOldEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = async () => {
     try {
@@ -50,6 +51,28 @@ function AccountManagement() {
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const deletePersonalAccount = async () => {
+    try {
+      const { data } = await apiService.delete(
+        `http://localhost:5021/deletepersonnelaccount/${user.id}`
+      );
+
+      if (data.status === 204) {
+        alert("Vous ne pouvez pas supprimer ce compte."); // eslint-disable-line no-alert
+      } else {
+        alert("votre compte a été supprimé avec succès."); // eslint-disable-line no-alert
+        logout();
+        navigate("/login");
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        alert("Vous n'êtes pas autorisé à effectuer cette action;"); // eslint-disable-line no-alert
+      } else {
+        console.error(error);
+      }
     }
   };
 
@@ -129,8 +152,8 @@ function AccountManagement() {
         Déconnexion
       </MDBBtn>
 
-      <MDBBtn className="mt-4 mb-6" onClick={() => removeUser()}>
-        Supprimer son compte
+      <MDBBtn className="mt-4 mb-6" onClick={deletePersonalAccount}>
+        Supprimer mon compte
       </MDBBtn>
     </MDBContainer>
   );

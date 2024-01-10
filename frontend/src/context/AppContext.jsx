@@ -14,7 +14,7 @@ function AppContextProvider({ children, apiService }) {
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  // const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
   const navigate = useNavigate();
 
   const login = async (credentials) => {
@@ -63,26 +63,6 @@ function AppContextProvider({ children, apiService }) {
     navigate("/home");
   };
 
-  // TODO: A voir - supprimer
-  const removeUser = () => {
-    const currentUser = JSON.parse(localStorage.getItem("session"));
-
-    if (currentUser) {
-      const users = getUsers();
-
-      const updatedUsers = users.filter(
-        (userdb) => userdb.email !== currentUser.email
-      );
-
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-      setUser(undefined);
-      setOpenNavSecond(false);
-      localStorage.removeItem("session");
-      navigate("/home");
-    }
-  };
-
   const contextData = useMemo(
     () => ({
       isAdmin,
@@ -94,7 +74,6 @@ function AppContextProvider({ children, apiService }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      removeUser,
       apiService,
     }),
     [
@@ -107,7 +86,6 @@ function AppContextProvider({ children, apiService }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      removeUser,
       apiService,
     ]
   );

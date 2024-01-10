@@ -11,13 +11,13 @@ const {
 } = require("./middlewares/Security/auth.admin.middleware");
 
 router.get("/users/personal", authMiddleware, userControllers.getProfile);
-router.get("/users", userControllers.getUsers);
 router.get(
-  "/users/:id",
+  "/users",
   authMiddleware,
   authAdminMiddleware,
-  userControllers.getUsersById
+  userControllers.getUsers
 );
+router.get("/users/:id", userControllers.getUsersById);
 router.get("/users/:id([0-9]+)", userControllers.getUsersById);
 router.get("/auth/get-question/:email", userControllers.getUserQuestion);
 router.get(
@@ -27,8 +27,23 @@ router.get(
 router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
-router.delete("/users/:id", authMiddleware, userControllers.deleteUsers);
-router.put("/users/:id", userControllers.updateUsers);
+router.delete(
+  "/users/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.deleteUsers
+);
+router.delete(
+  "/deletepersonnelaccount/:id",
+  authMiddleware,
+  userControllers.deleteUsers
+);
+router.put(
+  "/users/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.updateUsers
+);
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 

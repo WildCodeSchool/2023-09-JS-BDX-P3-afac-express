@@ -6,12 +6,14 @@ import {
   MDBTableHead,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import ApiService from "../../services/api.service";
+
+const apiService = new ApiService();
 
 const userFetch = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:5021/users`);
+    const { data } = await apiService.get(`http://localhost:5021/users`);
     return data;
   } catch (err) {
     console.error(err);
