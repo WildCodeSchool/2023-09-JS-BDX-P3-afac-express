@@ -41,7 +41,6 @@ const router = createBrowserRouter([
         );
         return { preloadUser: data ?? null };
       } catch (err) {
-        console.error(err.message);
         return null;
       }
     },

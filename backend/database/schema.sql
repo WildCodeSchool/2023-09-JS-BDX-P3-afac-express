@@ -1,4 +1,5 @@
 -- SQLBook: Code
+drop DATABASE if exists afac_express;
 
 CREATE DATABASE afac_express;
 
@@ -175,24 +176,25 @@ VALUES (
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE
-    users (
-        id int primary key NOT NULL AUTO_INCREMENT,
-        firstname varchar(255) NOT NULL,
-        lastname varchar(255) NOT NULL,
-        email varchar(255) UNIQUE NOT NULL,
-        hashedPassword varchar(255) NOT NULL,
-        birthday varchar(255) DEFAULT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT false,
-        secret_question varchar(255) DEFAULT "?",
-        secret_answer varchar(255) DEFAULT ""
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+ users (
+    id int primary key NOT NULL AUTO_INCREMENT,
+    firstname varchar(255) NOT NULL,
+    lastname varchar(255) NOT NULL,
+    email varchar(255) UNIQUE NOT NULL,
+    password varchar(255) NOT NULL,
+    birthday varchar(255) DEFAULT NULL,
+    is_admin BOOLEAN NOT NULL DEFAULT false,
+    secret_question varchar(255) DEFAULT NULL,
+    secret_answer varchar(255) DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 
 INSERT INTO
     users (
         firstname,
         lastname,
         email,
-        hashedPassword,
+        password,
         is_admin,
         secret_question,
         secret_answer

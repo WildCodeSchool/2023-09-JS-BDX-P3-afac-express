@@ -16,7 +16,7 @@ class UserManager extends AbstractManager {
       UserManager.hashPassword(user.password)
         .then((hash) => {
           return this.database.query(
-            `insert into ${this.table} (firstname, lastname, email, hashedPassword, is_admin, secret_question, secret_answer) values (?, ?, ?, ?, ?, ?, ?)`,
+            `insert into ${this.table} (firstname, lastname, email, password, is_admin, secret_question, secret_answer) values (?, ?, ?, ?, ?, ?, ?)`,
             [
               user.firstname,
               user.lastname,

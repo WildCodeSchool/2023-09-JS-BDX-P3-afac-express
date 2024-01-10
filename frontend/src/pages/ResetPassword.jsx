@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
-import { Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Redirection from "../components/Redirection";
 
 export default function ResetPassword() {
+  const navigate = useNavigate();
   const location = useLocation();
   const question = location.state?.question;
   const [answer, setAnswer] = useState("");
@@ -14,7 +15,11 @@ export default function ResetPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password.length < 4 || confirmPassword.length < 4) {
+    if (
+      password.length < 4 ||
+      confirmPassword.length < 4 ||
+      answer.trim() === ""
+    ) {
       setError("Le mot de passe doit contenir au minimum 4 caractères.");
       return;
     }
@@ -23,7 +28,21 @@ export default function ResetPassword() {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
+
+    if (answer.trim() === "") {
+      setError("Veuillez fournir une réponse à la question secrète.");
+      return;
+    }
     setError("");
+
+    try {
+      navigate("/login");
+    } catch (err) {
+      // Gérer les erreurs liées à la réinitialisation du mot de passe
+      setError(
+        "Une erreur s'est produite lors de la réinitialisation du mot de passe."
+      );
+    }
   };
 
   return (
@@ -60,9 +79,7 @@ export default function ResetPassword() {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <MDBBtn type="submit" className="mb-4" block>
-        <Link className="nav-link navLink" to="/login">
-          Réinitialiser mon mot de passe
-        </Link>
+        Réinitialiser mon mot de passe
       </MDBBtn>
       <Redirection />
     </form>

@@ -27,6 +27,7 @@ router.get(
 router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
+router.post("/reset/:password", userControllers.postPassword);
 router.delete(
   "/users/:id",
   authMiddleware,

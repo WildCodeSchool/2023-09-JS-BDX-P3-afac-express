@@ -17,8 +17,8 @@ export default function Register() {
     email: "",
     password: "",
     is_admin: "",
-    secretQuestion: "",
-    secretAnswer: "",
+    secret_question: "",
+    secret_answer: "",
   });
 
   const { register } = useApp();
@@ -39,7 +39,7 @@ export default function Register() {
               name="lastname"
               onChange={onChange}
               id="validationUser2"
-              required
+              required="required"
               label="Nom"
               type="lastname"
             />
@@ -51,7 +51,7 @@ export default function Register() {
               name="firstname"
               onChange={onChange}
               id="validationUser1"
-              required
+              required="required"
               label="Prénom"
               type="firstname"
             />
@@ -63,7 +63,7 @@ export default function Register() {
           name="email"
           onChange={onChange}
           id="validationUser3"
-          required
+          required="required"
           label="Email"
           type="email"
         />
@@ -73,29 +73,29 @@ export default function Register() {
           name="password"
           onChange={onChange}
           id="validationUser4"
-          required
+          required="required"
           label="Mot de passe"
           type="password"
         />
         <MDBInput
           className="mb-4"
-          value={formValue.secretQuestion}
-          name="secretQuestion"
+          value={formValue.secret_question}
+          name="secret_question"
           onChange={onChange}
           id="validationUser4"
-          required
+          required="required"
           label="Question secrète ?"
-          type="secretQuestion"
+          type="secret_question"
         />
         <MDBInput
           className="mb-4"
-          value={formValue.secretAnswer}
-          name="secretAnswer"
+          value={formValue.secret_answer}
+          name="secret_answer"
           onChange={onChange}
           id="validationUser4"
-          required
+          required="required"
           label="Réponse secrète"
-          type="secretAnswer"
+          type="secret_answer"
         />
 
         <MDBSwitch

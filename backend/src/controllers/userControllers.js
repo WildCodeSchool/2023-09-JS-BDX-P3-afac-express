@@ -107,7 +107,7 @@ const postUsers = (req, res) => {
     .then((result) => {
       res.send({
         id: result.insertId,
-        firstnname: req.body.firstname,
+        firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
         is_admin: req.body.is_admin,
@@ -119,13 +119,23 @@ const postUsers = (req, res) => {
     });
 };
 
+const postPassword = (req, res) => {
+  models.users
+    .update(req.body)
+    .then((result) => {
+      res.send({
+        id: result.insertId,
+        password: req.body.password,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
+};
+
 const deleteUsers = (req, res) => {
-  if (req.user.id !== parseInt(req.params.id, 10)) {
-    return res
-      .status(401)
-      .send({ message: "Vous n'êtes pas autorisé à effectuer cette action." });
-  }
-  return models.users
+  models.users
     .delete(req.params.id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
@@ -221,6 +231,7 @@ module.exports = {
   postUserByEmail,
   postLogin,
   postUsers,
+  postPassword,
   deleteUsers,
   updateUsers,
   patchEmail,
