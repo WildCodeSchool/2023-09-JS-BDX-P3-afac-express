@@ -23,7 +23,6 @@ export default function ResetPassword() {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
-
     setError("");
   };
 
@@ -33,7 +32,7 @@ export default function ResetPassword() {
       <h3>Nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="password"
+        type="new-password"
         id="form2Example1"
         required="required"
         value={password}
@@ -42,7 +41,7 @@ export default function ResetPassword() {
       <h3>Confirmez le nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="password"
+        type="current-password"
         id="form2Example2"
         required="required"
         value={confirmPassword}
@@ -52,7 +51,7 @@ export default function ResetPassword() {
       <MDBInput
         className="mb-4"
         type="text"
-        id="form2Example2"
+        id="form2Example3"
         required="required"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}

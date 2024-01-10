@@ -93,8 +93,8 @@ class UserManager extends AbstractManager {
       throw error;
     }
   }
-  // TODO à voir si utile -->
 
+  // TODO à voir si utile -->
   async postUserByEmail(email) {
     try {
       const [rows] = await this.database.query(

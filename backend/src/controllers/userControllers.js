@@ -52,6 +52,23 @@ const getUserQuestion = (req, res) => {
     });
 };
 
+const getCheckingSecretAnswer = (req, res) => {
+  models.users
+    .getUserByEmail(req.params.email)
+    .then((user) => {
+      console.error("rows", user);
+      if (user != null) {
+        res.json({ response: user.secret_answer });
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const postUserByEmail = (req, res) => {
   models.users
     .postUserByEmail(req.params.email)
@@ -195,6 +212,7 @@ module.exports = {
   getUsers,
   getUsersById,
   getUserQuestion,
+  getCheckingSecretAnswer,
   postUserByEmail,
   postLogin,
   postUsers,

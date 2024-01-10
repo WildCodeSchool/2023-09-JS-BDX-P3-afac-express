@@ -20,6 +20,10 @@ router.get(
 );
 router.get("/users/:id([0-9]+)", userControllers.getUsersById);
 router.get("/auth/get-question/:email", userControllers.getUserQuestion);
+router.get(
+  "/auth/get-response/:email",
+  userControllers.getCheckingSecretAnswer
+);
 router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);

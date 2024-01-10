@@ -56,18 +56,6 @@ export default function Register() {
               type="firstname"
             />
           </MDBCol>
-          <MDBCol>
-            <MDBInput
-              className="mb-4"
-              value={formValue.lastname}
-              name="lastname"
-              onChange={onChange}
-              id="validationUser2"
-              required
-              label="Nom"
-              type="lastname"
-            />
-          </MDBCol>
         </MDBRow>
         <MDBInput
           className="mb-4"
