@@ -12,7 +12,7 @@ CREATE TABLE
         id int primary key NOT NULL AUTO_INCREMENT,
         name varchar(255) ,
         description varchar(10000),
-        image varchar(500) NOT NULL
+        image varchar(500) NULL
     )
 
 INSERT INTO artist (name, description, image)

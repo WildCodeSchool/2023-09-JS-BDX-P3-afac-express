@@ -10,9 +10,11 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
-import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 import Redirection from "../../components/Redirection";
+import ApiService from "../../services/api.service";
+
+const apiService = new ApiService();
 
 export default function AdminArtManager() {
   const loaderdata = useLoaderData();
@@ -25,12 +27,17 @@ export default function AdminArtManager() {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`http://localhost:5021/artist`, postArtist)
-      .then((res) => console.warn(res))
-      .catch((err) => console.error(err));
+    try {
+      const res = await apiService.post(
+        `http://localhost:5021/artist`,
+        postArtist
+      );
+      console.warn(res);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const [postArt, setPostArt] = useState({
@@ -44,18 +51,23 @@ export default function AdminArtManager() {
     setPostArt({ ...postArt, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitArt = (e) => {
+  const handleSubmitArt = async (e) => {
     e.preventDefault();
-    axios
-      .post(`http://localhost:5021/artwork`, postArt)
-      .then((res) => console.warn(res))
-      .catch((err) => console.error(err));
+    try {
+      const res = await apiService.post(
+        `http://localhost:5021/artwork`,
+        postArt
+      );
+      console.warn(res);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div>
       <h1>Artistes</h1>
-      <form className="user-form">
+      <form className="user-form" onSubmit={handleSubmit}>
         <h3>Ajouter un artiste</h3>
         <MDBInput
           className="mb-4"
@@ -74,7 +86,7 @@ export default function AdminArtManager() {
         <MDBBtn type="submit" className="mb-4" block>
           Ajouter une image
         </MDBBtn>
-        <MDBBtn type="submit" className="mb-4" onClick={handleSubmit} block>
+        <MDBBtn type="submit" className="mb-4" block>
           Valider
         </MDBBtn>
       </form>
@@ -148,7 +160,7 @@ export default function AdminArtManager() {
       <MDBRow>
         <MDBRow className="row-cols-1 row-cols-md-2 g-4">
           {loaderdata.artCollection.map((art) => (
-            <MDBCol key={art.name} xl={3} lg={4} className="mb-4">
+            <MDBCol key={art.title} xl={3} lg={4} className="mb-4">
               <MDBCard>
                 <MDBCardImage src={art.image} />
                 <MDBCardBody>
