@@ -1,6 +1,7 @@
 -- SQLBook: Code
-
+DROP DATABASE IF EXISTS afac_express;
 CREATE DATABASE afac_express;
+
 
 USE afac_express;
 
