@@ -20,6 +20,10 @@ export default function Register() {
   });
 
   const { register } = useApp();
+  const submitform = (e) => {
+    e.preventDefault();
+    register(formValue);
+  };
 
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -27,7 +31,7 @@ export default function Register() {
 
   return (
     <MDBContainer fluid className="mt-5">
-      <form className="user-form">
+      <form className="user-form" onSubmit={(event) => submitform(event)}>
         <h1 className="mb-5">Créer un compte</h1>
         <MDBRow className="mb-2">
           <MDBCol>
@@ -84,12 +88,7 @@ export default function Register() {
           }
         />
 
-        <MDBBtn
-          type="submit"
-          className="mb-4 mt-4"
-          block
-          onClick={() => register(formValue)}
-        >
+        <MDBBtn type="submit" className="mb-4 mt-4" block>
           Suivant
         </MDBBtn>
 

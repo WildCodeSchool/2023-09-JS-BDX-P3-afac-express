@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from "axios";
 import App from "./App";
 import "./App.scss";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -86,7 +87,26 @@ const router = createBrowserRouter([
         children: [
           { path: "/admin", element: <AdminHome /> },
           { path: "/admin/adminuser", element: <AdminUser /> },
-          { path: "/admin/adminart", element: <AdminArtManager /> },
+          {
+            path: "/admin/adminart",
+            element: <AdminArtManager />,
+            loader: async () => {
+              try {
+                const [artistData, artData] = await Promise.all([
+                  axios.get("http://localhost:5021/artist"),
+                  axios.get("http://localhost:5021/artwork"),
+                ]);
+
+                return {
+                  artistCollection: artistData.data,
+                  artCollection: artData.data,
+                };
+              } catch (error) {
+                console.error(error);
+                return [];
+              }
+            },
+          },
           {
             path: "/admin/adminusermanagement/:id",
             element: <AdminUserManagement />,

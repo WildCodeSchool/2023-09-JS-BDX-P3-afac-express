@@ -26,11 +26,6 @@ function AppContextProvider({ children, apiService }) {
 
       // console.log("Login success. Token:", data.token);
 
-      setUser((prevUser) => ({
-        ...prevUser,
-        token: data.token,
-      }));
-
       localStorage.setItem("token", data.token);
 
       apiService.setToken(data.token);
@@ -49,7 +44,6 @@ function AppContextProvider({ children, apiService }) {
       }
       return navigate("/home");
     } catch (err) {
-      console.error(err);
       alert(err.message); // eslint-disable-line no-alert
     }
 
@@ -66,8 +60,7 @@ function AppContextProvider({ children, apiService }) {
       setUser(newUserResponse);
 
       alert(`Bienvenue ${newUserResponse.email}`); // eslint-disable-line no-alert
-      login();
-      navigate("/home");
+      navigate("/login");
     } catch (err) {
       alert(err.message); // eslint-disable-line no-alert
     }

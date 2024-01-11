@@ -1,79 +1,169 @@
 import React, { useState } from "react";
-import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
+import {
+  MDBInput,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBCard,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardBody,
+} from "mdb-react-ui-kit";
 import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 
 export default function AdminArtManager() {
-  const [post, setPost] = useState({
+  const loaderdata = useLoaderData();
+  const [postArtist, setPostArtist] = useState({
     name: "",
     description: "",
   });
+
   const handleInput = (e) => {
-    setPost({ ...post, [e.target.name]: e.target.value });
+    setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:5021/artist`, post)
+      .post(`http://localhost:5021/artist`, postArtist)
+      .then((res) => console.warn(res))
+      .catch((err) => console.error(err));
+  };
+
+  const [postArt, setPostArt] = useState({
+    title: "",
+    image: "",
+    dimension: "",
+    creation_place: "",
+  });
+
+  const handleInputArt = (e) => {
+    setPostArt({ ...postArt, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitArt = (e) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:5021/artwork`, postArt)
       .then((res) => console.warn(res))
       .catch((err) => console.error(err));
   };
 
   return (
-    <form className="user-form">
-      <h1>Ajout artistes et oeuvres</h1>
-      <h3>Créateur</h3>
+    <div>
+      <h1>Artistes</h1>
+      <form className="user-form">
+        <h3>Ajouter un artiste</h3>
+        <MDBInput
+          className="mb-4"
+          onChange={handleInput}
+          name="name"
+          type="text"
+          label="Artiste"
+        />
+        <MDBInput
+          className="mb-4"
+          onChange={handleInput}
+          name="description"
+          type="text"
+          label="Biographie"
+        />
+        <MDBBtn type="submit" className="mb-4" block>
+          Ajouter une image
+        </MDBBtn>
+        <MDBBtn type="submit" className="mb-4" onClick={handleSubmit} block>
+          Valider
+        </MDBBtn>
+      </form>
+
+      <MDBRow className="row-cols-1 row-cols-md-2 g-4">
+        {loaderdata.artistCollection.map((artist) => (
+          <MDBCol key={artist.name} xl={3} lg={4} className="mb-4">
+            <MDBCard>
+              <MDBCardImage src={artist.image} />
+              <MDBCardBody>
+                <MDBCardTitle>{artist.name}</MDBCardTitle>
+                <MDBCardText>{artist.description}</MDBCardText>
+                <MDBBtn href="#">Modifier</MDBBtn>
+                <MDBBtn href="#">Supprimer</MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        ))}
+      </MDBRow>
+
+      <h1>Oeuvres</h1>
+      <h3>Ajouter une oeuvre</h3>
       <MDBInput
         className="mb-4"
-        onChange={handleInput}
-        name="name"
-        type="text"
-        label="Artiste"
+        onChange={handleInputArt}
+        type="artName"
+        name="title"
+        id="artName"
+        label="Titre"
       />
       <MDBInput
         className="mb-4"
-        onChange={handleInput}
-        name="description"
-        type="text"
-        label="Biographie"
-      />
-      <MDBBtn type="submit" className="mb-4" block>
-        Ajouter une image
-      </MDBBtn>
-      <MDBBtn type="submit" className="mb-4" onClick={handleSubmit} block>
-        Valider
-      </MDBBtn>
-      <h3>Oeuvres</h3>
-      <MDBInput className="mb-4" type="artName" id="artName" label="Titre" />
-      <MDBInput
-        className="mb-4"
+        onChange={handleInputArt}
         type="artistArt"
+        name="artist_id"
         id="artistArt"
-        label="Si existant choix de l'artiste"
+        label="Choix de l'artiste"
       />
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput id="height" label="Largeur" />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput id="width" label="Longueur" />
+          <MDBInput
+            id="Taille"
+            onChange={handleInputArt}
+            name="dimension"
+            label="Taille ex : 100x200"
+          />
         </MDBCol>
       </MDBRow>
       <MDBInput
         className="mb-4"
-        type="password"
+        onChange={handleInputArt}
+        type="createlocation"
+        name="creation_place"
         id="createLocation"
         label="Lieux de création"
+      />
+      <MDBInput
+        className="mb-4"
+        onChange={handleInputArt}
+        type="createlocation"
+        name="image"
+        id="createLocation"
+        label="image"
       />
       <MDBBtn type="submit" className="mb-4" block>
         Ajouter une image
       </MDBBtn>
-      <MDBBtn type="submit" className="mb-4" block>
+      <MDBBtn type="submit" className="mb-4" onClick={handleSubmitArt} block>
         Valider
       </MDBBtn>
+      <MDBRow>
+        <MDBRow className="row-cols-1 row-cols-md-2 g-4">
+          {loaderdata.artCollection.map((art) => (
+            <MDBCol key={art.name} xl={3} lg={4} className="mb-4">
+              <MDBCard>
+                <MDBCardImage src={art.image} />
+                <MDBCardBody>
+                  <MDBCardTitle>{art.title}</MDBCardTitle>
+                  <MDBCardText>{art.description}</MDBCardText>
+                  <MDBBtn href="#">Modifier</MDBBtn>
+                  <MDBBtn href="#">Supprimer</MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          ))}
+        </MDBRow>
+      </MDBRow>
 
       <Redirection />
-    </form>
+    </div>
   );
 }
