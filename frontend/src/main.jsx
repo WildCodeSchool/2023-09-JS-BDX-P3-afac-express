@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import axios from "axios";
 import App from "./App";
 import "./App.scss";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -93,8 +92,8 @@ const router = createBrowserRouter([
             loader: async () => {
               try {
                 const [artistData, artData] = await Promise.all([
-                  axios.get("http://localhost:5021/artist"),
-                  axios.get("http://localhost:5021/artwork"),
+                  apiService.get("http://localhost:5021/artist"),
+                  apiService.get("http://localhost:5021/artwork"),
                 ]);
 
                 return {
