@@ -16,7 +16,7 @@ export default function Register() {
     lastname: "",
     email: "",
     password: "",
-    is_admin: "",
+    is_admin: false,
   });
 
   const { register } = useApp();

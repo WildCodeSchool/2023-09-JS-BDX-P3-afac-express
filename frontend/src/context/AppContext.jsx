@@ -23,6 +23,14 @@ function AppContextProvider({ children, apiService }) {
         `http://localhost:5021/login`,
         credentials
       );
+
+      // console.log("Login success. Token:", data.token);
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        token: data.token,
+      }));
+
       localStorage.setItem("token", data.token);
 
       apiService.setToken(data.token);
@@ -30,6 +38,8 @@ function AppContextProvider({ children, apiService }) {
       const result = await apiService.get(
         "http://localhost:5021/users/personal"
       );
+
+      // console.log("User data from API:", result.data);
 
       alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
       setUser(result.data);
@@ -48,11 +58,18 @@ function AppContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:5021/users", newUser));
-      alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
+      const response = await axios.post("http://localhost:5021/users", newUser);
+
+      const newUserResponse = response.data;
+      // console.log("User registered successfully. Data:", newUserResponse);
+
+      setUser(newUserResponse);
+
+      alert(`Bienvenue ${newUserResponse.email}`); // eslint-disable-line no-alert
+      login();
+      navigate("/home");
     } catch (err) {
       alert(err.message); // eslint-disable-line no-alert
-      navigate("/home");
     }
   };
 

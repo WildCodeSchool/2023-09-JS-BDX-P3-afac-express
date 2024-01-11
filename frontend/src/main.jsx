@@ -35,12 +35,22 @@ const router = createBrowserRouter([
     path: "/",
     loader: async () => {
       try {
-        const data = await apiService.get(
-          "http://localhost:5021/users/personal"
-        );
-        return { preloadUser: data ?? null };
+        const token = localStorage.getItem("token");
+        // console.log("Token from localStorage:", token);
+
+        if (token) {
+          apiService.setToken(token);
+
+          const data = await apiService.get(
+            "http://localhost:5021/users/personal"
+          );
+
+          return { preloadUser: data ?? null };
+        }
+
+        return null;
       } catch (err) {
-        console.error(err.message);
+        console.error("Loader Error:", err.message);
         return null;
       }
     },
