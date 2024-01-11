@@ -111,6 +111,8 @@ const postUsers = (req, res) => {
         lastname: req.body.lastname,
         email: req.body.email,
         is_admin: req.body.is_admin,
+        secret_question: req.body.secret_question,
+        secret_answer: req.body.secret_answer,
       });
     })
     .catch((err) => {

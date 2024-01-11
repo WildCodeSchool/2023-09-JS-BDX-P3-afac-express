@@ -67,7 +67,7 @@ class UserManager extends AbstractManager {
 
   getProfile(id) {
     return this.database.query(
-      `SELECT id, email, firstname, lastname, is_admin FROM ${this.table} WHERE id = ?`,
+      `SELECT id, email, firstname, lastname, secret_question, secret_answer is_admin FROM ${this.table} WHERE id = ?`,
       [id]
     );
   }
