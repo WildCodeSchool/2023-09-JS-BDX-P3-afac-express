@@ -27,12 +27,36 @@ import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 import AdminHome from "./pages/Admin/AdminHome";
+import ApiService from "./services/api.service";
+
+const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: async () => {
+      try {
+        const token = localStorage.getItem("token");
+        // console.log("Token from localStorage:", token);
+
+        if (token) {
+          apiService.setToken(token);
+
+          const data = await apiService.get(
+            "http://localhost:5021/users/personal"
+          );
+
+          return { preloadUser: data ?? null };
+        }
+
+        return null;
+      } catch (err) {
+        console.error("Loader Error:", err.message);
+        return null;
+      }
+    },
     element: (
-      <AppContextProvider>
+      <AppContextProvider apiService={apiService}>
         <LikeContextProvider>
           <App />
         </LikeContextProvider>
@@ -84,7 +108,7 @@ const router = createBrowserRouter([
             },
           },
           {
-            path: "/admin/adminusermanagement",
+            path: "/admin/adminusermanagement/:id",
             element: <AdminUserManagement />,
           },
         ],

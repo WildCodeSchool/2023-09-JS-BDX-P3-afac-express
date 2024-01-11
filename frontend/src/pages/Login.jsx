@@ -7,7 +7,7 @@ import {
   MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function Login() {
@@ -23,10 +23,11 @@ function Login() {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    const success = await login(formValue);
 
-    if (login(formValue)) {
+    if (success) {
       navigate("/home");
     }
   };
@@ -64,7 +65,7 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <a href="/forgottenpassword">Mot de passe oublié ?</a>
+          <Link to="/forgottenpassword">Mot de passe oublié ?</Link>
         </MDBCol>
       </MDBRow>
 
@@ -74,7 +75,7 @@ function Login() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <a href="/register">Enregistrez-vous</a>
+          Pas encore membre ? <Link to="/register">Enregistrez-vous</Link>
         </p>
       </div>
     </form>

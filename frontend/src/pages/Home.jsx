@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
@@ -26,30 +27,30 @@ function Home() {
       <MDBCard className="card-custom  ">
         <MDBCardBody>
           <MDBCardTitle>
-            <h1>Bienvenue sur notre musée interactif</h1>
+            <span className="h1">Bienvenue sur notre musée interactif</span>
           </MDBCardTitle>
           <MDBCardText>
-            <p>
-              L'Appropriation du patrimoine iconographique de l'océan Indien par
-              les populations vise à diffuser les images du sud-ouest de l'océan
-              Indien auprès des publics de ces territoires par la transmission
-              et la médiation pédagogique, le soutien à la création artistique
-              et le partage par l'organisation d'entretiens du patrimoine sur
-              l'image. Au fur et à mesure du projet, des supports de
-              valorisation sont diffusés sur le site internet de l'Iconothèque
-              et sur ses réseaux sociaux. Le parti-pris de l'exposition
-              "Patrimoines iconographiques de l'océan Indien", conçue à partir
-              des oeuvres des artistes en résidence dans les institutions
-              partenaires du projet est l'élaboration d'une cartographie
-              artistique (réelle et imaginaire) de l'océan Indien.
-              L'Appropriation du patrimoine iconographique de l'océan Indien par
-              les populations, portée par le Département de La Réunion, est
-              cofinancée par l'Union européenne au titre du PO INTERREG V océan
-              Indien et soutenue par la Commission de l'océan Indien (COI).
-            </p>
+            L'Appropriation du patrimoine iconographique de l'océan Indien par
+            les populations vise à diffuser les images du sud-ouest de l'océan
+            Indien auprès des publics de ces territoires par la transmission et
+            la médiation pédagogique, le soutien à la création artistique et le
+            partage par l'organisation d'entretiens du patrimoine sur l'image.
+            Au fur et à mesure du projet, des supports de valorisation sont
+            diffusés sur le site internet de l'Iconothèque et sur ses réseaux
+            sociaux. Le parti-pris de l'exposition "Patrimoines iconographiques
+            de l'océan Indien", conçue à partir des oeuvres des artistes en
+            résidence dans les institutions partenaires du projet est
+            l'élaboration d'une cartographie artistique (réelle et imaginaire)
+            de l'océan Indien. L'Appropriation du patrimoine iconographique de
+            l'océan Indien par les populations, portée par le Département de La
+            Réunion, est cofinancée par l'Union européenne au titre du PO
+            INTERREG V océan Indien et soutenue par la Commission de l'océan
+            Indien (COI).
           </MDBCardText>
-          <MDBBtn className="btn" link href="/About">
-            À propos
+          <MDBBtn className="btn">
+            <Link to="/About" className="nav-link navLink">
+              À propos
+            </Link>
           </MDBBtn>
         </MDBCardBody>
       </MDBCard>

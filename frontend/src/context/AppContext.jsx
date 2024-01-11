@@ -1,80 +1,83 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBAlert } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ApiService from "../services/api.service";
 
 const appContext = createContext();
-function AppContextProvider({ children }) {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("session")));
+function AppContextProvider({ children, apiService }) {
+  const givenData = useLoaderData();
+  const [isAdmin, setIsAdmin] = useState(
+    givenData?.preloadUser?.data?.is_admin
+  );
+  const [user, setUser] = useState(givenData?.preloadUser?.data);
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  // const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
   const navigate = useNavigate();
 
-  const login = (credentials) => {
-    const users = getUsers();
+  const login = async (credentials) => {
+    try {
+      const data = await apiService.post(
+        `http://localhost:5021/login`,
+        credentials
+      );
 
-    const memoryUser = users.find(
-      (userdb) =>
-        userdb.email === credentials.email &&
-        userdb.password === credentials.password
-    );
+      // console.log("Login success. Token:", data.token);
 
-    if (!memoryUser) {
-      alert("Identifiants incorrects !"); // eslint-disable-line no-alert
-      return false;
+      setUser((prevUser) => ({
+        ...prevUser,
+        token: data.token,
+      }));
+
+      localStorage.setItem("token", data.token);
+
+      apiService.setToken(data.token);
+
+      const result = await apiService.get(
+        "http://localhost:5021/users/personal"
+      );
+
+      // console.log("User data from API:", result.data);
+
+      alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+      setUser(result.data);
+
+      if (result.data.is_admin === 1) {
+        navigate("/admin");
+      }
+      return navigate("/home");
+    } catch (err) {
+      console.error(err);
+      alert(err.message); // eslint-disable-line no-alert
     }
 
-    alert(`Content de vous revoir ${credentials.email}`); // eslint-disable-line no-alert
-    setUser(memoryUser);
-    localStorage.setItem("session", JSON.stringify(memoryUser));
-    return true;
+    return null;
   };
 
-  const register = (newUser) => {
-    const users = getUsers();
+  const register = async (newUser) => {
+    try {
+      const response = await axios.post("http://localhost:5021/users", newUser);
 
-    if (!users.find((userdb) => userdb.email === newUser.email)) {
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert(`Bienvenue ${newUser.email}`); // eslint-disable-line no-alert
+      const newUserResponse = response.data;
+      // console.log("User registered successfully. Data:", newUserResponse);
+
+      setUser(newUserResponse);
+
+      alert(`Bienvenue ${newUserResponse.email}`); // eslint-disable-line no-alert
+      login();
       navigate("/home");
-    } else {
-      alert("Vous êtes déjà inscrit !"); // eslint-disable-line no-alert
+    } catch (err) {
+      alert(err.message); // eslint-disable-line no-alert
     }
   };
-
-  // useEffect(() => {
-  //   register({
-  //     email: "nouvel_utilisateur@example.com",
-  //     password: "mot_de_passe",
-  //   });
-  // }, []);
 
   const logout = () => {
     setUser(undefined);
     setOpenNavSecond(false);
-    localStorage.removeItem("session");
-  };
-
-  const removeUser = () => {
-    const currentUser = JSON.parse(localStorage.getItem("session"));
-
-    if (currentUser) {
-      const users = getUsers();
-
-      const updatedUsers = users.filter(
-        (userdb) => userdb.email !== currentUser.email
-      );
-
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-      setUser(undefined);
-      setOpenNavSecond(false);
-      localStorage.removeItem("session");
-      navigate("/home");
-    }
+    localStorage.removeItem("token");
+    navigate("/home");
   };
 
   const contextData = useMemo(
@@ -88,7 +91,7 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      removeUser,
+      apiService,
     }),
     [
       isAdmin,
@@ -100,9 +103,17 @@ function AppContextProvider({ children }) {
       register,
       openNavSecond,
       setOpenNavSecond,
-      removeUser,
+      apiService,
     ]
   );
+
+  // useEffect(() => {
+  //   if (isAdmin) {
+  //     return navigate("/admin");
+  //   }
+
+  //   return null;
+  // }, []);
 
   return (
     <appContext.Provider value={contextData}>
@@ -124,6 +135,7 @@ function AppContextProvider({ children }) {
 
 AppContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  apiService: PropTypes.instanceOf(ApiService).isRequired,
 };
 
 export default AppContextProvider;

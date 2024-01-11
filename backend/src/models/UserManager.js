@@ -8,8 +8,8 @@ class UserManager extends AbstractManager {
 
   create(user) {
     return new Promise((resolve, reject) => {
-      if (!user.password || typeof user.password !== "string") {
-        reject(new Error("Invalid password"));
+      if (!user.firstname || !user.lastname || !user.email || !user.password) {
+        reject(new Error("Missing required fields"));
         return;
       }
 
@@ -54,8 +54,16 @@ class UserManager extends AbstractManager {
     return result ? user : undefined;
   }
 
+  getProfile(id) {
+    return this.database.query(
+      `SELECT id, email, firstname, lastname, is_admin FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+  }
+
   static hashPassword(password, workFactor = 5) {
     return bcrypt.hash(password, workFactor);
   }
 }
+
 module.exports = UserManager;

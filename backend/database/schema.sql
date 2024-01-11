@@ -186,7 +186,7 @@ CREATE TABLE
         lastname varchar(255) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
         password varchar(255) DEFAULT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT false
+        is_admin BOOLEAN NULL DEFAULT false
     )
 
 INSERT INTO
