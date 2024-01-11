@@ -26,11 +26,6 @@ function AppContextProvider({ children, apiService }) {
 
       // console.log("Login success. Token:", data.token);
 
-      setUser((prevUser) => ({
-        ...prevUser,
-        token: data.token,
-      }));
-
       localStorage.setItem("token", data.token);
 
       apiService.setToken(data.token);
