@@ -41,9 +41,10 @@ function Login() {
         name="email"
         onChange={onChange}
         id="validationUser01"
-        required
+        required="required"
         label="Adresse mail"
         type="email"
+        autoComplete="on"
       />
       <MDBInput
         className="mb-4"
@@ -51,9 +52,10 @@ function Login() {
         name="password"
         onChange={onChange}
         id="validationUser02"
-        required
+        required="required"
         label="Mot de passe"
         type="password"
+        autoComplete="current-password"
       />
 
       <MDBRow className="mb-4">

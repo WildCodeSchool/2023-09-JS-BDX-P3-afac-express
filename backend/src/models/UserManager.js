@@ -6,44 +6,40 @@ class UserManager extends AbstractManager {
     super({ table: "users" });
   }
 
-  create(user) {
-    return new Promise((resolve, reject) => {
-      if (!user.firstname || !user.lastname || !user.email || !user.password) {
-        reject(new Error("Missing required fields"));
-        return;
-      }
+  async create(user) {
+    if (
+      !user.firstname ||
+      !user.lastname ||
+      !user.email ||
+      !user.password ||
+      !user.secret_question ||
+      !user.secret_answer
+    ) {
+      throw new Error("Missing required fields");
+    }
 
-      UserManager.hashPassword(user.password)
-        .then((hash) => {
-          return this.database.query(
-            `insert into ${this.table} (firstname, lastname, email, password, is_admin, secret_question, secret_answer) values (?, ?, ?, ?, ?, ?, ?)`,
-            [
-              user.firstname,
-              user.lastname,
-              user.email,
-              hash,
-              user.is_admin,
-              user.secret_question,
-              user.secret_answer,
-            ]
-          );
-        })
-        .then((result) => {
-          resolve({
-            id: result.insertId,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            hashedPassword: user.hashedPassword,
-            is_admin: user.is_admin,
-            secret_question: user.secret_question,
-            secret_answer: user.secret_answer,
-          });
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    const answer = await UserManager.hashPassword(user.secret_answer);
+    const hash = await UserManager.hashPassword(user.password);
+    const result = await this.database.query(
+      `insert into ${this.table} (firstname, lastname, email, password, is_admin, secret_question, secret_answer) values (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        user.firstname,
+        user.lastname,
+        user.email,
+        hash,
+        user.is_admin ?? false,
+        user.secret_question,
+        answer,
+      ]
+    );
+
+    return {
+      id: result.insertId,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      is_admin: user.is_admin ?? false,
+    };
   }
 
   async login({ email, password }) {
@@ -67,7 +63,7 @@ class UserManager extends AbstractManager {
 
   getProfile(id) {
     return this.database.query(
-      `SELECT id, email, firstname, lastname, secret_question, secret_answer is_admin FROM ${this.table} WHERE id = ?`,
+      `SELECT id, email, firstname, lastname, is_admin FROM ${this.table} WHERE id = ?`,
       [id]
     );
   }

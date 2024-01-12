@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate, useLocation } from "react-router-dom";
 import Redirection from "../components/Redirection";
+import ApiService from "../services/api.service"; // Assurez-vous d'importer le bon chemin
+
+const apiService = new ApiService();
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -12,7 +15,7 @@ export default function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -36,11 +39,23 @@ export default function ResetPassword() {
     setError("");
 
     try {
-      navigate("/login");
+      // Envoyer une demande de réinitialisation côté serveur
+      await apiService.post(`http://localhost:5021/reset/password`, {
+        email: location.state?.email, // Utilisez l'email de l'utilisateur connecté
+        answer,
+        newPassword: password,
+        confirmPassword,
+      });
+
+      // Si la réinitialisation réussit, redirigez vers la page de connexion
+
+      navigate("/login", {
+        state: { successMessage: "Mot de passe réinitialisé avec succès." },
+      });
     } catch (err) {
       // Gérer les erreurs liées à la réinitialisation du mot de passe
       setError(
-        "Une erreur s'est produite lors de la réinitialisation du mot de passe."
+        `Une erreur s'est produite lors de la réinitialisation du mot de passe`
       );
     }
   };

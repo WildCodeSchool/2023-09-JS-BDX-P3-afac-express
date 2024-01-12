@@ -3,7 +3,7 @@ const models = require("../models");
 const getArtwork = (_, res) => {
   models.artwork
     .findAll()
-    .then((rows) => {
+    .then(([rows]) => {
       res.send(rows);
     })
     .catch((err) => {

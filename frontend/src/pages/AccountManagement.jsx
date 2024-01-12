@@ -56,22 +56,22 @@ function AccountManagement() {
 
   const deletePersonalAccount = async () => {
     try {
-      const { data } = await apiService.delete(
+      const response = await apiService.delete(
         `http://localhost:5021/deletepersonnelaccount/${user.id}`
       );
 
-      if (data.status === 204) {
-        alert("Vous ne pouvez pas supprimer ce compte."); // eslint-disable-line no-alert
-      } else {
-        alert("votre compte a été supprimé avec succès."); // eslint-disable-line no-alert
+      if (response.status === 204) {
+        alert("Votre compte a été supprimé avec succès."); // eslint-disable-line no-alert
         logout();
         navigate("/login");
+      } else {
+        alert("Vous ne pouvez pas supprimer ce compte."); // eslint-disable-line no-alert
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        alert("Vous n'êtes pas autorisé à effectuer cette action;"); // eslint-disable-line no-alert
+      if (error.response && error.response.status === 401) {
+        alert("Vous n'êtes pas autorisé à effectuer cette action."); // eslint-disable-line no-alert
       } else {
-        console.error(error);
+        alert("Une erreur s'est produite lors de la suppression du compte."); // eslint-disable-line no-alert
       }
     }
   };
@@ -130,6 +130,7 @@ function AccountManagement() {
           id="oldPassword"
           required="required"
           label="Ancien mot de passe"
+          autoComplete="current-password"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
@@ -139,6 +140,7 @@ function AccountManagement() {
           id="newPassword"
           required="required"
           label="Nouveau mot de passe"
+          autoComplete="current-password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />

@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const models = require("../models");
+const UserManager = require("../models/UserManager");
 
 function generateAccessToken(data) {
   return jwt.sign(data, process.env.APP_SECRET); // TODO ajouter , { expiresIn: "1800s" } ?
@@ -105,15 +106,7 @@ const postUsers = (req, res) => {
   models.users
     .create(req.body)
     .then((result) => {
-      res.send({
-        id: result.insertId,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        is_admin: req.body.is_admin,
-        secret_question: req.body.secret_question,
-        secret_answer: req.body.secret_answer,
-      });
+      res.send(result);
     })
     .catch((err) => {
       console.error(err);
@@ -121,24 +114,44 @@ const postUsers = (req, res) => {
     });
 };
 
-const postPassword = (req, res) => {
-  models.users
-    .update(req.body)
-    .then((result) => {
-      res.send({
-        id: result.insertId,
-        password: req.body.password,
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(422).send({ error: err.message });
+const postPassword = async (req, res) => {
+  try {
+    const { newPassword, confirmPassword, answer, email } = req.body;
+
+    // Récupérez l'utilisateur en fonction de l'email
+    const user = await models.users.getUserByEmail(email);
+
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    // Validez le nouveau mot de passe
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ error: "Mot de passe incorrect" });
+    }
+
+    // Vérifiez la réponse à la question secrète
+    if (!bcrypt.compareSync(answer, user.secret_answer)) {
+      return res.status(403).json({ error: "Réponse secrète incorrecte" });
+    }
+
+    // Mettez à jour le mot de passe dans la base de données
+    const hashedPassword = await UserManager.hashPassword(newPassword);
+    await models.users.update({ password: hashedPassword }, user.id);
+
+    return res.json({
+      message: "Mot de passe réinitialisé avec succès",
     });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const deleteUsers = (req, res) => {
-  models.users
-    .delete(req.params.id)
+  const id = parseInt(req.params.id, 10);
+  return models.users
+    .delete(id)
     .then(([rows]) => {
       if (rows.affectedRows === 0) {
         res.sendStatus(404);

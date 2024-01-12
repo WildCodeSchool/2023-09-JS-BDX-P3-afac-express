@@ -36,11 +36,22 @@ const router = createBrowserRouter([
     path: "/",
     loader: async () => {
       try {
-        const data = await apiService.get(
-          "http://localhost:5021/users/personal"
-        );
-        return { preloadUser: data ?? null };
+        const token = localStorage.getItem("token");
+        // console.log("Token from localStorage:", token);
+
+        if (token) {
+          apiService.setToken(token);
+
+          const data = await apiService.get(
+            "http://localhost:5021/users/personal"
+          );
+
+          return { preloadUser: data ?? null };
+        }
+
+        return null;
       } catch (err) {
+        console.error("Loader Error:", err.message);
         return null;
       }
     },
@@ -77,7 +88,26 @@ const router = createBrowserRouter([
         children: [
           { path: "/admin", element: <AdminHome /> },
           { path: "/admin/adminuser", element: <AdminUser /> },
-          { path: "/admin/adminart", element: <AdminArtManager /> },
+          {
+            path: "/admin/adminart",
+            element: <AdminArtManager />,
+            loader: async () => {
+              try {
+                const [artistData, artData] = await Promise.all([
+                  apiService.get("http://localhost:5021/artist"),
+                  apiService.get("http://localhost:5021/artwork"),
+                ]);
+
+                return {
+                  artistCollection: artistData.data,
+                  artCollection: artData.data,
+                };
+              } catch (error) {
+                console.error(error);
+                return [];
+              }
+            },
+          },
           {
             path: "/admin/adminusermanagement/:id",
             element: <AdminUserManagement />,
