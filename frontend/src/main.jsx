@@ -37,19 +37,26 @@ const router = createBrowserRouter([
     loader: async () => {
       try {
         const token = localStorage.getItem("token");
-        // console.log("Token from localStorage:", token);
 
         if (token) {
           apiService.setToken(token);
 
-          const data = await apiService.get(
-            "http://localhost:5021/users/personal"
-          );
-
-          return { preloadUser: data ?? null };
+          const [userData, artistData, artData] = await Promise.all([
+            apiService.get("http://localhost:5021/users/personal"),
+            apiService.get("http://localhost:5021/artist"),
+            apiService.get("http://localhost:5021/artwork"),
+          ]);
+          return {
+            preloadUser: userData ?? null,
+            artistCollection: artistData.data,
+            artCollection: artData.data,
+          };
         }
 
-        return null;
+        return {
+          artistCollection: [],
+          artCollection: [],
+        };
       } catch (err) {
         console.error("Loader Error:", err.message);
         return null;
@@ -91,22 +98,6 @@ const router = createBrowserRouter([
           {
             path: "/admin/adminart",
             element: <AdminArtManager />,
-            loader: async () => {
-              try {
-                const [artistData, artData] = await Promise.all([
-                  apiService.get("http://localhost:5021/artist"),
-                  apiService.get("http://localhost:5021/artwork"),
-                ]);
-
-                return {
-                  artistCollection: artistData.data,
-                  artCollection: artData.data,
-                };
-              } catch (error) {
-                console.error(error);
-                return [];
-              }
-            },
           },
           {
             path: "/admin/adminusermanagement/:id",

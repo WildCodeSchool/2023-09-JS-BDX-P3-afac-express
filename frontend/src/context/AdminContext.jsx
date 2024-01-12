@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useEffect } from "react";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "./AppContext";
@@ -6,8 +6,8 @@ import { useApp } from "./AppContext";
 const adminContext = createContext();
 
 function AdminContextProvider({ children }) {
-  const navigate = useNavigate();
   const { user, isAdmin, setIsAdmin } = useApp();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user.is_admin !== 1) {
