@@ -10,19 +10,15 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
-import { useLoaderData } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
+import { useApp } from "../../context/AppContext";
 
 const apiService = new ApiService();
 
 export default function AdminArtManager() {
-  const loaderdata = useLoaderData();
-  const [postArtist, setPostArtist] = useState({
-    name: "",
-    description: "",
-  });
-
+  const { artistCollection, artCollection } = useApp();
+  const [postArtist, setPostArtist] = useState({ name: "", description: "" });
   const handleInput = (e) => {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
@@ -45,6 +41,7 @@ export default function AdminArtManager() {
     image: "",
     dimension: "",
     creation_place: "",
+    artist_id: "",
   });
 
   const handleInputArt = (e) => {
@@ -92,19 +89,25 @@ export default function AdminArtManager() {
       </form>
 
       <MDBRow className="row-cols-1 row-cols-md-2 g-4">
-        {loaderdata.artistCollection.map((artist) => (
-          <MDBCol key={artist.name} xl={3} lg={4} className="mb-4">
-            <MDBCard>
-              <MDBCardImage src={artist.image} />
-              <MDBCardBody>
-                <MDBCardTitle>{artist.name}</MDBCardTitle>
-                <MDBCardText>{artist.description}</MDBCardText>
-                <MDBBtn href="#">Modifier</MDBBtn>
-                <MDBBtn href="#">Supprimer</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        ))}
+        {artistCollection && artistCollection.length > 0 ? (
+          artistCollection.map((artist) => (
+            <MDBCol key={artist.id} xl={3} lg={4} className="mb-4">
+              <MDBCard>
+                <MDBCardImage src={artist.image} />
+                <MDBCardBody>
+                  <MDBCardTitle>{artist.name}</MDBCardTitle>
+                  <MDBCardText className="text-truncate">
+                    {artist.description}
+                  </MDBCardText>
+                  <MDBBtn href="#">Modifier</MDBBtn>
+                  <MDBBtn href="#">Supprimer</MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          ))
+        ) : (
+          <p>Aucun artiste disponible.</p>
+        )}
       </MDBRow>
 
       <h1>Oeuvres</h1>
@@ -159,19 +162,27 @@ export default function AdminArtManager() {
       </MDBBtn>
       <MDBRow>
         <MDBRow className="row-cols-1 row-cols-md-2 g-4">
-          {loaderdata.artCollection.map((art) => (
-            <MDBCol key={art.title} xl={3} lg={4} className="mb-4">
-              <MDBCard>
-                <MDBCardImage src={art.image} />
-                <MDBCardBody>
-                  <MDBCardTitle>{art.title}</MDBCardTitle>
-                  <MDBCardText>{art.description}</MDBCardText>
-                  <MDBBtn href="#">Modifier</MDBBtn>
-                  <MDBBtn href="#">Supprimer</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-          ))}
+          {artCollection && artCollection.length > 0 ? (
+            artCollection.map((art) => (
+              <MDBCol key={art.id} xl={3} lg={4} className="mb-4">
+                <MDBCard>
+                  <MDBCardImage src={art.image} />
+                  <MDBCardBody>
+                    <MDBCardTitle className="text-truncate">
+                      {art.title}
+                    </MDBCardTitle>
+                    <MDBCardText className="text-truncate">
+                      {art.dimension} {art.creation_place}
+                    </MDBCardText>
+                    <MDBBtn href="#">Modifier</MDBBtn>
+                    <MDBBtn href="#">Supprimer</MDBBtn>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            ))
+          ) : (
+            <p>Aucune œuvre disponible.</p>
+          )}
         </MDBRow>
       </MDBRow>
 

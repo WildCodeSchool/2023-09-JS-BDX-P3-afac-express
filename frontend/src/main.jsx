@@ -18,7 +18,6 @@ import Artists from "./pages/Artists";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import User from "./pages/User";
-import UserForgottenPassword from "./pages/UserForgottenPassword";
 import Register from "./pages/Register";
 import AdminArtManager from "./pages/Admin/AdminArtManager";
 import AdminUser from "./pages/Admin/AdminUser";
@@ -36,19 +35,26 @@ const router = createBrowserRouter([
     loader: async () => {
       try {
         const token = localStorage.getItem("token");
-        // console.log("Token from localStorage:", token);
 
         if (token) {
           apiService.setToken(token);
 
-          const data = await apiService.get(
-            "http://localhost:5021/users/personal"
-          );
-
-          return { preloadUser: data ?? null };
+          const [userData, artistData, artData] = await Promise.all([
+            apiService.get("http://localhost:5021/users/personal"),
+            apiService.get("http://localhost:5021/artist"),
+            apiService.get("http://localhost:5021/artwork"),
+          ]);
+          return {
+            preloadUser: userData ?? null,
+            artistCollection: artistData.data,
+            artCollection: artData.data,
+          };
         }
 
-        return null;
+        return {
+          artistCollection: [],
+          artCollection: [],
+        };
       } catch (err) {
         console.error("Loader Error:", err.message);
         return null;
@@ -71,7 +77,6 @@ const router = createBrowserRouter([
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
-      { path: "/forgottenpassword", element: <UserForgottenPassword /> },
       { path: "/register", element: <Register /> },
       { path: "/user", element: <User /> },
       { path: "/user/:id", element: <User /> },
@@ -89,22 +94,6 @@ const router = createBrowserRouter([
           {
             path: "/admin/adminart",
             element: <AdminArtManager />,
-            loader: async () => {
-              try {
-                const [artistData, artData] = await Promise.all([
-                  apiService.get("http://localhost:5021/artist"),
-                  apiService.get("http://localhost:5021/artwork"),
-                ]);
-
-                return {
-                  artistCollection: artistData.data,
-                  artCollection: artData.data,
-                };
-              } catch (error) {
-                console.error(error);
-                return [];
-              }
-            },
           },
           {
             path: "/admin/adminusermanagement/:id",
