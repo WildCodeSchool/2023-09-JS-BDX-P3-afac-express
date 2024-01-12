@@ -10,18 +10,11 @@ import {
   MDBCarouselItem,
   MDBCarouselCaption,
 } from "mdb-react-ui-kit";
-
-import deepabauhadoor from "../assets/artists/2_DeepaBauhadoor.jpg";
-import mahefadimbiniainadandrianarivelo from "../assets/artists/3_MahefaDimbiniainaRandrianarivelo.jpg";
-import mathildeneri from "../assets/artists/4_MathildeNeri.jpg";
-import larasousa from "../assets/artists/1_LaraSousa.jpg";
-import CathedraleAntsirabe from "../assets/artworks/13_CathédraleAntsirabe.jpg";
-import bredechouchou from "../assets/artworks/6_BredeChouchou.jpg";
-import analakelyantananarivo from "../assets/artworks/11_AnalakelyAntananarivo.jpg";
-import ilneresteplusque from "../assets/artworks/16_IlNeRestePlusQue[...].jpg";
 import "../style/Home.scss";
+import { useApp } from "../context/AppContext";
 
 function Home() {
+  const { artistCollection, artCollection } = useApp();
   return (
     <MDBContainer fluid className="pt-5   ">
       <MDBCard className="card-custom  ">
@@ -59,51 +52,28 @@ function Home() {
       </h2>
 
       <MDBCarousel className="mt-3  " showControls showIndicators>
-        <MDBCarouselItem itemId={1}>
-          <img src={larasousa} className="d-block w-100" alt="Lara Sousa" />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Lara Sousa</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={2}>
-          <img
-            src={deepabauhadoor}
-            className="d-block w-100"
-            alt="Deepa Bauhadoor"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Deepa Bauhadoor</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={3}>
-          <img
-            src={mahefadimbiniainadandrianarivelo}
-            className="d-block w-100"
-            alt="Mahefa D. Randrianarivelo"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Mahefa D. Randrianarivelo</h5>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={4}>
-          <img
-            src={mathildeneri}
-            className="d-block w-100"
-            alt="Mathilde Neri"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Mathilde Neri</h5>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
+        {artistCollection && artistCollection.length > 0 ? (
+          artistCollection.map((artist) => (
+            <MDBCarouselItem itemId={artist.id} key={artist.id}>
+              <img
+                src={artist.image}
+                className="d-block w-100"
+                alt="Lara Sousa"
+              />
+              <MDBCard>
+                <MDBCardBody>
+                  <MDBCardTitle className="text-center mb-0">
+                    {artist.name}
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCarouselItem>
+          ))
+        ) : (
+          <p>Aucun artiste disponible.</p>
+        )}
       </MDBCarousel>
+
       <h2 className="mt-5" style={{ color: "#7b273d" }}>
         Collections
       </h2>
@@ -111,50 +81,25 @@ function Home() {
         "Regarder le monde c'est toucher sa diversité".
       </p>
       <MDBCarousel className="mt-3 mb-5 " showControls showIndicators>
-        <MDBCarouselItem itemId={1}>
-          <img
-            src={CathedraleAntsirabe}
-            className="d-block w-100"
-            alt="Cathédrale , Antsirabe"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Cathédrale , Antsirabe</h5>
-            <p>Mahefa D. Randrianarivelo</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={2}>
-          <img
-            src={bredechouchou}
-            className="d-block w-100"
-            alt="Deepa Bauhadoor"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Brède chouchou</h5>
-            <p>Deepa Bauhadoor</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={3}>
-          <img
-            src={analakelyantananarivo}
-            className="d-block w-100"
-            alt="Analakely, Antananarivo"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Analakely, Antananarivo</h5>
-            <p>Mahefa D. Randrianarivelo</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={4}>
-          <img
-            src={ilneresteplusque}
-            className="d-block w-100"
-            alt="Il ne reste plus que [...]"
-          />
-          <MDBCarouselCaption className="carousel-description">
-            <h5>Il ne reste plus que [...]</h5>
-            <p>Mathilde Neri</p>
-          </MDBCarouselCaption>
-        </MDBCarouselItem>
+        {artCollection && artCollection.length > 0 ? (
+          artCollection.map((art) => (
+            <MDBCarouselItem itemId={art.id} key={art.id}>
+              <img src={art.image} className="d-block w-100" alt={art.title} />
+              <MDBCarouselCaption className="carousel-description">
+                <p>Mahefa D. Randrianarivelo</p>
+              </MDBCarouselCaption>
+              <MDBCard>
+                <MDBCardBody>
+                  <MDBCardTitle className="text-center mb-0">
+                    {art.title}
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCarouselItem>
+          ))
+        ) : (
+          <p>Aucune œuvre disponible.</p>
+        )}
       </MDBCarousel>
     </MDBContainer>
   );
