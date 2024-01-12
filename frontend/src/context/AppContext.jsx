@@ -14,7 +14,12 @@ function AppContextProvider({ children, apiService }) {
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const [basicDanger, setBasicDanger] = useState(false);
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  // const getUsers = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  const [artistCollection, setArtistCollection] = useState(
+    givenData?.artistCollection || []
+  );
+  const [artCollection, setArtCollection] = useState(
+    givenData?.artCollection || []
+  );
   const navigate = useNavigate();
 
   const login = async (credentials) => {
@@ -84,6 +89,10 @@ function AppContextProvider({ children, apiService }) {
       register,
       openNavSecond,
       setOpenNavSecond,
+      artistCollection,
+      setArtistCollection,
+      artCollection,
+      setArtCollection,
       apiService,
     }),
     [
@@ -96,6 +105,10 @@ function AppContextProvider({ children, apiService }) {
       register,
       openNavSecond,
       setOpenNavSecond,
+      artistCollection,
+      setArtistCollection,
+      artCollection,
+      setArtCollection,
       apiService,
     ]
   );
