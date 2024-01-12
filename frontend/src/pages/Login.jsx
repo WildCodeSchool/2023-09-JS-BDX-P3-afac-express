@@ -41,9 +41,10 @@ function Login() {
         name="email"
         onChange={onChange}
         id="validationUser01"
-        required
+        required="required"
         label="Adresse mail"
         type="email"
+        autoComplete="on"
       />
       <MDBInput
         className="mb-4"
@@ -51,9 +52,10 @@ function Login() {
         name="password"
         onChange={onChange}
         id="validationUser02"
-        required
+        required="required"
         label="Mot de passe"
         type="password"
+        autoComplete="current-password"
       />
 
       <MDBRow className="mb-4">
@@ -65,7 +67,9 @@ function Login() {
           />
         </MDBCol>
         <MDBCol>
-          <Link to="/forgottenpassword">Mot de passe oublié ?</Link>
+          <Link className="nav-link navLink" to="/verificationlogin">
+            Mot de passe oublié ?
+          </Link>
         </MDBCol>
       </MDBRow>
 
@@ -75,7 +79,10 @@ function Login() {
 
       <div className="text-center">
         <p>
-          Pas encore membre ? <Link to="/register">Enregistrez-vous</Link>
+          Pas encore membre ?{" "}
+          <Link className="nav-link navLink" to="/register">
+            Enregistrez-vous
+          </Link>
         </p>
       </div>
     </form>

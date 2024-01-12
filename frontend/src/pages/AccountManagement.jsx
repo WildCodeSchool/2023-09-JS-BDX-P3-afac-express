@@ -130,6 +130,7 @@ function AccountManagement() {
           id="oldPassword"
           required="required"
           label="Ancien mot de passe"
+          autoComplete="current-password"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
@@ -139,6 +140,7 @@ function AccountManagement() {
           id="newPassword"
           required="required"
           label="Nouveau mot de passe"
+          autoComplete="current-password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />

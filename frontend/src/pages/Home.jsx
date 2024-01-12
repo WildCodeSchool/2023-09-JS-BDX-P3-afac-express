@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
@@ -10,6 +9,7 @@ import {
   MDBCarouselItem,
   MDBCarouselCaption,
 } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 import "../style/Home.scss";
 import { useApp } from "../context/AppContext";
 
