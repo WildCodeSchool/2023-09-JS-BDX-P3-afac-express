@@ -18,8 +18,16 @@ router.get(
   userControllers.getUsers
 );
 router.get("/users/:id", userControllers.getUsersById);
+router.get("/users/:id([0-9]+)", userControllers.getUsersById);
+router.get("/auth/get-question/:email", userControllers.getUserQuestion);
+router.get(
+  "/auth/get-response/:email",
+  userControllers.getCheckingSecretAnswer
+);
+router.post("/users/:email", userControllers.postUserByEmail);
 router.post("/login", userControllers.postLogin);
 router.post("/users", userControllers.postUsers);
+router.post("/reset/password", userControllers.postPassword);
 router.delete(
   "/users/:id",
   authMiddleware,

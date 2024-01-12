@@ -1,5 +1,6 @@
 -- SQLBook: Code
-DROP DATABASE IF EXISTS afac_express;
+DROP DATABASE IF exists afac_express;
+
 CREATE DATABASE afac_express;
 
 
@@ -10,8 +11,8 @@ DROP TABLE IF EXISTS artist;
 CREATE TABLE
     artist (
         id int primary key NOT NULL AUTO_INCREMENT,
-        name varchar(255) ,
-        description varchar(10000),
+        name varchar(255) NOT NULL,
+        description TEXT NULL,
         image varchar(500) NULL
     )
 
@@ -46,7 +47,7 @@ CREATE TABLE
         creation_place varchar(255) DEFAULT NULL,
         artist_id int DEFAULT NULL,
         CONSTRAINT fk_artwork_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
-    )
+    );
 
 INSERT INTO
     artwork (
@@ -181,14 +182,17 @@ VALUES (
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE
-    users (
-        id int primary key NOT NULL AUTO_INCREMENT,
-        firstname varchar(255) NOT NULL,
-        lastname varchar(255) NOT NULL,
-        email varchar(255) UNIQUE NOT NULL,
-        password varchar(255) DEFAULT NULL,
-        is_admin BOOLEAN NULL DEFAULT false
-    )
+ users (
+    id int primary key NOT NULL AUTO_INCREMENT,
+    firstname varchar(255) NOT NULL,
+    lastname varchar(255) NOT NULL,
+    email varchar(255) UNIQUE NOT NULL,
+    password varchar(255) NOT NULL,
+    is_admin BOOLEAN NULL DEFAULT false,
+    secret_question varchar(255) DEFAULT NULL,
+    secret_answer varchar(255) DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 
 INSERT INTO
     users (
@@ -196,26 +200,34 @@ INSERT INTO
         lastname,
         email,
         password,
-        is_admin
+        is_admin,
+        secret_question,
+        secret_answer
     )
 VALUES (
         'Ben et nuts',
         'noit',
         'ben.noit@test.fr',
         '1234',
-        FALSE
+        TRUE,
+        "Quelle était la couleur du cheval blanc d'Henri IV ?",
+        "Blanc"
     ), (
         'Nel',
         'ia',
         'nel.ia@test.fr',
         '3456',
-        TRUE
+        TRUE,
+        "Que dit un papier quand il tombe dans l'eau ?",
+        "J'ai pas pied"
     ), (
-        'Floflo',
-        'BRUNLOURS',
+        'florian',
+        'BRUN',
         'azerty@hotmail.fr',
-        '12348',
-        TRUE
+        '1234',
+        TRUE,
+        "Tu as trois poussins sur une table et tu n'en veux que deux, que fais-tu ?",
+        "T'en pousses un"
     );
 
 DROP TABLE IF EXISTS artwork_users;
@@ -226,4 +238,4 @@ CREATE TABLE
         users_id int NOT NULL,
         CONSTRAINT fk_users_artist FOREIGN KEY (artwork_id) REFERENCES artwork(id),
         CONSTRAINT fk_artist_users FOREIGN KEY (users_id) REFERENCES users(id)
-    )
+    );

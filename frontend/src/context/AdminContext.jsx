@@ -13,7 +13,7 @@ function AdminContextProvider({ children }) {
     if (user.is_admin !== 1) {
       navigate("/admin");
     }
-  }, [user.ise_admin, navigate]);
+  }, [user.is_admin, navigate]);
 
   const adminData = useMemo(
     () => ({ isAdmin, setIsAdmin }),

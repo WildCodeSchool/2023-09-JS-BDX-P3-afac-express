@@ -17,6 +17,8 @@ export default function Register() {
     email: "",
     password: "",
     is_admin: false,
+    secret_question: "",
+    secret_answer: "",
   });
 
   const { register } = useApp();
@@ -36,26 +38,26 @@ export default function Register() {
         <MDBRow className="mb-2">
           <MDBCol>
             <MDBInput
-              className="mb-3"
-              value={formValue.firstname}
-              name="firstname"
-              onChange={onChange}
-              id="validationUser1"
-              required
-              label="Prénom"
-              type="firstname"
-            />
-          </MDBCol>
-          <MDBCol>
-            <MDBInput
               className="mb-4"
               value={formValue.lastname}
               name="lastname"
               onChange={onChange}
               id="validationUser2"
-              required
+              required="required"
               label="Nom"
               type="lastname"
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput
+              className="mb-3"
+              value={formValue.firstname}
+              name="firstname"
+              onChange={onChange}
+              id="validationUser1"
+              required="required"
+              label="Prénom"
+              type="firstname"
             />
           </MDBCol>
         </MDBRow>
@@ -65,7 +67,7 @@ export default function Register() {
           name="email"
           onChange={onChange}
           id="validationUser3"
-          required
+          required="required"
           label="Email"
           type="email"
         />
@@ -75,9 +77,29 @@ export default function Register() {
           name="password"
           onChange={onChange}
           id="validationUser4"
-          required
+          required="required"
           label="Mot de passe"
           type="password"
+        />
+        <MDBInput
+          className="mb-4"
+          value={formValue.secret_question}
+          name="secret_question"
+          onChange={onChange}
+          id="validationUser4"
+          required="required"
+          label="Question secrète ?"
+          type="secret_question"
+        />
+        <MDBInput
+          className="mb-4"
+          value={formValue.secret_answer}
+          name="secret_answer"
+          onChange={onChange}
+          id="validationUser4"
+          required="required"
+          label="Réponse secrète"
+          type="secret_answer"
         />
 
         <MDBSwitch
