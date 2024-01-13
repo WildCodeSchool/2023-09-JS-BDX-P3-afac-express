@@ -2,7 +2,7 @@ const models = require("../models");
 
 const getArtwork = (_, res) => {
   models.artwork
-    .findAll()
+    .findArtwork()
     .then(([rows]) => {
       res.send(rows);
     })

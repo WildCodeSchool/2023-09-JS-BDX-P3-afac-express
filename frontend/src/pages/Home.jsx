@@ -55,18 +55,18 @@ function Home() {
         {artistCollection && artistCollection.length > 0 ? (
           artistCollection.map((artist) => (
             <MDBCarouselItem itemId={artist.id} key={artist.id}>
+              <MDBCard>
+                <MDBCardBody>
+                  <MDBCardTitle className="text-center mb-0 fw-bold fs-4">
+                    {artist.name}
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
               <img
                 src={artist.image}
                 className="d-block w-100"
                 alt="Lara Sousa"
               />
-              <MDBCard>
-                <MDBCardBody>
-                  <MDBCardTitle className="text-center mb-0">
-                    {artist.name}
-                  </MDBCardTitle>
-                </MDBCardBody>
-              </MDBCard>
             </MDBCarouselItem>
           ))
         ) : (
@@ -90,8 +90,11 @@ function Home() {
               </MDBCarouselCaption>
               <MDBCard>
                 <MDBCardBody>
-                  <MDBCardTitle className="text-center mb-0">
+                  <MDBCardTitle className="text-center mb-0 fst-italic fw-bold">
                     {art.title}
+                  </MDBCardTitle>
+                  <MDBCardTitle className="text-center mb-0 fs-6">
+                    {art.artist_name}
                   </MDBCardTitle>
                 </MDBCardBody>
               </MDBCard>

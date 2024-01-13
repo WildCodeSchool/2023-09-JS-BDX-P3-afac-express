@@ -5,6 +5,13 @@ class ArtworkManager extends AbstractManager {
     super({ table: "artwork" });
   }
 
+  findArtwork() {
+    return this.database
+      .query(`  SELECT artwork.id, artwork.title, artwork.image, artwork.dimension, artwork.creation_place, artist.name AS artist_name
+    FROM artwork
+    JOIN artist ON artwork.artist_id = artist.id;`);
+  }
+
   create(artwork) {
     return this.database.query(
       `insert into ${this.table} (title, image, dimension, creation_place, artist_id) values (?, ?, ?, ?, ?)`,
