@@ -11,6 +11,7 @@ import { useApp } from "../context/AppContext";
 import Redirection from "../components/Redirection";
 
 export default function Register() {
+  const { register, logout } = useApp();
   const [formValue, setFormValue] = useState({
     firstname: "",
     lastname: "",
@@ -21,10 +22,10 @@ export default function Register() {
     secret_answer: "",
   });
 
-  const { register } = useApp();
-  const submitform = (e) => {
+  const submitform = async (e) => {
     e.preventDefault();
-    register(formValue);
+    await register(formValue);
+    logout();
   };
 
   const onChange = (e) => {
@@ -101,19 +102,19 @@ export default function Register() {
           label="Réponse secrète"
           type="secret_answer"
         />
-
         <MDBSwitch
           id="flexSwitchCheckDefault"
           label="Administrateur"
           onClick={() =>
-            setFormValue({ ...formValue, is_admin: !formValue.is_admin })
+            setFormValue({
+              ...formValue,
+              is_admin: !formValue.is_admin,
+            })
           }
         />
-
         <MDBBtn type="submit" className="mb-4 mt-4" block>
           Suivant
         </MDBBtn>
-
         <Redirection />
       </form>
     </MDBContainer>
