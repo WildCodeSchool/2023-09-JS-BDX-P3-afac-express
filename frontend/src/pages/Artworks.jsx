@@ -3,122 +3,30 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardText,
-  MDBCardImage,
-  MDBRipple,
   MDBContainer,
+  MDBCarousel,
+  MDBCarouselItem,
+  MDBCardTitle,
 } from "mdb-react-ui-kit";
-
-import ArtworksFilter from "../components/ArtworksFilter";
-
-const artworks = [
-  {
-    artist: {
-      id: 1,
-      name: "Lara Sousa",
-
-      artworks: [
-        {
-          id: 1,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 2,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 3,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-      ],
-    },
-  },
-  {
-    artist: {
-      id: 2,
-      name: "Deepa Bauhadoor",
-
-      artworks: [
-        {
-          id: 1,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 2,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 3,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-      ],
-    },
-  },
-  {
-    artist: {
-      id: 3,
-      name: "Mahefa Dimbiniaina Randrianarivelo",
-
-      artworks: [
-        {
-          id: 1,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 2,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 3,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-      ],
-    },
-  },
-  {
-    artist: {
-      id: 4,
-      name: "Mathilde Neri",
-
-      artworks: [
-        {
-          id: 1,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 2,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-        {
-          id: 3,
-          image: "https://mdbootstrap.com/img/new/standard/city/041.webp",
-          details: "rien à afficher pour le moment",
-        },
-      ],
-    },
-  },
-];
+import { useApp } from "../context/AppContext";
+import FilterArtworks from "../components/Filter/FilterArtworks";
 
 function Artworks() {
+  const { artistCollection } = useApp();
   const [selectedArtist, setSelectedArtist] = useState(null);
-  const [selectedArtworks, setSelectedArtworks] = useState([]);
 
-  const onSelectArtist = (artist) => {
-    setSelectedArtist(artist);
-    setSelectedArtworks(artist.artworks || []);
+  const onSelectArtist = (artist, artCollection) => {
+    const artistWithArtworks = {
+      ...artist,
+      artworks: artCollection.filter(
+        (artwork) => artwork.artist_id === artist.id
+      ),
+    };
+    setSelectedArtist(artistWithArtworks);
   };
+
   return (
-    <MDBContainer fluid className="pt-5">
+    <MDBContainer fluid className="pt-5 pb-5">
       <h3
         className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
@@ -126,39 +34,49 @@ function Artworks() {
         Patrimoine iconographique de l'océan indien
       </h3>
 
-      <ArtworksFilter artworks={artworks} onSelectArtist={onSelectArtist} />
+      <FilterArtworks
+        artists={artistCollection}
+        onSelectArtist={onSelectArtist}
+      />
+
       {selectedArtist && (
         <div key={selectedArtist.id}>
-          <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
+          <h3 className="fs-3 text text-center pt-2 fw-bold pb-2">
+            {selectedArtist.name}
+          </h3>
 
-          {selectedArtworks.map((artwork) => (
-            <MDBCard
-              alignment="center"
-              className="col-10 m-auto"
-              shadow="5"
-              key={artwork.id}
-            >
-              <MDBRipple
-                rippleColor="light"
-                rippleTag="div"
-                className="bg-image hover-overlay"
-              >
-                <div className="bg-image hover-zoom">
-                  <MDBCardImage
-                    src={artwork.image}
-                    fluid
-                    alt={selectedArtist.name}
-                    class="rounded img-fluid"
-                  />
-                </div>
-              </MDBRipple>
-              <MDBCardBody>
-                <MDBCardText className="p-5 text-start">
-                  {selectedArtist.description}
-                </MDBCardText>
-              </MDBCardBody>
-            </MDBCard>
-          ))}
+          <MDBCarousel showControls>
+            {selectedArtist.artworks.map((artwork, index) => (
+              <MDBCarouselItem key={artwork.id} itemID={index + 1}>
+                <img
+                  src={artwork.image}
+                  className="d-block w-100"
+                  alt={artwork.title}
+                />
+                <MDBCard>
+                  <MDBCardBody>
+                    <MDBCardTitle
+                      className="fst-italic text-center fs-5"
+                      style={{ color: "#7b273d" }}
+                    >
+                      {artwork.title}
+                    </MDBCardTitle>
+                    <MDBCardText className="text-center lh-sm">
+                      {artwork.dimension && (
+                        <span>
+                          {artwork.dimension}
+                          <br />
+                        </span>
+                      )}
+                      {artwork.creation_place && (
+                        <span>{artwork.creation_place}</span>
+                      )}
+                    </MDBCardText>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCarouselItem>
+            ))}
+          </MDBCarousel>
         </div>
       )}
     </MDBContainer>
@@ -166,89 +84,3 @@ function Artworks() {
 }
 
 export default Artworks;
-
-/* <MDBRow>
-            <MDBCol lg="4" md="12" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                src="https://mdbootstrap.com/img/new/standard/city/041.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={300}
-                src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={500}
-                src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-          </MDBRow>
-
-          <MDBRow>
-            <MDBCol lg="4" md="12" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={300}
-                src="https://mdbootstrap.com/img/new/standard/city/045.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-
-            <MDBCol lg="4" md="6" className="mb-4">
-              <MDBAnimation
-                reset
-                tag="img"
-                repeatOnScroll
-                start="onScroll"
-                animation="fade-in"
-                duration={500}
-                delay={500}
-                src="https://mdbootstrap.com/img/new/standard/city/046.webp"
-                className="img-fluid shadow-1-strong rounded"
-              />
-            </MDBCol>
-          </MDBRow> */
