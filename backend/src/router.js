@@ -51,7 +51,12 @@ router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 router.get("/artist", artistControllers.getArtists);
 router.post("/artist", artistControllers.postArtist);
 
-router.get("/artwork", artworkControllers.getArtwork);
+router.get(
+  "/artwork",
+  authMiddleware,
+  authAdminMiddleware,
+  artworkControllers.getArtwork
+);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
