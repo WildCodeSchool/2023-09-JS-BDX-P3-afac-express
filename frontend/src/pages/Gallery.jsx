@@ -29,7 +29,7 @@ function Gallery() {
   return (
     <MDBContainer fluid className="pt-5">
       <h2
-        className="fs-2 text text-center fw-bold pt-5"
+        className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
       >
         Patrimoine iconographique de l’océan indien
