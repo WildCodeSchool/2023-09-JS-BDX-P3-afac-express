@@ -75,7 +75,7 @@ function AppContextProvider({ children, apiService }) {
     setUser(undefined);
     setOpenNavSecond(false);
     localStorage.removeItem("token");
-    navigate("/home");
+    navigate("/login");
   };
 
   const contextData = useMemo(

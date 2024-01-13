@@ -41,7 +41,7 @@ export default function ResetPassword() {
     try {
       // Envoyer une demande de réinitialisation côté serveur
       await apiService.post(`http://localhost:5021/reset/password`, {
-        email: location.state?.email, // Utilisez l'email de l'utilisateur connecté
+        email: location.state?.email, // Utilisez l'email de l'utilisateur enregistré
         answer,
         newPassword: password,
         confirmPassword,
