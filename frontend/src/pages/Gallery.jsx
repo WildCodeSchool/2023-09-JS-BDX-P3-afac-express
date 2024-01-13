@@ -10,13 +10,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Likes from "../components/Likes";
 import FilterGallery from "../components/Filter/FilterGallery";
-import { useLike } from "../context/LikeContext";
+import { useApp } from "../context/AppContext";
 
 function Gallery() {
+  const { artistCollection } = useApp();
   const [selectedArtist, setSelectedArtist] = useState(null);
-  const { artists } = useLike();
-  const onSelectArtist = (artist) => {
-    setSelectedArtist(artist);
+
+  const onSelectArtist = (artist, artCollection) => {
+    const artistWithArtworks = {
+      ...artist,
+      artworks: artCollection.filter(
+        (artwork) => artwork.artist_id === artist.id
+      ),
+    };
+    setSelectedArtist(artistWithArtworks);
   };
 
   return (
@@ -28,11 +35,14 @@ function Gallery() {
         Patrimoine iconographique de l’océan indien
       </h2>
 
-      <FilterGallery artists={artists} onSelectArtist={onSelectArtist} />
+      <FilterGallery
+        artists={artistCollection}
+        onSelectArtist={onSelectArtist}
+      />
 
       {selectedArtist && (
         <div key={selectedArtist.id}>
-          <h3 className="fs-6 text text-start fw-bold">
+          <h3 className="fs-6 text text-start fw-bold mb-4 fs-4">
             {selectedArtist.name}
           </h3>
 
@@ -43,7 +53,7 @@ function Gallery() {
                 md="12"
                 className="mb-4"
                 key={artwork.id}
-                itemId={index + 1}
+                itemID={index + 1}
               >
                 <MDBAnimation
                   reset
@@ -55,19 +65,16 @@ function Gallery() {
                   src={artwork.image}
                   className="img-fluid shadow-1-strong rounded"
                 />
-                <h3 className=" fst-italic fs-6">{artwork.title}</h3>
+                <h3 className=" fst-italic fs-6 text-center mt-3">
+                  {artwork.title}
+                </h3>
                 <div className="d-flex justify-content-center">
-                  <MDBBtn
-                    color="none"
-                    className="m-1"
-                    style={{ color: "#7b273d" }}
-                    link
-                  >
+                  <MDBBtn tag="span" color="none" className="m-1">
                     <Link to="/Artworks">
                       <MDBIcon
                         fas
                         icon="exclamation-circle"
-                        className="d-block p-2 size='4x'"
+                        style={{ color: "#7b273d" }}
                       />
                     </Link>
                   </MDBBtn>

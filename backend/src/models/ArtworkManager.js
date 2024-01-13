@@ -7,9 +7,9 @@ class ArtworkManager extends AbstractManager {
 
   findArtwork() {
     return this.database
-      .query(`  SELECT artwork.id, artwork.title, artwork.image, artwork.dimension, artwork.creation_place, artist.name AS artist_name
-    FROM artwork
-    JOIN artist ON artwork.artist_id = artist.id;`);
+      .query(`SELECT artwork.id, artwork.title, artwork.image, artwork.dimension, artwork.creation_place, artist.id AS artist_id, artist.name AS artist_name
+      FROM artwork
+      JOIN artist ON artwork.artist_id = artist.id;`);
   }
 
   create(artwork) {
