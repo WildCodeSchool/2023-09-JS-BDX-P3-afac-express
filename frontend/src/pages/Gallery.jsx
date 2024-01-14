@@ -70,7 +70,7 @@ function Gallery() {
                 </h3>
                 <div className="d-flex justify-content-center">
                   <MDBBtn tag="span" color="none" className="m-1">
-                    <Link to="/Artworks">
+                    <Link to={`/artworks/${artwork.id}`}>
                       <MDBIcon
                         fas
                         icon="exclamation-circle"
