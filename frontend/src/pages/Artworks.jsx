@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -8,23 +8,44 @@ import {
   MDBCarouselItem,
   MDBCardTitle,
 } from "mdb-react-ui-kit";
+import { useParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import FilterArtworks from "../components/Filter/FilterArtworks";
 
 function Artworks() {
-  const { artistCollection } = useApp();
+  const { artistCollection, artCollection } = useApp();
   const [selectedArtist, setSelectedArtist] = useState(null);
+  const { id } = useParams();
 
-  const onSelectArtist = (artist, artCollection) => {
+  const onSelectArtist = (artist, artworks) => {
     const artistWithArtworks = {
       ...artist,
-      artworks: artCollection.filter(
-        (artwork) => artwork.artist_id === artist.id
-      ),
+      artworks: artworks.filter((art) => art.artist_id === artist.id),
     };
     setSelectedArtist(artistWithArtworks);
   };
 
+  useEffect(() => {
+    // console.log("id:", id, typeof id);
+    // console.log("artCollection:", artCollection);
+    if (id) {
+      const selectedArtwork = artCollection.find(
+        (artwork) => artwork.id === parseInt(id, 10)
+      );
+      // console.log("selectedArtwork:", selectedArtwork);
+      if (selectedArtwork) {
+        const selectedArtists = artistCollection.find(
+          (artist) => artist.id === selectedArtwork.artist_id
+        );
+        // console.log("selectedArtists:", selectedArtists);
+        if (selectedArtists) {
+          onSelectArtist(selectedArtists, [selectedArtwork]);
+        }
+      }
+    } else {
+      setSelectedArtist(null);
+    }
+  }, [id, artistCollection, artCollection]);
   return (
     <MDBContainer fluid className="pt-5 pb-5">
       <h3
@@ -45,13 +66,13 @@ function Artworks() {
             {selectedArtist.name}
           </h3>
 
-          <MDBCarousel showControls>
-            {selectedArtist.artworks.map((artwork, index) => (
-              <MDBCarouselItem key={artwork.id} itemID={index + 1}>
+          <MDBCarousel showControls interval={10000}>
+            {selectedArtist.artworks.map((art, index) => (
+              <MDBCarouselItem key={art.id} id={index + 1}>
                 <img
-                  src={artwork.image}
+                  src={art.image}
                   className="d-block w-100"
-                  alt={artwork.title}
+                  alt={art.title}
                 />
                 <MDBCard>
                   <MDBCardBody>
@@ -59,18 +80,16 @@ function Artworks() {
                       className="fst-italic text-center fs-5"
                       style={{ color: "#7b273d" }}
                     >
-                      {artwork.title}
+                      {art.title}
                     </MDBCardTitle>
                     <MDBCardText className="text-center lh-sm">
-                      {artwork.dimension && (
+                      {art.dimension && (
                         <span>
-                          {artwork.dimension}
+                          {art.dimension}
                           <br />
                         </span>
                       )}
-                      {artwork.creation_place && (
-                        <span>{artwork.creation_place}</span>
-                      )}
+                      {art.creation_place && <span>{art.creation_place}</span>}
                     </MDBCardText>
                   </MDBCardBody>
                 </MDBCard>

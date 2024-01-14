@@ -234,6 +234,11 @@ CREATE TABLE
     artwork_users (
         artwork_id int NOT NULL,
         users_id int NOT NULL,
-        CONSTRAINT fk_users_artist FOREIGN KEY (artwork_id) REFERENCES artwork(id),
-        CONSTRAINT fk_artist_users FOREIGN KEY (users_id) REFERENCES users(id)
+        artist_id int NOT NULL,
+        artist_name varchar(255) NOT NULL,
+        artwork_title varchar(200) NOT NULL,
+        artwork_image varchar(500) NOT NULL,
+        CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork(id),
+        CONSTRAINT fk_artwork_users_users FOREIGN KEY (users_id) REFERENCES users(id),
+        CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
     );
