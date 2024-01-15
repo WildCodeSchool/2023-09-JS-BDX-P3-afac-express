@@ -240,3 +240,11 @@ CREATE TABLE
         CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork(id),
         CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
     );
+
+CREATE TABLE
+    upload (
+        id int primary key NOT NULL AUTO_INCREMENT,
+        url varchar(255) NOT NULL,
+        unique(url),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );

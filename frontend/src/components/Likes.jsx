@@ -1,33 +1,26 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { useApp } from "../context/AppContext";
+import ApiService from "../services/api.service";
 
+const apiService = new ApiService();
 function Likes({
   artworkId,
-  artworkTitle,
-  artworkImage,
   artistId,
   artistName,
+  artworkTitle,
+  artworkImage,
 }) {
-  const { user } = useApp();
-
   const toggleLikes = async () => {
     const newFavorite = {
-      id: artworkId,
-      title: artworkTitle,
-      image: artworkImage,
-      artist_id: artistId,
-      artist_name: artistName,
+      artworkId,
+      artistId,
+      artistName,
+      artworkTitle,
+      artworkImage,
     };
 
-    // console.log("Nouveau favori à envoyer :", newFavorite);
-
     try {
-      // console.log("Avant la requête POST. Nouveau favori :", newFavorite);
-
-      await axios.post(`/artwork/user/${user.id}`, newFavorite);
-      // console.log("Requête POST réussie. Nouveau favori ajouté :", newFavorite);
+      await apiService.post(`http://localhost:5021/artwork/user`, newFavorite);
 
       // Gérer le cas où l'ajout est réussi (éventuellement mettre à jour l'état local)
     } catch (error) {
