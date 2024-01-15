@@ -41,7 +41,8 @@ function AppContextProvider({ children, apiService }) {
 
       // console.log("User data from API:", result.data);
 
-      alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+      // alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+
       setUser(result.data);
 
       if (result.data.is_admin === 1) {
@@ -49,10 +50,8 @@ function AppContextProvider({ children, apiService }) {
       }
       return navigate("/home");
     } catch (err) {
-      alert(err.message); // eslint-disable-line no-alert
+      throw new Error("Identifiants incorrects"); // eslint-disable-line no-alert
     }
-
-    return null;
   };
 
   const register = async (newUser) => {
