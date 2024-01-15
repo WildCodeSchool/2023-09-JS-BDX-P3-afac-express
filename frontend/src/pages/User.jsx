@@ -13,23 +13,23 @@ import {
   //   MDBRow,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
-import { useLike } from "../context/LikeContext";
+// import { useLike } from "../context/LikeContext";
 // import Likes from "../components/Likes";
 import FilterUser from "../components/Filter/FilterUser";
+import { useApp } from "../context/AppContext";
 
 function User() {
+  const { artistCollection } = useApp();
   const [selectedArtist, setSelectedArtist] = useState(null);
-  const { artists, favoriteArtworks } = useLike();
 
-  const onSelectArtist = (artist) => {
-    setSelectedArtist(artist);
-  };
-
-  const getFavoriteArtworkById = (artworkId) => {
-    return favoriteArtworks.find(
-      (artwork) =>
-        artwork.id === artworkId && artwork.artistId === selectedArtist.id
-    );
+  const onSelectArtist = (artist, artCollection) => {
+    const artistWithArtworks = {
+      ...artist,
+      artworks: artCollection.filter(
+        (artwork) => artwork.artist_id === artist.id
+      ),
+    };
+    setSelectedArtist(artistWithArtworks);
   };
 
   return (
@@ -41,7 +41,7 @@ function User() {
         Patrimoine iconographique de l’océan indien
       </h2>
 
-      <FilterUser artists={artists} onSelectArtist={onSelectArtist} />
+      <FilterUser artists={artistCollection} onSelectArtist={onSelectArtist} />
 
       {selectedArtist && (
         <div key={selectedArtist.id}>
@@ -56,22 +56,15 @@ function User() {
                   {selectedArtist.artworks.map((artwork) => (
                     <MDBCol lg="4" key={artwork.id}>
                       <MDBLightboxItem
-                        src={
-                          getFavoriteArtworkById(artwork.id)?.image ||
-                          artwork.image
-                        }
-                        fullscreenSrc={
-                          getFavoriteArtworkById(artwork.id)?.image ||
-                          artwork.image
-                        }
+                        src={artwork.image}
+                        fullscreenSrc={artwork.image}
                         className="w-100"
                       />
                       <MDBCard>
                         <MDBCardBody className="d-flex justify-content-center">
                           <div className="d-inline p-2">
                             <MDBCardTitle tag="strong" className="fs-5 me-5">
-                              {getFavoriteArtworkById(artwork.id)?.title ||
-                                artwork.title}
+                              {artwork.title}
                             </MDBCardTitle>
                             <div className="d-inline">
                               {/* <Likes

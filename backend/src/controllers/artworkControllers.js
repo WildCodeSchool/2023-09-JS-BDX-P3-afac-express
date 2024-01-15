@@ -12,6 +12,18 @@ const getArtwork = (_, res) => {
     });
 };
 
+const getArtworkForUsers = ({ params: { userId } }, res) => {
+  models.artwork
+    .findArtworkByUserId(userId)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const getArtworkById = (req, res) => {
   models.artwork
     .find(req.params.id)
@@ -33,6 +45,27 @@ const postArtwork = (req, res) => {
     .create(req.body)
     .then(([rows]) => {
       res.send({ id: rows.insertId, ...req.body });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const postArtworkForUser = (req, res) => {
+  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
+    req.body;
+
+  models.artwork
+    .addArtworkForUser(
+      artworkId,
+      artistId,
+      artistName,
+      artworkTitle,
+      artworkImage
+    )
+    .then(() => {
+      res.status(201).send("Artwork added for user successfully");
     })
     .catch((err) => {
       console.error(err);
@@ -72,8 +105,10 @@ const updateArtwork = (req, res) => {
 
 module.exports = {
   getArtwork,
+  getArtworkForUsers,
   getArtworkById,
   postArtwork,
+  postArtworkForUser,
   deleteArtwork,
   updateArtwork,
 };
