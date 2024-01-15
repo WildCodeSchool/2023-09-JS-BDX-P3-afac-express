@@ -11,6 +11,21 @@ const getArtists = (_, res) => {
       res.sendStatus(500);
     });
 };
+const getArtistById = (req, res) => {
+  models.artist
+    .find(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] != null) {
+        res.json(rows[0]);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 const postArtist = (req, res) => {
   models.artist
@@ -28,7 +43,24 @@ const postArtist = (req, res) => {
     });
 };
 
+const updateArtist = (req, res) => {
+  models.artist
+    .update(req.body, req.params.id)
+    .then((result) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      res.status(422).send({ message: err.message });
+    });
+};
+
 module.exports = {
   getArtists,
+  getArtistById,
   postArtist,
+  updateArtist,
 };
