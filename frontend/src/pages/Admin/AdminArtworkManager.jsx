@@ -20,11 +20,11 @@ export default function AdminartworkManager() {
   const updateartworkData = async () => {
     try {
       const updatedData = {
-        artworkName:
+        artworkTitle:
           updatedartworkTitle !== ""
             ? updatedartworkTitle
-            : artwork.artworkName,
-        biography: updatedSize !== "" ? updatedSize : artwork.biography,
+            : artwork.artworkTitle,
+        size: updatedSize !== "" ? updatedSize : artwork.size,
       };
 
       const { data } = await apiService.put(
@@ -112,7 +112,7 @@ export default function AdminartworkManager() {
       </form>
 
       <MDBBtn className="mt-4 mb-6" onClick={deleteartworkData}>
-        Supprimer le compte
+        Supprimer l'oeuvre
       </MDBBtn>
 
       <Redirection />
