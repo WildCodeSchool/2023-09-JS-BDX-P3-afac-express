@@ -83,6 +83,8 @@ function Gallery() {
                     artworkId={artwork.id}
                     artworkTitle={artwork.title}
                     artworkImage={artwork.image}
+                    artistId={selectedArtist.id}
+                    artistName={selectedArtist.name}
                   />
                 </div>
               </MDBCol>

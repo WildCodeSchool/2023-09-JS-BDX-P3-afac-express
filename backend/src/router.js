@@ -62,7 +62,7 @@ router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
 router.put("/artwork/:id", artworkControllers.updateArtwork);
 router.post(
-  "/artwork/user/:userId",
+  "/artwork/user",
   authMiddleware,
   artworkControllers.postArtworkForUser
 );

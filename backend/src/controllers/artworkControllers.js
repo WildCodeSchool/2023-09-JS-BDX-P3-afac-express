@@ -52,26 +52,25 @@ const postArtwork = (req, res) => {
     });
 };
 
-const postArtworkForUser = async (
-  { params: { userId }, body: artworkData },
-  res
-) => {
-  try {
-    // 1. Créer l'œuvre d'art avec la fonction createForArtworkUser
-    const createResult = await models.artwork.createForArtworkUser(artworkData);
+const postArtworkForUser = (req, res) => {
+  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
+    req.body;
 
-    // 2. Ajouter l'œuvre d'art à la table artwork_users avec la fonction addArtworkForUser
-    await models.artwork.addArtworkForUser(createResult.insertId, userId);
-
-    // 3. Récupérer les données mises à jour de l'utilisateur avec la fonction findArtworkByUserId
-    const userArtwork = await models.artwork.findArtworkByUserId(userId);
-
-    // Envoyer la réponse avec les données mises à jour
-    res.status(201).json({ message: "Artwork added for user", userArtwork });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
+  models.artwork
+    .addArtworkForUser(
+      artworkId,
+      artistId,
+      artistName,
+      artworkTitle,
+      artworkImage
+    )
+    .then(() => {
+      res.status(201).send("Artwork added for user successfully");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 const deleteArtwork = (req, res) => {

@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS artwork;
 CREATE TABLE
     artwork (
         id int primary key NOT NULL AUTO_INCREMENT,
-        title varchar(200) UNIQUE NOT NULL,
+        title varchar(200) NOT NULL,
         image varchar(500) NOT NULL,
         dimension varchar(100) DEFAULT NULL,
         creation_place varchar(255) DEFAULT NULL,
@@ -233,12 +233,10 @@ DROP TABLE IF EXISTS artwork_users;
 CREATE TABLE
     artwork_users (
         artwork_id int NOT NULL,
-        users_id int NOT NULL,
         artist_id int NOT NULL,
         artist_name varchar(255) NOT NULL,
         artwork_title varchar(200) NOT NULL,
         artwork_image varchar(500) NOT NULL,
         CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork(id),
-        CONSTRAINT fk_artwork_users_users FOREIGN KEY (users_id) REFERENCES users(id),
         CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
     );
