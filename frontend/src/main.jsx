@@ -9,8 +9,6 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";
 import AdminContextProvider from "./context/AdminContext";
-import LikeContextProvider from "./context/LikeContext";
-
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Artworks from "./pages/Artworks";
@@ -66,9 +64,7 @@ const router = createBrowserRouter([
     },
     element: (
       <AppContextProvider apiService={apiService}>
-        <LikeContextProvider>
-          <App />
-        </LikeContextProvider>
+        <App />
       </AppContextProvider>
     ),
     children: [

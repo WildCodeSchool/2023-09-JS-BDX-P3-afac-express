@@ -6,8 +6,15 @@ import {
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useApp } from "../../context/AppContext";
 
-function FilterArtist({ artists, onSelectArtist }) {
+function FilterArtist({ onSelectArtist }) {
+  const { artistCollection, artCollection } = useApp();
+
+  const handleSelectArtist = (artist) => {
+    onSelectArtist(artist, artCollection);
+  };
+
   return (
     <MDBDropdown className="d-flex justify-content-center pb-4 pt-3">
       <MDBDropdownToggle
@@ -18,11 +25,11 @@ function FilterArtist({ artists, onSelectArtist }) {
       </MDBDropdownToggle>
 
       <MDBDropdownMenu>
-        {artists.map((artist) => (
+        {artistCollection.map((artist) => (
           <MDBDropdownItem key={artist.id}>
             <Link
               to={`/artist/${artist.id}`}
-              onClick={() => onSelectArtist(artist)}
+              onClick={() => handleSelectArtist(artist)}
             >
               {artist.name}
             </Link>
@@ -34,12 +41,6 @@ function FilterArtist({ artists, onSelectArtist }) {
 }
 
 FilterArtist.propTypes = {
-  artists: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   onSelectArtist: PropTypes.func.isRequired,
 };
 

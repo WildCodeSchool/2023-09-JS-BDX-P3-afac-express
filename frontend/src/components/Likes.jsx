@@ -1,57 +1,43 @@
-import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
-import { useLike } from "../context/LikeContext";
+import axios from "axios";
+import { useApp } from "../context/AppContext";
 
-function Likes({ artworkId, artworkTitle, artworkImage }) {
-  const { artists, favoriteArtworks, setFavoriteArtworks } = useLike();
-  const isLiked = favoriteArtworks.some((artwork) => artwork.id === artworkId);
+function Likes({
+  artworkId,
+  artworkTitle,
+  artworkImage,
+  artistId,
+  artistName,
+}) {
+  const { user } = useApp();
 
-  const toggleLikes = () => {
-    if (isLiked) {
-      // Retirer l'artwork de la liste des favoris
-      const updatedFavorites = favoriteArtworks.filter(
-        (artwork) => artwork.id !== artworkId
-      );
-      setFavoriteArtworks(updatedFavorites);
-    } else {
-      // Récupérer l'artiste associé à l'œuvre
-      const artist = artists.find(
-        (
-          artist // eslint-disable-line
-        ) => artist.artworks.some((artwork) => artwork.id === artworkId) // eslint-disable-line
-      );
+  const toggleLikes = async () => {
+    const newFavorite = {
+      id: artworkId,
+      title: artworkTitle,
+      image: artworkImage,
+      artist_id: artistId,
+      artist_name: artistName,
+    };
 
-      // Ajouter l'artwork à la liste des favoris avec le nom de l'artiste
-      const newFavorite = {
-        id: artworkId,
-        title: artworkTitle,
-        image: artworkImage,
-        artistId: artist.id,
-      };
-      setFavoriteArtworks([...favoriteArtworks, newFavorite]);
-      // Mettre à jour le local storage avec la nouvelle liste
-      localStorage.setItem(
-        "favorite_artworks",
-        JSON.stringify([...favoriteArtworks, newFavorite])
-      );
+    // console.log("Nouveau favori à envoyer :", newFavorite);
+
+    try {
+      // console.log("Avant la requête POST. Nouveau favori :", newFavorite);
+
+      await axios.post(`/artwork/user/${user.id}`, newFavorite);
+      // console.log("Requête POST réussie. Nouveau favori ajouté :", newFavorite);
+
+      // Gérer le cas où l'ajout est réussi (éventuellement mettre à jour l'état local)
+    } catch (error) {
+      console.error("Erreur lors de la requête POST :", error);
     }
   };
 
-  const icon = !isLiked ? (
-    <MDBIcon far icon="heart" className="d-block p-2" />
-  ) : (
-    <MDBIcon fas icon="heart" className="d-block p-2" />
-  );
-
   return (
-    <MDBBtn
-      tag="a"
-      color="none"
-      className="m-1"
-      style={{ color: "#7b273d" }}
-      onClick={toggleLikes}
-    >
-      {icon}
+    <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
+      Ajouter au favori
     </MDBBtn>
   );
 }
@@ -59,6 +45,8 @@ Likes.propTypes = {
   artworkId: PropTypes.number.isRequired,
   artworkTitle: PropTypes.string.isRequired,
   artworkImage: PropTypes.string.isRequired,
+  artistId: PropTypes.number.isRequired,
+  artistName: PropTypes.string.isRequired,
 };
 
 export default Likes;
