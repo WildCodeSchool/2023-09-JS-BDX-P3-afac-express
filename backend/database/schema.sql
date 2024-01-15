@@ -42,11 +42,10 @@ CREATE TABLE
     artwork (
         id int primary key NOT NULL AUTO_INCREMENT,
         title varchar(200) UNIQUE NOT NULL,
-        image varchar(500) NOT NULL,
+        image varchar(500) NULL,
         dimension varchar(100) DEFAULT NULL,
         creation_place varchar(255) DEFAULT NULL,
-        artist_id int DEFAULT NULL,
-        CONSTRAINT fk_artwork_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
+        artist_id int DEFAULT NULL
     );
 
 INSERT INTO

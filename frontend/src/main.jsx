@@ -21,7 +21,9 @@ import User from "./pages/User";
 import Register from "./pages/Register";
 import VerificationLogin from "./pages/VerificationLogin";
 import ResetPassword from "./pages/ResetPassword";
-import AdminArtManager from "./pages/Admin/AdminArtManager";
+import AdminArt from "./pages/Admin/AdminArt";
+import AdminArtistManager from "./pages/Admin/AdminArtistManager";
+import AdminArtworkManager from "./pages/Admin/AdminArtworkManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
@@ -97,7 +99,15 @@ const router = createBrowserRouter([
           { path: "/admin/adminuser", element: <AdminUser /> },
           {
             path: "/admin/adminart",
-            element: <AdminArtManager />,
+            element: <AdminArt />,
+          },
+          {
+            path: "/admin/adminartistmanager/:id",
+            element: <AdminArtistManager />,
+          },
+          {
+            path: "/admin/adminartworkmanager/:id",
+            element: <AdminArtworkManager />,
           },
           {
             path: "/admin/adminusermanagement/:id",
