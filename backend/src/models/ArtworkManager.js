@@ -58,23 +58,36 @@ class ArtworkManager extends AbstractManager {
     artworkImage
   ) {
     const sqlQuery = `
-      SELECT
-        artwork_id AS artworkId,
-        artist_id AS artistId,
-        users_id AS userId,
-        artist_name AS artistName,
-        artwork_title AS artworkTitle,
-        artwork_image AS artworkImage
-      FROM artwork_users
+    SELECT
+    artwork_id AS artworkId,
+    artist_id AS artistId,
+    users_id AS userId,
+    artist_name AS artistName,
+    artwork_title AS artworkTitle,
+    artwork_image AS artworkImage
+  FROM artwork_users
+  WHERE
+  (? IS NULL OR artwork_id = ?)
+    AND (? IS NULL OR artist_id = ?)
+    AND (? IS NULL OR users_id = ?)
+    AND (? IS NULL OR artist_name LIKE ?)
+    AND (? IS NULL OR artwork_title LIKE ?)
+    AND (? IS NULL OR artwork_image LIKE ?)
     `;
     return this.database
       .query(sqlQuery, [
         artworkId,
+        artworkId,
+        artistId,
         artistId,
         userId,
+        userId,
         artistName,
+        `%${artistName}%`,
         artworkTitle,
+        `%${artworkTitle}%`,
         artworkImage,
+        `%${artworkImage}%`,
       ])
       .then((result) => {
         return result;
