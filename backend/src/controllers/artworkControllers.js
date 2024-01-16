@@ -12,14 +12,15 @@ const getArtwork = (_, res) => {
     });
 };
 
-const getArtworkForUsers = ({ params: { userId } }, res) => {
+const getArtworkForUsers = (req, res) => {
   models.artwork
-    .findArtworkByUserId(userId)
+    .findArtworkForUser()
     .then(([rows]) => {
+      // console.log("Rows retrieved from the database:", rows);
       res.send(rows);
     })
     .catch((err) => {
-      console.error(err);
+      console.error("Error fetching artwork data:", err);
       res.sendStatus(500);
     });
 };
@@ -53,13 +54,20 @@ const postArtwork = (req, res) => {
 };
 
 const postArtworkForUser = (req, res) => {
-  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
-    req.body;
+  const {
+    artworkId,
+    artistId,
+    userId,
+    artistName,
+    artworkTitle,
+    artworkImage,
+  } = req.body;
 
   models.artwork
     .addArtworkForUser(
       artworkId,
       artistId,
+      userId,
       artistName,
       artworkTitle,
       artworkImage

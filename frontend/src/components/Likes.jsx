@@ -6,6 +6,7 @@ const apiService = new ApiService();
 function Likes({
   artworkId,
   artistId,
+  userId,
   artistName,
   artworkTitle,
   artworkImage,
@@ -14,10 +15,13 @@ function Likes({
     const newFavorite = {
       artworkId,
       artistId,
+      userId,
       artistName,
       artworkTitle,
       artworkImage,
     };
+
+    // console.log("Nouveau favori à envoyer :", newFavorite);
 
     try {
       await apiService.post(`http://localhost:5021/artwork/user`, newFavorite);
@@ -39,6 +43,7 @@ Likes.propTypes = {
   artworkTitle: PropTypes.string.isRequired,
   artworkImage: PropTypes.string.isRequired,
   artistId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   artistName: PropTypes.string.isRequired,
 };
 
