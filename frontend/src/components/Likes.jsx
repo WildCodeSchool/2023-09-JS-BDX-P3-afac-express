@@ -26,7 +26,7 @@ function Likes({
     try {
       await apiService.post(`http://localhost:5021/artwork/user`, newFavorite);
 
-      // Gérer le cas où l'ajout est réussi (éventuellement mettre à jour l'état local)
+      // Gérer le cas où l'ajout est réussi (l'envoie à la page perso ?)
     } catch (error) {
       console.error("Erreur lors de la requête POST :", error);
     }

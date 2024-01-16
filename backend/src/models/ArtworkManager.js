@@ -49,16 +49,39 @@ class ArtworkManager extends AbstractManager {
       });
   }
 
-  findArtworkForUser() {
-    return this.database.query(`
+  findArtworkForUser(
+    artworkId,
+    artistId,
+    userId,
+    artistName,
+    artworkTitle,
+    artworkImage
+  ) {
+    const sqlQuery = `
       SELECT
         artwork_id AS artworkId,
         artist_id AS artistId,
+        users_id AS userId,
         artist_name AS artistName,
         artwork_title AS artworkTitle,
         artwork_image AS artworkImage
       FROM artwork_users
-    `);
+    `;
+    return this.database
+      .query(sqlQuery, [
+        artworkId,
+        artistId,
+        userId,
+        artistName,
+        artworkTitle,
+        artworkImage,
+      ])
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 
   create(artwork) {
