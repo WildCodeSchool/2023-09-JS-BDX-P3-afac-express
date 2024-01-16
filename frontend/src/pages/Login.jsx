@@ -13,6 +13,7 @@ import { useApp } from "../context/AppContext";
 function Login() {
   const { login } = useApp();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [formValue, setFormValue] = useState({
     email: "",
@@ -25,10 +26,16 @@ function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const success = await login(formValue);
+    try {
+      const success = await login(formValue);
 
-    if (success) {
-      navigate("/home");
+      if (success) {
+        navigate("/home");
+      } else {
+        setError("Identifiants incorrects");
+      }
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -72,7 +79,7 @@ function Login() {
           </Link>
         </MDBCol>
       </MDBRow>
-
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <MDBBtn type="submit" className="mb-4" block>
         Se connecter
       </MDBBtn>
