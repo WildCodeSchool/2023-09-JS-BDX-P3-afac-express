@@ -34,7 +34,7 @@ function Likes({
 
   return (
     <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
-      Ajouter au favori
+      Ajouter aux favoris
     </MDBBtn>
   );
 }
