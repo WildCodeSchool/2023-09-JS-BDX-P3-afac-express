@@ -49,7 +49,9 @@ router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
 router.get("/artist", artistControllers.getArtists);
+router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
+router.put("/artist/:id", artistControllers.updateArtist);
 
 router.get(
   "/artwork",
