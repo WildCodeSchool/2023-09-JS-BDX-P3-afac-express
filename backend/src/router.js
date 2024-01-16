@@ -52,6 +52,7 @@ router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
 router.put("/artist/:id", artistControllers.updateArtist);
+router.delete("/artist/:id", artistControllers.deleteArtist);
 
 router.get(
   "/artwork",

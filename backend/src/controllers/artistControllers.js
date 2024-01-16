@@ -58,9 +58,26 @@ const updateArtist = (req, res) => {
     });
 };
 
+const deleteArtist = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  return models.artist
+    .delete(id)
+    .then(([rows]) => {
+      if (rows.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 module.exports = {
   getArtists,
   getArtistById,
   postArtist,
   updateArtist,
+  deleteArtist,
 };
