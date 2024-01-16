@@ -13,7 +13,7 @@ import FilterGallery from "../components/Filter/FilterGallery";
 import { useApp } from "../context/AppContext";
 
 function Gallery() {
-  const { artistCollection } = useApp();
+  const { user, artistCollection } = useApp();
   const [selectedArtist, setSelectedArtist] = useState(null);
 
   const onSelectArtist = (artist, artCollection) => {
@@ -82,6 +82,7 @@ function Gallery() {
                   <Likes
                     artworkId={artwork.id}
                     artworkTitle={artwork.title}
+                    userId={user.id}
                     artworkImage={artwork.image}
                     artistId={selectedArtist.id}
                     artistName={selectedArtist.name}

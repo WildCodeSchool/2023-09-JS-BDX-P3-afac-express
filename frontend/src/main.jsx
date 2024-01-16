@@ -72,7 +72,20 @@ const router = createBrowserRouter([
       { path: "/gallery", element: <Gallery /> },
       { path: "/gallery/:id", element: <Gallery /> },
       { path: "/artworks", element: <Artworks /> },
-      { path: "/artworks/:id", element: <Artworks /> },
+      {
+        path: "/artworks/:id",
+        element: <Artworks />,
+        loader: async ({ params }) => {
+          try {
+            const { data } = await apiService.get(
+              `http://localhost:5021/artwork/${params.id}`
+            );
+            return { artworkData: data };
+          } catch (err) {
+            return null;
+          }
+        },
+      },
       { path: "/artists", element: <Artists /> },
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },

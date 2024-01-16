@@ -1,10 +1,10 @@
 import {
+  MDBBtn,
   MDBDropdown,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useApp } from "../../context/AppContext";
 
@@ -26,13 +26,10 @@ function FilterGallery({ onSelectArtist }) {
 
       <MDBDropdownMenu>
         {artistCollection.map((artist) => (
-          <MDBDropdownItem key={artist.id}>
-            <Link
-              to={`/gallery/${artist.id}`}
-              onClick={() => handleSelectArtist(artist)}
-            >
+          <MDBDropdownItem key={artist.id} className="d-grid gap-2">
+            <MDBBtn onClick={() => handleSelectArtist(artist)}>
               {artist.name}
-            </Link>
+            </MDBBtn>
           </MDBDropdownItem>
         ))}
       </MDBDropdownMenu>
