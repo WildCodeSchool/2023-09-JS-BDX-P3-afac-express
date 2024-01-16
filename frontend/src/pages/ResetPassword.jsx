@@ -66,7 +66,7 @@ export default function ResetPassword() {
       <h3>Nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="new-password"
+        type="password"
         id="form2Example1"
         required="required"
         value={password}
@@ -75,7 +75,7 @@ export default function ResetPassword() {
       <h3>Confirmez le nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="current-password"
+        type="password"
         id="form2Example2"
         required="required"
         value={confirmPassword}
