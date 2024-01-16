@@ -10,15 +10,18 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
 import { useApp } from "../../context/AppContext";
 
 const apiService = new ApiService();
 
-export default function AdminArtManager() {
+export default function AdminArt() {
+  const navigate = useNavigate();
   const { artistCollection, artCollection } = useApp();
   const [postArtist, setPostArtist] = useState({ name: "", description: "" });
+
   const handleInput = (e) => {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
@@ -63,6 +66,7 @@ export default function AdminArtManager() {
 
   return (
     <div>
+      {/* Artist Section */}
       <h1>Artistes</h1>
       <form className="user-form" onSubmit={handleSubmit}>
         <h3>Ajouter un artiste</h3>
@@ -99,8 +103,13 @@ export default function AdminArtManager() {
                   <MDBCardText className="text-truncate">
                     {artist.description}
                   </MDBCardText>
-                  <MDBBtn href="#">Modifier</MDBBtn>
-                  <MDBBtn href="#">Supprimer</MDBBtn>
+                  <MDBBtn
+                    onClick={() =>
+                      navigate(`/admin/adminartistmanager/${artist.id}`)
+                    }
+                  >
+                    Modifier ou supprimer
+                  </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
@@ -110,6 +119,7 @@ export default function AdminArtManager() {
         )}
       </MDBRow>
 
+      {/* Artwork Section */}
       <h1>Oeuvres</h1>
       <h3>Ajouter une oeuvre</h3>
       <MDBInput
@@ -160,30 +170,34 @@ export default function AdminArtManager() {
       <MDBBtn type="submit" className="mb-4" onClick={handleSubmitArt} block>
         Valider
       </MDBBtn>
-      <MDBRow>
-        <MDBRow className="row-cols-1 row-cols-md-2 g-4">
-          {artCollection && artCollection.length > 0 ? (
-            artCollection.map((art) => (
-              <MDBCol key={art.id} xl={3} lg={4} className="mb-4">
-                <MDBCard>
-                  <MDBCardImage src={art.image} />
-                  <MDBCardBody>
-                    <MDBCardTitle className="text-truncate">
-                      {art.title}
-                    </MDBCardTitle>
-                    <MDBCardText className="text-truncate">
-                      {art.dimension} {art.creation_place}
-                    </MDBCardText>
-                    <MDBBtn href="#">Modifier</MDBBtn>
-                    <MDBBtn href="#">Supprimer</MDBBtn>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            ))
-          ) : (
-            <p>Aucune œuvre disponible.</p>
-          )}
-        </MDBRow>
+
+      <MDBRow className="row-cols-1 row-cols-md-2 g-4">
+        {artCollection && artCollection.length > 0 ? (
+          artCollection.map((art) => (
+            <MDBCol key={art.id} xl={3} lg={4} className="mb-4">
+              <MDBCard>
+                <MDBCardImage src={art.image} />
+                <MDBCardBody>
+                  <MDBCardTitle className="text-truncate">
+                    {art.title}
+                  </MDBCardTitle>
+                  <MDBCardText className="text-truncate">
+                    {art.dimension} {art.creation_place}
+                  </MDBCardText>
+                  <MDBBtn
+                    onClick={() =>
+                      navigate(`/admin/adminartworkmanager/${art.id}`)
+                    }
+                  >
+                    Modifier ou supprimer
+                  </MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          ))
+        ) : (
+          <p>Aucune œuvre disponible.</p>
+        )}
       </MDBRow>
 
       <Redirection />
