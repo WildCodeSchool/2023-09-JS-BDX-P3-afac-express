@@ -68,6 +68,6 @@ router.post(
   authMiddleware,
   artworkControllers.postArtworkForUser
 );
-router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
+router.get("/artwork/user", artworkControllers.getArtworkForUsers);
 
 module.exports = router;
