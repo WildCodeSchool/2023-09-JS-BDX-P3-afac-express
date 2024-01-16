@@ -1,5 +1,6 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import ApiService from "../services/api.service";
 
 const apiService = new ApiService();
@@ -11,6 +12,8 @@ function Likes({
   artworkTitle,
   artworkImage,
 }) {
+  const navigate = useNavigate();
+
   const toggleLikes = async () => {
     const newFavorite = {
       artworkId,
@@ -21,11 +24,9 @@ function Likes({
       artworkImage,
     };
 
-    // console.log("Nouveau favori à envoyer :", newFavorite);
-
     try {
       await apiService.post(`http://localhost:5021/artwork/user`, newFavorite);
-
+      navigate("/user");
       // Gérer le cas où l'ajout est réussi (l'envoie à la page perso ?)
     } catch (error) {
       console.error("Erreur lors de la requête POST :", error);
