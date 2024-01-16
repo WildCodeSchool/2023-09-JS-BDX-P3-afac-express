@@ -3,7 +3,6 @@ import {
   MDBBtn,
   MDBCol,
   MDBContainer,
-  MDBIcon,
   MDBRow,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
@@ -69,13 +68,24 @@ function Gallery() {
                   {artwork.title}
                 </h3>
                 <div className="d-flex justify-content-center">
-                  <MDBBtn tag="span" color="none" className="m-1">
-                    <Link to={`/artworks/${artwork.id}`}>
-                      <MDBIcon
-                        fas
-                        icon="exclamation-circle"
-                        style={{ color: "#7b273d" }}
-                      />
+                  <MDBBtn tag="span" className="m-1 text-white">
+                    <Link
+                      to={{
+                        pathname: `/artworks/${artwork.id}`,
+                        state: {
+                          artwork: {
+                            id: artwork.id,
+                            image: artwork.image,
+                            title: artwork.title,
+                            artistName: artwork.artist_name,
+                            dimension: artwork.dimension,
+                            creationPlace: artwork.creation_place,
+                          },
+                        },
+                      }}
+                      className="text-white"
+                    >
+                      Plus d'info
                     </Link>
                   </MDBBtn>
 
