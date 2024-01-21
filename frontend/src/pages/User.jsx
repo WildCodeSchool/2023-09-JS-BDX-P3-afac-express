@@ -1,11 +1,8 @@
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
-  //   MDBAnimation,
   MDBCol,
   MDBContainer,
-  //   MDBCol,
   MDBLightbox,
   MDBLightboxItem,
   MDBRow,
@@ -37,11 +34,16 @@ function User() {
           `http://localhost:5021/artwork/user/${user.userId}`
         );
 
-        localStorage.setItem(
-          "artworks",
-          JSON.stringify(response.data, addedArtwork)
-        );
-        setArtworks([...response.data, addedArtwork]);
+        const existingArtworks =
+          JSON.parse(localStorage.getItem("artworks")) || [];
+        const updatedArtworks = [
+          ...existingArtworks,
+          ...response.data,
+          addedArtwork,
+        ];
+
+        localStorage.setItem("artworks", JSON.stringify(updatedArtworks));
+        setArtworks(updatedArtworks);
       } catch (error) {
         console.error("Error during GET request:", error);
       }
@@ -59,35 +61,36 @@ function User() {
         Patrimoine iconographique de l’océan indien
       </h2>
       <div>
-        <h2 className="fs-5 text text-center pt-2 pb-2">nom artiste</h2>
-
         <div className="d-flex flex-column mb-3">
           <div className="p-2">
             <MDBLightbox>
               <MDBRow>
                 {artworks.map((artwork) => (
-                  <MDBCol lg="4" key={artwork.artworkId}>
-                    <MDBLightboxItem
-                      src={artwork.artworkImage}
-                      fullscreenSrc={artwork.artworkImage}
-                      className="w-100"
-                    />
-                    <MDBCard>
-                      <MDBCardBody className="d-flex justify-content-center">
-                        <div className="d-inline p-2">
-                          <MDBCardTitle tag="strong" className="fs-5 me-5">
-                            {artwork.artworkTitle}
-                          </MDBCardTitle>
-                          <div className="d-inline">
-                            {/* <Likes
-                              artworkId={selectedArtist.artworks[0].id}
-                              artworkTitle={selectedArtist.artworks[0].title}
-                              artworkImage={selectedArtist.artworks[0].image}
-                            /> */}
+                  <MDBCol lg="4" key={artwork?.artworkId}>
+                    {artwork && artwork.artworkImage ? (
+                      <MDBLightboxItem
+                        src={artwork.artworkImage}
+                        fullscreenSrc={artwork.artworkImage}
+                        className="w-100"
+                      />
+                    ) : null}
+
+                    {artwork && artwork.artworkTitle && (
+                      <MDBCard>
+                        <MDBCardBody className="d-flex justify-content-center">
+                          <div className="d-inline p-2">
+                            <h2 className="fs-5 me-5 text-center">
+                              {artwork.artworkTitle}
+                            </h2>
+                            {artwork.artistName && (
+                              <h3 className="fs-6 fst-italic text text-center pt-2 pb-2">
+                                {artwork.artistName}
+                              </h3>
+                            )}
                           </div>
-                        </div>
-                      </MDBCardBody>
-                    </MDBCard>
+                        </MDBCardBody>
+                      </MDBCard>
+                    )}
                   </MDBCol>
                 ))}
               </MDBRow>
