@@ -58,6 +58,11 @@ router.get(
   authMiddleware,
   artworkControllers.getArtworkForUserById
 );
+router.delete(
+  "/artwork/user/:userId/:artworkId",
+  authMiddleware,
+  artworkControllers.deleteArtworkForUser
+);
 router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);

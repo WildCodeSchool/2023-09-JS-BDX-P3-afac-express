@@ -119,6 +119,20 @@ const getArtworkForUserById = (req, res) => {
     });
 };
 
+const deleteArtworkForUser = (req, res) => {
+  const { userId, artworkId } = req.params;
+
+  models.artwork
+    .deleteArtworkForUser(userId, artworkId)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error("Error deleting artwork:", err);
+      res.sendStatus(500);
+    });
+};
+
 const deleteArtwork = (req, res) => {
   models.artwork
     .delete(req.params.id)
@@ -154,6 +168,7 @@ module.exports = {
   getArtworkForUsers,
   getArtworkById,
   getArtworkForUserById,
+  deleteArtworkForUser,
   postArtwork,
   postArtworkForUser,
   deleteArtwork,

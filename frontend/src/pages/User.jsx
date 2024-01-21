@@ -79,7 +79,7 @@ function User() {
                       <MDBCard>
                         <MDBCardBody className="d-flex justify-content-center">
                           <div className="d-inline p-2">
-                            <h2 className="fs-5 me-5 text-center">
+                            <h2 className="fs-5 me-5 text-center fw-bold">
                               {artwork.artworkTitle}
                             </h2>
                             {artwork.artistName && (
