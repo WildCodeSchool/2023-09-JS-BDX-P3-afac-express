@@ -27,12 +27,10 @@ function Likes({
     };
 
     try {
-      console.info("Data to be sent in POST request:", newFavorite);
       const postResponse = await apiService.post(
         `http://localhost:5021/artwork/user`,
         newFavorite
       );
-      console.info("POST request successful", postResponse);
       appContext.setAddedArtwork(postResponse);
       navigate("/user");
     } catch (error) {
