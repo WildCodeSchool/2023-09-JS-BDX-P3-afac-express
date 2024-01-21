@@ -12,34 +12,6 @@ const getArtwork = (_, res) => {
     });
 };
 
-const getArtworkForUsers = (req, res) => {
-  const {
-    artworkId,
-    artistId,
-    userId,
-    artistName,
-    artworkTitle,
-    artworkImage,
-  } = req.body;
-
-  models.artwork
-    .findArtworkForUser(
-      artworkId,
-      artistId,
-      userId,
-      artistName,
-      artworkTitle,
-      artworkImage
-    )
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
 const getArtworkById = (req, res) => {
   models.artwork
     .find(req.params.id)
@@ -68,7 +40,7 @@ const postArtwork = (req, res) => {
     });
 };
 
-const postArtworkForUser = (req, res) => {
+const postArtworkForUser = async (req, res) => {
   const {
     artworkId,
     artistId,
@@ -78,8 +50,35 @@ const postArtworkForUser = (req, res) => {
     artworkImage,
   } = req.body;
 
+  try {
+    await models.artwork.addArtworkForUser(
+      artworkId,
+      artistId,
+      userId,
+      artistName,
+      artworkTitle,
+      artworkImage
+    );
+
+    const artworks = await models.artwork.findArtworkForUser(userId);
+
+    res.status(201).json({
+      message: "Artwork added for user successfully",
+      artworks,
+    });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
+
+const getArtworkForUsers = (req, res) => {
+  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
+    req.params;
+
+  const { userId } = req.params;
   models.artwork
-    .addArtworkForUser(
+    .findArtworkForUser(
       artworkId,
       artistId,
       userId,
@@ -87,8 +86,30 @@ const postArtworkForUser = (req, res) => {
       artworkTitle,
       artworkImage
     )
-    .then(() => {
-      res.status(201).send("Artwork added for user successfully");
+    .then((artwork) => {
+      if (artwork) {
+        res.json(artwork);
+      } else {
+        res.status(404).json({ message: "Artwork not found" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getArtworkForUserById = (req, res) => {
+  const { userId } = req.params;
+
+  models.artwork
+    .findArtworkForUser(userId)
+    .then((artwork) => {
+      if (artwork) {
+        res.json(artwork);
+      } else {
+        res.status(404).json({ message: "Artwork not found" });
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -130,6 +151,7 @@ module.exports = {
   getArtwork,
   getArtworkForUsers,
   getArtworkById,
+  getArtworkForUserById,
   postArtwork,
   postArtworkForUser,
   deleteArtwork,

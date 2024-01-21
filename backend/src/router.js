@@ -56,7 +56,7 @@ router.post(
 router.get(
   "/artwork/user/:userId",
   authMiddleware,
-  artworkControllers.getArtworkForUsers
+  artworkControllers.getArtworkForUserById
 );
 router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);

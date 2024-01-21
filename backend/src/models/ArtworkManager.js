@@ -41,56 +41,66 @@ class ArtworkManager extends AbstractManager {
         artworkTitle,
         artworkImage,
       ])
-      .then((result) => {
-        return result;
+      .then(async () => {
+        const artworks = await this.findArtworkForUser(userId);
+        return artworks;
       })
       .catch((error) => {
         throw error;
       });
   }
 
-  findArtworkForUser(
-    artworkId,
-    artistId,
-    userId,
-    artistName,
-    artworkTitle,
-    artworkImage
-  ) {
+  findArtworkForUser(userId) {
     const sqlQuery = `
-    SELECT
-    artwork_id AS artworkId,
-    artist_id AS artistId,
-    users_id AS userId,
-    artist_name AS artistName,
-    artwork_title AS artworkTitle,
-    artwork_image AS artworkImage
-  FROM artwork_users
-  WHERE
-  (? IS NULL OR artwork_id = ?)
-    AND (? IS NULL OR artist_id = ?)
-    AND (? IS NULL OR users_id = ?)
-    AND (? IS NULL OR artist_name LIKE ?)
-    AND (? IS NULL OR artwork_title LIKE ?)
-    AND (? IS NULL OR artwork_image LIKE ?)
+      SELECT
+        artwork_id AS artworkId,
+        artist_id AS artistId,
+        users_id AS userId,
+        artist_name AS artistName,
+        artwork_title AS artworkTitle,
+        artwork_image AS artworkImage
+      FROM artwork_users
+      WHERE users_id = ?
+      LIMIT 1;
     `;
+
     return this.database
-      .query(sqlQuery, [
-        artworkId,
-        artworkId,
-        artistId,
-        artistId,
-        userId,
-        userId,
-        artistName,
-        `%${artistName}%`,
-        artworkTitle,
-        `%${artworkTitle}%`,
-        artworkImage,
-        `%${artworkImage}%`,
-      ])
+      .query(sqlQuery, [userId])
       .then((result) => {
-        return result;
+        const artwork = result[0];
+        if (artwork) {
+          return artwork;
+        }
+        return null;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  findArtworkById(artworkId) {
+    const sqlQuery = `
+      SELECT
+        artwork_id AS artworkId,
+        artist_id AS artistId,
+        users_id AS userId,
+        artist_name AS artistName,
+        artwork_title AS artworkTitle,
+        artwork_image AS artworkImage
+      FROM artwork_users
+      WHERE artwork_id = ?
+      LIMIT 1;
+    `;
+
+    return this.database
+      .query(sqlQuery, [artworkId])
+      .then((result) => {
+        const artwork = result[0];
+        // console.log("Artwork result:", artwork);
+        if (artwork) {
+          return artwork;
+        }
+        return null;
       })
       .catch((error) => {
         throw error;
