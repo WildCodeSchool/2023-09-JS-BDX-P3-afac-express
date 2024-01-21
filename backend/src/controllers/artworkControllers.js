@@ -60,11 +60,13 @@ const postArtworkForUser = async (req, res) => {
       artworkImage
     );
 
-    const artworks = await models.artwork.findArtworkForUser(userId);
-
     res.status(201).json({
-      message: "Artwork added for user successfully",
-      artworks,
+      artworkId,
+      artistId,
+      userId,
+      artistName,
+      artworkTitle,
+      artworkImage,
     });
   } catch (err) {
     console.error(err);

@@ -89,14 +89,16 @@ function Gallery() {
                     </Link>
                   </MDBBtn>
 
-                  <Likes
-                    artworkId={artwork.id}
-                    artworkTitle={artwork.title}
-                    userId={user.id}
-                    artworkImage={artwork.image}
-                    artistId={selectedArtist.id}
-                    artistName={selectedArtist.name}
-                  />
+                  {selectedArtist && user && (
+                    <Likes
+                      artworkId={artwork.id}
+                      artistId={selectedArtist.id}
+                      userId={user.id}
+                      artistName={selectedArtist.name}
+                      artworkTitle={artwork.title}
+                      artworkImage={artwork.image}
+                    />
+                  )}
                 </div>
               </MDBCol>
             ))}
