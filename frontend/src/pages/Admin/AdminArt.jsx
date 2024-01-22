@@ -19,12 +19,14 @@ const apiService = new ApiService();
 
 export default function AdminArt() {
   const navigate = useNavigate();
-  const { artistCollection, artCollection } = useApp();
+  const { artistCollection, artCollection, setArtist } = useApp();
   const [postArtist, setPostArtist] = useState({ name: "", description: "" });
 
   const handleInput = (e) => {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
+
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +39,13 @@ export default function AdminArt() {
     } catch (error) {
       console.error(error);
     }
+    const formData = new FormData();
+    formData.append("avatar", image);
+    const result = await apiService.post(
+      `http://localhost:5021/uploads`,
+      formData
+    );
+    setArtist(result);
   };
 
   const [postArt, setPostArt] = useState({
@@ -84,9 +93,13 @@ export default function AdminArt() {
           type="text"
           label="Biographie"
         />
-        <MDBBtn type="submit" className="mb-4" block>
-          Ajouter une image
-        </MDBBtn>
+        <form className="d-flex flex-column mb-4" onSubmit={handleSubmit}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </form>
         <MDBBtn type="submit" className="mb-4" block>
           Valider
         </MDBBtn>

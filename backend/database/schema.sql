@@ -244,3 +244,12 @@ CREATE TABLE
         CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork(id),
         CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist(id)
     );
+
+     CREATE TABLE upload ( 
+  id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  url varchar(255) NOT NULL,
+  unique(url),
+  created_at timestamp default CURRENT_TIMESTAMP
+);
+
+ALTER TABLE artist ADD COLUMN avatar int(11), ADD CONSTRAINT fk_artist_upload_id FOREIGN KEY (artist) REFERENCES upload(id);

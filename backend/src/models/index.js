@@ -32,6 +32,7 @@ const models = {};
 const ArtistManager = require("./ArtistManager");
 const UserManager = require("./UserManager");
 const ArtworkManager = require("./ArtworkManager");
+const UploadManager = require("./UploadManager");
 
 models.artist = new ArtistManager();
 models.artist.setDatabase(pool);
@@ -41,5 +42,8 @@ models.users.setDatabase(pool);
 
 models.artwork = new ArtworkManager();
 models.artwork.setDatabase(pool);
+
+models.upload = new UploadManager();
+models.upload.setDatabase(pool);
 
 module.exports = models;

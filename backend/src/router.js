@@ -1,10 +1,14 @@
 const express = require("express");
 
 const router = express.Router();
+const multer = require("multer");
+
+const upload = multer({ dest: "public/uploads/" });
 
 const userControllers = require("./controllers/userControllers");
 const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
+const uploadControllers = require("./controllers/uploadControllers");
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const {
   authAdminMiddleware,
@@ -70,5 +74,21 @@ router.post(
   artworkControllers.postArtworkForUser
 );
 router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
+
+// UPLOADS
+
+router.get(
+  "/uploads",
+  authMiddleware,
+  authAdminMiddleware,
+  uploadControllers.getList
+);
+
+router.post(
+  "/uploads",
+  // authMiddleware,
+  upload.single("avatar"),
+  uploadControllers.creator
+);
 
 module.exports = router;
