@@ -12,19 +12,6 @@ const getArtwork = (_, res) => {
     });
 };
 
-const getArtworkForUsers = (req, res) => {
-  models.artwork
-    .findArtworkForUser()
-    .then(([rows]) => {
-      // console.log("Rows retrieved from the database:", rows);
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error("Error fetching artwork data:", err);
-      res.sendStatus(500);
-    });
-};
-
 const getArtworkById = (req, res) => {
   models.artwork
     .find(req.params.id)
@@ -53,7 +40,7 @@ const postArtwork = (req, res) => {
     });
 };
 
-const postArtworkForUser = (req, res) => {
+const postArtworkForUser = async (req, res) => {
   const {
     artworkId,
     artistId,
@@ -63,8 +50,37 @@ const postArtworkForUser = (req, res) => {
     artworkImage,
   } = req.body;
 
+  try {
+    await models.artwork.addArtworkForUser(
+      artworkId,
+      artistId,
+      userId,
+      artistName,
+      artworkTitle,
+      artworkImage
+    );
+
+    res.status(201).json({
+      artworkId,
+      artistId,
+      userId,
+      artistName,
+      artworkTitle,
+      artworkImage,
+    });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
+
+const getArtworkForUsers = (req, res) => {
+  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
+    req.params;
+
+  const { userId } = req.params;
   models.artwork
-    .addArtworkForUser(
+    .findArtworkForUser(
       artworkId,
       artistId,
       userId,
@@ -72,11 +88,47 @@ const postArtworkForUser = (req, res) => {
       artworkTitle,
       artworkImage
     )
-    .then(() => {
-      res.status(201).send("Artwork added for user successfully");
+    .then((artwork) => {
+      if (artwork) {
+        res.json(artwork);
+      } else {
+        res.status(404).json({ message: "Artwork not found" });
+      }
     })
     .catch((err) => {
       console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getArtworkForUserById = (req, res) => {
+  const { userId } = req.params;
+
+  models.artwork
+    .findArtworkForUser(userId)
+    .then((artwork) => {
+      if (artwork) {
+        res.json(artwork);
+      } else {
+        res.status(404).json({ message: "Artwork not found" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const deleteArtworkForUser = (req, res) => {
+  const { userId, artworkId } = req.params;
+
+  models.artwork
+    .deleteArtworkForUser(userId, artworkId)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error("Error deleting artwork:", err);
       res.sendStatus(500);
     });
 };
@@ -115,6 +167,8 @@ module.exports = {
   getArtwork,
   getArtworkForUsers,
   getArtworkById,
+  getArtworkForUserById,
+  deleteArtworkForUser,
   postArtwork,
   postArtworkForUser,
   deleteArtwork,

@@ -1,6 +1,8 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
+
 import ApiService from "../services/api.service";
+import { useApp } from "../context/AppContext";
 
 const apiService = new ApiService();
 function Likes({
@@ -11,6 +13,8 @@ function Likes({
   artworkTitle,
   artworkImage,
 }) {
+  const appContext = useApp();
+
   const toggleLikes = async () => {
     const newFavorite = {
       artworkId,
@@ -21,14 +25,15 @@ function Likes({
       artworkImage,
     };
 
-    // console.log("Nouveau favori à envoyer :", newFavorite);
-
     try {
-      await apiService.post(`http://localhost:5021/artwork/user`, newFavorite);
-
-      // Gérer le cas où l'ajout est réussi (l'envoie à la page perso ?)
+      const postResponse = await apiService.post(
+        `http://localhost:5021/artwork/user`,
+        newFavorite
+      );
+      console.info(postResponse);
+      appContext.setAddedArtwork(postResponse);
     } catch (error) {
-      console.error("Erreur lors de la requête POST :", error);
+      console.error("Error during POST request:", error);
     }
   };
 
@@ -40,10 +45,10 @@ function Likes({
 }
 Likes.propTypes = {
   artworkId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   artworkTitle: PropTypes.string.isRequired,
   artworkImage: PropTypes.string.isRequired,
   artistId: PropTypes.number.isRequired,
-  userId: PropTypes.number.isRequired,
   artistName: PropTypes.string.isRequired,
 };
 

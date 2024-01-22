@@ -20,6 +20,7 @@ function AppContextProvider({ children, apiService }) {
   const [artCollection, setArtCollection] = useState(
     givenData?.artCollection || []
   );
+  const [addedArtwork, setAddedArtwork] = useState(null);
   const navigate = useNavigate();
 
   const login = async (credentials) => {
@@ -93,6 +94,8 @@ function AppContextProvider({ children, apiService }) {
       artCollection,
       setArtCollection,
       apiService,
+      addedArtwork,
+      setAddedArtwork,
     }),
     [
       isAdmin,
@@ -109,6 +112,8 @@ function AppContextProvider({ children, apiService }) {
       artCollection,
       setArtCollection,
       apiService,
+      addedArtwork,
+      setAddedArtwork,
     ]
   );
 
