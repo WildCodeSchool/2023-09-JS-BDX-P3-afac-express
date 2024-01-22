@@ -1,0 +1,37 @@
+// @import "mdb-react-ui-kit/dist/scss/mdb.pro.scss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "./style/Home.scss";
+@import "./style/About.scss";
+
+$my-theme-primary: #7b273d;
+$my-theme-secondary: #e3ebf7;
+$my-dark-theme: mdb-light-theme($my-theme-primary, $my-theme-secondary);
+// @include mdb-theme($my-dark-theme);
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins", sans-serif;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

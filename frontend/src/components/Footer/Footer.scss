@@ -1,0 +1,111 @@
+.container-footer {
+  background-color: #7b273d;
+  color: white;
+}
+
+.container-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.title-contact,
+.title-partnerships {
+  color: white;
+  margin-bottom: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.logo-mail,
+.logo-telephone {
+  width: 20px;
+  height: 20px;
+}
+
+.telephone-number,
+.adress-mail {
+  margin-left: 10px;
+  margin-top: -3px;
+}
+
+.logo-left {
+  width: 90px;
+  height: 80px;
+  margin-right: 50px;
+}
+
+.logo-right {
+  width: 140px;
+  height: 80px;
+}
+
+.container-development > p {
+  margin-bottom: 0;
+}
+
+//Media queries pour le format Desktop
+
+@media (min-width: 768px) {
+  .container {
+    display: inline;
+    flex-direction: row;
+  }
+
+  .contact,
+  .partnerships,
+  .development {
+    width: 33.33%; // On répartit l'espace en trois colonnes égales.
+    margin-bottom: 0;
+  }
+  .container-partnerships {
+    margin-top: 20px;
+  }
+
+  .container-development {
+    margin-top: 20px;
+  }
+  .contact-details {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    // align-items: center;
+  }
+  .logo-telephone,
+  .logo-mail {
+    display: flex;
+    margin-right: 5px;
+  }
+  .telephone-number,
+  .adress-mail {
+    display: inline;
+  }
+
+  .contact {
+    display: inline;
+    justify-content: flex-start;
+    // On aligne le container à gauche.
+  }
+
+  .partnerships {
+    display: inline;
+    justify-content: flex-end; // On aligne le container au centre.
+  }
+
+  .development {
+    display: inline;
+    justify-content: center; // On aligne le container à droite.
+  }
+  .copyright {
+    margin-top: 0;
+  }
+
+  .container-footer a {
+    color: white;
+    text-decoration: none;
+  }
+}

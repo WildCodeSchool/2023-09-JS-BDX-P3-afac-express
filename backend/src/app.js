@@ -25,19 +25,15 @@ const app = express();
 // 4. Be sure to only have URLs in the array with domains from which you want to allow requests.
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
-/*
 const cors = require("cors");
 
 app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
-      "http://mysite.com",
-      "http://another-domain.com",
-    ]
+    ],
   })
 );
-*/
 
 /* ************************************************************************* */
 
@@ -48,6 +44,7 @@ app.use(
 // The current code contains different parsing options as comments to demonstrate different ways of extracting data.
 
 // 1. `express.json()`: Parses requests with JSON data.
+app.use(express.json());
 // 2. `express.urlencoded()`: Parses requests with URL-encoded data.
 // 3. `express.text()`: Parses requests with raw text data.
 // 4. `express.raw()`: Parses requests with raw binary data.
@@ -88,7 +85,7 @@ app.use(
 const router = require("./router");
 
 // Mount the API routes under the "/api" endpoint
-app.use("/api", router);
+app.use(router);
 
 /* ************************************************************************* */
 
