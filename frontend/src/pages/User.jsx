@@ -11,8 +11,6 @@ import {
   //   MDBRow,
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
-// import { useLike } from "../context/LikeContext";
-// import Likes from "../components/Likes";
 // import FilterUser from "../components/Filter/FilterUser";
 import { useApp } from "../context/AppContext";
 import ApiService from "../services/api.service";
@@ -24,15 +22,15 @@ function User() {
   const [artworks, setArtworks] = useState([]);
 
   useEffect(() => {
-    if (!user) {
-      console.error("user not defined");
-      return;
-    }
-
     const fetchData = async () => {
       try {
+        if (!user || !user.id) {
+          console.error("user or user.userId not defined");
+          return;
+        }
+
         const response = await apiService.get(
-          `http://localhost:5021/artwork/user/${user.userId}`
+          `http://localhost:5021/artwork/user/${user.id}`
         );
 
         const existingArtworks =
@@ -44,7 +42,6 @@ function User() {
           addedArtwork,
         ];
 
-        console.info(updatedArtworks);
         localStorage.setItem("artworks", JSON.stringify(updatedArtworks));
         setArtworks(updatedArtworks);
       } catch (error) {
@@ -57,9 +54,8 @@ function User() {
 
   const handleDelete = async (artworkId) => {
     try {
-      console.info("Deleting artwork with ID:", artworkId);
       await apiService.delete(
-        `http://localhost:5021/artwork/user/${user.userId}/${artworkId}`
+        `http://localhost:5021/artwork/user/${user.id}/${artworkId}`
       );
 
       const updatedArtworks = artworks.filter(
@@ -67,13 +63,11 @@ function User() {
       );
 
       setArtworks(updatedArtworks);
-
-      console.info("Artwork deleted successfully");
     } catch (error) {
       console.error("Error deleting artwork:", error);
     }
   };
-
+  // console.log(artworks);
   return (
     <MDBContainer fluid className="pt-5">
       <h2
@@ -85,45 +79,49 @@ function User() {
       <div>
         <div className="d-flex flex-column mb-3">
           <div className="p-2">
-            <MDBLightbox>
-              <MDBRow>
-                {artworks.map((artwork) => (
-                  <MDBCol lg="4" key={artwork?.artworkId}>
-                    {artwork && artwork.artworkImage ? (
-                      <MDBLightboxItem
-                        src={artwork.artworkImage}
-                        fullscreenSrc={artwork.artworkImage}
-                        className="w-100"
-                      />
-                    ) : null}
+            {user && user.id ? (
+              <MDBLightbox>
+                <MDBRow>
+                  {artworks.map((artwork) => (
+                    <MDBCol lg="4" key={artwork?.artworkId}>
+                      {artwork && artwork.artworkImage ? (
+                        <MDBLightboxItem
+                          src={artwork.artworkImage}
+                          fullscreenSrc={artwork.artworkImage}
+                          className="w-100"
+                        />
+                      ) : null}
 
-                    {artwork && artwork.artworkTitle && (
-                      <MDBCard>
-                        <MDBCardBody className="d-flex justify-content-center">
-                          <div className="d-inline p-2">
-                            <h2 className="fs-5 me-5 text-center fw-bold">
-                              {artwork.artworkTitle}
-                            </h2>
-                            {artwork.artistName && (
-                              <h3 className="fs-6 fst-italic text text-center pt-2 pb-2">
-                                {artwork.artistName}
-                              </h3>
-                            )}
-                            <MDBBtn
-                              tag="a"
-                              className="m-1"
-                              onClick={() => handleDelete(artwork.artworkId)}
-                            >
-                              Supprimer des favoris
-                            </MDBBtn>
-                          </div>
-                        </MDBCardBody>
-                      </MDBCard>
-                    )}
-                  </MDBCol>
-                ))}
-              </MDBRow>
-            </MDBLightbox>
+                      {artwork && artwork.artworkTitle && (
+                        <MDBCard>
+                          <MDBCardBody className="d-flex justify-content-center">
+                            <div className="d-inline p-2">
+                              <h2 className="fs-5 me-5 text-center fw-bold">
+                                {artwork.artworkTitle}
+                              </h2>
+                              {artwork.artistName && (
+                                <h3 className="fs-6 fst-italic text text-center pt-2 pb-2">
+                                  {artwork.artistName}
+                                </h3>
+                              )}
+                              <MDBBtn
+                                tag="a"
+                                className="m-1"
+                                onClick={() => handleDelete(artwork.artworkId)}
+                              >
+                                Supprimer des favoris
+                              </MDBBtn>
+                            </div>
+                          </MDBCardBody>
+                        </MDBCard>
+                      )}
+                    </MDBCol>
+                  ))}
+                </MDBRow>
+              </MDBLightbox>
+            ) : (
+              <p>Chargement des données...</p>
+            )}
           </div>
         </div>
       </div>
