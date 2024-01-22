@@ -30,7 +30,7 @@ function Likes({
         `http://localhost:5021/artwork/user`,
         newFavorite
       );
-      console.info(postResponse);
+
       appContext.setAddedArtwork(postResponse);
     } catch (error) {
       console.error("Error during POST request:", error);
