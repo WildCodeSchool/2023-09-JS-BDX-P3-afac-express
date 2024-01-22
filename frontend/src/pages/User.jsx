@@ -1,4 +1,5 @@
 import {
+  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCol,
@@ -36,12 +37,14 @@ function User() {
 
         const existingArtworks =
           JSON.parse(localStorage.getItem("artworks")) || [];
+
         const updatedArtworks = [
           ...existingArtworks,
           ...response.data,
           addedArtwork,
         ];
 
+        console.info(updatedArtworks);
         localStorage.setItem("artworks", JSON.stringify(updatedArtworks));
         setArtworks(updatedArtworks);
       } catch (error) {
@@ -51,6 +54,25 @@ function User() {
 
     fetchData();
   }, [user, addedArtwork]);
+
+  const handleDelete = async (artworkId) => {
+    try {
+      console.info("Deleting artwork with ID:", artworkId);
+      await apiService.delete(
+        `http://localhost:5021/artwork/user/${user.userId}/${artworkId}`
+      );
+
+      const updatedArtworks = artworks.filter(
+        (artwork) => artwork.artworkId !== artworkId
+      );
+
+      setArtworks(updatedArtworks);
+
+      console.info("Artwork deleted successfully");
+    } catch (error) {
+      console.error("Error deleting artwork:", error);
+    }
+  };
 
   return (
     <MDBContainer fluid className="pt-5">
@@ -87,6 +109,13 @@ function User() {
                                 {artwork.artistName}
                               </h3>
                             )}
+                            <MDBBtn
+                              tag="a"
+                              className="m-1"
+                              onClick={() => handleDelete(artwork.artworkId)}
+                            >
+                              Supprimer des favoris
+                            </MDBBtn>
                           </div>
                         </MDBCardBody>
                       </MDBCard>

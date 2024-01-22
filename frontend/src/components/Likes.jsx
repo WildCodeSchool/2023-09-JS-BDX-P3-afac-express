@@ -1,6 +1,6 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+
 import ApiService from "../services/api.service";
 import { useApp } from "../context/AppContext";
 
@@ -13,7 +13,6 @@ function Likes({
   artworkTitle,
   artworkImage,
 }) {
-  const navigate = useNavigate();
   const appContext = useApp();
 
   const toggleLikes = async () => {
@@ -31,8 +30,8 @@ function Likes({
         `http://localhost:5021/artwork/user`,
         newFavorite
       );
+      console.info(postResponse);
       appContext.setAddedArtwork(postResponse);
-      navigate("/user");
     } catch (error) {
       console.error("Error during POST request:", error);
     }
