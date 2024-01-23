@@ -29,47 +29,14 @@ import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 import AdminHome from "./pages/Admin/AdminHome";
 import ApiService from "./services/api.service";
+import globalAppLoader from "./loaders/global-app.loader";
 
 const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    loader: async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-          apiService.setToken(token);
-
-          const [userData, artistData, artData] = await Promise.all([
-            apiService.get(
-              `${import.meta.env.VITE_BACKEND_URL}/users/personal`
-            ),
-            apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
-            apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
-          ]);
-
-          return {
-            preloadUser: userData ?? null,
-            artistCollection: artistData.data,
-            artCollection: artData.data,
-          };
-        }
-        const [artistData, artData] = await Promise.all([
-          apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
-          apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
-        ]);
-
-        return {
-          artistCollection: artistData.data,
-          artCollection: artData.data,
-        };
-      } catch (err) {
-        console.error("Loader Error:", err.message);
-        return null;
-      }
-    },
+    loader: async () => globalAppLoader(apiService),
     element: (
       <AppContextProvider apiService={apiService}>
         <App />

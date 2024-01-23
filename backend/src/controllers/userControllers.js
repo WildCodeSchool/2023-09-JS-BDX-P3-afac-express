@@ -239,17 +239,17 @@ const getProfile = async (req, res) => {
 };
 
 module.exports = {
+  deleteUsers,
+  getCheckingSecretAnswer,
+  getProfile,
+  getUserQuestion,
   getUsers,
   getUsersById,
-  getUserQuestion,
-  getCheckingSecretAnswer,
-  postUserByEmail,
-  postLogin,
-  postUsers,
-  postPassword,
-  deleteUsers,
-  updateUsers,
   patchEmail,
   patchPassword,
-  getProfile,
+  postLogin,
+  postPassword,
+  postUserByEmail,
+  postUsers,
+  updateUsers,
 };
