@@ -80,11 +80,20 @@ function Likes({
   };
 
   return (
-    <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
-      {isLiked ? "Déjà ajouté au favori" : "Ajouter au favori"}
-    </MDBBtn>
+    <div>
+      {!isLiked ? (
+        <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
+          Ajouter au favori
+        </MDBBtn>
+      ) : (
+        <MDBBtn tag="a" className="m-1" disabled>
+          Déjà ajouté au favori
+        </MDBBtn>
+      )}
+    </div>
   );
 }
+
 Likes.propTypes = {
   artworkId: PropTypes.number.isRequired,
   userId: PropTypes.number.isRequired,
