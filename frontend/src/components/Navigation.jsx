@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   MDBNavbar,
@@ -19,16 +19,29 @@ import logoAfac from "../assets/logo/logoAfac.png";
 export default function Navigation() {
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const { user, isAdmin, logout } = useApp();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   let navigationContent;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   if (user) {
     if (isAdmin) {
       navigationContent = (
-        <MDBDropdown>
+        <MDBDropdown style={{ color: "#ffffff" }}>
+          {!isMobile && user.email}
           <MDBDropdownToggle>
-            {user.email}
-            <MDBIcon far icon="user" className="pe-2 ps-4" />
+            <MDBIcon far icon="user" className="pe-2" />
           </MDBDropdownToggle>
 
           <MDBDropdownMenu>
@@ -59,10 +72,10 @@ export default function Navigation() {
       );
     } else {
       navigationContent = (
-        <MDBDropdown>
+        <MDBDropdown style={{ color: "#ffffff" }}>
+          {!isMobile && user.email}
           <MDBDropdownToggle>
-            {user.email}
-            <MDBIcon far icon="user" className="pe-2 ps-4" />
+            <MDBIcon far icon="user" className="pe-2" />
           </MDBDropdownToggle>
 
           <MDBDropdownMenu>
