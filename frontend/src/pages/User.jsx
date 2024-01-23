@@ -27,7 +27,7 @@ function User() {
         }
 
         const response = await apiService.get(
-          `http://localhost:5021/artwork/user/${user.id}`
+          `${import.meta.env.VITE_BACKEND_URL}/artwork/user/${user.id}`
         );
 
         setArtworks(response.data);
@@ -42,7 +42,9 @@ function User() {
   const handleDelete = async (artworkId) => {
     try {
       await apiService.delete(
-        `http://localhost:5021/artwork/user/${user.id}/${artworkId}`
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/user/${
+          user.id
+        }/${artworkId}`
       );
 
       const updatedArtworks = artworks.filter(

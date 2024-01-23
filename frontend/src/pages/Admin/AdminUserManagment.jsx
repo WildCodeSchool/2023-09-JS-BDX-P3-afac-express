@@ -28,7 +28,7 @@ export default function AdminUserManagment() {
       };
 
       const { data } = await apiService.put(
-        `http://localhost:5021/users/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/users/${id}`,
         updatedData
       );
       setUser(data);
@@ -40,7 +40,7 @@ export default function AdminUserManagment() {
   useEffect(() => {
     const fetchUserData = async () => {
       const { data } = await apiService.get(
-        `http://localhost:5021/users/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/users/${id}`
       );
       setUser(data);
     };
@@ -50,7 +50,7 @@ export default function AdminUserManagment() {
   const deleteUserData = async () => {
     try {
       const { data } = await apiService.delete(
-        `http://localhost:5021/users/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/users/${id}`
       );
       setUser(data);
       navigate("/admin/adminuser");

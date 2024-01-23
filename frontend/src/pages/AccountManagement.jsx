@@ -17,7 +17,7 @@ function AccountManagement() {
   const handleEmailChange = async () => {
     try {
       const response = await apiService.patch(
-        `http://localhost:5021/change/email`,
+        `${import.meta.env.VITE_BACKEND_URL}/change/email`,
         {
           oldEmail,
           newEmail,
@@ -37,7 +37,7 @@ function AccountManagement() {
   const handlePasswordChange = async () => {
     try {
       const response = await apiService.patch(
-        `http://localhost:5021/change/password`,
+        `${import.meta.env.VITE_BACKEND_URL}/change/password`,
         {
           oldPassword,
           newPassword,
@@ -57,7 +57,7 @@ function AccountManagement() {
   const deletePersonalAccount = async () => {
     try {
       const response = await apiService.delete(
-        `http://localhost:5021/deletepersonnelaccount/${user.id}`
+        `${import.meta.env.VITE_BACKEND_URL}/deletepersonnelaccount/${user.id}`
       );
 
       if (response.status === 204) {
