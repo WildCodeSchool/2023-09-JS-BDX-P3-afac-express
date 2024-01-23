@@ -21,13 +21,13 @@ const globalAppLoader = async (apiService) => {
       apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
       apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
     ]);
-
     return {
       artistCollection: artistData.data,
       artCollection: artData.data,
     };
   } catch (err) {
     console.error("Loader Error:", err.message);
+    console.error("Loader Error Stack:", err.stack);
     return null;
   }
 };
