@@ -61,7 +61,6 @@ class ArtworkManager extends AbstractManager {
         artwork_image AS artworkImage
       FROM artwork_users
       WHERE users_id = ?
-      LIMIT 1;
     `;
 
     return this.database

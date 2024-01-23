@@ -33,17 +33,7 @@ function User() {
           `http://localhost:5021/artwork/user/${user.id}`
         );
 
-        const existingArtworks =
-          JSON.parse(localStorage.getItem("artworks")) || [];
-
-        const updatedArtworks = [
-          ...existingArtworks,
-          ...response.data,
-          addedArtwork,
-        ];
-
-        localStorage.setItem("artworks", JSON.stringify(updatedArtworks));
-        setArtworks(updatedArtworks);
+        setArtworks(response.data);
       } catch (error) {
         console.error("Error during GET request:", error);
       }
@@ -67,7 +57,7 @@ function User() {
       console.error("Error deleting artwork:", error);
     }
   };
-  // console.log(artworks);
+
   return (
     <MDBContainer fluid className="pt-5">
       <h2
