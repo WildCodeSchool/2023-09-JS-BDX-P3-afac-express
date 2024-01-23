@@ -26,7 +26,7 @@ export default function AdminArtistManager() {
       };
 
       const { data } = await apiService.put(
-        `http://localhost:5021/artist/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`,
         updatedData
       );
       setArtist(data);
@@ -38,7 +38,7 @@ export default function AdminArtistManager() {
   useEffect(() => {
     const fetchArtistData = async () => {
       const { data } = await apiService.get(
-        `http://localhost:5021/artist/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`
       );
       setArtist(data);
     };
@@ -48,7 +48,7 @@ export default function AdminArtistManager() {
   const deleteArtistData = async () => {
     try {
       const { data } = await apiService.delete(
-        `http://localhost:5021/artist/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`
       );
       setArtist(data);
       navigate("/admin/adminart");

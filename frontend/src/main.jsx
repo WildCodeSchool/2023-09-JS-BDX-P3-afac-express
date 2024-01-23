@@ -43,9 +43,11 @@ const router = createBrowserRouter([
           apiService.setToken(token);
 
           const [userData, artistData, artData] = await Promise.all([
-            apiService.get("http://localhost:5021/users/personal"),
-            apiService.get("http://localhost:5021/artist"),
-            apiService.get("http://localhost:5021/artwork"),
+            apiService.get(
+              `${import.meta.env.VITE_BACKEND_URL}/users/personal`
+            ),
+            apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
+            apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
           ]);
 
           return {
@@ -55,8 +57,8 @@ const router = createBrowserRouter([
           };
         }
         const [artistData, artData] = await Promise.all([
-          apiService.get("http://localhost:5021/artist"),
-          apiService.get("http://localhost:5021/artwork"),
+          apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
+          apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
         ]);
 
         return {
@@ -85,7 +87,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const { data } = await apiService.get(
-              `http://localhost:5021/artwork/${params.id}`
+              `${import.meta.env.VITE_BACKEND_URL}/artwork/${params.id}`
             );
             return { artworkData: data };
           } catch (err) {

@@ -21,7 +21,7 @@ function Likes({
     const fetchFavorites = async () => {
       try {
         const favoritesResponse = await apiService.get(
-          `http://localhost:5021/artwork/user/${userId}`
+          `${import.meta.env.VITE_BACKEND_URL}/artwork/user/${userId}`
         );
 
         const favorites = favoritesResponse.data;
@@ -58,7 +58,7 @@ function Likes({
 
     try {
       const postResponse = await apiService.post(
-        `http://localhost:5021/artwork/user`,
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/user`,
         newFavorite
       );
 

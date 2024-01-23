@@ -28,7 +28,7 @@ export default function AdminartworkManager() {
       };
 
       const { data } = await apiService.put(
-        `http://localhost:5021/artwork/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`,
         updatedData
       );
       setartwork(data);
@@ -40,7 +40,7 @@ export default function AdminartworkManager() {
   useEffect(() => {
     const fetchartworkData = async () => {
       const { data } = await apiService.get(
-        `http://localhost:5021/artwork/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
       setartwork(data);
     };
@@ -50,7 +50,7 @@ export default function AdminartworkManager() {
   const deleteartworkData = async () => {
     try {
       const { data } = await apiService.delete(
-        `http://localhost:5021/artwork/${id}`
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
       setartwork(data);
       navigate("/admin/adminartwork");

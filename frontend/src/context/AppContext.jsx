@@ -27,7 +27,7 @@ function AppContextProvider({ children, apiService }) {
   const login = async (credentials) => {
     try {
       const data = await apiService.post(
-        `http://localhost:5021/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
         credentials
       );
 
@@ -36,7 +36,7 @@ function AppContextProvider({ children, apiService }) {
       apiService.setToken(data.token);
 
       const result = await apiService.get(
-        "http://localhost:5021/users/personal"
+        `${import.meta.env.VITE_BACKEND_URL}/users/personal`
       );
 
       // console.log("User data from API:", result.data);
@@ -56,7 +56,10 @@ function AppContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      const response = await axios.post("http://localhost:5021/users", newUser);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users`,
+        newUser
+      );
 
       const newUserResponse = response.data;
       // console.log("User registered successfully. Data:", newUserResponse);
