@@ -81,7 +81,7 @@ function Likes({
 
   return (
     <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
-      {isLiked ? "Déjà ajouté au favori" : "Ajouter au favori"}
+      {isLiked ? "Déjà ajouté au favori" : "Ajouter aux favoris"}
     </MDBBtn>
   );
 }

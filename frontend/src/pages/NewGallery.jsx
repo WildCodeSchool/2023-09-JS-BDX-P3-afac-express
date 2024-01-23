@@ -5,12 +5,13 @@ import {
   MDBContainer,
   MDBRow,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import Likes from "../components/Likes";
 import { useApp } from "../context/AppContext";
 
-function Gallery() {
-  const { artCollection } = useApp();
+function NewGallery() {
+  const { user, addedArtwork, artCollection } = useApp();
 
   return (
     <MDBContainer fluid className="pt-5">
@@ -18,7 +19,7 @@ function Gallery() {
         className="fs-1 text text-center fw-bold pt-5 mb-6"
         style={{ color: "#7b273d" }}
       >
-        Titre à définir
+        Parcourez notre galerie d'art
       </h2>
       <MDBRow>
         {artCollection.map((artwork, index) => (
@@ -70,9 +71,21 @@ function Gallery() {
                   Plus d'infos
                 </Link>
               </MDBBtn>
-              <MDBBtn tag="span" className="m-1 text-white">
-                Ajouter aux favoris
-              </MDBBtn>
+
+              {user && (
+                <Likes
+                  artworkId={artwork.id}
+                  artistId={artwork.artist_id}
+                  userId={user.id}
+                  artistName={artwork.artist_name}
+                  artworkTitle={artwork.title}
+                  artworkImage={artwork.image}
+                  isLiked={
+                    addedArtwork &&
+                    addedArtwork.some((added) => added.artworkId === artwork.id)
+                  }
+                />
+              )}
             </div>
           </MDBCol>
         ))}
@@ -80,4 +93,4 @@ function Gallery() {
     </MDBContainer>
   );
 }
-export default Gallery;
+export default NewGallery;
