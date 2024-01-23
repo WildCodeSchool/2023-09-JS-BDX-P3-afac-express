@@ -18,7 +18,78 @@ import logoAfac from "../assets/logo/logoAfac.png";
 
 export default function Navigation() {
   const [openNavSecond, setOpenNavSecond] = useState(false);
-  const { user, logout } = useApp();
+  const { user, isAdmin, logout } = useApp();
+
+  let navigationContent;
+
+  if (user) {
+    if (isAdmin) {
+      navigationContent = (
+        <MDBDropdown>
+          <MDBDropdownToggle>
+            {user.email}
+            <MDBIcon far icon="user" className="pe-2 ps-4" />
+          </MDBDropdownToggle>
+
+          <MDBDropdownMenu>
+            <Link to="/accountmanagement" className="nav-link navLink">
+              Mon compte
+            </Link>
+            <Link to="/User" className="nav-link navLink">
+              Ma page personnelle
+            </Link>
+            <Link to="/admin" className="nav-link navLink">
+              Admin
+            </Link>
+            <Link to="/admin/adminuser" className="nav-link navLink">
+              Gérer les utilisateurs
+            </Link>
+            <Link to="/admin/adminart" className="nav-link navLink">
+              Gérer les oeuvres et artistes
+            </Link>
+            <button
+              type="button"
+              className="nav-link navLink navButton"
+              onClick={logout}
+            >
+              Déconnexion
+            </button>
+          </MDBDropdownMenu>
+        </MDBDropdown>
+      );
+    } else {
+      navigationContent = (
+        <MDBDropdown>
+          <MDBDropdownToggle>
+            {user.email}
+            <MDBIcon far icon="user" className="pe-2 ps-4" />
+          </MDBDropdownToggle>
+
+          <MDBDropdownMenu>
+            <Link to="/accountmanagement" className="nav-link navLink">
+              Mon compte
+            </Link>
+            <Link to="/User" className="nav-link navLink">
+              Ma page personnelle
+            </Link>
+            <button
+              type="button"
+              className="nav-link navLink navButton"
+              onClick={logout}
+            >
+              Déconnexion
+            </button>
+          </MDBDropdownMenu>
+        </MDBDropdown>
+      );
+    }
+  } else {
+    navigationContent = (
+      <Link to="/login">
+        <MDBIcon far icon="user" />
+      </Link>
+    );
+  }
 
   return (
     <MDBContainer fluid className="row w-100 navigation">
@@ -54,48 +125,7 @@ export default function Navigation() {
             <img src={logoAfac} className="logoAfac" alt="logoAfac" />
           </Link>
         </div>
-        {user ? (
-          <MDBDropdown>
-            <MDBDropdownToggle>
-              {user.email}
-              <MDBIcon far icon="user" className="pe-2 ps-4" />
-            </MDBDropdownToggle>
-
-            <MDBDropdownMenu>
-              <Link to="/accountmanagement" className="nav-link navLink">
-                Mon compte
-              </Link>
-              <Link to="/User" className="nav-link navLink">
-                Ma page personnelle
-              </Link>
-              {/* {isAdmin && (
-                <> */}
-              <Link to="/admin" className="nav-link navLink">
-                Admin
-              </Link>
-              <Link to="/admin/adminuser" className="nav-link navLink">
-                Gérer les utilisateurs
-              </Link>
-              <Link to="/admin/adminart" className="nav-link navLink">
-                Gérer les oeuvres et artistes
-              </Link>
-              {/* </>
-              )} */}
-
-              <button
-                type="button"
-                className="nav-link navLink navButton"
-                onClick={logout}
-              >
-                Déconnexion
-              </button>
-            </MDBDropdownMenu>
-          </MDBDropdown>
-        ) : (
-          <Link to="/login">
-            <MDBIcon far icon="user" />
-          </Link>
-        )}
+        {navigationContent}
       </MDBNavbar>
     </MDBContainer>
   );

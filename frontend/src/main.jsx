@@ -47,16 +47,21 @@ const router = createBrowserRouter([
             apiService.get("http://localhost:5021/artist"),
             apiService.get("http://localhost:5021/artwork"),
           ]);
+
           return {
             preloadUser: userData ?? null,
             artistCollection: artistData.data,
             artCollection: artData.data,
           };
         }
+        const [artistData, artData] = await Promise.all([
+          apiService.get("http://localhost:5021/artist"),
+          apiService.get("http://localhost:5021/artwork"),
+        ]);
 
         return {
-          artistCollection: [],
-          artCollection: [],
+          artistCollection: artistData.data,
+          artCollection: artData.data,
         };
       } catch (err) {
         console.error("Loader Error:", err.message);
