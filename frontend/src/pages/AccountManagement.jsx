@@ -46,6 +46,8 @@ function AccountManagement() {
 
       if (response.status === 204) {
         alert("Le mot de passe a été modifiée avec succès."); // eslint-disable-line no-alert
+        logout();
+        navigate("/login");
       } else {
         alert("Échec de la modification du mot de passe."); // eslint-disable-line no-alert
       }

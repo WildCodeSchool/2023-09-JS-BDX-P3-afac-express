@@ -103,7 +103,6 @@ const getArtworkForUsers = (req, res) => {
 
 const getArtworkForUserById = (req, res) => {
   const { userId } = req.params;
-  console.info("Received userId:", userId);
   models.artwork
     .findArtworkForUser(userId)
     .then((artwork) => {
