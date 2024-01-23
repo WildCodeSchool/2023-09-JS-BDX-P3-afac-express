@@ -7,11 +7,8 @@ import {
   MDBLightbox,
   MDBLightboxItem,
   MDBRow,
-
-  //   MDBRow,
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
-// import FilterUser from "../components/Filter/FilterUser";
 import { useApp } from "../context/AppContext";
 import ApiService from "../services/api.service";
 
@@ -33,17 +30,7 @@ function User() {
           `http://localhost:5021/artwork/user/${user.id}`
         );
 
-        const existingArtworks =
-          JSON.parse(localStorage.getItem("artworks")) || [];
-
-        const updatedArtworks = [
-          ...existingArtworks,
-          ...response.data,
-          addedArtwork,
-        ];
-
-        localStorage.setItem("artworks", JSON.stringify(updatedArtworks));
-        setArtworks(updatedArtworks);
+        setArtworks(response.data);
       } catch (error) {
         console.error("Error during GET request:", error);
       }
@@ -67,7 +54,7 @@ function User() {
       console.error("Error deleting artwork:", error);
     }
   };
-  // console.log(artworks);
+
   return (
     <MDBContainer fluid className="pt-5">
       <h2
@@ -96,14 +83,13 @@ function User() {
                         <MDBCard>
                           <MDBCardBody className="d-flex justify-content-center">
                             <div className="d-inline p-2">
-                              <h2 className="fs-5 me-5 text-center fw-bold">
+                              <h2 className="d-flex justify-content-center fs-5 fw-bold">
                                 {artwork.artworkTitle}
                               </h2>
-                              {artwork.artistName && (
-                                <h3 className="fs-6 fst-italic text text-center pt-2 pb-2">
-                                  {artwork.artistName}
-                                </h3>
-                              )}
+                              <h3 className="fs-6 fst-italic text text-center pt-2 pb-2">
+                                {artwork.artistName}
+                              </h3>
+
                               <MDBBtn
                                 tag="a"
                                 className="m-1"

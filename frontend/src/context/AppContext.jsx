@@ -20,7 +20,7 @@ function AppContextProvider({ children, apiService }) {
   const [artCollection, setArtCollection] = useState(
     givenData?.artCollection || []
   );
-  const [addedArtwork, setAddedArtwork] = useState(null);
+  const [addedArtwork, setAddedArtwork] = useState([]);
 
   const navigate = useNavigate();
 
