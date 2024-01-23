@@ -15,14 +15,9 @@ function AdminHome() {
           Gérer les utilisateurs
         </Link>
       </MDBBtn>
-      <MDBBtn className="mt-5 mb-4">
+      <MDBBtn className="mt-3 mb-8">
         <Link to="/admin/adminart" className="nav-link navLink">
           Gérer les oeuvres et artistes
-        </Link>
-      </MDBBtn>
-      <MDBBtn className="mt-5 mb-6">
-        <Link to="/accountmanagement" className="nav-link navLink">
-          Gérer mon compte
         </Link>
       </MDBBtn>
     </>
