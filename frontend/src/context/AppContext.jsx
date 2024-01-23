@@ -20,7 +20,8 @@ function AppContextProvider({ children, apiService }) {
   const [artCollection, setArtCollection] = useState(
     givenData?.artCollection || []
   );
-  const [addedArtwork, setAddedArtwork] = useState(null);
+  const [addedArtwork, setAddedArtwork] = useState([]);
+
   const navigate = useNavigate();
 
   const login = async (credentials) => {
@@ -29,8 +30,6 @@ function AppContextProvider({ children, apiService }) {
         `http://localhost:5021/login`,
         credentials
       );
-
-      // console.log("Login success. Token:", data.token);
 
       localStorage.setItem("token", data.token);
 

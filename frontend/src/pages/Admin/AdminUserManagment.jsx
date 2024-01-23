@@ -117,14 +117,6 @@ export default function AdminUserManagment() {
         </MDBBtn>
       </form>
 
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
-        <h3 className="fs-5 fw-bold pb-3">Changement de mot de passe</h3>
-
-        <MDBBtn type="submit" block className="mb-2">
-          Réinitialisation de mot de passe
-        </MDBBtn>
-      </form>
-
       <MDBBtn className="mt-4 mb-6" onClick={deleteUserData}>
         Supprimer le compte
       </MDBBtn>
