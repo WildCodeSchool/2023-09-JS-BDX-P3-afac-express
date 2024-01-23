@@ -11,6 +11,7 @@ import AppContextProvider from "./context/AppContext";
 import AdminContextProvider from "./context/AdminContext";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
+
 import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/gallery", element: <Gallery /> },
+
       { path: "/gallery/:id", element: <Gallery /> },
       { path: "/artworks", element: <Artworks /> },
       {
