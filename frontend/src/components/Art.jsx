@@ -43,10 +43,10 @@ function Art() {
               )}
             </MDBListGroupItem>
             <MDBListGroupItem>
-              {artwork.creationPlace && (
+              {artwork.creation_place && (
                 <div className="d-flex align-items-start bg-body-tertiary">
                   <MDBCol className="fw-bold">Lieu de création</MDBCol>
-                  <MDBCol>{artwork.creationPlace}</MDBCol>
+                  <MDBCol>{artwork.creation_place}</MDBCol>
                 </div>
               )}
             </MDBListGroupItem>
