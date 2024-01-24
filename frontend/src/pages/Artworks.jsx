@@ -10,7 +10,7 @@ function Artworks() {
         className="fs-1 text text-center fw-bold pt-5 mb-6"
         style={{ color: "#7b273d" }}
       >
-        Patrimoine iconographique de l'océan indien
+        Œuvre de l'artiste
       </h3>
       <Art />
     </MDBContainer>
