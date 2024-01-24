@@ -32,7 +32,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/artist`,
+        `http://localhost:5021/artist`,
         postArtist
       );
       console.warn(res);
@@ -63,7 +63,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/artwork`,
+        `http://localhost:5021/artwork`,
         postArt
       );
       console.warn(res);
