@@ -40,13 +40,8 @@ DROP TABLE IF EXISTS artwork;
 CREATE TABLE
     artwork (
         id int primary key NOT NULL AUTO_INCREMENT,
-<<<<<<< HEAD
-        title varchar(200) UNIQUE NOT NULL,
-        image varchar(500) NULL,
-=======
         title varchar(200) NOT NULL,
         image varchar(500) NOT NULL,
->>>>>>> 0e6fbde1577bcf3c5f43526428ec0aafe66750ac
         dimension varchar(100) DEFAULT NULL,
         creation_place varchar(255) DEFAULT NULL,
         artist_id int DEFAULT NULL

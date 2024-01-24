@@ -1,16 +1,12 @@
-const fs = require("fs");
-
+/* const fs = require("fs");
 const AbstractManager = require("./AbstractManager");
-// const { url } = require("inspector");
 
-class UploadManager extends AbstractManager {
+class UploadArtistManager extends AbstractManager {
   constructor() {
-    super({ table: "upload" });
+    super({ table: "artist" });
   }
 
   create(data) {
-    // let filename = data.destination.replace("public/", "");
-
     const name = `${data.path}.${data.filename.split(".").slice(-1)}`;
 
     return new Promise((resolve, reject) => {
@@ -18,17 +14,18 @@ class UploadManager extends AbstractManager {
         if (err) {
           reject(err);
         }
+
         const [result] = await this.database.query(
-          `INSERT INTO ${this.table} (url) VALUES (?)`,
-          [name]
+          `INSERT INTO ${this.table} (image) VALUES (?)`,
+          [result]
         );
+
         resolve({
-          id: result.insertId,
-          url: name,
+          image: name,
         });
       });
     });
   }
 }
 
-module.exports = UploadManager;
+module.exports = UploadArtistManager; */
