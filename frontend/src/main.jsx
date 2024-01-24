@@ -11,6 +11,7 @@ import AppContextProvider from "./context/AppContext";
 import AdminContextProvider from "./context/AdminContext";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
+
 import Artworks from "./pages/Artworks";
 import Artists from "./pages/Artists";
 import About from "./pages/About";
@@ -28,40 +29,14 @@ import AccountManagement from "./pages/AccountManagement";
 import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 import AdminHome from "./pages/Admin/AdminHome";
 import ApiService from "./services/api.service";
+import globalAppLoader from "./loaders/global-app.loader";
 
 const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    loader: async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-          apiService.setToken(token);
-
-          const [userData, artistData, artData] = await Promise.all([
-            apiService.get("http://localhost:5021/users/personal"),
-            apiService.get("http://localhost:5021/artist"),
-            apiService.get("http://localhost:5021/artwork"),
-          ]);
-          return {
-            preloadUser: userData ?? null,
-            artistCollection: artistData.data,
-            artCollection: artData.data,
-          };
-        }
-
-        return {
-          artistCollection: [],
-          artCollection: [],
-        };
-      } catch (err) {
-        console.error("Loader Error:", err.message);
-        return null;
-      }
-    },
+    loader: async () => globalAppLoader(apiService),
     element: (
       <AppContextProvider apiService={apiService}>
         <App />
@@ -70,9 +45,23 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/gallery", element: <Gallery /> },
+
       { path: "/gallery/:id", element: <Gallery /> },
       { path: "/artworks", element: <Artworks /> },
-      { path: "/artworks/:id", element: <Artworks /> },
+      {
+        path: "/artworks/:id",
+        element: <Artworks />,
+        loader: async ({ params }) => {
+          try {
+            const { data } = await apiService.get(
+              `${import.meta.env.VITE_BACKEND_URL}/artwork/${params.id}`
+            );
+            return { artworkData: data };
+          } catch (err) {
+            return null;
+          }
+        },
+      },
       { path: "/artists", element: <Artists /> },
       { path: "/artist/:id", element: <Artists /> },
       { path: "/about", element: <About /> },

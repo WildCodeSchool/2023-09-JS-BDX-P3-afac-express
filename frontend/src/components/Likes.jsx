@@ -1,48 +1,102 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import PropTypes from "prop-types";
-import axios from "axios";
+
+import { useEffect, useState } from "react";
+import ApiService from "../services/api.service";
 import { useApp } from "../context/AppContext";
 
+const apiService = new ApiService();
 function Likes({
   artworkId,
+  artistId,
+  userId,
+  artistName,
   artworkTitle,
   artworkImage,
-  artistId,
-  artistName,
 }) {
-  const { user } = useApp();
+  const appContext = useApp();
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const favoritesResponse = await apiService.get(
+          `${import.meta.env.VITE_BACKEND_URL}/artwork/user/${userId}`
+        );
+
+        const favorites = favoritesResponse.data;
+
+        if (Array.isArray(favorites)) {
+          const isArtworkLiked = favorites.some(
+            (favorite) => favorite.artworkId === artworkId
+          );
+
+          setIsLiked(isArtworkLiked);
+        } else if (favorites && "artworkId" in favorites) {
+          const isArtworkLiked = favorites.artworkId === artworkId;
+          setIsLiked(isArtworkLiked);
+        } else {
+          console.error("Error fetching favorites: Unexpected response format");
+        }
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    };
+
+    fetchFavorites();
+  }, [apiService, userId, artworkId]);
 
   const toggleLikes = async () => {
     const newFavorite = {
-      id: artworkId,
-      title: artworkTitle,
-      image: artworkImage,
-      artist_id: artistId,
-      artist_name: artistName,
+      artworkId,
+      artistId,
+      userId,
+      artistName,
+      artworkTitle,
+      artworkImage,
     };
 
-    // console.log("Nouveau favori à envoyer :", newFavorite);
-
     try {
-      // console.log("Avant la requête POST. Nouveau favori :", newFavorite);
+      const postResponse = await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/user`,
+        newFavorite
+      );
 
-      await axios.post(`/artwork/user/${user.id}`, newFavorite);
-      // console.log("Requête POST réussie. Nouveau favori ajouté :", newFavorite);
+      const isAlreadyAdded = appContext.addedArtwork.some(
+        (artwork) => artwork.artworkId === artworkId
+      );
 
-      // Gérer le cas où l'ajout est réussi (éventuellement mettre à jour l'état local)
+      if (!isAlreadyAdded) {
+        appContext.setAddedArtwork((prevArtwork) => [
+          ...prevArtwork,
+          postResponse,
+        ]);
+      }
+
+      setIsLiked(true);
     } catch (error) {
-      console.error("Erreur lors de la requête POST :", error);
+      console.error("Error during POST request:", error);
     }
   };
 
   return (
-    <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
-      Ajouter au favori
-    </MDBBtn>
+    <div>
+      {!isLiked ? (
+        <MDBBtn tag="a" className="m-1" onClick={toggleLikes}>
+          Ajouter au favori
+        </MDBBtn>
+      ) : (
+        <MDBBtn tag="a" className="m-1" disabled>
+          Déjà ajouté au favori
+        </MDBBtn>
+      )}
+    </div>
   );
 }
+
 Likes.propTypes = {
   artworkId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   artworkTitle: PropTypes.string.isRequired,
   artworkImage: PropTypes.string.isRequired,
   artistId: PropTypes.number.isRequired,

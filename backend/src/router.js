@@ -1,14 +1,10 @@
 const express = require("express");
 
 const router = express.Router();
-const multer = require("multer");
-
-const upload = multer({ dest: "public/uploads/" });
 
 const userControllers = require("./controllers/userControllers");
 const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
-const uploadControllers = require("./controllers/uploadControllers");
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const {
   authAdminMiddleware,
@@ -52,18 +48,28 @@ router.put(
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
+router.post(
+  "/artwork/user",
+  authMiddleware,
+  artworkControllers.postArtworkForUser
+);
+router.get(
+  "/artwork/user/:userId",
+  authMiddleware,
+  artworkControllers.getArtworkForUserById
+);
+router.delete(
+  "/artwork/user/:userId/:artworkId",
+  authMiddleware,
+  artworkControllers.deleteArtworkForUser
+);
 router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
 router.put("/artist/:id", artistControllers.updateArtist);
 router.delete("/artist/:id", artistControllers.deleteArtist);
 
-router.get(
-  "/artwork",
-  authMiddleware,
-  authAdminMiddleware,
-  artworkControllers.getArtwork
-);
+router.get("/artwork", artworkControllers.getArtwork);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
@@ -74,21 +80,5 @@ router.post(
   artworkControllers.postArtworkForUser
 );
 router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
-
-// UPLOADS
-
-router.get(
-  "/uploads",
-  authMiddleware,
-  authAdminMiddleware,
-  uploadControllers.getList
-);
-
-router.post(
-  "/uploads",
-  // authMiddleware,
-  upload.single("avatar"),
-  uploadControllers.creator
-);
 
 module.exports = router;

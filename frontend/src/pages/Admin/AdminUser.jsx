@@ -13,7 +13,9 @@ const apiService = new ApiService();
 
 const userFetch = async () => {
   try {
-    const { data } = await apiService.get(`http://localhost:5021/users`);
+    const { data } = await apiService.get(
+      `${import.meta.env.VITE_BACKEND_URL}/users`
+    );
     return data;
   } catch (err) {
     console.error(err);

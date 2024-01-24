@@ -20,28 +20,29 @@ function AppContextProvider({ children, apiService }) {
   const [artCollection, setArtCollection] = useState(
     givenData?.artCollection || []
   );
+  const [addedArtwork, setAddedArtwork] = useState([]);
+
   const navigate = useNavigate();
 
   const login = async (credentials) => {
     try {
       const data = await apiService.post(
-        `http://localhost:5021/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
         credentials
       );
-
-      // console.log("Login success. Token:", data.token);
 
       localStorage.setItem("token", data.token);
 
       apiService.setToken(data.token);
 
       const result = await apiService.get(
-        "http://localhost:5021/users/personal"
+        `${import.meta.env.VITE_BACKEND_URL}/users/personal`
       );
 
       // console.log("User data from API:", result.data);
 
-      alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+      // alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
+
       setUser(result.data);
 
       if (result.data.is_admin === 1) {
@@ -49,15 +50,16 @@ function AppContextProvider({ children, apiService }) {
       }
       return navigate("/home");
     } catch (err) {
-      alert(err.message); // eslint-disable-line no-alert
+      throw new Error("Identifiants incorrects"); // eslint-disable-line no-alert
     }
-
-    return null;
   };
 
   const register = async (newUser) => {
     try {
-      const response = await axios.post("http://localhost:5021/users", newUser);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users`,
+        newUser
+      );
 
       const newUserResponse = response.data;
       // console.log("User registered successfully. Data:", newUserResponse);
@@ -80,20 +82,22 @@ function AppContextProvider({ children, apiService }) {
 
   const contextData = useMemo(
     () => ({
+      addedArtwork,
+      apiService,
+      artCollection,
+      artistCollection,
       isAdmin,
-      setIsAdmin,
-      user,
-      setUser,
       login,
       logout,
-      register,
       openNavSecond,
-      setOpenNavSecond,
-      artistCollection,
-      setArtistCollection,
-      artCollection,
+      register,
+      setAddedArtwork,
       setArtCollection,
-      apiService,
+      setArtistCollection,
+      setIsAdmin,
+      setOpenNavSecond,
+      setUser,
+      user,
     }),
     [
       isAdmin,
@@ -110,6 +114,8 @@ function AppContextProvider({ children, apiService }) {
       artCollection,
       setArtCollection,
       apiService,
+      addedArtwork,
+      setAddedArtwork,
     ]
   );
 

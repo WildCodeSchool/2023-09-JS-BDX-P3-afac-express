@@ -40,12 +40,15 @@ export default function ResetPassword() {
 
     try {
       // Envoyer une demande de réinitialisation côté serveur
-      await apiService.post(`http://localhost:5021/reset/password`, {
-        email: location.state?.email, // Utilisez l'email de l'utilisateur enregistré
-        answer,
-        newPassword: password,
-        confirmPassword,
-      });
+      await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/reset/password`,
+        {
+          email: location.state?.email, // Utilisez l'email de l'utilisateur enregistré
+          answer,
+          newPassword: password,
+          confirmPassword,
+        }
+      );
 
       // Si la réinitialisation réussit, redirigez vers la page de connexion
 
@@ -66,7 +69,7 @@ export default function ResetPassword() {
       <h3>Nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="new-password"
+        type="password"
         id="form2Example1"
         required="required"
         value={password}
@@ -75,7 +78,7 @@ export default function ResetPassword() {
       <h3>Confirmez le nouveau mot de passe</h3>
       <MDBInput
         className="mb-4"
-        type="current-password"
+        type="password"
         id="form2Example2"
         required="required"
         value={confirmPassword}

@@ -5,15 +5,10 @@ import {
   MDBDropdownToggle,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useApp } from "../../context/AppContext";
 
-function ArtworksFilter({ onSelectArtist }) {
-  const { artistCollection, artCollection } = useApp();
-
-  const handleSelectArtist = (artist) => {
-    onSelectArtist(artist, artCollection);
-  };
+function ArtworksFilter() {
+  const { artistCollection } = useApp();
 
   return (
     <MDBDropdown className="d-flex justify-content-center pb-4 pt-3">
@@ -27,21 +22,12 @@ function ArtworksFilter({ onSelectArtist }) {
       <MDBDropdownMenu>
         {artistCollection.map((artist) => (
           <MDBDropdownItem key={artist.id}>
-            <Link
-              to={`/artworks/${artist.id}`}
-              onClick={() => handleSelectArtist(artist)}
-            >
-              {artist.name}
-            </Link>
+            <Link to={`/artworks/${artist.id}`}>{artist.name}</Link>
           </MDBDropdownItem>
         ))}
       </MDBDropdownMenu>
     </MDBDropdown>
   );
 }
-
-ArtworksFilter.propTypes = {
-  onSelectArtist: PropTypes.func.isRequired,
-};
 
 export default ArtworksFilter;

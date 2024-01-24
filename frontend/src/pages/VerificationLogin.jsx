@@ -6,7 +6,7 @@ import axios from "axios";
 
 function VerificationLogin() {
   const navigate = useNavigate();
-
+  const [error, setError] = useState("");
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -25,7 +25,9 @@ function VerificationLogin() {
       // Utilisez axios pour faire une requête à la route backend
 
       const { data } = await axios.get(
-        `http://localhost:5021/auth/get-question/${formValue.email}`
+        `${import.meta.env.VITE_BACKEND_URL}/auth/get-question/${
+          formValue.email
+        }`
       );
 
       if (data) {
@@ -42,11 +44,8 @@ function VerificationLogin() {
           "Adresse e-mail non trouvée. Veuillez vérifier l'adresse e-mail renseignée."
         );
       }
-    } catch (error) {
-      console.error("Erreur lors de la récupération de l'utilisateur :", error);
-      alert(
-        "Erreur lors de la récupération de l'utilisateur. Veuillez réessayer plus tard."
-      );
+    } catch (err) {
+      setError("Adresse e-mail non trouvée");
     }
   };
 
@@ -63,6 +62,7 @@ function VerificationLogin() {
         label="Adresse mail"
         type="email"
       />
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <MDBBtn type="submit" className="mb-4" block onClick={onClickValidate}>
         Valider
       </MDBBtn>

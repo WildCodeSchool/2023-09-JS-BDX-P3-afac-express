@@ -17,7 +17,7 @@ function AccountManagement() {
   const handleEmailChange = async () => {
     try {
       const response = await apiService.patch(
-        `http://localhost:5021/change/email`,
+        `${import.meta.env.VITE_BACKEND_URL}/change/email`,
         {
           oldEmail,
           newEmail,
@@ -37,7 +37,7 @@ function AccountManagement() {
   const handlePasswordChange = async () => {
     try {
       const response = await apiService.patch(
-        `http://localhost:5021/change/password`,
+        `${import.meta.env.VITE_BACKEND_URL}/change/password`,
         {
           oldPassword,
           newPassword,
@@ -46,6 +46,8 @@ function AccountManagement() {
 
       if (response.status === 204) {
         alert("Le mot de passe a été modifiée avec succès."); // eslint-disable-line no-alert
+        logout();
+        navigate("/login");
       } else {
         alert("Échec de la modification du mot de passe."); // eslint-disable-line no-alert
       }
@@ -57,7 +59,7 @@ function AccountManagement() {
   const deletePersonalAccount = async () => {
     try {
       const response = await apiService.delete(
-        `http://localhost:5021/deletepersonnelaccount/${user.id}`
+        `${import.meta.env.VITE_BACKEND_URL}/deletepersonnelaccount/${user.id}`
       );
 
       if (response.status === 204) {

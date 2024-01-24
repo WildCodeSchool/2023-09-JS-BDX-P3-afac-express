@@ -15,7 +15,7 @@ export default function Footer() {
             <div className="shadow-lg contact">
               <h2 className="title-contact">Nous Contacter</h2>
               <div className="contact-details">
-                <div className="container number">
+                <div className="container-number">
                   <img
                     className="logo-telephone"
                     src={logoTelephone}
@@ -25,7 +25,7 @@ export default function Footer() {
                     <a href="tel:">+262 692 31 83 98</a>
                   </p>
                 </div>
-                <div className="container mail">
+                <div className="container-mail">
                   <img className="logo-mail" src={logoMail} alt="icone mail" />
                   <p className="adress-mail">
                     <a href="mailto:">afac974@gmail.com</a>
@@ -103,7 +103,7 @@ export default function Footer() {
 
       <div
         className="text-center copyright"
-        style={{ backgroundColor: "#7b273d" }}
+        style={{ backgroundColor: "#6b83c4" }}
       >
         &copy; {new Date().getFullYear()} Copyright: Afac express
       </div>
