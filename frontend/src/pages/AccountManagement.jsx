@@ -14,7 +14,8 @@ function AccountManagement() {
   const [newPassword, setNewPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleEmailChange = async () => {
+  const handleEmailChange = async (event) => {
+    event.preventDefault();
     try {
       const response = await apiService.patch(
         `${import.meta.env.VITE_BACKEND_URL}/change/email`,
@@ -26,6 +27,7 @@ function AccountManagement() {
 
       if (response.status === 204) {
         alert("L'adresse e-mail a été modifiée avec succès."); // eslint-disable-line no-alert
+        window.location.reload();
       } else {
         alert("Échec de la modification de l'adresse e-mail."); // eslint-disable-line no-alert
       }
@@ -34,7 +36,8 @@ function AccountManagement() {
     }
   };
 
-  const handlePasswordChange = async () => {
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
     try {
       const response = await apiService.patch(
         `${import.meta.env.VITE_BACKEND_URL}/change/password`,
