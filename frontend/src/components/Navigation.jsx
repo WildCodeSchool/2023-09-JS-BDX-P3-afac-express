@@ -122,14 +122,11 @@ export default function Navigation() {
             <Link className="nav-link navLink" to="/Gallery">
               Galerie
             </Link>
-            <Link className="nav-link navLink" to="/Artworks">
-              Oeuvres
-            </Link>
             <Link className="nav-link navLink" to="/Artists">
               Artistes
             </Link>
             <Link className="nav-link navLink" to="/About">
-              A propos
+              À propos
             </Link>
           </MDBNavbarNav>
         </MDBCollapse>
