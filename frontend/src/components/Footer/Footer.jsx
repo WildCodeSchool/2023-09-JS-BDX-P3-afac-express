@@ -103,7 +103,7 @@ export default function Footer() {
 
       <div
         className="text-center copyright"
-        style={{ backgroundColor: "#6b83c4" }}
+        style={{ backgroundColor: "#7b273d" }}
       >
         &copy; {new Date().getFullYear()} Copyright: Afac express
       </div>
