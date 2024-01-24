@@ -19,10 +19,7 @@ function Art() {
 
   return (
     <MDBContainer fluid>
-      <div
-        className="d-flex align-items-start bg-body-tertiary"
-        style={{ height: "100px" }}
-      >
+      <div className="d-flex align-items-start bg-body-tertiary">
         <MDBCol>
           <img
             src={artwork.image}
@@ -47,10 +44,7 @@ function Art() {
             </MDBListGroupItem>
             <MDBListGroupItem>
               {artwork.creationPlace && (
-                <div
-                  className="d-flex align-items-start bg-body-tertiary"
-                  style={{ height: "100px" }}
-                >
+                <div className="d-flex align-items-start bg-body-tertiary">
                   <MDBCol className="fw-bold">Lieu de création</MDBCol>
                   <MDBCol>{artwork.creationPlace}</MDBCol>
                 </div>
@@ -59,38 +53,6 @@ function Art() {
           </MDBListGroup>
         </MDBCol>
       </div>
-
-      {/* </div>
-      {artCollection?.length > 0 &&
-        artCollection.map((art, index) => (
-          <MDBCard id={index + 1}>
-            <MDBCardImage src={art.image} position="top" alt={art.title} />
-            <MDBCardBody>
-              <MDBCardTitle
-                className="fst-italic text-center fs-5"
-                style={{ color: "#7b273d" }}
-              >
-                {art.title}
-              </MDBCardTitle>
-              <MDBCardText className="text-center lh-sm">
-                <span className="fs-6 text text-center fw-bold pt-2 pb-2">
-                  {art.artist_name}
-                </span>
-                {art.dimension && (
-                  <span style={{ color: "#786996" }}>
-                    {art.dimension}
-                    <br />
-                  </span>
-                )}
-                {art.creation_place && (
-                  <span style={{ color: "#786996" }}>{art.creation_place}</span>
-                )}
-              </MDBCardText>
-            </MDBCardBody>
-          </MDBCard>
-        ))}
-
-      {!artCollection?.length && <p>Les données ne sont pas disponibles.</p>} */}
     </MDBContainer>
   );
 }
