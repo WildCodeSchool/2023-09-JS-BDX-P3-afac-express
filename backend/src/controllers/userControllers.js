@@ -89,7 +89,6 @@ const postUserByEmail = (req, res) => {
 const postLogin = (req, res) => {
   models.users.login(req.body).then((user) => {
     if (user) {
-      // TODO à voir si on garde email et admin
       const token = generateAccessToken({
         email: user.email,
         admin: user.is_admin,

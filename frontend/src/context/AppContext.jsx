@@ -39,10 +39,6 @@ function AppContextProvider({ children, apiService }) {
         `${import.meta.env.VITE_BACKEND_URL}/users/personal`
       );
 
-      // console.log("User data from API:", result.data);
-
-      // alert(`Content de vous revoir ${result.data.email}`); // eslint-disable-line no-alert
-
       setUser(result.data);
 
       if (result.data.is_admin === 1) {
@@ -118,14 +114,6 @@ function AppContextProvider({ children, apiService }) {
       setAddedArtwork,
     ]
   );
-
-  // useEffect(() => {
-  //   if (isAdmin) {
-  //     return navigate("/admin");
-  //   }
-
-  //   return null;
-  // }, []);
 
   return (
     <appContext.Provider value={contextData}>

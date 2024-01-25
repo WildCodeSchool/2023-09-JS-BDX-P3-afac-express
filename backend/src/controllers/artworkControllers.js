@@ -74,32 +74,32 @@ const postArtworkForUser = async (req, res) => {
   }
 };
 
-const getArtworkForUsers = (req, res) => {
-  const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
-    req.params;
+// const getArtworkForUsers = (req, res) => {
+//   const { artworkId, artistId, artistName, artworkTitle, artworkImage } =
+//     req.params;
 
-  const { userId } = req.params;
-  models.artwork
-    .findArtworkForUser(
-      artworkId,
-      artistId,
-      userId,
-      artistName,
-      artworkTitle,
-      artworkImage
-    )
-    .then((artwork) => {
-      if (artwork) {
-        res.json(artwork);
-      } else {
-        res.status(404).json({ message: "Artwork not found" });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
+//   const { userId } = req.params;
+//   models.artwork
+//     .findArtworkForUser(
+//       artworkId,
+//       artistId,
+//       userId,
+//       artistName,
+//       artworkTitle,
+//       artworkImage
+//     )
+//     .then((artwork) => {
+//       if (artwork) {
+//         res.json(artwork);
+//       } else {
+//         res.status(404).json({ message: "Artwork not found" });
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// };
 
 const getArtworkForUserById = (req, res) => {
   const { userId } = req.params;
@@ -164,7 +164,7 @@ const updateArtwork = (req, res) => {
 
 module.exports = {
   getArtwork,
-  getArtworkForUsers,
+  // getArtworkForUsers,
   getArtworkById,
   getArtworkForUserById,
   deleteArtworkForUser,
