@@ -37,6 +37,7 @@ router.delete(
   authAdminMiddleware,
   userControllers.deleteUsers
 );
+
 router.delete(
   "/deletepersonnelaccount/:id",
   authMiddleware,
@@ -83,7 +84,6 @@ router.post(
   authMiddleware,
   artworkControllers.postArtworkForUser
 );
-router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
 router.get(
   "/uploads",
   authMiddleware,
