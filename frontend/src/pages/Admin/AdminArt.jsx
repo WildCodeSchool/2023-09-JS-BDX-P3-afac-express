@@ -175,6 +175,17 @@ export default function AdminArt() {
         id="createLocation"
         label="Lieux de création"
       />
+      <MDBInput
+        className="mb-4"
+        onChange={handleInputArt}
+        type="createlocation"
+        name="image"
+        id="createLocation"
+        label="image"
+      />
+      <MDBBtn type="submit" className="mb-4" block>
+        Ajouter une image
+      </MDBBtn>
       <form className="d-flex flex-column mb-4" onSubmit={handleSubmitArt}>
         <input
           type="file"
