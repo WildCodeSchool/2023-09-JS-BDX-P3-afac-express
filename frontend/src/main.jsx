@@ -30,6 +30,7 @@ import AdminUserManagement from "./pages/Admin/AdminUserManagment";
 import AdminHome from "./pages/Admin/AdminHome";
 import ApiService from "./services/api.service";
 import globalAppLoader from "./loaders/global-app.loader";
+import artistIdLoader from "./loaders/artistid.loader";
 
 const apiService = new ApiService();
 
@@ -51,16 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/artworks/:id",
         element: <Artworks />,
-        loader: async ({ params }) => {
-          try {
-            const { data } = await apiService.get(
-              `${import.meta.env.VITE_BACKEND_URL}/artwork/${params.id}`
-            );
-            return { artworkData: data };
-          } catch (err) {
-            return null;
-          }
-        },
+        loader: async ({ params }) => artistIdLoader(apiService, params),
       },
       { path: "/artists", element: <Artists /> },
       { path: "/artist/:id", element: <Artists /> },
