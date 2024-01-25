@@ -21,7 +21,6 @@ router.get(
   authAdminMiddleware,
   userControllers.getUsers
 );
-router.get("/users/:id", userControllers.getUsersById);
 router.get("/users/:id([0-9]+)", userControllers.getUsersById);
 router.get("/auth/get-question/:email", userControllers.getUserQuestion);
 router.get(
@@ -38,6 +37,7 @@ router.delete(
   authAdminMiddleware,
   userControllers.deleteUsers
 );
+
 router.delete(
   "/deletepersonnelaccount/:id",
   authMiddleware,
@@ -84,7 +84,6 @@ router.post(
   authMiddleware,
   artworkControllers.postArtworkForUser
 );
-router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
 router.get(
   "/uploads",
   authMiddleware,

@@ -22,6 +22,7 @@ class UploadManager extends AbstractManager {
           `INSERT INTO ${this.table} (url) VALUES (?)`,
           [name]
         );
+
         resolve({
           id: result.insertId,
           url: name,
