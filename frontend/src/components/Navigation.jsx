@@ -116,20 +116,17 @@ export default function Navigation() {
         </MDBNavbarToggler>
         <MDBCollapse className="navbar-display" navbar open={openNavSecond}>
           <MDBNavbarNav className="ms-auto">
-            <Link className="nav-link navLink" to="/Home">
+            <Link className="nav-link navLink" to="/home">
               Accueil
             </Link>
-            <Link className="nav-link navLink" to="/Gallery">
+            <Link className="nav-link navLink" to="/gallery">
               Galerie
             </Link>
-            <Link className="nav-link navLink" to="/Artworks">
-              Oeuvres
-            </Link>
-            <Link className="nav-link navLink" to="/Artists">
+            <Link className="nav-link navLink" to="/artists">
               Artistes
             </Link>
-            <Link className="nav-link navLink" to="/About">
-              A propos
+            <Link className="nav-link navLink" to="/about">
+              À propos
             </Link>
           </MDBNavbarNav>
         </MDBCollapse>

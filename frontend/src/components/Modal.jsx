@@ -25,7 +25,7 @@ function Modal() {
       <MDBModalDialog>
         <MDBModalContent>
           <MDBModalHeader>
-            <MDBModalTitle>Modal title</MDBModalTitle>
+            <MDBModalTitle>Modifications apportées</MDBModalTitle>
             <MDBBtn className="btn-close" color="none" onClick={toggleOpen} />
           </MDBModalHeader>
           <MDBModalBody>...</MDBModalBody>
@@ -33,7 +33,7 @@ function Modal() {
             <MDBBtn color="secondary" onClick={toggleOpen}>
               Close
             </MDBBtn>
-            <MDBBtn>Understood</MDBBtn>
+            <MDBBtn>Ok</MDBBtn>
           </MDBModalFooter>
         </MDBModalContent>
       </MDBModalDialog>
