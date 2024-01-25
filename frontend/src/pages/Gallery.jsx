@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   MDBAnimation,
   MDBBtn,
@@ -6,9 +7,8 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 
-import { Link } from "react-router-dom";
-import Likes from "../components/Likes";
 import { useApp } from "../context/AppContext";
+import Likes from "../components/Likes";
 
 function Gallery() {
   const { user, addedArtwork, artCollection } = useApp();

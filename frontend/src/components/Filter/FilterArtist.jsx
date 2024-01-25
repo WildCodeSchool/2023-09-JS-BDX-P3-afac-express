@@ -21,7 +21,7 @@ function FilterArtist({ onSelectArtist }) {
         tag="a"
         className="btn btn-primary bg-transparent text-dark"
       >
-        Autres artistes
+        Tous les artistes
       </MDBDropdownToggle>
 
       <MDBDropdownMenu>
