@@ -1,9 +1,11 @@
 import {
   MDBCard,
-  MDBCardBody,
+  MDBCardTitle,
   MDBCardText,
+  MDBCardBody,
   MDBCardImage,
-  MDBRipple,
+  MDBRow,
+  MDBCol,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -36,6 +38,7 @@ function Artists() {
 
       {selectedArtist ? (
         <div key={selectedArtist.id}>
+          artistwithoutfilter
           <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
           <MDBCard key={selectedArtist.id}>
             <MDBCardImage
