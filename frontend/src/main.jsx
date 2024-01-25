@@ -5,6 +5,7 @@ import App from "./App";
 import "./App.scss";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import "mdb-react-ecommerce-gallery/dist/css/ecommerce-gallery.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import AppContextProvider from "./context/AppContext";

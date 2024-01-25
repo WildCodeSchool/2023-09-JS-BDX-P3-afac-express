@@ -5,6 +5,8 @@ import {
   MDBCardImage,
   MDBRipple,
   MDBContainer,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import FilterArtist from "../components/Filter/FilterArtist";
@@ -19,7 +21,7 @@ function Artists() {
   };
 
   return (
-    <MDBContainer fluid className="pt-5 mb-7" responsive>
+    <MDBContainer fluid className="pt-5 mb-7">
       <h3
         className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
@@ -32,13 +34,13 @@ function Artists() {
         onSelectArtist={onSelectArtist}
       />
 
-      {selectedArtist && (
+      {selectedArtist ? (
         <div key={selectedArtist.id}>
           <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
 
           <MDBCard
             alignment="center"
-            className="col-10 m-auto"
+            className="col-8 m-auto"
             shadow="5"
             key={selectedArtist.id}
           >
@@ -52,17 +54,48 @@ function Artists() {
                   src={selectedArtist.image}
                   fluid
                   alt={selectedArtist.name}
-                  class="rounded img-fluid"
+                  className="rounded img-fluid"
                 />
               </div>
             </MDBRipple>
             <MDBCardBody>
-              <MDBCardText className="p-5 text-start">
+              <MDBCardText className="text-start">
                 {selectedArtist.description}
               </MDBCardText>
             </MDBCardBody>
           </MDBCard>
         </div>
+      ) : (
+        <MDBRow>
+          {artistCollection.map((artist) => (
+            <MDBCol key={artist.id}>
+              <h3 className="fs-4 text text-center pt-2 pb-3">{artist.name}</h3>
+
+              <MDBCard
+                alignment="center"
+                className="col-15 m-auto"
+                shadow="5"
+                key={artist.id}
+              >
+                <MDBRipple
+                  rippleColor="light"
+                  rippleTag="div"
+                  className="bg-image hover-overlay"
+                  onClick={() => onSelectArtist(artist)}
+                >
+                  <div className="bg-image hover-zoom">
+                    <MDBCardImage
+                      src={artist.image}
+                      fluid
+                      alt={artist.name}
+                      className=" img-fluid"
+                    />
+                  </div>
+                </MDBRipple>
+              </MDBCard>
+            </MDBCol>
+          ))}
+        </MDBRow>
       )}
     </MDBContainer>
   );
