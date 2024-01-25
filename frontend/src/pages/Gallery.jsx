@@ -7,11 +7,20 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 
+import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import Likes from "../components/Likes";
+import FilterGallery from "../components/Filter/FilterGallery";
 
 function Gallery() {
+  const { artistCollection } = useApp();
   const { user, addedArtwork, artCollection } = useApp();
+
+  const [selectedArtist, setSelectedArtist] = useState(null);
+
+  const onSelectArtist = (artist) => {
+    setSelectedArtist(artist);
+  };
 
   return (
     <MDBContainer fluid className="pt-5">
@@ -21,8 +30,17 @@ function Gallery() {
       >
         Parcourez notre galerie d'art
       </h2>
+      <FilterGallery
+        artists={artistCollection}
+        onSelectArtist={onSelectArtist}
+      />
       <MDBRow>
-        {artCollection.map((artwork, index) => (
+        {(selectedArtist
+          ? artCollection.filter(
+              (artwork) => artwork.artist_id === selectedArtist.id
+            )
+          : artCollection
+        ).map((artwork, index) => (
           <MDBCol
             lg="4"
             md="12"
@@ -93,4 +111,5 @@ function Gallery() {
     </MDBContainer>
   );
 }
+
 export default Gallery;

@@ -21,7 +21,7 @@ function Artists() {
   };
 
   return (
-    <MDBContainer fluid className="pt-5 mb-7" responsive>
+    <MDBContainer fluid className="pt-5 mb-7">
       <h3
         className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
