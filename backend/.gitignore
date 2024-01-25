@@ -2,3 +2,5 @@ node_modules
 coverage
 .env
 schema.sql
+/public/uploads
+!/public/uploads/.gitkeep
