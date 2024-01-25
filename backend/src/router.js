@@ -1,11 +1,15 @@
 const express = require("express");
 
 const router = express.Router();
+const multer = require("multer");
+
+const upload = multer({ dest: "public/uploads/" });
 
 const userControllers = require("./controllers/userControllers");
 const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
+const uploadControllers = require("./controllers/uploadControllers");
 const {
   authAdminMiddleware,
 } = require("./middlewares/Security/auth.admin.middleware");
@@ -68,11 +72,31 @@ router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
 router.put("/artist/:id", artistControllers.updateArtist);
+router.delete("/artist/:id", artistControllers.deleteArtist);
 
 router.get("/artwork", artworkControllers.getArtwork);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
 router.put("/artwork/:id", artworkControllers.updateArtwork);
+router.post(
+  "/artwork/user",
+  authMiddleware,
+  artworkControllers.postArtworkForUser
+);
+router.get("/artwork/user/:userId", artworkControllers.getArtworkForUsers);
+router.get(
+  "/uploads",
+  authMiddleware,
+  authAdminMiddleware,
+  uploadControllers.getList
+);
+
+router.post(
+  "/uploads",
+  // authMiddleware,
+  upload.single("avatar"),
+  uploadControllers.creator
+);
 
 module.exports = router;

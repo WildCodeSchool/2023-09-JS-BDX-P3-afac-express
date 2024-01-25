@@ -13,8 +13,9 @@ const getArtists = async (_, res) => {
 const getArtistById = async (req, res) => {
   try {
     const [rows] = await models.artist.find(req.params.id);
+    
+    if (rows[0] != null) {
 
-    if (rows[0] !== null) {
       res.json(rows[0]);
     } else {
       res.sendStatus(404);
@@ -40,22 +41,35 @@ const postArtist = async (req, res) => {
   }
 };
 
-const updateArtist = (req, res) => {
-  models.artist
-    .update(req.body, req.params.id)
-    .then((result) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      res.status(422).send({ message: err.message });
-    });
+const updateArtist = async (req, res) => {
+  try {
+    const result = await models.artist.update(req.body, req.params.id);
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    res.status(422).send({ message: err.message });
+  }
+};
+
+const deleteArtist = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const [rows] = await models.artist.delete(id);
+    if (rows.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 };
 
 module.exports = {
+  deleteArtist,
   getArtists,
   getArtistById,
   postArtist,
