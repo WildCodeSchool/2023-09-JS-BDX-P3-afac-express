@@ -26,7 +26,7 @@ function Artists() {
         className="fs-1 text text-center fw-bold pt-5"
         style={{ color: "#7b273d" }}
       >
-        Nos artistes
+        Les artistes
       </h3>
 
       <FilterArtist
@@ -37,27 +37,13 @@ function Artists() {
       {selectedArtist ? (
         <div key={selectedArtist.id}>
           <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
+          <MDBCard key={selectedArtist.id}>
+            <MDBCardImage
+              src={selectedArtist.image}
+              fluid
+              alt={selectedArtist.name}
+            />
 
-          <MDBCard
-            alignment="center"
-            className="col-8 m-auto"
-            shadow="5"
-            key={selectedArtist.id}
-          >
-            <MDBRipple
-              rippleColor="light"
-              rippleTag="div"
-              className="bg-image hover-overlay"
-            >
-              <div className="bg-image hover-zoom">
-                <MDBCardImage
-                  src={selectedArtist.image}
-                  fluid
-                  alt={selectedArtist.name}
-                  className="rounded img-fluid"
-                />
-              </div>
-            </MDBRipple>
             <MDBCardBody>
               <MDBCardText className="text-start">
                 {selectedArtist.description}
@@ -73,17 +59,17 @@ function Artists() {
 
               <MDBCard
                 alignment="center"
-                className="col-15 m-auto"
+                className="col-15 m-auto container-image"
                 shadow="5"
                 key={artist.id}
               >
                 <MDBRipple
                   rippleColor="light"
                   rippleTag="div"
-                  className="bg-image hover-overlay"
+                  className="bg-image hover-overlay rounded "
                   onClick={() => onSelectArtist(artist)}
                 >
-                  <div className="bg-image hover-zoom">
+                  <div className="bg-image hover-zoom ">
                     <MDBCardImage
                       src={artist.image}
                       fluid
