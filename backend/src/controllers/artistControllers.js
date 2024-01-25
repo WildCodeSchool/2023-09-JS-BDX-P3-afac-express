@@ -13,7 +13,9 @@ const getArtists = async (_, res) => {
 const getArtistById = async (req, res) => {
   try {
     const [rows] = await models.artist.find(req.params.id);
+    
     if (rows[0] != null) {
+
       res.json(rows[0]);
     } else {
       res.sendStatus(404);
@@ -27,6 +29,7 @@ const getArtistById = async (req, res) => {
 const postArtist = async (req, res) => {
   try {
     const [rows] = await models.artist.create(req.body);
+
     res.send({
       id: rows.insertId,
       name: req.body.name,
