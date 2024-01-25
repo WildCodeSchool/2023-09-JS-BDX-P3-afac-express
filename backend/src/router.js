@@ -21,7 +21,6 @@ router.get(
   authAdminMiddleware,
   userControllers.getUsers
 );
-router.get("/users/:id", userControllers.getUsersById);
 router.get("/users/:id([0-9]+)", userControllers.getUsersById);
 router.get("/auth/get-question/:email", userControllers.getUserQuestion);
 router.get(
@@ -43,12 +42,12 @@ router.delete(
   authMiddleware,
   userControllers.deleteUsers
 );
-router.put(
-  "/users/:id",
-  authMiddleware,
-  authAdminMiddleware,
-  userControllers.updateUsers
-);
+// router.put(
+//   "/users/:id",
+//   authMiddleware,
+//   authAdminMiddleware,
+//   userControllers.updateUsers
+// );
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
