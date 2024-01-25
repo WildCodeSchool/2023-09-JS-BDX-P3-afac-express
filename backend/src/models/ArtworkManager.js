@@ -20,47 +20,30 @@ class ArtworkManager extends AbstractManager {
     artworkTitle,
     artworkImage
   ) {
-    // Vérifie si l'œuvre existe déjà pour cet utilisateur
-    const checkDuplicateQuery = `
-      SELECT *
-      FROM artwork_users
-      WHERE users_id = ? AND artwork_id = ?
+    const sqlQuery = `
+      INSERT INTO artwork_users (
+        artwork_id,
+        artist_id,
+        users_id,
+        artist_name,
+        artwork_title,
+        artwork_image
+      )
+      VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     return this.database
-      .query(checkDuplicateQuery, [userId, artworkId])
-      .then((existingArtwork) => {
-        if (existingArtwork.length > 0) {
-          console.info("L'œuvre existe déjà pour cet utilisateur");
-          return null;
-        }
-        const insertQuery = `
-          INSERT INTO artwork_users (
-            artwork_id,
-            artist_id,
-            users_id,
-            artist_name,
-            artwork_title,
-            artwork_image
-          )
-          VALUES (?, ?, ?, ?, ?, ?)
-        `;
-
-        return this.database.query(insertQuery, [
-          artworkId,
-          artistId,
-          userId,
-          artistName,
-          artworkTitle,
-          artworkImage,
-        ]);
-      })
-      .then(async (result) => {
-        if (result !== null) {
-          const artworks = await this.findArtworkForUser(userId);
-          return artworks;
-        }
-        return null;
+      .query(sqlQuery, [
+        artworkId,
+        artistId,
+        userId,
+        artistName,
+        artworkTitle,
+        artworkImage,
+      ])
+      .then(async () => {
+        const artworks = await this.findArtworkForUser(userId);
+        return artworks;
       })
       .catch((error) => {
         throw error;
@@ -78,7 +61,6 @@ class ArtworkManager extends AbstractManager {
         artwork_image AS artworkImage
       FROM artwork_users
       WHERE users_id = ?
-      LIMIT 1;
     `;
 
     return this.database

@@ -68,12 +68,7 @@ router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
 router.put("/artist/:id", artistControllers.updateArtist);
 
-router.get(
-  "/artwork",
-  authMiddleware,
-  authAdminMiddleware,
-  artworkControllers.getArtwork
-);
+router.get("/artwork", artworkControllers.getArtwork);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);

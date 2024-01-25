@@ -69,12 +69,18 @@
   .container-development {
     margin-top: 20px;
   }
-  .contact-details {
-    margin-top: 20px;
-    text-align: center;
-    display: flex;
-    // align-items: center;
+
+  .title-development {
+    margin-bottom: 0;
   }
+
+  .container-number,
+  .container-mail {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
   .logo-telephone,
   .logo-mail {
     display: flex;
@@ -87,18 +93,14 @@
 
   .contact {
     display: inline;
-    justify-content: flex-start;
-    // On aligne le container à gauche.
   }
 
   .partnerships {
     display: inline;
-    justify-content: flex-end; // On aligne le container au centre.
   }
 
   .development {
     display: inline;
-    justify-content: center; // On aligne le container à droite.
   }
   .copyright {
     margin-top: 0;

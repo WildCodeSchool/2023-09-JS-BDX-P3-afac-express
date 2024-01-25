@@ -25,7 +25,9 @@ function VerificationLogin() {
       // Utilisez axios pour faire une requête à la route backend
 
       const { data } = await axios.get(
-        `http://localhost:5021/auth/get-question/${formValue.email}`
+        `${import.meta.env.VITE_BACKEND_URL}/auth/get-question/${
+          formValue.email
+        }`
       );
 
       if (data) {
