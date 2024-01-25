@@ -1,43 +1,38 @@
 const models = require("../models");
 
-const getArtwork = (_, res) => {
-  models.artwork
-    .findArtwork()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const getArtwork = async (_, res) => {
+  try {
+    const [rows] = await models.artwork.findArtwork();
+    res.send(rows);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const getArtworkById = (req, res) => {
-  models.artwork
-    .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] != null) {
-        res.json(rows[0]);
-      } else {
-        res.sendStatus(404);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const getArtworkById = async (req, res) => {
+  try {
+    const [rows] = await models.artwork.find(req.params.id);
+
+    if (rows[0] !== null) {
+      res.json(rows[0]);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const postArtwork = (req, res) => {
-  models.artwork
-    .create(req.body)
-    .then(([rows]) => {
-      res.send({ id: rows.insertId, ...req.body });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const postArtwork = async (req, res) => {
+  try {
+    const [rows] = await models.artwork.create(req.body);
+    res.send({ id: rows.insertId, ...req.body });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
 const postArtworkForUser = async (req, res) => {
@@ -101,65 +96,61 @@ const postArtworkForUser = async (req, res) => {
 //     });
 // };
 
-const getArtworkForUserById = (req, res) => {
-  const { userId } = req.params;
-  models.artwork
-    .findArtworkForUser(userId)
-    .then((artwork) => {
-      if (artwork) {
-        res.json(artwork);
-      } else {
-        res.status(404).json({ message: "Artwork not found" });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const getArtworkForUserById = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const artwork = await models.artwork.findArtworkForUser(userId);
+
+    if (artwork) {
+      res.json(artwork);
+    } else {
+      res.status(404).json({ message: "Artwork not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const deleteArtworkForUser = (req, res) => {
-  const { userId, artworkId } = req.params;
+const deleteArtworkForUser = async (req, res) => {
+  try {
+    const { userId, artworkId } = req.params;
 
-  models.artwork
-    .deleteArtworkForUser(userId, artworkId)
-    .then(() => {
+    await models.artwork.deleteArtworkForUser(userId, artworkId);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error("Error deleting artwork:", err);
+    res.sendStatus(500);
+  }
+};
+
+const deleteArtwork = async (req, res) => {
+  try {
+    const [rows] = await models.artwork.delete(req.params.id);
+
+    if (rows.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
       res.sendStatus(204);
-    })
-    .catch((err) => {
-      console.error("Error deleting artwork:", err);
-      res.sendStatus(500);
-    });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 };
 
-const deleteArtwork = (req, res) => {
-  models.artwork
-    .delete(req.params.id)
-    .then(([rows]) => {
-      if (rows.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
-};
+const updateArtwork = async (req, res) => {
+  try {
+    const result = await models.artwork.update(req.body, req.params.id);
 
-const updateArtwork = (req, res) => {
-  models.artwork
-    .update(req.body, req.params.id)
-    .then((result) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      res.status(422).send({ message: err.message });
-    });
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    res.status(422).send({ message: err.message });
+  }
 };
 
 module.exports = {
