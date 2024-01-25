@@ -58,6 +58,7 @@ router.get(
   authMiddleware,
   artworkControllers.getArtworkForUserById
 );
+
 router.delete(
   "/artwork/user/:userId/:artworkId",
   authMiddleware,
