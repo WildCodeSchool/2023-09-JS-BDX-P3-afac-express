@@ -1,14 +1,12 @@
 import {
   MDBCard,
-  MDBCardTitle,
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
   MDBRow,
   MDBCol,
   MDBContainer,
-  MDBRow,
-  MDBCol,
+  MDBRipple,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import FilterArtist from "../components/Filter/FilterArtist";
@@ -38,7 +36,6 @@ function Artists() {
 
       {selectedArtist ? (
         <div key={selectedArtist.id}>
-          artistwithoutfilter
           <h3 className="fs-4 text text-center pt-2">{selectedArtist.name}</h3>
           <MDBCard key={selectedArtist.id}>
             <MDBCardImage
