@@ -116,7 +116,7 @@ router.post(
 );
 
 router.patch(
-  "/uploads/artwork",
+  "/uploads/artwork/:id",
   authMiddleware,
   authAdminMiddleware,
   upload.single("avatar"),

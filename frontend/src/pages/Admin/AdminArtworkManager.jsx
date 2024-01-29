@@ -8,7 +8,7 @@ const apiService = new ApiService();
 
 export default function AdminartworkManager() {
   const { id } = useParams();
-  const [artwork, setartwork] = useState({
+  const [artwork, setArtwork] = useState({
     title: "Titre de l'oeuvre",
     dimension: "Dimension de l'oeuvre",
     creation_place: "Lieu de création de l'oeuvre",
@@ -37,7 +37,7 @@ export default function AdminartworkManager() {
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`,
         updatedData
       );
-      setartwork(data);
+      setArtwork(data);
     } catch (error) {
       console.error(error);
     }
@@ -48,18 +48,35 @@ export default function AdminartworkManager() {
       const { data } = await apiService.get(
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
-      setartwork(data);
+      setArtwork(data);
     };
     fetchartworkData();
   }, [id]);
 
-  const deleteartworkData = async () => {
+  const deleteArtworkData = async () => {
     try {
       const { data } = await apiService.delete(
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
-      setartwork(data);
+      setArtwork(data);
       navigate("/admin/adminartwork");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateArtworkImage = async (formData) => {
+    try {
+      const response = await apiService.patchImage(
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artwork/${id}`,
+        formData
+      );
+
+      setArtwork((prevArtwork) => ({
+        ...prevArtwork,
+        image: response?.data?.image || prevArtwork.image,
+      }));
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +156,36 @@ export default function AdminartworkManager() {
         </MDBBtn>
       </form>
 
-      <MDBBtn className="mt-4 mb-6" onClick={deleteartworkData}>
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        encType="multipart/form-data"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("avatar", e.target.elements.avatar.files[0]);
+
+          updateArtworkImage(formData);
+        }}
+      >
+        <h3 className="fs-5 fw-bold pb-3">Modifier l'image</h3>
+        <img
+          src={artwork?.image || "URL_PAR_DEFAUT"}
+          className="d-block w-100"
+          alt={artwork?.name || "Nom par défaut"}
+        />
+
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          name="avatar"
+        />
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+
+      <MDBBtn className="mt-4 mb-6" onClick={deleteArtworkData}>
         Supprimer l'oeuvre
       </MDBBtn>
 
