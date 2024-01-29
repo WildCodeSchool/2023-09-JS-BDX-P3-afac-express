@@ -99,12 +99,28 @@ router.post(
   uploadControllers.creatorArtist
 );
 
+router.patch(
+  "/uploads/artist",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.patchArtistImage
+);
+
 router.post(
   "/uploads/artwork",
   authMiddleware,
   authAdminMiddleware,
   upload.single("avatar"),
   uploadControllers.creatorArtwork
+);
+
+router.patch(
+  "/uploads/artwork",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.patchArtworkImage
 );
 
 module.exports = router;

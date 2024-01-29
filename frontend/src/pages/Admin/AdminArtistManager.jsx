@@ -15,6 +15,7 @@ export default function AdminArtistManager() {
 
   const [updatedName, setUpdatedName] = useState("");
   const [updateddescription, setUpdateddescription] = useState("");
+  const [updatedImage, setUpdatedImage] = useState("");
   const navigate = useNavigate();
 
   const updateArtistData = async () => {
@@ -23,6 +24,7 @@ export default function AdminArtistManager() {
         name: updatedName !== "" ? updatedName : artist.name,
         description:
           updateddescription !== "" ? updateddescription : artist.description,
+        image: updatedImage !== "" ? updatedImage : artist.image,
       };
 
       const { data } = await apiService.put(
@@ -68,7 +70,10 @@ export default function AdminArtistManager() {
       >
         Gestion artiste
       </h3>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateArtistData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier le nom de l'artiste</h3>
         <p>{artist.name}</p>
         <MDBInput
@@ -79,11 +84,14 @@ export default function AdminArtistManager() {
           value={updatedName}
           onChange={(e) => setUpdatedName(e.target.value)}
         />
-        <MDBBtn type="submit" block className="mb-2" onClick={updateArtistData}>
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateArtistData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier la biographie</h3>
         <p>{artist.description}</p>
         <MDBInput
@@ -94,7 +102,25 @@ export default function AdminArtistManager() {
           value={updateddescription}
           onChange={(e) => setUpdateddescription(e.target.value)}
         />
-        <MDBBtn type="submit" block className="mb-2" onClick={updateArtistData}>
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateArtistData}
+      >
+        <h3 className="fs-5 fw-bold pb-3">Modifier l'image</h3>
+        <img src={artist.image} className="d-block w-100" alt={artist.title} />
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          value={updatedImage}
+          onChange={(e) => setUpdatedImage(e.target.value)}
+        />
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>
