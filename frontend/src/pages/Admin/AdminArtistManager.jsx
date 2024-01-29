@@ -11,11 +11,11 @@ export default function AdminArtistManager() {
   const [artist, setArtist] = useState({
     name: "Nom actuel",
     description: "Biographie actuelle",
+    image: "URL_PAR_DEFAUT",
   });
 
   const [updatedName, setUpdatedName] = useState("");
   const [updateddescription, setUpdateddescription] = useState("");
-  const [updatedImage, setUpdatedImage] = useState("");
   const navigate = useNavigate();
 
   const updateArtistData = async () => {
@@ -24,7 +24,6 @@ export default function AdminArtistManager() {
         name: updatedName !== "" ? updatedName : artist.name,
         description:
           updateddescription !== "" ? updateddescription : artist.description,
-        image: updatedImage !== "" ? updatedImage : artist.image,
       };
 
       const { data } = await apiService.put(
@@ -54,6 +53,23 @@ export default function AdminArtistManager() {
       );
       setArtist(data);
       navigate("/admin/adminart");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateArtistImage = async (formData) => {
+    try {
+      const response = await apiService.patchImage(
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artist/${id}`,
+        formData
+      );
+
+      setArtist((prevArtist) => ({
+        ...prevArtist,
+        image: response?.data?.image || prevArtist.image,
+      }));
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -109,16 +125,27 @@ export default function AdminArtistManager() {
 
       <form
         className="square border pt-3 ps-3 pe-3 mb-4 rounded"
-        onSubmit={updateArtistData}
+        encType="multipart/form-data"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("avatar", e.target.elements.avatar.files[0]);
+
+          updateArtistImage(formData);
+        }}
       >
         <h3 className="fs-5 fw-bold pb-3">Modifier l'image</h3>
-        <img src={artist.image} className="d-block w-100" alt={artist.title} />
+        <img
+          src={artist?.image || "URL_PAR_DEFAUT"}
+          className="d-block w-100"
+          alt={artist?.name || "Nom par défaut"}
+        />
+
         <input
           type="file"
           accept="image/*"
           className="d-flex flex-column mb-4"
-          value={updatedImage}
-          onChange={(e) => setUpdatedImage(e.target.value)}
+          name="avatar"
         />
         <MDBBtn type="submit" block className="mb-2">
           Valider

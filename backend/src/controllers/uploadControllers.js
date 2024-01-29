@@ -40,8 +40,8 @@ const creatorArtwork = async (req, res) => {
 };
 
 const patchArtistImage = async (req, res) => {
-  const artistId = parseInt(req.body?.artist, 10) ?? 0;
-
+  const artistId = parseInt(req.params.id, 10) ?? 0;
+  // ICI
   try {
     const newUpload = await models.upload.create(req.file);
     await models.artist.addAvatarArtist(
@@ -49,7 +49,7 @@ const patchArtistImage = async (req, res) => {
       `${req.protocol}://${req.headers.host}/${newUpload.url}`
     );
 
-    const [artist] = await models.artist.find(artistId ?? 0);
+    const [artist] = await models.artist.find(artistId || 0);
     return res.status(200).send(artist[0]);
   } catch (err) {
     console.error(err);
