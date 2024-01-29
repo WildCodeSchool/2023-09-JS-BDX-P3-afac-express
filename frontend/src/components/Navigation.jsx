@@ -99,7 +99,7 @@ export default function Navigation() {
   } else {
     navigationContent = (
       <Link to="/login">
-        <MDBIcon far icon="user" />
+        <MDBIcon className="me-4" far icon="user" />
       </Link>
     );
   }
