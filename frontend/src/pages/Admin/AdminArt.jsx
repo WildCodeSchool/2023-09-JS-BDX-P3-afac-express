@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
 import { useApp } from "../../context/AppContext";
+import FilterArtist from "../../components/Filter/FilterArtistAdmin";
 
 const apiService = new ApiService();
 
@@ -149,14 +150,9 @@ export default function AdminArt() {
         id="artName"
         label="Titre"
       />
-      <MDBInput
-        className="mb-4"
-        onChange={handleInputArt}
-        type="artistArt"
-        name="artist_id"
-        id="artistArt"
-        label="Choix de l'artiste"
-      />
+      <MDBRow className="mb-4">
+        <FilterArtist />
+      </MDBRow>
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
