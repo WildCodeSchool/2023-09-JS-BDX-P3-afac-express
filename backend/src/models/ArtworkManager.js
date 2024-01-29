@@ -100,6 +100,13 @@ class ArtworkManager extends AbstractManager {
       ]
     );
   }
+
+  async addAvatarArtwork(artworkId, uploadUrl) {
+    return this.database.query(
+      `UPDATE ${this.table} SET image = ? WHERE id = ?`,
+      [uploadUrl, artworkId]
+    );
+  }
 }
 
 module.exports = ArtworkManager;

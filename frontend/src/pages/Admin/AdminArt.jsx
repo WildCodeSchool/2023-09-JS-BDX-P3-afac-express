@@ -39,7 +39,8 @@ export default function AdminArt() {
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artist", res.id);
-      await apiService.post(`http://localhost:5021/uploads`, formData);
+      await apiService.post(`http://localhost:5021/uploads/artist`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
