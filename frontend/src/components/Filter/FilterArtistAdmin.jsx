@@ -1,7 +1,19 @@
+import React from "react";
 import { MDBSelect } from "mdb-react-ui-kit";
 
-function FilterArtist() {
-  return <MDBSelect data={[{ text: "One", value: 1 }]} />;
+export default function FilterArtistAdmin() {
+  return (
+    <MDBSelect
+      data={[
+        { text: "One", value: 1 },
+        { text: "Two", value: 2 },
+        { text: "Three", value: 3 },
+        { text: "Four", value: 4 },
+        { text: "Five", value: 5 },
+        { text: "Six", value: 6 },
+        { text: "Seven", value: 7 },
+        { text: "Eight", value: 8 },
+      ]}
+    />
+  );
 }
-
-export default FilterArtist;
