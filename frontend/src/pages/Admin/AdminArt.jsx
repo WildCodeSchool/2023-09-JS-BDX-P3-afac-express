@@ -94,13 +94,14 @@ export default function AdminArt() {
           type="text"
           label="Biographie"
         />
-        <form className="d-flex flex-column mb-4" onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </form>
+
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+
         <MDBBtn type="submit" className="mb-4" block>
           Valider
         </MDBBtn>
