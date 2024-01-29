@@ -1,3 +1,9 @@
+DROP DATABASE IF exists afac_express;
+
+CREATE DATABASE afac_express;
+
+USE afac_express;
+
 DROP TABLE IF EXISTS artist;
 
 CREATE TABLE artist (
@@ -22,7 +28,7 @@ VALUES (
 DROP TABLE IF EXISTS artwork;
 
 CREATE TABLE artwork (
-    id int primary key NOT NULL AUTO_INCREMENT, title varchar(200) NOT NULL, image varchar(500) NOT NULL, dimension varchar(100) DEFAULT NULL, creation_place varchar(255) DEFAULT NULL, artist_id int DEFAULT NULL
+    id int primary key NOT NULL AUTO_INCREMENT, title varchar(200) NOT NULL, image varchar(500) NULL, dimension varchar(100) DEFAULT NULL, creation_place varchar(255) DEFAULT NULL, artist_id int DEFAULT NULL
 );
 
 INSERT INTO
@@ -115,6 +121,8 @@ DROP TABLE IF EXISTS artwork_users;
 CREATE TABLE artwork_users (
     artwork_id int NOT NULL, artist_id int NOT NULL, artist_name varchar(255) NOT NULL, artwork_title varchar(200) NOT NULL, artwork_image varchar(500) NOT NULL, CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork (id), CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist (id)
 );
+
+DROP TABLE IF EXISTS upload;
 
  CREATE TABLE upload ( 
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,

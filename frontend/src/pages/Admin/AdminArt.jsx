@@ -40,7 +40,8 @@ export default function AdminArt() {
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artist", res.id);
-      await apiService.post(`http://localhost:5021/uploads`, formData);
+      await apiService.post(`http://localhost:5021/uploads/artist`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -64,13 +65,14 @@ export default function AdminArt() {
         `http://localhost:5021/artwork`,
         postArt
       );
-      console.warn(res);
+      const formData = new FormData();
+      formData.append("avatar", image);
+      formData.append("artwork", res.id);
+      await apiService.post(`http://localhost:5021/uploads/artwork`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
-    const formData = new FormData();
-    formData.append("avatar", image);
-    await apiService.post(`http://localhost:5021/uploads`, formData);
   };
 
   return (
@@ -93,13 +95,14 @@ export default function AdminArt() {
           type="text"
           label="Biographie"
         />
-        <form className="d-flex flex-column mb-4" onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </form>
+
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+
         <MDBBtn type="submit" className="mb-4" block>
           Valider
         </MDBBtn>
