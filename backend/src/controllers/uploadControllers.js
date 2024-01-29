@@ -13,7 +13,7 @@ const creatorArtist = async (req, res) => {
   const artistId = parseInt(req.body?.artist, 10) ?? 0;
   try {
     const newUpload = await models.upload.create(req.file);
-    await models.artist.addAvataArtist(
+    await models.artist.addAvatarArtist(
       artistId,
       `${req.protocol}://${req.headers.host}/${newUpload.url}`
     );
