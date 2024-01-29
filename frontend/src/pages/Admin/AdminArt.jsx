@@ -156,10 +156,10 @@ export default function AdminArt() {
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            id="Taille"
+            id="Dimension"
             onChange={handleInputArt}
             name="dimension"
-            label="Taille ex : 100x200"
+            label="Dimension ex : 100x200"
           />
         </MDBCol>
       </MDBRow>

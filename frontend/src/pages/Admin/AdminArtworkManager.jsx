@@ -99,7 +99,11 @@ export default function AdminartworkManager() {
         onSubmit={updateartworkData}
       >
         <h3 className="fs-5 fw-bold pb-3">Modifier la taille</h3>
-        <p>{artwork.dimension}</p>
+        {artwork.dimension ? (
+          <p>{artwork.dimension}</p>
+        ) : (
+          <p>Pas de dimension (Pour modifier, ex : 100 x 100).</p>
+        )}
         <MDBInput
           className="mb-4"
           type="pseudo"
@@ -117,7 +121,11 @@ export default function AdminartworkManager() {
         onSubmit={updateartworkData}
       >
         <h3 className="fs-5 fw-bold pb-3">Modifier le lieux de création</h3>
-        <p>{artwork.creation_place}</p>
+        {artwork.creation_place ? (
+          <p>{artwork.creation_place}</p>
+        ) : (
+          <p>Pas de lieu de création.</p>
+        )}
         <MDBInput
           className="mb-4"
           type="pseudo"
