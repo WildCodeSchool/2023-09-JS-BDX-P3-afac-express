@@ -87,45 +87,23 @@ class ArtworkManager extends AbstractManager {
       throw error;
     });
   }
-  // findArtworkById(artworkId) {
-  //   const sqlQuery = `
-  //     SELECT
-  //       artwork_id AS artworkId,
-  //       artist_id AS artistId,
-  //       users_id AS userId,
-  //       artist_name AS artistName,
-  //       artwork_title AS artworkTitle,
-  //       artwork_image AS artworkImage
-  //     FROM artwork_users
-  //     WHERE artwork_id = ?
-  //     LIMIT 1;
-  //   `;
-
-  //   return this.database
-  //     .query(sqlQuery, [artworkId])
-  //     .then((result) => {
-  //       const artwork = result[0];
-  //       // console.log("Artwork result:", artwork);
-  //       if (artwork) {
-  //         return artwork;
-  //       }
-  //       return null;
-  //     })
-  //     .catch((error) => {
-  //       throw error;
-  //     });
-  // }
 
   create(artwork) {
     return this.database.query(
-      `insert into ${this.table} (title, image, dimension, creation_place, artist_id) values (?, ?, ?, ?, ?);`,
+      `insert into ${this.table} (title, dimension, creation_place, artist_id) values (?, ?, ?, ?);`,
       [
         artwork.title,
-        artwork.image,
         artwork.dimension,
         artwork.creation_place,
         artwork.artist_id,
       ]
+    );
+  }
+
+  async addAvatarArtwork(artworkId, uploadUrl) {
+    return this.database.query(
+      `UPDATE ${this.table} SET image = ? WHERE id = ?`,
+      [uploadUrl, artworkId]
     );
   }
 }

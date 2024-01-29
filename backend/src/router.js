@@ -1,11 +1,15 @@
 const express = require("express");
 
 const router = express.Router();
+const multer = require("multer");
+
+const upload = multer({ dest: "public/uploads/" });
 
 const userControllers = require("./controllers/userControllers");
 const artistControllers = require("./controllers/artistControllers");
 const artworkControllers = require("./controllers/artworkControllers");
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
+const uploadControllers = require("./controllers/uploadControllers");
 const {
   authAdminMiddleware,
 } = require("./middlewares/Security/auth.admin.middleware");
@@ -17,7 +21,6 @@ router.get(
   authAdminMiddleware,
   userControllers.getUsers
 );
-router.get("/users/:id", userControllers.getUsersById);
 router.get("/users/:id([0-9]+)", userControllers.getUsersById);
 router.get("/auth/get-question/:email", userControllers.getUserQuestion);
 router.get(
@@ -34,17 +37,18 @@ router.delete(
   authAdminMiddleware,
   userControllers.deleteUsers
 );
+
 router.delete(
   "/deletepersonnelaccount/:id",
   authMiddleware,
   userControllers.deleteUsers
 );
-router.put(
-  "/users/:id",
-  authMiddleware,
-  authAdminMiddleware,
-  userControllers.updateUsers
-);
+// router.put(
+//   "/users/:id",
+//   authMiddleware,
+//   authAdminMiddleware,
+//   userControllers.updateUsers
+// );
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
@@ -58,6 +62,7 @@ router.get(
   authMiddleware,
   artworkControllers.getArtworkForUserById
 );
+
 router.delete(
   "/artwork/user/:userId/:artworkId",
   authMiddleware,
@@ -67,11 +72,55 @@ router.get("/artist", artistControllers.getArtists);
 router.get("/artist/:id", artistControllers.getArtistById);
 router.post("/artist", artistControllers.postArtist);
 router.put("/artist/:id", artistControllers.updateArtist);
+router.delete("/artist/:id", artistControllers.deleteArtist);
 
 router.get("/artwork", artworkControllers.getArtwork);
 router.get("/artwork/:id", artworkControllers.getArtworkById);
 router.post("/artwork", artworkControllers.postArtwork);
 router.delete("/artwork/:id", artworkControllers.deleteArtwork);
 router.put("/artwork/:id", artworkControllers.updateArtwork);
+router.post(
+  "/artwork/user",
+  authMiddleware,
+  artworkControllers.postArtworkForUser
+);
+router.get(
+  "/uploads",
+  authMiddleware,
+  authAdminMiddleware,
+  uploadControllers.getList
+);
+
+router.post(
+  "/uploads/artist",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.creatorArtist
+);
+
+router.patch(
+  "/uploads/artist/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.patchArtistImage
+);
+
+router.post(
+  "/uploads/artwork",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.creatorArtwork
+);
+
+router.patch(
+  "/uploads/artwork/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.patchArtworkImage
+);
 
 module.exports = router;

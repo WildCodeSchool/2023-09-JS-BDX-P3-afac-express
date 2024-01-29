@@ -26,14 +26,21 @@ export default function AdminArt() {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
 
+  const [image, setImage] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/artist`,
+        `http://localhost:5021/artist`,
         postArtist
       );
-      console.warn(res);
+
+      const formData = new FormData();
+      formData.append("avatar", image);
+      formData.append("artist", res.id);
+      await apiService.post(`http://localhost:5021/uploads/artist`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +48,6 @@ export default function AdminArt() {
 
   const [postArt, setPostArt] = useState({
     title: "",
-    image: "",
     dimension: "",
     creation_place: "",
     artist_id: "",
@@ -55,10 +61,14 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/artwork`,
+        `http://localhost:5021/artwork`,
         postArt
       );
-      console.warn(res);
+      const formData = new FormData();
+      formData.append("avatar", image);
+      formData.append("artwork", res.id);
+      await apiService.post(`http://localhost:5021/uploads/artwork`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -84,9 +94,14 @@ export default function AdminArt() {
           type="text"
           label="Biographie"
         />
-        <MDBBtn type="submit" className="mb-4" block>
-          Ajouter une image
-        </MDBBtn>
+
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+
         <MDBBtn type="submit" className="mb-4" block>
           Valider
         </MDBBtn>
@@ -141,10 +156,10 @@ export default function AdminArt() {
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            id="Taille"
+            id="Dimension"
             onChange={handleInputArt}
             name="dimension"
-            label="Taille ex : 100x200"
+            label="Dimension ex : 100x200"
           />
         </MDBCol>
       </MDBRow>
@@ -156,17 +171,13 @@ export default function AdminArt() {
         id="createLocation"
         label="Lieux de création"
       />
-      <MDBInput
-        className="mb-4"
-        onChange={handleInputArt}
-        type="createlocation"
-        name="image"
-        id="createLocation"
-        label="image"
-      />
-      <MDBBtn type="submit" className="mb-4" block>
-        Ajouter une image
-      </MDBBtn>
+      <form className="d-flex flex-column mb-4" onSubmit={handleSubmitArt}>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+      </form>
       <MDBBtn type="submit" className="mb-4" onClick={handleSubmitArt} block>
         Valider
       </MDBBtn>

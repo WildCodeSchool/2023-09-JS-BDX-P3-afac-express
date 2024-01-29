@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ApiService from "../../services/api.service";
+import Redirection from "../../components/Redirection";
 
 const apiService = new ApiService();
 
@@ -93,6 +94,7 @@ export default function AdminUser() {
           </MDBTable>
         </div>
       </section>
+      <Redirection />
     </MDBContainer>
   );
 }

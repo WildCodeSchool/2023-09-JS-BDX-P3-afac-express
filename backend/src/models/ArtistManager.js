@@ -11,6 +11,13 @@ class ArtistManager extends AbstractManager {
       [artist.name, artist.description]
     );
   }
+
+  async addAvatarArtist(artistId, uploadUrl) {
+    return this.database.query(
+      `UPDATE ${this.table} SET image = ? WHERE id = ?`,
+      [uploadUrl, artistId]
+    );
+  }
 }
 
 module.exports = ArtistManager;
