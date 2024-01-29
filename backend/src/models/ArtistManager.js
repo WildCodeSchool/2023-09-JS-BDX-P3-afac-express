@@ -12,7 +12,7 @@ class ArtistManager extends AbstractManager {
     );
   }
 
-  async addAvatar(artistId, uploadUrl) {
+  async addAvatarArtist(artistId, uploadUrl) {
     return this.database.query(
       `UPDATE ${this.table} SET image = ? WHERE id = ?`,
       [uploadUrl, artistId]
