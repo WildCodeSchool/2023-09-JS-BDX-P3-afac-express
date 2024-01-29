@@ -13,9 +13,8 @@ const getArtists = async (_, res) => {
 const getArtistById = async (req, res) => {
   try {
     const [rows] = await models.artist.find(req.params.id);
-    
-    if (rows[0] != null) {
 
+    if (rows[0] != null) {
       res.json(rows[0]);
     } else {
       res.sendStatus(404);

@@ -92,11 +92,19 @@ router.get(
 );
 
 router.post(
-  "/uploads",
+  "/uploads/artist",
   authMiddleware,
   authAdminMiddleware,
   upload.single("avatar"),
-  uploadControllers.creator
+  uploadControllers.creatorArtist
+);
+
+router.post(
+  "/uploads/artwork",
+  authMiddleware,
+  authAdminMiddleware,
+  upload.single("avatar"),
+  uploadControllers.creatorArtwork
 );
 
 module.exports = router;
