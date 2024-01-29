@@ -11,6 +11,7 @@ export default function AdminArtistManager() {
   const [artist, setArtist] = useState({
     name: "Nom actuel",
     description: "Biographie actuelle",
+    image: "URL_PAR_DEFAUT",
   });
 
   const [updatedName, setUpdatedName] = useState("");
@@ -57,6 +58,23 @@ export default function AdminArtistManager() {
     }
   };
 
+  const updateArtistImage = async (formData) => {
+    try {
+      const response = await apiService.patchImage(
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artist/${id}`,
+        formData
+      );
+
+      setArtist((prevArtist) => ({
+        ...prevArtist,
+        image: response?.data?.image || prevArtist.image,
+      }));
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <MDBContainer
       fluid
@@ -68,7 +86,10 @@ export default function AdminArtistManager() {
       >
         Gestion artiste
       </h3>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateArtistData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier le nom de l'artiste</h3>
         <p>{artist.name}</p>
         <MDBInput
@@ -79,11 +100,14 @@ export default function AdminArtistManager() {
           value={updatedName}
           onChange={(e) => setUpdatedName(e.target.value)}
         />
-        <MDBBtn type="submit" block className="mb-2" onClick={updateArtistData}>
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateArtistData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier la biographie</h3>
         <p>{artist.description}</p>
         <MDBInput
@@ -94,7 +118,36 @@ export default function AdminArtistManager() {
           value={updateddescription}
           onChange={(e) => setUpdateddescription(e.target.value)}
         />
-        <MDBBtn type="submit" block className="mb-2" onClick={updateArtistData}>
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        encType="multipart/form-data"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("avatar", e.target.elements.avatar.files[0]);
+
+          updateArtistImage(formData);
+        }}
+      >
+        <h3 className="fs-5 fw-bold pb-3">Modifier l'image</h3>
+        <img
+          src={artist?.image || "URL_PAR_DEFAUT"}
+          className="d-block w-100"
+          alt={artist?.name || "Nom par défaut"}
+        />
+
+        <input
+          type="file"
+          accept="image/*"
+          className="d-flex flex-column mb-4"
+          name="avatar"
+        />
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>

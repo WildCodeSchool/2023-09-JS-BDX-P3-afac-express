@@ -47,4 +47,15 @@ export default class ApiService {
   delete(url) {
     return axios.delete(url, this.getConfig());
   }
+
+  async patchImage(url, formData) {
+    const response = await axios.patch(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        ...this.getConfig().headers,
+      },
+    });
+
+    return response.data;
+  }
 }
