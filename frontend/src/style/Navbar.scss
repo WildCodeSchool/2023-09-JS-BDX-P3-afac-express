@@ -2,30 +2,13 @@
 
 .navigation {
   background-color: #7b273d;
-  background-size: cover;
   padding: 1.5rem;
-  height: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-left: 0 !important;
-  margin-right: 0 !important;
 
   .navbar {
     box-shadow: none;
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
-    transition: left 0.3s ease;
-    left: 0;
-  }
-
-  .navbar-display {
-    background-color: #7b273d;
-    top: 50px;
-    z-index: 100;
-    width: calc(100% + 12px);
-    left: -12px;
   }
 
   .logoAfac {
@@ -37,33 +20,12 @@
     z-index: 1000;
   }
 
-  .containernavbar {
-    position: relative;
-  }
-
   .nav-link {
-    color: whitesmoke;
-    text-decoration: none;
-  }
-  .dropdown-menu .nav-link {
-    background-color: #7b273d;
+    color: white;
   }
 
-  .btn-primary {
-    --mdb-btn-box-shadow: 0;
-  }
   i::before {
-    font-size: 20px;
-  }
-
-  .navButton {
-    border: none;
-    padding-right: 95px;
-  }
-
-  button:hover {
-    background-color: #7b273d;
-    box-shadow: #7b273d;
+    font-size: 25px;
   }
 
   @media screen and (min-width: 1024px) {
