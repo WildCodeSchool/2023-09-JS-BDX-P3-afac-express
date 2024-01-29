@@ -1,10 +1,3 @@
--- SQLBook: Code
-DROP DATABASE IF exists afac_express;
-
-CREATE DATABASE afac_express;
-
-USE afac_express;
-
 DROP TABLE IF EXISTS artist;
 
 CREATE TABLE artist (

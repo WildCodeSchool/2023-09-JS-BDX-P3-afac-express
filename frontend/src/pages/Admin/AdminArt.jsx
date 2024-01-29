@@ -20,7 +20,7 @@ const apiService = new ApiService();
 
 export default function AdminArt() {
   const navigate = useNavigate();
-  const { artistCollection, artCollection, setArtist, setArt } = useApp();
+  const { artistCollection, artCollection } = useApp();
   const [postArtist, setPostArtist] = useState({ name: "", description: "" });
 
   const handleInput = (e) => {
@@ -36,17 +36,14 @@ export default function AdminArt() {
         `http://localhost:5021/artist`,
         postArtist
       );
-      console.warn(res);
+
+      const formData = new FormData();
+      formData.append("avatar", image);
+      formData.append("artist", res.id);
+      await apiService.post(`http://localhost:5021/uploads`, formData);
     } catch (error) {
       console.error(error);
     }
-    const formData = new FormData();
-    formData.append("avatar", image);
-    const result = await apiService.post(
-      `http://localhost:5021/uploads`,
-      formData
-    );
-    setArtist(result);
   };
 
   const [postArt, setPostArt] = useState({
@@ -73,11 +70,7 @@ export default function AdminArt() {
     }
     const formData = new FormData();
     formData.append("avatar", image);
-    const result = await apiService.post(
-      `http://localhost:5021/uploads`,
-      formData
-    );
-    setArt(result);
+    await apiService.post(`http://localhost:5021/uploads`, formData);
   };
 
   return (
