@@ -41,7 +41,6 @@ const creatorArtwork = async (req, res) => {
 
 const patchArtistImage = async (req, res) => {
   const artistId = parseInt(req.params.id, 10) ?? 0;
-  // ICI
   try {
     const newUpload = await models.upload.create(req.file);
     await models.artist.addAvatarArtist(
@@ -58,7 +57,7 @@ const patchArtistImage = async (req, res) => {
 };
 
 const patchArtworkImage = async (req, res) => {
-  const artworkId = parseInt(req.body?.artwork, 10) ?? 0;
+  const artworkId = parseInt(req.params.id, 10) ?? 0;
 
   try {
     const newUpload = await models.upload.create(req.file);

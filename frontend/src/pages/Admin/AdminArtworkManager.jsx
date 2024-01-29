@@ -9,22 +9,28 @@ const apiService = new ApiService();
 export default function AdminartworkManager() {
   const { id } = useParams();
   const [artwork, setartwork] = useState({
-    artworkTitle: "Titre de l'oeuvre",
-    size: "Taille",
+    title: "Titre de l'oeuvre",
+    dimension: "Dimension de l'oeuvre",
+    creation_place: "Lieu de création de l'oeuvre",
+    image: "URL_PAR_DEFAUT",
   });
 
-  const [updatedartworkTitle, setupdatedartworkTitle] = useState("");
-  const [updatedSize, setupdatedSize] = useState("");
+  const [updatedTitle, setupdatedTitle] = useState("");
+  const [updatedDimension, setupdatedDimension] = useState("");
+  const [updatedCreationPlace, setupdatedCreationPlace] = useState("");
+
   const navigate = useNavigate();
 
   const updateartworkData = async () => {
     try {
       const updatedData = {
-        artworkTitle:
-          updatedartworkTitle !== ""
-            ? updatedartworkTitle
-            : artwork.artworkTitle,
-        size: updatedSize !== "" ? updatedSize : artwork.size,
+        title: updatedTitle !== "" ? updatedTitle : artwork.title,
+        dimension:
+          updatedDimension !== "" ? updatedDimension : artwork.dimension,
+        creation_place:
+          updatedCreationPlace !== ""
+            ? updatedCreationPlace
+            : artwork.creation_place,
       };
 
       const { data } = await apiService.put(
@@ -70,43 +76,57 @@ export default function AdminartworkManager() {
       >
         Gestion des Oeuvres
       </h3>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateartworkData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier le titre de l'oeuvre</h3>
-        <p>{artwork.artworkTitle}</p>
+        <p>{artwork.title}</p>
         <MDBInput
           className="mb-4"
           type="nom"
           id="form1Example1"
           label="Modifier le nom"
-          value={updatedartworkTitle}
-          onChange={(e) => setupdatedartworkTitle(e.target.value)}
+          value={updatedTitle}
+          onChange={(e) => setupdatedTitle(e.target.value)}
         />
-        <MDBBtn
-          type="submit"
-          block
-          className="mb-2"
-          onClick={updateartworkData}
-        >
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>
-      <form className="square border pt-3 ps-3 pe-3 mb-4 rounded">
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateartworkData}
+      >
         <h3 className="fs-5 fw-bold pb-3">Modifier la taille</h3>
-        <p>{artwork.size}</p>
+        <p>{artwork.dimension}</p>
         <MDBInput
           className="mb-4"
           type="pseudo"
           id="form1Example1"
           label="Modifier le nom"
-          value={updatedSize}
-          onChange={(e) => setupdatedSize(e.target.value)}
+          value={updatedDimension}
+          onChange={(e) => setupdatedDimension(e.target.value)}
         />
-        <MDBBtn
-          type="submit"
-          block
-          className="mb-2"
-          onClick={updateartworkData}
-        >
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateartworkData}
+      >
+        <h3 className="fs-5 fw-bold pb-3">Modifier le lieux de création</h3>
+        <p>{artwork.creation_place}</p>
+        <MDBInput
+          className="mb-4"
+          type="pseudo"
+          id="form1Example1"
+          label="Modifier le nom"
+          value={setupdatedCreationPlace}
+          onChange={(e) => setupdatedCreationPlace(e.target.value)}
+        />
+        <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>
       </form>
