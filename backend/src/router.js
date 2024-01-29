@@ -93,9 +93,8 @@ router.get(
 
 router.post(
   "/uploads",
-  // TODO: Uncomment this lines
-  // authMiddleware,
-  // authAdminMiddleware,
+  authMiddleware,
+  authAdminMiddleware,
   upload.single("avatar"),
   uploadControllers.creator
 );

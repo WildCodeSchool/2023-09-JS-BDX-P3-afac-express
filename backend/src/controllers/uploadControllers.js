@@ -10,7 +10,7 @@ const getList = async (req, res) => {
 };
 
 const creator = async (req, res) => {
-  const artistId = +(req.body?.artist ?? 0);
+  const artistId = parseInt(req.body?.artist, 10) ?? 0;
   try {
     const newUpload = await models.upload.create(req.file);
     await models.artist.addAvatar(

@@ -1,10 +1,3 @@
--- SQLBook: Code
-DROP DATABASE IF exists afac_express;
-
-CREATE DATABASE afac_express;
-
-USE afac_express;
-
 DROP TABLE IF EXISTS artist;
 
 CREATE TABLE artist (
@@ -120,12 +113,9 @@ VALUES (
 DROP TABLE IF EXISTS artwork_users;
 
 CREATE TABLE artwork_users (
-    users_id int NOT NULL, artwork_id int NOT NULL, artist_id int NOT NULL, artist_name varchar(255) NOT NULL, artwork_title varchar(200) NOT NULL, artwork_image varchar(500) NOT NULL, CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork (id), CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist (id)
+    artwork_id int NOT NULL, artist_id int NOT NULL, artist_name varchar(255) NOT NULL, artwork_title varchar(200) NOT NULL, artwork_image varchar(500) NOT NULL, CONSTRAINT fk_artwork_users_artwork FOREIGN KEY (artwork_id) REFERENCES artwork (id), CONSTRAINT fk_artwork_users_artist FOREIGN KEY (artist_id) REFERENCES artist (id)
 );
 
-CREATE TABLE upload ( 
-  id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  url varchar(255) NOT NULL,
-  unique(url),
-  created_at timestamp default CURRENT_TIMESTAMP
+CREATE TABLE upload (
+    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT, url varchar(255) NOT NULL, unique (url), created_at timestamp default CURRENT_TIMESTAMP
 );

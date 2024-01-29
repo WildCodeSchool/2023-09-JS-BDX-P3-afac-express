@@ -7,7 +7,6 @@ import {
   MDBCol,
   MDBContainer,
   MDBRipple,
-  MDBCardTitle,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import FilterArtist from "../components/Filter/FilterArtist";
@@ -37,26 +36,21 @@ function Artists() {
 
       {selectedArtist ? (
         <div key={selectedArtist.id}>
-          <MDBCard>
-            <MDBRow>
-              <MDBCol>
-                <MDBCardImage
-                  src={selectedArtist.image}
-                  alt={selectedArtist.name}
-                  fluid
-                />
-              </MDBCol>
-              <MDBCol md="8">
-                <MDBCardBody>
-                  <MDBCardTitle>
-                    <h3 className="fs-2 text-center mb-4">
-                      {selectedArtist.name}
-                    </h3>
-                  </MDBCardTitle>
-                  <MDBCardText>{selectedArtist.description}</MDBCardText>
-                </MDBCardBody>
-              </MDBCol>
-            </MDBRow>
+          <h3 className="fs-4 text text-center pt-2 mb-4">
+            {selectedArtist.name}
+          </h3>
+          <MDBCard key={selectedArtist.id}>
+            <MDBCardImage
+              src={selectedArtist.image}
+              fluid
+              alt={selectedArtist.name}
+            />
+
+            <MDBCardBody>
+              <MDBCardText className="text-start">
+                {selectedArtist.description}
+              </MDBCardText>
+            </MDBCardBody>
           </MDBCard>
         </div>
       ) : (
