@@ -90,10 +90,9 @@ class ArtworkManager extends AbstractManager {
 
   create(artwork) {
     return this.database.query(
-      `insert into ${this.table} (title, image, dimension, creation_place, artist_id) values (?, ?, ?, ?, ?);`,
+      `insert into ${this.table} (title, dimension, creation_place, artist_id) values (?, ?, ?, ?);`,
       [
         artwork.title,
-        artwork.image,
         artwork.dimension,
         artwork.creation_place,
         artwork.artist_id,

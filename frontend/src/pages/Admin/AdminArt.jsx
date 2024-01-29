@@ -64,13 +64,14 @@ export default function AdminArt() {
         `http://localhost:5021/artwork`,
         postArt
       );
-      console.warn(res);
+      const formData = new FormData();
+      formData.append("avatar", image);
+      formData.append("artwork", res.id);
+      await apiService.post(`http://localhost:5021/uploads/artwork`, formData);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
-    const formData = new FormData();
-    formData.append("avatar", image);
-    await apiService.post(`http://localhost:5021/uploads`, formData);
   };
 
   return (
