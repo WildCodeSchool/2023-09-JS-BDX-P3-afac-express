@@ -27,7 +27,7 @@ import AdminArtworkManager from "./pages/Admin/AdminArtworkManager";
 import AdminUser from "./pages/Admin/AdminUser";
 import Admin from "./pages/Admin/Admin";
 import AccountManagement from "./pages/AccountManagement";
-import AdminUserManagement from "./pages/Admin/AdminUserManagment";
+import AdminUserManagement from "./pages/Admin/AdminUserManagement";
 import AdminHome from "./pages/Admin/AdminHome";
 import ApiService from "./services/api.service";
 import globalAppLoader from "./loaders/global-app.loader";
