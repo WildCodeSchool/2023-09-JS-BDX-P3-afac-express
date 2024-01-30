@@ -43,12 +43,14 @@ router.delete(
   authMiddleware,
   userControllers.deleteUsers
 );
-// router.put(
-//   "/users/:id",
-//   authMiddleware,
-//   authAdminMiddleware,
-//   userControllers.updateUsers
-// );
+
+router.put(
+  "/users/:id",
+  authMiddleware,
+  authAdminMiddleware,
+  userControllers.updateUsers
+);
+
 router.patch("/change/email", authMiddleware, userControllers.patchEmail);
 router.patch("/change/password", authMiddleware, userControllers.patchPassword);
 
