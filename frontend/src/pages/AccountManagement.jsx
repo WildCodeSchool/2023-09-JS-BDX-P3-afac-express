@@ -118,10 +118,11 @@ function AccountManagement() {
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
         />
-
-        <MDBBtn type="submit" block className="mb-2">
-          Valider
-        </MDBBtn>
+        <div className="d-grid gap-2 col-6 mx-auto">
+          <MDBBtn type="submit" block className="mb-2">
+            Valider
+          </MDBBtn>
+        </div>
       </Form>
 
       <Form
@@ -149,15 +150,12 @@ function AccountManagement() {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
-
-        <MDBBtn type="submit" block className="mb-2">
-          Valider
-        </MDBBtn>
+        <div className="d-grid gap-2 col-6 mx-auto">
+          <MDBBtn type="submit" block className="mb-2">
+            Valider
+          </MDBBtn>
+        </div>
       </Form>
-
-      <MDBBtn className="mt-4 mb-6" onClick={logout}>
-        Déconnexion
-      </MDBBtn>
 
       <MDBBtn className="mt-4 mb-6" onClick={deletePersonalAccount}>
         Supprimer mon compte
