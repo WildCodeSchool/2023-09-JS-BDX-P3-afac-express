@@ -10,16 +10,18 @@ function AdminHome() {
       >
         Administrateur
       </h3>
-      <MDBBtn className="mt-5 mb-4">
-        <Link to="/admin/adminuser" className="nav-link navLink">
-          Gérer les utilisateurs
-        </Link>
-      </MDBBtn>
-      <MDBBtn className="mt-3 mb-8">
-        <Link to="/admin/adminart" className="nav-link navLink">
-          Gérer les oeuvres et artistes
-        </Link>
-      </MDBBtn>
+      <div className="d-grid gap-2 col-6 mx-auto">
+        <MDBBtn className="mt-5 mb-4">
+          <Link to="/admin/adminuser" className="nav-link navLink">
+            Gérer les utilisateurs
+          </Link>
+        </MDBBtn>
+        <MDBBtn className="mt-3 mb-8">
+          <Link to="/admin/adminart" className="nav-link navLink">
+            Gérer les oeuvres et artistes
+          </Link>
+        </MDBBtn>
+      </div>
     </>
   );
 }
