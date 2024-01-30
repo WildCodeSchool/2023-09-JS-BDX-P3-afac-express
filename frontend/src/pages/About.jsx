@@ -13,7 +13,7 @@ function About() {
   return (
     <div>
       <MDBContainer fluid className="pt-5">
-        <MDBCard alignment="center" className="col-10 m-auto" shadow="5">
+        <MDBCard alignment="center" className="col-10 m-auto mb-8" shadow="5">
           <MDBRipple
             rippleColor="light"
             rippleTag="div"
