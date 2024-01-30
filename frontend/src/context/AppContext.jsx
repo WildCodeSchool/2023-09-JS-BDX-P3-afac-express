@@ -40,11 +40,9 @@ function AppContextProvider({ children, apiService }) {
       );
 
       setUser(result.data);
+      setIsAdmin(result.data.is_admin === 1);
 
-      if (result.data.is_admin === 1) {
-        navigate("/admin");
-      }
-      return navigate("/home");
+      return navigate(result.data.is_admin === 1 ? "/admin" : "/home");
     } catch (err) {
       throw new Error("Identifiants incorrects"); // eslint-disable-line no-alert
     }
@@ -71,6 +69,7 @@ function AppContextProvider({ children, apiService }) {
 
   const logout = () => {
     setUser(undefined);
+    setIsAdmin(false);
     setOpenNavSecond(false);
     localStorage.removeItem("token");
     navigate("/login");

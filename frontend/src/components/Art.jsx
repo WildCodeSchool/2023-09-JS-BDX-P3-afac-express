@@ -6,6 +6,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import Redirection from "./Redirection";
 
 function Art() {
   const { id } = useParams();
@@ -19,39 +20,44 @@ function Art() {
 
   return (
     <MDBContainer fluid>
-      <div className="d-flex align-items-start bg-body-tertiary">
-        <MDBCol>
-          <img
-            src={artwork.image}
-            className="img-fluid hover-shadow"
-            alt={artwork.id}
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBListGroup className="ps-5" style={{ minWidthL: "22rem" }} light>
-            <h3 className="fw-bold">{artwork.title}</h3>
-            <h5 className="mt-1 fst-italic">{artwork.artist_name}</h5>
-            <MDBListGroupItem>
-              {artwork.dimension && (
-                <div
-                  className="d-flex align-items-start bg-body-tertiary mt-3"
-                  style={{ height: "20px" }}
-                >
-                  <MDBCol className="fw-bold">Dimension</MDBCol>
-                  <MDBCol>{artwork.dimension}</MDBCol>
-                </div>
-              )}
-            </MDBListGroupItem>
-            <MDBListGroupItem>
-              {artwork.creation_place && (
-                <div className="d-flex align-items-start bg-body-tertiary">
-                  <MDBCol className="fw-bold">Lieu de création</MDBCol>
-                  <MDBCol>{artwork.creation_place}</MDBCol>
-                </div>
-              )}
-            </MDBListGroupItem>
-          </MDBListGroup>
-        </MDBCol>
+      <div>
+        <div className="d-flex align-items-start bg-body-tertiary">
+          <MDBCol>
+            <img
+              src={artwork.image}
+              className="img-fluid hover-shadow"
+              alt={artwork.id}
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBListGroup className="ps-5" style={{ minWidthL: "22rem" }} light>
+              <h3 className="fw-bold">{artwork.title}</h3>
+              <h5 className="mt-1 fst-italic">{artwork.artist_name}</h5>
+              <MDBListGroupItem>
+                {artwork.dimension && (
+                  <div
+                    className="d-flex align-items-start bg-body-tertiary mt-3"
+                    style={{ height: "20px" }}
+                  >
+                    <MDBCol className="fw-bold">Dimension</MDBCol>
+                    <MDBCol>{artwork.dimension}</MDBCol>
+                  </div>
+                )}
+              </MDBListGroupItem>
+              <MDBListGroupItem>
+                {artwork.creation_place && (
+                  <div className="d-flex align-items-start bg-body-tertiary">
+                    <MDBCol className="fw-bold">Lieu de création</MDBCol>
+                    <MDBCol>{artwork.creation_place}</MDBCol>
+                  </div>
+                )}
+              </MDBListGroupItem>
+            </MDBListGroup>
+          </MDBCol>
+        </div>
+        <div className="d-block p-2 text-center">
+          <Redirection />
+        </div>
       </div>
     </MDBContainer>
   );
