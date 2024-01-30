@@ -16,8 +16,8 @@ import { useApp } from "../context/AppContext";
 function Home() {
   const { artistCollection, artCollection } = useApp();
   return (
-    <MDBContainer fluid className="pt-5   ">
-      <MDBCard className="card-custom  ">
+    <MDBContainer fluid className="pt-5">
+      <MDBCard className="card-custom">
         <MDBCardBody>
           <MDBCardTitle>
             <span className="h1">Bienvenue sur notre musée interactif</span>
