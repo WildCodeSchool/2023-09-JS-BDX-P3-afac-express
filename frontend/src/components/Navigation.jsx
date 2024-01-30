@@ -21,8 +21,6 @@ export default function Navigation() {
   const { user, isAdmin, logout } = useApp();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  let navigationContent;
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -34,6 +32,12 @@ export default function Navigation() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const closeDropdown = () => {
+    setOpenNavSecond(false);
+  };
+
+  let navigationContent;
 
   if (user) {
     if (isAdmin) {
@@ -98,8 +102,8 @@ export default function Navigation() {
     }
   } else {
     navigationContent = (
-      <Link to="/login">
-        <MDBIcon className="me-4" far icon="user" />
+      <Link to="/login" className="user-icon">
+        <MDBIcon className="me-2" far icon="user" />
       </Link>
     );
   }
@@ -116,16 +120,32 @@ export default function Navigation() {
         </MDBNavbarToggler>
         <MDBCollapse className="navbar-display" navbar open={openNavSecond}>
           <MDBNavbarNav className="ms-auto">
-            <Link className="nav-link navLink" to="/home">
+            <Link
+              className="nav-link navLink"
+              to="/home"
+              onClick={closeDropdown}
+            >
               Accueil
             </Link>
-            <Link className="nav-link navLink" to="/gallery">
+            <Link
+              className="nav-link navLink"
+              to="/gallery"
+              onClick={closeDropdown}
+            >
               Galerie
             </Link>
-            <Link className="nav-link navLink" to="/artists">
+            <Link
+              className="nav-link navLink"
+              to="/artists"
+              onClick={closeDropdown}
+            >
               Artistes
             </Link>
-            <Link className="nav-link navLink" to="/about">
+            <Link
+              className="nav-link navLink"
+              to="/about"
+              onClick={closeDropdown}
+            >
               À propos
             </Link>
           </MDBNavbarNav>

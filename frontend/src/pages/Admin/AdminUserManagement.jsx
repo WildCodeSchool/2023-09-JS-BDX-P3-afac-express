@@ -6,7 +6,7 @@ import ApiService from "../../services/api.service";
 
 const apiService = new ApiService();
 
-export default function AdminUserManagment() {
+export default function AdminUserManagement() {
   const { id } = useParams();
   const [user, setUser] = useState({
     firstname: "Prénom actuel",
