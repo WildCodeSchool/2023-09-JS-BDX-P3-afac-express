@@ -24,7 +24,7 @@ function AppContextProvider({ children, apiService }) {
   const [preloadUserForAdminData, setPreloadUserForAdminData] = useState(
     givenData?.preloadUserForAdmin || []
   );
-  // console.log(userData);
+
   const navigate = useNavigate();
 
   const login = async (credentials) => {
