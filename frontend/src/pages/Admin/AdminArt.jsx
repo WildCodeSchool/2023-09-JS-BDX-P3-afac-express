@@ -14,12 +14,18 @@ import { useNavigate } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
 import { useApp } from "../../context/AppContext";
+import FilterArtistAdmin from "../../components/Filter/FilterArtistAdmin";
 
 const apiService = new ApiService();
 
 export default function AdminArt() {
   const navigate = useNavigate();
-  const { artistCollection, artCollection } = useApp();
+  const {
+    artistCollection,
+    artCollection,
+    setArtCollection,
+    setArtistCollection,
+  } = useApp();
   const [postArtist, setPostArtist] = useState({ name: "", description: "" });
 
   const handleInput = (e) => {
@@ -39,8 +45,11 @@ export default function AdminArt() {
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artist", res.id);
-      await apiService.post(`http://localhost:5021/uploads/artist`, formData);
-      window.location.reload();
+      const response = await apiService.post(
+        `http://localhost:5021/uploads/artist`,
+        formData
+      );
+      setArtistCollection([...artistCollection, response]);
     } catch (error) {
       console.error(error);
     }
@@ -53,7 +62,7 @@ export default function AdminArt() {
     artist_id: "",
   });
 
-  const handleInputArt = (e) => {
+  const handleInputArt = async (e) => {
     setPostArt({ ...postArt, [e.target.name]: e.target.value });
   };
 
@@ -67,13 +76,15 @@ export default function AdminArt() {
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artwork", res.id);
-      await apiService.post(`http://localhost:5021/uploads/artwork`, formData);
-      window.location.reload();
+      const response = await apiService.post(
+        `http://localhost:5021/uploads/artwork`,
+        formData
+      );
+      setArtCollection([...artCollection, response]);
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <div>
       {/* Artist Section */}
@@ -134,53 +145,51 @@ export default function AdminArt() {
         )}
       </MDBRow>
 
-      {/* Artwork Section */}
-      <h1>Oeuvres</h1>
-      <h3>Ajouter une oeuvre</h3>
-      <MDBInput
-        className="mb-4"
-        onChange={handleInputArt}
-        type="artName"
-        name="title"
-        id="artName"
-        label="Titre"
-      />
-      <MDBInput
-        className="mb-4"
-        onChange={handleInputArt}
-        type="artistArt"
-        name="artist_id"
-        id="artistArt"
-        label="Choix de l'artiste"
-      />
-      <MDBRow className="mb-4">
-        <MDBCol>
-          <MDBInput
-            id="Dimension"
-            onChange={handleInputArt}
-            name="dimension"
-            label="Dimension ex : 100x200"
-          />
-        </MDBCol>
-      </MDBRow>
-      <MDBInput
-        className="mb-4"
-        onChange={handleInputArt}
-        type="createlocation"
-        name="creation_place"
-        id="createLocation"
-        label="Lieux de création"
-      />
-      <form className="d-flex flex-column mb-4" onSubmit={handleSubmitArt}>
+      <form className="user-form" onSubmit={handleSubmitArt}>
+        <h1>Oeuvres</h1>
+        <h3>Ajouter une oeuvre</h3>
+        <MDBInput
+          className="mb-4"
+          onChange={handleInputArt}
+          type="artName"
+          name="title"
+          id="artName"
+          label="Titre"
+        />
+
+        <MDBRow className="mb-4">
+          <MDBCol>
+            <MDBInput
+              id="Dimension"
+              onChange={handleInputArt}
+              name="dimension"
+              label="Dimension ex : 100x200"
+            />
+          </MDBCol>
+        </MDBRow>
+        <MDBInput
+          className="mb-4"
+          onChange={handleInputArt}
+          type="createlocation"
+          name="creation_place"
+          id="createLocation"
+          label="Lieux de création"
+        />
+
+        <MDBRow className="mb-4">
+          <FilterArtistAdmin name="artist_id" onChange={handleInputArt} />
+        </MDBRow>
+
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
         />
+
+        <MDBBtn type="submit" className="mb-4" block>
+          Valider
+        </MDBBtn>
       </form>
-      <MDBBtn type="submit" className="mb-4" onClick={handleSubmitArt} block>
-        Valider
-      </MDBBtn>
 
       <MDBRow className="row-cols-1 row-cols-md-2 g-4">
         {artCollection && artCollection.length > 0 ? (

@@ -162,20 +162,20 @@ const deleteUsers = async (req, res) => {
   }
 };
 
-// const updateUsers = async (req, res) => {
-//   try {
-//     const result = await models.users.update(req.body, req.params.id);
+const updateUsers = async (req, res) => {
+  try {
+    const result = await models.users.update(req.body, req.params.id);
 
-//     if (result.affectedRows === 0) {
-//       res.sendStatus(404);
-//     } else {
-//       res.sendStatus(204);
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(422).send({ message: err.message });
-//   }
-// };
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(422).send({ message: err.message });
+  }
+};
 
 const patchEmail = async (req, res) => {
   try {
@@ -249,5 +249,5 @@ module.exports = {
   postPassword,
   postUserByEmail,
   postUsers,
-  // updateUsers,
+  updateUsers,
 };
