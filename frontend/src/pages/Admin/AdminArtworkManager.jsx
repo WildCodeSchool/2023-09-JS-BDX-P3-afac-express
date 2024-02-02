@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
+import FilterArtistAdmin from "../../components/Filter/FilterArtistAdmin";
 
 const apiService = new ApiService();
 
@@ -13,8 +14,10 @@ export default function AdminartworkManager() {
     dimension: "Dimension de l'oeuvre",
     creation_place: "Lieu de création de l'oeuvre",
     image: "URL_PAR_DEFAUT",
+    artist_id: null,
   });
 
+  const [selectedArtist, setSelectedArtist] = useState(null);
   const [updatedTitle, setupdatedTitle] = useState("");
   const [updatedDimension, setupdatedDimension] = useState("");
   const [updatedCreationPlace, setupdatedCreationPlace] = useState("");
@@ -49,6 +52,7 @@ export default function AdminartworkManager() {
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
       setArtwork(data);
+      setSelectedArtist(data.artist_id);
     };
     fetchartworkData();
   }, [id]);
@@ -103,7 +107,7 @@ export default function AdminartworkManager() {
           className="mb-4"
           type="nom"
           id="form1Example1"
-          label="Modifier le nom"
+          label="Modifier le titre"
           value={updatedTitle}
           onChange={(e) => setupdatedTitle(e.target.value)}
         />
@@ -115,7 +119,7 @@ export default function AdminartworkManager() {
         className="square border pt-3 ps-3 pe-3 mb-4 rounded"
         onSubmit={updateartworkData}
       >
-        <h3 className="fs-5 fw-bold pb-3">Modifier la taille</h3>
+        <h3 className="fs-5 fw-bold pb-3">Modifier la dimension</h3>
         {artwork.dimension ? (
           <p>{artwork.dimension}</p>
         ) : (
@@ -125,7 +129,7 @@ export default function AdminartworkManager() {
           className="mb-4"
           type="pseudo"
           id="form1Example1"
-          label="Modifier le nom"
+          label="Modifier la dimension"
           value={updatedDimension}
           onChange={(e) => setupdatedDimension(e.target.value)}
         />
@@ -147,10 +151,29 @@ export default function AdminartworkManager() {
           className="mb-4"
           type="pseudo"
           id="form1Example1"
-          label="Modifier le nom"
+          label="Modifier le lieu de création"
           value={setupdatedCreationPlace}
           onChange={(e) => setupdatedCreationPlace(e.target.value)}
         />
+        <MDBBtn type="submit" block className="mb-2">
+          Valider
+        </MDBBtn>
+      </form>
+
+      <form
+        className="square border pt-3 ps-3 pe-3 mb-4 rounded"
+        onSubmit={updateartworkData}
+      >
+        <h3 className="fs-5 fw-bold pb-3">Modifier l'artiste</h3>
+
+        <p>{artwork.artist_name}</p>
+
+        <FilterArtistAdmin
+          name="artist_id"
+          onChange={(e) => setSelectedArtist(e.target.value)}
+          selectedArtist={selectedArtist}
+        />
+
         <MDBBtn type="submit" block className="mb-2">
           Valider
         </MDBBtn>

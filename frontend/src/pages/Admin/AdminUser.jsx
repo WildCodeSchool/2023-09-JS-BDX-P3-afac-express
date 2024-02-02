@@ -6,39 +6,12 @@ import {
   MDBTableHead,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import ApiService from "../../services/api.service";
+import { useApp } from "../../context/AppContext";
 import Redirection from "../../components/Redirection";
 
-const apiService = new ApiService();
-
-const userFetch = async () => {
-  try {
-    const { data } = await apiService.get(
-      `${import.meta.env.VITE_BACKEND_URL}/users`
-    );
-    return data;
-  } catch (err) {
-    console.error(err);
-    alert(err.message); // eslint-disable-line no-alert
-    return null;
-  }
-};
-
 export default function AdminUser() {
-  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const userData = await userFetch();
-      if (userData) {
-        setUsers([...userData[0]]);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const { preloadUserForAdminData } = useApp();
 
   return (
     <MDBContainer fluid className="pt-5 pb-5">
@@ -59,7 +32,7 @@ export default function AdminUser() {
               </tr>
             </MDBTableHead>
             <MDBTableBody style={{ verticalAlign: "middle" }}>
-              {users.map((user) => (
+              {preloadUserForAdminData[0].map((user) => (
                 <tr key={user.id}>
                   <td>
                     <div className="ms-3">
