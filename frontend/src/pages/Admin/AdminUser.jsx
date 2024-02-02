@@ -26,8 +26,9 @@ export default function AdminUser() {
           <MDBTable align="middle" responsive>
             <MDBTableHead light>
               <tr>
-                <th>Identifiant</th>
-                <th>Mot de passe</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prénom</th>
                 <th>Actions</th>
               </tr>
             </MDBTableHead>
@@ -36,14 +37,14 @@ export default function AdminUser() {
                 <tr key={user.id}>
                   <td>
                     <div className="ms-3">
-                      <p className="fw-bold mb-1">
-                        {user.firstname} {user.lastname}
-                      </p>
                       <p className="text-muted mb-0">{user.email}</p>
                     </div>
                   </td>
                   <td>
-                    <p className="fw-normal mb-1">{user.password}</p>
+                    <p className="fw-normal mb-1">{user.lastname}</p>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">{user.firstname}</p>
                   </td>
 
                   <td>
