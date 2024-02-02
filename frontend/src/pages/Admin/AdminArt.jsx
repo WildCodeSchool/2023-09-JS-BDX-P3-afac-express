@@ -202,6 +202,9 @@ export default function AdminArt() {
                     {art.title}
                   </MDBCardTitle>
                   <MDBCardText className="text-truncate">
+                    {art.artist_name}
+                  </MDBCardText>
+                  <MDBCardText className="text-truncate">
                     {art.dimension} {art.creation_place}
                   </MDBCardText>
                   <MDBBtn
