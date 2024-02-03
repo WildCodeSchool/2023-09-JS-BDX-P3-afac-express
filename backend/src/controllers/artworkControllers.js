@@ -12,7 +12,7 @@ const getArtwork = async (_, res) => {
 
 const getArtworkById = async (req, res) => {
   try {
-    const [rows] = await models.artwork.find(req.params.id);
+    const [rows] = await models.artwork.findArtworkById(req.params.id);
 
     if (rows[0] !== null) {
       res.json(rows[0]);
