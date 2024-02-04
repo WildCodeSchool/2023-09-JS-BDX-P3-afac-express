@@ -27,7 +27,7 @@ function AccountManagement() {
 
       if (response.status === 204) {
         alert("L'adresse e-mail a été modifiée avec succès."); // eslint-disable-line no-alert
-        window.location.reload();
+        navigate("/accountmanagement");
       } else {
         alert("Échec de la modification de l'adresse e-mail."); // eslint-disable-line no-alert
       }
