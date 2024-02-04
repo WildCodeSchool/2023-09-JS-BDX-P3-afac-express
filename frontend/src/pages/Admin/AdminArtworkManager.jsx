@@ -21,7 +21,7 @@ export default function AdminartworkManager() {
   const [updatedTitle, setupdatedTitle] = useState("");
   const [updatedDimension, setupdatedDimension] = useState("");
   const [updatedCreationPlace, setUpdatedCreationPlace] = useState("");
-  const [updatedArtistId, setupdatedArtistId] = useState("");
+  const [updatedArtistId, setUpdatedArtistId] = useState("");
 
   const navigate = useNavigate();
 
@@ -83,6 +83,12 @@ export default function AdminartworkManager() {
         ...prevArtwork,
         image: response?.data?.image || prevArtwork.image,
       }));
+
+      const { data } = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
+      );
+
+      setArtwork(data);
     } catch (error) {
       console.error(error);
     }
@@ -176,7 +182,7 @@ export default function AdminartworkManager() {
 
         <FilterArtistAdmin
           name="artist_id"
-          onChange={(e) => setupdatedArtistId(e.target.value)}
+          onChange={(e) => setUpdatedArtistId(e.target.value)}
           selectedArtist={selectedArtist}
         />
 
