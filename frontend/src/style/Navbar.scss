@@ -6,10 +6,7 @@
   justify-content: space-between;
   margin-left: 0 !important;
   margin-right: 0 !important;
-
-  .navbar {
-    box-shadow: none;
-  }
+  position: relative;
 
   .logoAfac {
     position: absolute;
@@ -19,13 +16,25 @@
     top: 50%;
   }
   .user-icon {
-    position: absolute;
-    right: 20px;
     color: white;
+    position: absolute;
+    right: 1.5rem;
+    z-index: 1000;
+  }
+
+  .dropdown {
+    position: absolute !important;
+    z-index: 1000;
+    right: 0 !important;
+    transform: translateY(0%) !important;
+  }
+  .navbar {
+    box-shadow: none;
   }
   .nav-link {
     color: white;
   }
+
   .dropdown-menu .nav-link {
     background-color: #7b273d;
   }

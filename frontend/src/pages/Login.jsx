@@ -72,8 +72,8 @@ function Login() {
       </MDBBtn>
 
       <div className="text-center">
+        <p className="fw-bold">Pas encore membre ? </p>
         <p>
-          Pas encore membre ?{" "}
           <Link className="nav-link navLink" to="/register">
             Enregistrez-vous
           </Link>
