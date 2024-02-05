@@ -4,6 +4,7 @@ import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
 import FilterArtistAdmin from "../../components/Filter/FilterArtistAdmin";
+import { useApp } from "../../context/AppContext";
 
 const apiService = new ApiService();
 
@@ -22,6 +23,7 @@ export default function AdminartworkManager() {
   const [updatedDimension, setupdatedDimension] = useState("");
   const [updatedCreationPlace, setUpdatedCreationPlace] = useState("");
   const [updatedArtistId, setUpdatedArtistId] = useState("");
+  const { setArtCollection } = useApp();
 
   const navigate = useNavigate();
 
@@ -65,8 +67,9 @@ export default function AdminartworkManager() {
       const { data } = await apiService.delete(
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
-      setArtwork(data);
-      navigate("/admin/adminartwork");
+
+      setArtCollection(data);
+      navigate("/admin/adminart");
     } catch (error) {
       console.error(error);
     }
