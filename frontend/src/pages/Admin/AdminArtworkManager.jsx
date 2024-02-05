@@ -11,9 +11,9 @@ const apiService = new ApiService();
 export default function AdminartworkManager() {
   const { id } = useParams();
   const [artwork, setArtwork] = useState({
-    title: "Titre de l'oeuvre",
-    dimension: "Dimension de l'oeuvre",
-    creation_place: "Lieu de création de l'oeuvre",
+    title: "Titre de l'œuvre",
+    dimension: "Dimension de l'œuvre",
+    creation_place: "Lieu de création de l'œuvre",
     image: "URL_PAR_DEFAUT",
     artist_id: null,
   });
@@ -106,13 +106,13 @@ export default function AdminartworkManager() {
         className=" d-flex justify-content-center fs-1 text text-center fw-bold pt-5 text-uppercase mb-5"
         style={{ color: "#7b273d" }}
       >
-        Gestion des Oeuvres
+        Gestion des œuvres
       </h3>
       <form
         className="square border pt-3 ps-3 pe-3 mb-4 rounded"
         onSubmit={updateartworkData}
       >
-        <h3 className="fs-5 fw-bold pb-3">Modifier le titre de l'oeuvre</h3>
+        <h3 className="fs-5 fw-bold pb-3">Modifier le titre de l'œuvre</h3>
         <p>{artwork.title}</p>
         <MDBInput
           className="mb-4"
@@ -224,7 +224,7 @@ export default function AdminartworkManager() {
       </form>
 
       <MDBBtn className="mt-4 mb-6" onClick={deleteArtworkData}>
-        Supprimer l'oeuvre
+        Supprimer l'œuvre
       </MDBBtn>
 
       <Redirection />

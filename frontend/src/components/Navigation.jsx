@@ -68,7 +68,7 @@ export default function Navigation() {
               Gérer les utilisateurs
             </Link>
             <Link to="/admin/adminart" className="nav-link navLink">
-              Gérer les oeuvres et artistes
+              Gérer les œuvres et artistes
             </Link>
             <button
               type="button"
