@@ -12,6 +12,18 @@ class ArtworkManager extends AbstractManager {
       JOIN artist ON artwork.artist_id = artist.id;`);
   }
 
+  findArtworkById(id) {
+    return this.database.query(
+      `
+      SELECT artwork.id, artwork.title, artwork.image, artwork.dimension, artwork.creation_place, artwork.artist_id, artist.name AS artist_name
+      FROM artwork
+      LEFT JOIN artist ON artwork.artist_id = artist.id
+      WHERE artwork.id = ?
+    `,
+      [id]
+    );
+  }
+
   addArtworkForUser(
     artworkId,
     artistId,

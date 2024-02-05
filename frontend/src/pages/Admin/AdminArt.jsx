@@ -49,7 +49,17 @@ export default function AdminArt() {
         `http://localhost:5021/uploads/artist`,
         formData
       );
-      setArtistCollection([...artistCollection, response]);
+
+      const newArtist = {
+        id: res.id,
+        name: res.name,
+        description: res.description,
+        image: response.image,
+      };
+
+      setArtistCollection([...artistCollection, newArtist]);
+      // setPostArtist({ name: "", description: "" });
+      // setImage("");
     } catch (error) {
       console.error(error);
     }
@@ -73,6 +83,7 @@ export default function AdminArt() {
         `http://localhost:5021/artwork`,
         postArt
       );
+
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artwork", res.id);
@@ -80,7 +91,24 @@ export default function AdminArt() {
         `http://localhost:5021/uploads/artwork`,
         formData
       );
-      setArtCollection([...artCollection, response]);
+      const newArtwork = {
+        id: res.id,
+        title: res.title,
+        dimension: res.dimension,
+        creation_place: res.creation_place,
+        artist_id: res.artist_id,
+        artist_name: res.artist_name,
+        image: response.image,
+      };
+
+      setArtCollection([...artCollection, newArtwork]);
+      // setPostArt({
+      //   title: "",
+      //   dimension: "",
+      //   creation_place: "",
+      //   artist_id: "",
+      // });
+      // setImage("");
     } catch (error) {
       console.error(error);
     }
@@ -146,8 +174,8 @@ export default function AdminArt() {
       </MDBRow>
 
       <form className="user-form" onSubmit={handleSubmitArt}>
-        <h1>Oeuvres</h1>
-        <h3>Ajouter une oeuvre</h3>
+        <h1>œuvres</h1>
+        <h3>Ajouter une œuvre</h3>
         <MDBInput
           className="mb-4"
           onChange={handleInputArt}
@@ -176,11 +204,12 @@ export default function AdminArt() {
           label="Lieux de création"
         />
 
-        <MDBRow className="mb-4">
+        <MDBRow className="mb-4 text-start">
           <FilterArtistAdmin name="artist_id" onChange={handleInputArt} />
         </MDBRow>
 
         <input
+          className="d-flex flex-column mb-4"
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}

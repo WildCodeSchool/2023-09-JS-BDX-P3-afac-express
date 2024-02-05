@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
+import { useApp } from "../../context/AppContext";
 
 const apiService = new ApiService();
 
@@ -16,6 +17,8 @@ export default function AdminArtistManager() {
 
   const [updatedName, setUpdatedName] = useState("");
   const [updateddescription, setUpdateddescription] = useState("");
+  const { artistCollection, setArtistCollection } = useApp();
+
   const navigate = useNavigate();
 
   const updateArtistData = async () => {
@@ -48,10 +51,14 @@ export default function AdminArtistManager() {
 
   const deleteArtistData = async () => {
     try {
-      const { data } = await apiService.delete(
+      await apiService.delete(
         `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`
       );
-      setArtist(data);
+
+      setArtistCollection([
+        ...artistCollection.filter((item) => item.id !== +id),
+      ]);
+
       navigate("/admin/adminart");
     } catch (error) {
       console.error(error);
@@ -69,7 +76,12 @@ export default function AdminArtistManager() {
         ...prevArtist,
         image: response?.data?.image || prevArtist.image,
       }));
-      window.location.reload();
+
+      const { data } = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`
+      );
+
+      setArtist(data);
     } catch (error) {
       console.error(error);
     }

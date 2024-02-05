@@ -4,15 +4,16 @@ import { MDBBtn, MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
 import FilterArtistAdmin from "../../components/Filter/FilterArtistAdmin";
+import { useApp } from "../../context/AppContext";
 
 const apiService = new ApiService();
 
 export default function AdminartworkManager() {
   const { id } = useParams();
   const [artwork, setArtwork] = useState({
-    title: "Titre de l'oeuvre",
-    dimension: "Dimension de l'oeuvre",
-    creation_place: "Lieu de création de l'oeuvre",
+    title: "Titre de l'œuvre",
+    dimension: "Dimension de l'œuvre",
+    creation_place: "Lieu de création de l'œuvre",
     image: "URL_PAR_DEFAUT",
     artist_id: null,
   });
@@ -20,7 +21,9 @@ export default function AdminartworkManager() {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [updatedTitle, setupdatedTitle] = useState("");
   const [updatedDimension, setupdatedDimension] = useState("");
-  const [updatedCreationPlace, setupdatedCreationPlace] = useState("");
+  const [updatedCreationPlace, setUpdatedCreationPlace] = useState("");
+  const [updatedArtistId, setUpdatedArtistId] = useState("");
+  const { setArtCollection } = useApp();
 
   const navigate = useNavigate();
 
@@ -34,6 +37,7 @@ export default function AdminartworkManager() {
           updatedCreationPlace !== ""
             ? updatedCreationPlace
             : artwork.creation_place,
+        artist_id: updatedArtistId !== "" ? updatedArtistId : artwork.artist_id,
       };
 
       const { data } = await apiService.put(
@@ -51,6 +55,7 @@ export default function AdminartworkManager() {
       const { data } = await apiService.get(
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
+
       setArtwork(data);
       setSelectedArtist(data.artist_id);
     };
@@ -62,8 +67,9 @@ export default function AdminartworkManager() {
       const { data } = await apiService.delete(
         `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
       );
-      setArtwork(data);
-      navigate("/admin/adminartwork");
+
+      setArtCollection(data);
+      navigate("/admin/adminart");
     } catch (error) {
       console.error(error);
     }
@@ -80,7 +86,12 @@ export default function AdminartworkManager() {
         ...prevArtwork,
         image: response?.data?.image || prevArtwork.image,
       }));
-      window.location.reload();
+
+      const { data } = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/artwork/${id}`
+      );
+
+      setArtwork(data);
     } catch (error) {
       console.error(error);
     }
@@ -95,13 +106,13 @@ export default function AdminartworkManager() {
         className=" d-flex justify-content-center fs-1 text text-center fw-bold pt-5 text-uppercase mb-5"
         style={{ color: "#7b273d" }}
       >
-        Gestion des Oeuvres
+        Gestion des œuvres
       </h3>
       <form
         className="square border pt-3 ps-3 pe-3 mb-4 rounded"
         onSubmit={updateartworkData}
       >
-        <h3 className="fs-5 fw-bold pb-3">Modifier le titre de l'oeuvre</h3>
+        <h3 className="fs-5 fw-bold pb-3">Modifier le titre de l'œuvre</h3>
         <p>{artwork.title}</p>
         <MDBInput
           className="mb-4"
@@ -152,8 +163,8 @@ export default function AdminartworkManager() {
           type="pseudo"
           id="form1Example1"
           label="Modifier le lieu de création"
-          value={setupdatedCreationPlace}
-          onChange={(e) => setupdatedCreationPlace(e.target.value)}
+          value={updatedCreationPlace}
+          onChange={(e) => setUpdatedCreationPlace(e.target.value)}
         />
         <MDBBtn type="submit" block className="mb-2">
           Valider
@@ -164,13 +175,17 @@ export default function AdminartworkManager() {
         className="square border pt-3 ps-3 pe-3 mb-4 rounded"
         onSubmit={updateartworkData}
       >
-        <h3 className="fs-5 fw-bold pb-3">Modifier l'artiste</h3>
+        <h3 className="fs-5 fw-bold pb-3">Modifier le nom de l'artiste</h3>
 
-        <p>{artwork.artist_name}</p>
+        {artwork.artist_name !== null ? (
+          <p>{artwork.artist_name}</p>
+        ) : (
+          <p>Pas d'artiste.</p>
+        )}
 
         <FilterArtistAdmin
           name="artist_id"
-          onChange={(e) => setSelectedArtist(e.target.value)}
+          onChange={(e) => setUpdatedArtistId(e.target.value)}
           selectedArtist={selectedArtist}
         />
 
@@ -209,7 +224,7 @@ export default function AdminartworkManager() {
       </form>
 
       <MDBBtn className="mt-4 mb-6" onClick={deleteArtworkData}>
-        Supprimer l'oeuvre
+        Supprimer l'œuvre
       </MDBBtn>
 
       <Redirection />

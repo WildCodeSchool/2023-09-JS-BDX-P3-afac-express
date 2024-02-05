@@ -18,8 +18,8 @@ export default function FilterArtistAdmin({ name, onChange }) {
   return (
     <div>
       <select name={name} value={selectedArtist} onChange={handleArtistChange}>
-        <option value={selectedArtist.id}>Select an artist</option>
-        {artistCollection.map((artist) => (
+        <option value={selectedArtist.id}>Selectionner un artiste</option>
+        {artistCollection?.map((artist) => (
           <option key={artist.id} value={artist.id}>
             {artist.name}
           </option>
