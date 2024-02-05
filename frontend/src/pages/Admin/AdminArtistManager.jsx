@@ -69,7 +69,12 @@ export default function AdminArtistManager() {
         ...prevArtist,
         image: response?.data?.image || prevArtist.image,
       }));
-      window.location.reload();
+
+      const { data } = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/artist/${id}`
+      );
+
+      setArtist(data);
     } catch (error) {
       console.error(error);
     }

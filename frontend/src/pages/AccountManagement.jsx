@@ -7,11 +7,12 @@ import ApiService from "../services/api.service";
 const apiService = new ApiService();
 
 function AccountManagement() {
-  const { logout, user } = useApp();
+  const { logout, user, setUser } = useApp();
   const [oldEmail, setOldEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleEmailChange = async (event) => {
@@ -27,7 +28,11 @@ function AccountManagement() {
 
       if (response.status === 204) {
         alert("L'adresse e-mail a été modifiée avec succès."); // eslint-disable-line no-alert
-        window.location.reload();
+
+        setUser((prevUserData) => ({
+          ...prevUserData,
+          email: newEmail,
+        }));
       } else {
         alert("Échec de la modification de l'adresse e-mail."); // eslint-disable-line no-alert
       }

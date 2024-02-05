@@ -12,7 +12,7 @@ const getArtwork = async (_, res) => {
 
 const getArtworkById = async (req, res) => {
   try {
-    const [rows] = await models.artwork.find(req.params.id);
+    const [rows] = await models.artwork.findArtworkById(req.params.id);
 
     if (rows[0] !== null) {
       res.json(rows[0]);
@@ -28,7 +28,12 @@ const getArtworkById = async (req, res) => {
 const postArtwork = async (req, res) => {
   try {
     const [rows] = await models.artwork.create(req.body);
-    res.send({ id: rows.insertId, ...req.body });
+    const [result] = await models.artwork.findArtworkById(rows.insertId);
+    res.send({
+      id: rows.insertId,
+      ...req.body,
+      artist_name: result[0].artist_name,
+    });
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
@@ -128,11 +133,11 @@ const deleteArtworkForUser = async (req, res) => {
 const deleteArtwork = async (req, res) => {
   try {
     const [rows] = await models.artwork.delete(req.params.id);
-
+    const [result] = await models.artwork.findArtwork();
     if (rows.affectedRows === 0) {
       res.sendStatus(404);
     } else {
-      res.sendStatus(204);
+      res.send(result);
     }
   } catch (err) {
     res.status(500).send({ message: err.message });

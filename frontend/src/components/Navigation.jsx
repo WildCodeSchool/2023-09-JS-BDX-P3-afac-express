@@ -44,8 +44,13 @@ export default function Navigation() {
       navigationContent = (
         <MDBDropdown style={{ color: "#ffffff" }}>
           {!isMobile && user.email}
-
-          <MDBDropdownToggle>
+          <MDBDropdownToggle
+            style={{
+              background: "none",
+              border: "none",
+              boxShadow: "none",
+            }}
+          >
             <MDBIcon far icon="user" className="pe-2" />
           </MDBDropdownToggle>
 

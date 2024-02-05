@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import "../style/Login.scss";
-import {
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBCheckbox,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBCol, MDBRow, MDBBtn } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
@@ -66,13 +60,6 @@ function Login() {
       />
 
       <MDBRow className="mb-4">
-        <MDBCol className="d-flex justify-content-center">
-          <MDBCheckbox
-            id="form2Example3"
-            label="Se souvenir de moi"
-            defaultChecked
-          />
-        </MDBCol>
         <MDBCol>
           <Link className="nav-link navLink" to="/verificationlogin">
             Mot de passe oublié ?
@@ -85,8 +72,8 @@ function Login() {
       </MDBBtn>
 
       <div className="text-center">
+        <p className="fw-bold">Pas encore membre ? </p>
         <p>
-          Pas encore membre ?{" "}
           <Link className="nav-link navLink" to="/register">
             Enregistrez-vous
           </Link>

@@ -21,6 +21,9 @@ function AppContextProvider({ children, apiService }) {
     givenData?.artCollection || []
   );
   const [addedArtwork, setAddedArtwork] = useState([]);
+  const [preloadUserForAdminData, setPreloadUserForAdminData] = useState(
+    givenData?.preloadUserForAdmin || []
+  );
 
   const navigate = useNavigate();
 
@@ -93,6 +96,8 @@ function AppContextProvider({ children, apiService }) {
       setOpenNavSecond,
       setUser,
       user,
+      preloadUserForAdminData,
+      setPreloadUserForAdminData,
     }),
     [
       isAdmin,
@@ -111,6 +116,8 @@ function AppContextProvider({ children, apiService }) {
       apiService,
       addedArtwork,
       setAddedArtwork,
+      preloadUserForAdminData,
+      setPreloadUserForAdminData,
     ]
   );
 

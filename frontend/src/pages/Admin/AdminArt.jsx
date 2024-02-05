@@ -73,6 +73,7 @@ export default function AdminArt() {
         `http://localhost:5021/artwork`,
         postArt
       );
+
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artwork", res.id);
@@ -80,7 +81,17 @@ export default function AdminArt() {
         `http://localhost:5021/uploads/artwork`,
         formData
       );
-      setArtCollection([...artCollection, response]);
+      const newArtwork = {
+        id: res.id,
+        title: res.title,
+        dimension: res.dimension,
+        creation_place: res.creation_place,
+        artist_id: res.artist_id,
+        artist_name: res.artist_name,
+        image: response.image,
+      };
+
+      setArtCollection([...artCollection, newArtwork]);
     } catch (error) {
       console.error(error);
     }
@@ -176,11 +187,12 @@ export default function AdminArt() {
           label="Lieux de création"
         />
 
-        <MDBRow className="mb-4">
+        <MDBRow className="mb-4 text-start">
           <FilterArtistAdmin name="artist_id" onChange={handleInputArt} />
         </MDBRow>
 
         <input
+          className="d-flex flex-column mb-4"
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
@@ -201,6 +213,9 @@ export default function AdminArt() {
                   <MDBCardTitle className="text-truncate">
                     {art.title}
                   </MDBCardTitle>
+                  <MDBCardText className="text-truncate">
+                    {art.artist_name}
+                  </MDBCardText>
                   <MDBCardText className="text-truncate">
                     {art.dimension} {art.creation_place}
                   </MDBCardText>
