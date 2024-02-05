@@ -73,6 +73,7 @@ export default function AdminArt() {
         `http://localhost:5021/artwork`,
         postArt
       );
+
       const formData = new FormData();
       formData.append("avatar", image);
       formData.append("artwork", res.id);
@@ -80,7 +81,17 @@ export default function AdminArt() {
         `http://localhost:5021/uploads/artwork`,
         formData
       );
-      setArtCollection([...artCollection, response]);
+      const newArtwork = {
+        id: res.id,
+        title: res.title,
+        dimension: res.dimension,
+        creation_place: res.creation_place,
+        artist_id: res.artist_id,
+        artist_name: res.artist_name,
+        image: response.image,
+      };
+
+      setArtCollection([...artCollection, newArtwork]);
     } catch (error) {
       console.error(error);
     }
