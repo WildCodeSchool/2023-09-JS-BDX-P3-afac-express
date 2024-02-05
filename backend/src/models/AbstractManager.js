@@ -24,7 +24,7 @@ class AbstractManager {
     return this.database.query(`insert into * from ${this.table}`);
   }
 
-  delete(id) {
+  async delete(id) {
     return this.database.query(`delete from ${this.table} where id = ?`, [id]);
   }
 
