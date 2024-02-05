@@ -12,7 +12,7 @@ export default function Footer() {
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-            <div className="shadow-lg contact">
+            <div className="contact">
               <h2 className="title-contact">Nous Contacter</h2>
               <div className="contact-details">
                 <div className="container-number">
@@ -36,7 +36,7 @@ export default function Footer() {
           </MDBCol>
 
           <MDBCol lg="6" md="12">
-            <div className=" shadow-lg partnerships">
+            <div className="partnerships">
               <h2 className="title-partnerships">Partenaires</h2>
               <div className="container-partnerships">
                 <a
@@ -65,7 +65,7 @@ export default function Footer() {
             </div>
           </MDBCol>
           <MDBCol>
-            <div className=" shadow-lg development">
+            <div className="development">
               <h2 className="title-development">Développement</h2>
               <div className=" container-development">
                 <p className="developer">

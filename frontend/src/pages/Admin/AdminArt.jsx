@@ -187,11 +187,12 @@ export default function AdminArt() {
           label="Lieux de création"
         />
 
-        <MDBRow className="mb-4">
+        <MDBRow className="mb-4 text-start">
           <FilterArtistAdmin name="artist_id" onChange={handleInputArt} />
         </MDBRow>
 
         <input
+          className="d-flex flex-column mb-4"
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
