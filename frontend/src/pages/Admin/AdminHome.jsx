@@ -18,7 +18,7 @@ function AdminHome() {
         </MDBBtn>
         <MDBBtn className="mt-3 mb-8">
           <Link to="/admin/adminart" className="nav-link navLink">
-            Gérer les oeuvres et artistes
+            Gérer les œuvres et artistes
           </Link>
         </MDBBtn>
       </div>
