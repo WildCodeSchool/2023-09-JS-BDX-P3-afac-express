@@ -10,6 +10,7 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
+import { MDBFileUpload } from "mdb-react-file-upload";
 import { useNavigate } from "react-router-dom";
 import Redirection from "../../components/Redirection";
 import ApiService from "../../services/api.service";
@@ -32,7 +33,7 @@ export default function AdminArt() {
     setPostArtist({ ...postArtist, [e.target.name]: e.target.value });
   };
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,11 +135,10 @@ export default function AdminArt() {
           label="Biographie"
         />
 
-        <input
-          type="file"
-          accept="image/*"
-          className="d-flex flex-column mb-4"
-          onChange={(e) => setImage(e.target.files[0])}
+        <MDBFileUpload
+          className="mb-4"
+          onChange={(files) => setImage(files[0])}
+          defaultMessage="Insérer une image"
         />
 
         <MDBBtn type="submit" className="mb-4" block>
