@@ -38,7 +38,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `http://localhost:5021/artist`,
+        `${import.meta.env.VITE_BACKEND_URL}/artist`,
         postArtist
       );
 
@@ -46,7 +46,7 @@ export default function AdminArt() {
       formData.append("avatar", image);
       formData.append("artist", res.id);
       const response = await apiService.post(
-        `http://localhost:5021/uploads/artist`,
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artist`,
         formData
       );
 
@@ -80,7 +80,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `http://localhost:5021/artwork`,
+        `${import.meta.env.VITE_BACKEND_URL}/artwork`,
         postArt
       );
 
@@ -88,7 +88,7 @@ export default function AdminArt() {
       formData.append("avatar", image);
       formData.append("artwork", res.id);
       const response = await apiService.post(
-        `http://localhost:5021/uploads/artwork`,
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artwork`,
         formData
       );
       const newArtwork = {
