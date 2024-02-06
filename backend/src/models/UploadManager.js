@@ -1,7 +1,7 @@
 const fs = require("fs");
+const path = require("path");
 
 const AbstractManager = require("./AbstractManager");
-// const { url } = require("inspector");
 
 class UploadManager extends AbstractManager {
   constructor() {
@@ -36,11 +36,27 @@ class UploadManager extends AbstractManager {
     });
   }
 
-  async addAvatarArtist(artistId, uploadUrl) {
-    return this.database.query(
-      `UPDATE ${this.table} SET image = ? WHERE id = ?`,
-      [uploadUrl, artistId]
-    );
+  async delete(id) {
+    // Get the image URL from the database before deleting the record
+    const [result] = await this.find(id);
+    // console.log("upload delete result", result);
+
+    if (result && result.length > 0) {
+      const imagePath = `public/${result[0].url}`;
+      const filePath = path.resolve(imagePath);
+      // Delete the image file from the public folder
+      await new Promise((resolve, reject) => {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            reject(err);
+          }
+
+          resolve();
+        });
+      });
+      // Delete the record from the database
+      await this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+    }
   }
 }
 

@@ -38,7 +38,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `http://localhost:5021/artist`,
+        `${import.meta.env.VITE_BACKEND_URL}/artist`,
         postArtist
       );
 
@@ -46,10 +46,20 @@ export default function AdminArt() {
       formData.append("avatar", image);
       formData.append("artist", res.id);
       const response = await apiService.post(
-        `http://localhost:5021/uploads/artist`,
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artist`,
         formData
       );
-      setArtistCollection([...artistCollection, response]);
+
+      const newArtist = {
+        id: res.id,
+        name: res.name,
+        description: res.description,
+        image: response.image,
+      };
+
+      setArtistCollection([...artistCollection, newArtist]);
+      // setPostArtist({ name: "", description: "" });
+      // setImage("");
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +80,7 @@ export default function AdminArt() {
     e.preventDefault();
     try {
       const res = await apiService.post(
-        `http://localhost:5021/artwork`,
+        `${import.meta.env.VITE_BACKEND_URL}/artwork`,
         postArt
       );
 
@@ -78,7 +88,7 @@ export default function AdminArt() {
       formData.append("avatar", image);
       formData.append("artwork", res.id);
       const response = await apiService.post(
-        `http://localhost:5021/uploads/artwork`,
+        `${import.meta.env.VITE_BACKEND_URL}/uploads/artwork`,
         formData
       );
       const newArtwork = {
@@ -92,6 +102,13 @@ export default function AdminArt() {
       };
 
       setArtCollection([...artCollection, newArtwork]);
+      // setPostArt({
+      //   title: "",
+      //   dimension: "",
+      //   creation_place: "",
+      //   artist_id: "",
+      // });
+      // setImage("");
     } catch (error) {
       console.error(error);
     }
@@ -157,8 +174,8 @@ export default function AdminArt() {
       </MDBRow>
 
       <form className="user-form" onSubmit={handleSubmitArt}>
-        <h1>Oeuvres</h1>
-        <h3>Ajouter une oeuvre</h3>
+        <h1>œuvres</h1>
+        <h3>Ajouter une œuvre</h3>
         <MDBInput
           className="mb-4"
           onChange={handleInputArt}

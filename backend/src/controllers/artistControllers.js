@@ -6,7 +6,7 @@ const getArtists = async (_, res) => {
     res.send(rows);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(400).send({ message: err.message });
   }
 };
 
@@ -56,14 +56,13 @@ const updateArtist = async (req, res) => {
 const deleteArtist = async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
-    const [rows] = await models.artist.delete(id);
-    if (rows.affectedRows === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
-    }
+    await models.artist.delete(id);
+    res.sendStatus(204);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    console.error(err);
+    res
+      .status(err.message === "artist not found" ? 404 : 500)
+      .send({ message: err.message });
   }
 };
 
