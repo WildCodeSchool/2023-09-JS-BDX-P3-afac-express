@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   MDBNavbar,
   MDBContainer,
@@ -10,6 +10,7 @@ import {
   MDBNavbarNav,
   MDBDropdown,
   MDBDropdownMenu,
+  MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import "../style/Navbar.scss";
 import "../style/About.scss";
@@ -18,8 +19,10 @@ import logoAfac from "../assets/logo/logoAfac.png";
 
 export default function Navigation() {
   const [openNavSecond, setOpenNavSecond] = useState(false);
+  const [openNavIcon, setOpenNavIcon] = useState(false);
   const { user, isAdmin, logout } = useApp();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,17 +36,19 @@ export default function Navigation() {
     };
   }, []);
 
-  const closeDropdown = () => {
-    setOpenNavSecond(false);
-  };
-
   let navigationContent;
+
+  const closeDropdownThenNavigate = (url) => {
+    navigate(url);
+    setOpenNavIcon(!openNavIcon);
+  };
 
   if (user) {
     if (isAdmin) {
       navigationContent = (
         <MDBDropdown style={{ color: "#ffffff" }}>
           {!isMobile && user.email}
+
           <MDBDropdownToggle
             style={{
               background: "none",
@@ -53,29 +58,43 @@ export default function Navigation() {
           >
             <MDBIcon far icon="user" className="pe-2" />
           </MDBDropdownToggle>
-
           <MDBDropdownMenu>
-            <Link to="/accountmanagement" className="nav-link navLink">
-              Mon compte
-            </Link>
-            <Link to="/User" className="nav-link navLink">
-              Ma page personnelle
-            </Link>
-            <Link to="/admin" className="nav-link navLink">
-              Admin
-            </Link>
-            <Link to="/admin/adminuser" className="nav-link navLink">
-              Gérer les utilisateurs
-            </Link>
-            <Link to="/admin/adminart" className="nav-link navLink">
-              Gérer les œuvres et artistes
-            </Link>
+            <MDBDropdownItem
+              onClick={() => closeDropdownThenNavigate("/accountmanagement")}
+              className="nav-link navLink"
+            >
+              <span className="mx-2 my-2">Mon compte</span>
+            </MDBDropdownItem>
+            <MDBDropdownItem
+              className="nav-link navLink"
+              onClick={() => closeDropdownThenNavigate("/User")}
+            >
+              <span className="mx-2 my-2">Ma page personnelle</span>
+            </MDBDropdownItem>
+            <MDBDropdownItem
+              className="nav-link navLink"
+              onClick={() => closeDropdownThenNavigate("/admin")}
+            >
+              <span className="mx-2 my-2">Admin</span>
+            </MDBDropdownItem>
+            <MDBDropdownItem
+              className="nav-link navLink"
+              onClick={() => closeDropdownThenNavigate("/admin/adminuser")}
+            >
+              <span className="mx-2 my-2">Gérer les utilisateurs</span>
+            </MDBDropdownItem>
+            <MDBDropdownItem
+              className="nav-link navLink"
+              onClick={() => closeDropdownThenNavigate("/admin/adminart")}
+            >
+              <span className="mx-2 my-2">Gérer les oeuvres/artistes</span>
+            </MDBDropdownItem>
             <button
               type="button"
               className="nav-link navLink navButton"
               onClick={logout}
             >
-              Déconnexion
+              <span className="mx-2 my-2">Déconnexion</span>
             </button>
           </MDBDropdownMenu>
         </MDBDropdown>
@@ -84,23 +103,31 @@ export default function Navigation() {
       navigationContent = (
         <MDBDropdown style={{ color: "#ffffff" }}>
           {!isMobile && user.email}
-          <MDBDropdownToggle>
+          <MDBDropdownToggle onClick={() => setOpenNavIcon(!openNavIcon)}>
             <MDBIcon far icon="user" className="pe-2" />
           </MDBDropdownToggle>
 
           <MDBDropdownMenu>
-            <Link to="/accountmanagement" className="nav-link navLink">
-              Mon compte
-            </Link>
-            <Link to="/User" className="nav-link navLink">
-              Ma page personnelle
-            </Link>
+            <MDBDropdownItem
+              onClick={() => closeDropdownThenNavigate("/accountmanagement")}
+              className="nav-link navLink"
+            >
+              <span className="mx-2 my-2">Mon compte</span>
+            </MDBDropdownItem>
+
+            <MDBDropdownItem
+              className="nav-link navLink"
+              onClick={() => closeDropdownThenNavigate("/User")}
+            >
+              <span className="mx-2 my-2">Ma page personnelle</span>
+            </MDBDropdownItem>
+
             <button
               type="button"
               className="nav-link navLink navButton"
               onClick={logout}
             >
-              Déconnexion
+              <span className="mx-2 my-2">Déconnexion</span>
             </button>
           </MDBDropdownMenu>
         </MDBDropdown>
@@ -129,28 +156,28 @@ export default function Navigation() {
             <Link
               className="nav-link navLink"
               to="/home"
-              onClick={closeDropdown}
+              onClick={() => setOpenNavSecond(false)}
             >
               Accueil
             </Link>
             <Link
               className="nav-link navLink"
               to="/gallery"
-              onClick={closeDropdown}
+              onClick={() => setOpenNavSecond(false)}
             >
               Galerie
             </Link>
             <Link
               className="nav-link navLink"
               to="/artists"
-              onClick={closeDropdown}
+              onClick={() => setOpenNavSecond(false)}
             >
               Artistes
             </Link>
             <Link
               className="nav-link navLink"
               to="/about"
-              onClick={closeDropdown}
+              onClick={() => setOpenNavSecond(false)}
             >
               À propos
             </Link>
