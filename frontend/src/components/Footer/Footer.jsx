@@ -17,7 +17,7 @@ export default function Footer() {
               style={{
                 boxShadow: "none",
               }}
-            >      
+            >
               <h2 className="title-contact">Nous Contacter</h2>
               <div className="contact-details">
                 <div className="container-number">
@@ -47,8 +47,7 @@ export default function Footer() {
                 boxShadow: "none",
               }}
             >
-
-          <h2 className="title-partnerships">Partenaires</h2>
+              <h2 className="title-partnerships">Partenaires</h2>
               <div className="container-partnerships">
                 <a
                   href="https://www.departement974.fr/"
@@ -82,7 +81,7 @@ export default function Footer() {
                 boxShadow: "none",
               }}
             >
-           <h2 className="title-development">Développement</h2>
+              <h2 className="title-development">Développement</h2>
               <div className=" container-development">
                 <p className="developer">
                   <a
