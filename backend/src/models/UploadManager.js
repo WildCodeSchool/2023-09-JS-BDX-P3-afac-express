@@ -1,7 +1,7 @@
 const fs = require("fs");
+const path = require("path");
 
 const AbstractManager = require("./AbstractManager");
-// const { url } = require("inspector");
 
 class UploadManager extends AbstractManager {
   constructor() {
@@ -43,16 +43,20 @@ class UploadManager extends AbstractManager {
 
     if (result && result.length > 0) {
       const imagePath = `public/${result[0].url}`;
-      // console.log(path.resolve(imagePath));
-      try {
-        // Delete the image file from the public folder
-        fs.unlink(imagePath);
-      } catch (err) {
-        console.error(`Error deleting file: ${imagePath}`, err);
-      }
+      const filePath = path.resolve(imagePath);
+      // Delete the image file from the public folder
+      await new Promise((resolve, reject) => {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            reject(err);
+          }
+
+          resolve();
+        });
+      });
+      // Delete the record from the database
+      await this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
     }
-    // Delete the record from the database
-    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
   }
 }
 

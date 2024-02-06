@@ -59,6 +59,7 @@ const deleteArtist = async (req, res) => {
     await models.artist.delete(id);
     res.sendStatus(204);
   } catch (err) {
+    console.error(err);
     res
       .status(err.message === "artist not found" ? 404 : 500)
       .send({ message: err.message });
