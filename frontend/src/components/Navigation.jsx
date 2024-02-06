@@ -89,7 +89,6 @@ export default function Navigation() {
             >
               <span className="mx-2 my-2">Gérer les oeuvres/artistes</span>
             </MDBDropdownItem>
-
             <button
               type="button"
               className="nav-link navLink navButton"

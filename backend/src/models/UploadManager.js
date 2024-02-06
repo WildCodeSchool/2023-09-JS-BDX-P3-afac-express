@@ -36,11 +36,23 @@ class UploadManager extends AbstractManager {
     });
   }
 
-  async addAvatarArtist(artistId, uploadUrl) {
-    return this.database.query(
-      `UPDATE ${this.table} SET image = ? WHERE id = ?`,
-      [uploadUrl, artistId]
-    );
+  async delete(id) {
+    // Get the image URL from the database before deleting the record
+    const [result] = await this.find(id);
+    // console.log("upload delete result", result);
+
+    if (result && result.length > 0) {
+      const imagePath = `public/${result[0].url}`;
+      // console.log(path.resolve(imagePath));
+      try {
+        // Delete the image file from the public folder
+        fs.unlink(imagePath);
+      } catch (err) {
+        console.error(`Error deleting file: ${imagePath}`, err);
+      }
+    }
+    // Delete the record from the database
+    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
   }
 }
 
