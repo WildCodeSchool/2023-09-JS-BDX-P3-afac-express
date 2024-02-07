@@ -104,22 +104,21 @@ app.use(router);
 // 1. Uncomment the lines related to serving static files and redirecting unhandled requests.
 // 2. Ensure that the `reactBuildPath` points to the correct directory where your frontend's build artifacts are located.
 
-const reactBuildPath = `${__dirname}/../../frontend/dist`;
+const reactBuildPath = path.join(__dirname, "/../../frontend/dist");
 
 // Serve react resources
 
 app.use(express.static(reactBuildPath));
 
-// Redirect unhandled requests to the react index file
 app.get(
-  '*.*',
-  express.static(`${__dirname}/../../backend/public`, {
-    maxAge: '1y',
-  })
+  "*.*",
+  express.static(path.join(__dirname, "../public"), { maxAge: "1y" })
 );
 
-app.get("*", (req, res) => {
-  res.sendFile(`${reactBuildPath}/index.html`);
+// Redirect unhandled requests to the react index file
+
+app.get("*", (_, res) => {
+  res.sendFile(path.join(reactBuildPath, "/index.html"));
 });
 
 /* ************************************************************************* */
