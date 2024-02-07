@@ -25,21 +25,19 @@ function Home() {
             <span className="h1">Bienvenue sur notre musée interactif</span>
           </MDBCardTitle>
           <MDBCardText>
-            L'Appropriation du patrimoine iconographique de l'océan Indien par
-            les populations vise à diffuser les images du sud-ouest de l'océan
-            Indien auprès des publics de ces territoires par la transmission et
-            la médiation pédagogique, le soutien à la création artistique et le
-            partage par l'organisation d'entretiens du patrimoine sur l'image.
-          </MDBCardText>{" "}
-          <MDBCardText>
-            Au fur et à mesure du projet, des supports de valorisation sont
-            diffusés sur le site internet de l'Iconothèque et sur ses réseaux
-            sociaux. Le parti-pris de l'exposition "Patrimoines iconographiques
-            de l'océan Indien", conçue à partir des œuvres des artistes en
-            résidence dans les institutions partenaires du projet est
-            l'élaboration d'une cartographie artistique (réelle et imaginaire)
-            de l'océan Indien.
+            Plongez dans un voyage fascinant à travers les riches traditions
+            artistiques et le patrimoine culturel diversifié de cette région
+            exotique.
           </MDBCardText>
+          <MDBCardText>
+            Notre plateforme est une passerelle vers un monde d'inspiration, où
+            vous pourrez explorer les œuvres captivantes d'artistes émergents et
+            établis. Que vous soyez passionné par la peinture, la sculpture, la
+            musique, la danse ou tout autre forme d'expression artistique, vous
+            trouverez ici une source inépuisable d'émerveillement et
+            d'enrichissement culturel.
+          </MDBCardText>
+
           <MDBBtn className="btn">
             <Link to="/About" className="nav-link navLink">
               À propos

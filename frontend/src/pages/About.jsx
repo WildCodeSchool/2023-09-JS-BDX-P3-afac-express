@@ -24,16 +24,22 @@ function About() {
           <MDBCardBody>
             <h1 className="fs-2 text text-start fw-bold pt-5">AFAC 974</h1>
             <MDBCardText className="p-4 text-start">
-              Concevoir, produire et diffuser des animations et des ressources
-              valorisant la connaissance de l'environnement des communes de la
-              réunion : leur histoire, leur géographie, leur patrimoine
-              culturel, naturel elle ambitionne d'apporter aux familles des
-              outils facilitant les apprentissages en s'appuyant sur le milieu
-              local et sur l'environnement socioculturel des élèves et des
-              parents ; en mettant à leur disposition des ressources de qualité
-              éditoriale, dont le contenu aura été validé par un comité
-              scientifique (cours, méthodes, exercices en ligne, activités
-              ludo-pédagogiques ).
+              L'Association des Familles Amies de Capeline 974 a pour ambition
+              de développer un projet de plate-forme d'informations, et de
+              formations à caractère pédagogiques, relatives aux outre-mers.
+              C'est aussi une mise en relation de partenaires divers, impliqués
+              dans le développement durable des outre-mers, en particulier dans
+              l'océan Indien. Elle s'adresse aux élèves de la zone et à leurs
+              enseignants, à leurs familles, et aux collectivités. Ses
+              publications pédagogiques ou scientifiques sont vérifiées par un
+              Comité scientifique. Ses actions en ligne et sur le terrain
+              s'appuient sur des contributions bénévoles, mais aussi sur le
+              travail de stagiaires rémunérés, et, pour 2021, d'un emploi aidé
+              (stagiaire en formation à l'IUT de Saint-Pierre). Des
+              contributions occasionnelles de chercheurs ou de spécialistes dans
+              le domaine du numérique et/ou de l'enseignement nourrissent la
+              réflexion autour de l'enseignement avec le numérique (Réunion,
+              Inde, Madagascar, Belgique...)
             </MDBCardText>
           </MDBCardBody>
         </MDBCard>
