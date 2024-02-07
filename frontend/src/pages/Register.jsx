@@ -4,7 +4,6 @@ import {
   MDBCol,
   MDBRow,
   MDBBtn,
-  MDBSwitch,
   MDBContainer,
 } from "mdb-react-ui-kit";
 import { useApp } from "../context/AppContext";
@@ -102,16 +101,7 @@ export default function Register() {
           label="Réponse secrète"
           type="secret_answer"
         />
-        <MDBSwitch
-          id="flexSwitchCheckDefault"
-          label="Administrateur"
-          onClick={() =>
-            setFormValue({
-              ...formValue,
-              is_admin: !formValue.is_admin,
-            })
-          }
-        />
+
         <MDBBtn type="submit" className="mb-4 mt-4" block>
           Suivant
         </MDBBtn>

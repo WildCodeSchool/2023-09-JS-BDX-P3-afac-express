@@ -250,13 +250,7 @@ LOCK TABLES `users` WRITE;
 INSERT INTO
     `users`
 VALUES (
-        1, 'Ben et nuts', 'noit', 'ben.noit@test.fr', '1234', 1, 'Quelle était la couleur du cheval blanc d\'Henri IV ?', 'Blanc'
-    ),
-    (
-        2, 'Nel', 'ia', 'nel.ia@test.fr', '3456', 1, 'Que dit un papier quand il tombe dans l\'eau ?', 'J\'ai pas pied'
-    ),
-    (
-        3, 'florian', 'BRUN', 'azerty@hotmail.fr', '1234', 1, 'Tu as trois poussins sur une table et tu n\'en veux que deux, que fais-tu ?', 'T\'en pousses un'
+        1, 'Admin', 'admin', 'test@test.fr', '$2b$05$xVVvNABE5PGZMeZt2M2U6eDKyfctSAN5FRlqNfmi0K7ilfhbCIbkG', 1, 'Quelle était la couleur du cheval blanc d\'Henri IV ?', '$2b$05$fMGYv0HnpMGTVQ.MpRMCj.K9LKoNp4wFUYBauCQkGurKQG0iyziiK'
     )
 ON DUPLICATE KEY UPDATE
     `id` = VALUES(`id`),
