@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import "./App.scss";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "@fortawesome/fontawesome-free/css/all.min.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "mdb-react-ecommerce-gallery/dist/css/ecommerce-gallery.min.css";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "mdb-react-file-upload/dist/css/file-upload.min.css";
+import "./App.scss";
+
 import AppContextProvider from "./context/AppContext";
 import AdminContextProvider from "./context/AdminContext";
 import Home from "./pages/Home";
