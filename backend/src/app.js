@@ -111,8 +111,13 @@ const reactBuildPath = `${__dirname}/../../frontend/dist`;
 app.use(express.static(reactBuildPath));
 
 // Redirect unhandled requests to the react index file
+app.get(
+  '*.*',
+  express.static(`${__dirname}/../../backend/public`, {
+    maxAge: '1y',
+  })
+);
 
-app.use(express.static(`${__dirname}/../../backend/public`));
 app.get("*", (req, res) => {
   res.sendFile(`${reactBuildPath}/index.html`);
 });
