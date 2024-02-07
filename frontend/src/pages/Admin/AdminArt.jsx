@@ -208,11 +208,10 @@ export default function AdminArt() {
           <FilterArtistAdmin name="artist_id" onChange={handleInputArt} />
         </MDBRow>
 
-        <input
-          className="d-flex flex-column mb-4"
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
+        <MDBFileUpload
+          className="mb-4"
+          onChange={(files) => setImage(files[0])}
+          defaultMessage="Insérer une image"
         />
 
         <MDBBtn type="submit" className="mb-4" block>
