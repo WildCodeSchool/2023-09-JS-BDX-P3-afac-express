@@ -19,10 +19,10 @@ function Home() {
 
   return (
     <MDBContainer fluid className="pt-5 text-center">
-      <MDBCard className="card-custom">
+      <MDBCard className="card-custom mt-5">
         <MDBCardBody>
-          <MDBCardTitle>
-            <span className="h1">Bienvenue sur notre musée interactif</span>
+          <MDBCardTitle className="h1 pb-3 mt-2">
+            Bienvenue sur notre musée interactif
           </MDBCardTitle>
           <MDBCardText>
             Plongez dans un voyage fascinant à travers les riches traditions
