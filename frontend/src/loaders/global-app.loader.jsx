@@ -1,7 +1,13 @@
 const globalAppLoader = async (apiService) => {
-  try {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  const loaderData = {
+    artistCollection: null,
+    artCollection: null,
+    preloadUser: null,
+    preloadUserForAdmin: null,
+  };
 
+  try {
     if (token) {
       apiService.setToken(token);
 
@@ -13,34 +19,31 @@ const globalAppLoader = async (apiService) => {
           apiService.get(`${import.meta.env.VITE_BACKEND_URL}/users`),
         ]);
 
-      return {
-        preloadUser:
-          userData?.status === "fulfilled" ? userData.value.data : null,
-        artistCollection:
-          artistData?.status === "fulfilled" ? artistData.value.data : null,
-        artCollection:
-          artData?.status === "fulfilled" ? artData.value.data : null,
-        preloadUserForAdmin:
-          userAdminData?.status === "fulfilled"
-            ? userAdminData.value.data
-            : null,
-      };
+      loaderData.preloadUser =
+        userData?.status === "fulfilled" ? userData.value.data : null;
+      loaderData.artistCollection =
+        artistData?.status === "fulfilled" ? artistData.value.data : null;
+      loaderData.artCollection =
+        artData?.status === "fulfilled" ? artData.value.data : null;
+      loaderData.preloadUserForAdmin =
+        userAdminData?.status === "fulfilled" ? userAdminData.value.data : null;
+    } else {
+      localStorage.clear();
+      const [artistData, artData] = await Promise.allSettled([
+        apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
+        apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
+      ]);
+      loaderData.artistCollection =
+        artistData?.status === "fulfilled" ? artistData.value.data : null;
+      loaderData.artCollection =
+        artData?.status === "fulfilled" ? artData.value.data : null;
     }
-    const [artistData, artData] = await Promise.all([
-      apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artist`),
-      apiService.get(`${import.meta.env.VITE_BACKEND_URL}/artwork`),
-    ]);
-    return {
-      artistCollection:
-        artistData?.status === "fulfilled" ? artistData.value.data : null,
-      artCollection:
-        artData?.status === "fulfilled" ? artData.value.data : null,
-    };
   } catch (err) {
     console.error("Loader Error:", err.message);
     console.error("Loader Error Stack:", err.stack);
-    return null;
   }
+
+  return loaderData;
 };
 
 export default globalAppLoader;
