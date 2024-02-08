@@ -51,10 +51,6 @@ function Gallery() {
             <MDBAnimation
               reset
               tag="img"
-              repeatOnScroll
-              start="onScroll"
-              animation="fade-in"
-              duration={500}
               src={artwork.image}
               className="img-fluid shadow-1-strong rounded"
             />
