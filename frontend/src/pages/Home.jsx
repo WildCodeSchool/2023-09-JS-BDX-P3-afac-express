@@ -56,9 +56,9 @@ function Home() {
             <MDBCarouselItem itemId={artist.id} key={artist.id}>
               <MDBCard>
                 <MDBCardBody>
-                  <MDBCardTitle className="text-center mb-0 fw-bold fs-4">
+                  <h3 className="text-center mb-0 fw-bold fs-4">
                     {artist.name}
-                  </MDBCardTitle>
+                  </h3>
                 </MDBCardBody>
               </MDBCard>
               <img
@@ -94,12 +94,10 @@ function Home() {
               </MDBCarouselCaption>
               <MDBCard>
                 <MDBCardBody>
-                  <MDBCardTitle className="text-center mb-0 fst-italic fw-bold">
+                  <h3 className="text-center mb-0 fst-italic fw-bold fs-4">
                     {art.title}
-                  </MDBCardTitle>
-                  <MDBCardTitle className="text-center mb-0 fs-6">
-                    {art.artist_name}
-                  </MDBCardTitle>
+                  </h3>
+                  <h4 className="text-center mb-0 fs-6">{art.artist_name}</h4>
                 </MDBCardBody>
               </MDBCard>
             </MDBCarouselItem>

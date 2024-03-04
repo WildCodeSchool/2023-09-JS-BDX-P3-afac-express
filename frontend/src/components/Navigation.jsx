@@ -136,7 +136,12 @@ export default function Navigation() {
   } else {
     navigationContent = (
       <Link to="/login" className="user-icon">
-        <MDBIcon className="me-2" far icon="user" />
+        <MDBIcon
+          className="me-2"
+          far
+          icon="user"
+          alt="Connection utilisateur"
+        />
       </Link>
     );
   }
@@ -156,6 +161,7 @@ export default function Navigation() {
             <Link
               className="nav-link navLink"
               to="/home"
+              alt="Accueil"
               onClick={() => setOpenNavSecond(false)}
             >
               Accueil
@@ -163,6 +169,7 @@ export default function Navigation() {
             <Link
               className="nav-link navLink"
               to="/gallery"
+              alt="Galerie"
               onClick={() => setOpenNavSecond(false)}
             >
               Galerie
@@ -170,6 +177,7 @@ export default function Navigation() {
             <Link
               className="nav-link navLink"
               to="/artists"
+              alt="artists"
               onClick={() => setOpenNavSecond(false)}
             >
               Artistes
@@ -177,6 +185,7 @@ export default function Navigation() {
             <Link
               className="nav-link navLink"
               to="/about"
+              alt="À propos"
               onClick={() => setOpenNavSecond(false)}
             >
               À propos
