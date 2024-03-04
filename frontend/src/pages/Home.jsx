@@ -84,7 +84,11 @@ function Home() {
         {artCollection && artCollection.length > 0 ? (
           artCollection.map((art) => (
             <MDBCarouselItem itemId={art.id} key={art.id}>
-              <img src={art.image} alt={art.title} />
+              <img
+                className="d-block w-50 mx-auto"
+                src={art.image}
+                alt={art.title}
+              />
               <MDBCarouselCaption className="carousel-description">
                 <p>{art.artist_name}</p>
               </MDBCarouselCaption>
